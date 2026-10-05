@@ -1,0 +1,466 @@
+.owa-ontology-templates-view[hidden],
+.owa-template-dialog [hidden],
+.owa-template-dialog-backdrop[hidden] {
+  display: none !important;
+}
+
+.owa-ontology-templates-active > .owa-native-session-content:not(.owa-ontology-templates-view),
+.owa-ontology-templates-active > .owa-engineering-view,
+.owa-ontology-templates-active > .owa-ontology-registry-view {
+  display: none !important;
+}
+
+.owa-ontology-templates-view {
+  display: flex;
+  container-type: inline-size;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 12px 16px 14px;
+  padding: clamp(20px, 2.6vw, 34px);
+  overflow-y: auto;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-panel);
+  background: var(--owa-semantic-surface-canvas);
+  backdrop-filter: none;
+  box-shadow: var(--owa-shadow-panel);
+  color: var(--owa-semantic-text-primary);
+  font-family: var(--owa-font-stack);
+}
+
+.owa-template-heading {
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-template-heading > span {
+  color: var(--owa-semantic-accent);
+  font-size: 10px;
+  font-weight: 720;
+  letter-spacing: .14em;
+}
+
+.owa-template-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 7px;
+}
+
+.owa-template-title-row h1 {
+  margin: 0;
+  color: var(--owa-semantic-text-primary);
+  font-size: var(--owa-type-page-title);
+  letter-spacing: -.03em;
+}
+
+.owa-template-heading p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.owa-template-summary {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-panel-strong);
+  color: var(--owa-semantic-text-secondary);
+  white-space: nowrap;
+}
+
+.owa-template-summary strong { color: var(--owa-semantic-accent); font-size: 14px; line-height: 1; }
+.owa-template-summary span { font-size: 10px; }
+.owa-template-summary i { width: 1px; height: 11px; background: var(--owa-semantic-border-default); }
+
+.owa-template-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.owa-template-search {
+  display: block;
+  width: min(360px, 100%);
+}
+
+.owa-template-search input {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 13px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: 8px;
+  outline: 0;
+  background: var(--owa-semantic-surface-input);
+  color: var(--owa-semantic-text-primary);
+  font: inherit;
+  font-size: 12px;
+}
+
+.owa-template-search input:focus {
+  border-color: var(--owa-semantic-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--owa-semantic-accent) 20%, transparent);
+}
+
+.owa-template-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-template-filters button {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.owa-template-filters button.is-active {
+  border-bottom-color: var(--owa-semantic-accent);
+  color: var(--owa-semantic-accent);
+  font-weight: 650;
+}
+
+.owa-template-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.owa-template-card {
+  display: flex;
+  min-width: 0;
+  min-height: 294px;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+  transition: transform var(--owa-motion-standard) var(--owa-ease-standard), border-color var(--owa-motion-standard) var(--owa-ease-standard), background var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+.owa-template-card.is-orion { border-color: var(--owa-semantic-border-strong); }
+.owa-template-card:hover { border-color: var(--owa-semantic-border-strong); background: var(--owa-semantic-surface-hover); }
+
+.owa-template-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+
+.owa-template-card-meta em {
+  padding: 5px 9px;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 620;
+}
+
+.owa-template-card.is-orion .owa-template-card-meta em {
+  background: var(--owa-semantic-success-soft);
+  color: var(--owa-semantic-success);
+}
+
+.owa-template-card-copy { display: flex; min-width: 0; flex-direction: column; }
+.owa-template-card-meta > span { color: var(--owa-semantic-accent); font-size: 9px; font-weight: 650; letter-spacing: .04em; }
+.owa-template-card-copy h2 { min-height: 43px; margin: 7px 0 0; color: var(--owa-semantic-text-primary); font-size: 16px; line-height: 1.35; letter-spacing: -.015em; }
+.owa-template-card-copy b { align-self: flex-start; margin-top: 7px; padding: 3px 8px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: var(--owa-radius-round); color: var(--owa-semantic-text-secondary); font-size: 9px; font-weight: 520; }
+.owa-template-card-copy p { min-height: 54px; margin: 10px 0 0; color: var(--owa-semantic-text-secondary); font-size: 11px; line-height: 18px; }
+
+.owa-template-card dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 12px 0 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-template-card dl div { min-width: 0; padding: 0 9px; border-right: 1px solid var(--owa-semantic-border-subtle); }
+.owa-template-card dl div:first-child { padding-left: 0; }
+.owa-template-card dl div:last-child { padding-right: 0; border-right: 0; }
+.owa-template-card dt { color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-template-card dd { margin: 5px 0 0; color: var(--owa-semantic-text-primary); font-size: 17px; font-weight: 700; }
+
+.owa-template-provenance {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.owa-template-provenance span { overflow: hidden; text-overflow: ellipsis; }
+.owa-template-provenance span + span::before { margin-right: 6px; content: "·"; }
+
+.owa-template-card > footer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.owa-template-card > footer > * {
+  min-width: 0;
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 620;
+  line-height: 32px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.owa-template-card > footer > .is-primary {
+  grid-column: 1 / -1;
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+}
+
+.owa-template-card > footer > .is-source { border-color: transparent; background: transparent; color: var(--owa-semantic-text-secondary); }
+.owa-template-count { margin: 18px 0 0; color: var(--owa-semantic-text-tertiary); font-size: 10px; text-align: center; }
+
+.owa-template-empty,
+.owa-template-loading {
+  display: flex;
+  min-height: 260px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--owa-semantic-text-secondary);
+}
+.owa-template-empty strong,
+.owa-template-loading strong { color: var(--owa-semantic-text-primary); font-size: 14px; }
+.owa-template-empty span,
+.owa-template-loading span { font-size: 11px; }
+
+.owa-template-dialog-backdrop {
+  position: fixed;
+  z-index: 1300;
+  inset: 0;
+  background: rgb(2 8 16 / .62);
+  backdrop-filter: blur(5px);
+}
+
+/* A fixed dialog must remain anchored to the viewport while the catalog
+   scrolls. Suspend size containment only while the modal covers the grid. */
+.owa-ontology-templates-view:has(.owa-template-dialog) {
+  container-type: normal;
+}
+
+.owa-template-dialog {
+  position: fixed;
+  z-index: 1301;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: min(820px, calc(100vw - 32px));
+  max-height: min(860px, calc(100dvh - 32px));
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-dialog);
+  background: var(--owa-semantic-surface-overlay);
+  box-shadow: var(--owa-shadow-dialog);
+  color: var(--owa-semantic-text-primary);
+  transform: translate(-50%, -50%);
+}
+
+.owa-template-dialog > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto;
+  gap: 18px;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 18px 24px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.owa-template-dialog > header span { color: var(--owa-semantic-accent); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+.owa-template-dialog > header > div { min-width: 0; }
+.owa-template-dialog > header h2 { margin: 5px 0 0; font-family: inherit; font-size: 18px; font-weight: 650; line-height: 1.4; }
+.owa-template-dialog > header p { margin: 7px 0 0; color: var(--owa-semantic-text-secondary); font-size: 11px; line-height: 17px; }
+.owa-template-dialog > header button { flex-shrink: 0; min-height: 30px; padding: 4px 9px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: 7px; background: transparent; color: var(--owa-semantic-text-secondary); cursor: pointer; font: inherit; font-size: 11px; }
+.owa-template-dialog > header button:hover { background: var(--owa-semantic-surface-hover); color: var(--owa-semantic-text-primary); }
+
+.owa-template-dialog form {
+  display: grid;
+  min-height: 0;
+  gap: 18px;
+  padding: 16px 24px 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.owa-template-dialog label { display: grid; gap: 6px; color: var(--owa-semantic-text-secondary); font-size: 10px; }
+.owa-template-dialog label > span,
+.owa-template-dialog legend { color: var(--owa-semantic-text-primary); font-size: 11px; font-weight: 650; }
+.owa-template-dialog input:not([type="radio"]),
+.owa-template-dialog select,
+.owa-template-dialog textarea {
+  width: 100%;
+  min-height: 38px;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: 8px;
+  outline: 0;
+  background: var(--owa-semantic-surface-input);
+  color: var(--owa-semantic-text-primary);
+  font: inherit;
+  font-size: 11px;
+}
+.owa-template-dialog textarea { resize: vertical; line-height: 17px; }
+.owa-template-dialog input:focus,
+.owa-template-dialog select:focus,
+.owa-template-dialog textarea:focus { border-color: var(--owa-semantic-accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--owa-semantic-accent) 18%, transparent); }
+.owa-template-dialog small { color: var(--owa-semantic-text-tertiary); font-size: 9px; line-height: 15px; }
+
+/* Keep provenance available without giving it the visual weight of a form section. */
+.owa-template-dialog .owa-template-binding {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 8px;
+  background: var(--owa-semantic-surface-panel);
+}
+.owa-template-binding span { color: var(--owa-semantic-text-secondary); font-size: 10px; font-weight: 550; }
+.owa-template-binding strong { font-size: 11px; font-weight: 550; }
+.owa-template-binding small { margin-left: auto; font-size: 9px; overflow-wrap: anywhere; }
+
+.owa-template-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.owa-template-dialog fieldset { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; border: 0; }
+.owa-template-dialog legend { grid-column: 1 / -1; margin-bottom: 2px; }
+.owa-template-dialog fieldset label { display: grid; min-width: 0; grid-template-columns: 16px minmax(0, 1fr); align-items: start; gap: 7px; padding: 10px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); cursor: pointer; }
+.owa-template-dialog fieldset label:hover { border-color: var(--owa-semantic-accent); }
+.owa-template-dialog fieldset label:has(input:focus-visible) { outline: 2px solid var(--owa-semantic-accent); outline-offset: 2px; }
+.owa-template-dialog fieldset label:has(input:checked) { border-color: var(--owa-semantic-accent); background: var(--owa-semantic-surface-selected); }
+.owa-template-dialog fieldset input { margin: 2px 0 0; accent-color: var(--owa-semantic-accent); }
+.owa-template-dialog fieldset label span { display: grid; gap: 3px; }
+.owa-template-dialog fieldset strong { color: var(--owa-semantic-text-primary); font-size: 11px; }
+.owa-template-dialog fieldset small { font-size: 10px; font-weight: 400; line-height: 16px; }
+.owa-template-datasource { display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-template-datasource[hidden] { display: none !important; }
+.owa-template-source-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.owa-template-source-grid label:last-child { grid-column: 1 / -1; }
+.owa-template-source-grid select[multiple] { min-height: 140px; padding: 5px; }
+.owa-template-source-grid select[multiple] option { padding: 5px 8px; border-radius: 4px; }
+.owa-template-dialog select:disabled { cursor: wait; opacity: .6; }
+.owa-template-source-state { margin: 0; padding: 12px 14px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); color: var(--owa-semantic-text-secondary); font-size: 10px; }
+.owa-template-source-state.is-error { border-color: var(--owa-semantic-warning-border); color: var(--owa-semantic-warning); }
+.owa-template-source-state button { margin-left: 8px; border: 0; background: transparent; color: var(--owa-semantic-accent); cursor: pointer; font: inherit; font-size: 10px; }
+.owa-template-create-message { margin: 0; padding: 9px 11px; border: 1px solid var(--owa-semantic-warning-border); border-radius: var(--owa-radius-control); background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-text-primary); font-size: 10px; }
+
+.owa-template-dialog form > footer { position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin: 0 -24px; padding: 12px 24px 16px; border-top: 1px solid var(--owa-semantic-border-subtle); background: var(--owa-semantic-surface-overlay); box-shadow: 0 -8px 18px rgb(0 0 0 / .08); }
+.owa-template-dialog form > footer button { min-height: 38px; padding: 0 16px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-primary); cursor: pointer; font: inherit; font-size: 11px; font-weight: 620; }
+.owa-template-dialog form > footer button.is-primary { border-color: var(--owa-semantic-accent); background: var(--owa-semantic-accent); color: var(--owa-semantic-on-accent); }
+.owa-template-dialog form > footer button:disabled { cursor: progress; opacity: .65; }
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-ontology-templates-view {
+  border: 1px solid var(--owa-semantic-border-default);
+  background: var(--owa-region-workspace);
+  backdrop-filter: none !important;
+  box-shadow: var(--owa-shadow-panel);
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-ontology-templates-view {
+  --owa-semantic-surface-canvas: var(--owa-region-workspace);
+  --owa-semantic-surface-panel: var(--owa-surface-panel);
+  --owa-semantic-surface-panel-strong: var(--owa-surface-panel-strong);
+  --owa-semantic-surface-control: var(--owa-surface-control);
+  --owa-semantic-surface-input: var(--owa-surface-input);
+  --owa-semantic-surface-selected: var(--owa-surface-selected);
+  --owa-semantic-surface-hover: var(--owa-surface-hover);
+  --owa-semantic-surface-overlay: var(--owa-surface-overlay);
+}
+
+/* Aqua's global dialog rule is translucent; engineering forms need a stable
+   reading surface, including when the catalog is visible behind them. */
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-ontology-templates-view .owa-template-dialog {
+  background: var(--owa-semantic-surface-overlay) !important;
+  backdrop-filter: none !important;
+}
+
+@container (max-width: 980px) {
+  .owa-template-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@container (max-width: 680px) {
+  .owa-template-toolbar { align-items: stretch; flex-direction: column; gap: 10px; }
+  .owa-template-search { width: 100%; }
+  .owa-template-filters { overflow-x: auto; }
+  .owa-template-grid { grid-template-columns: minmax(0, 1fr); }
+  .owa-template-card { min-height: 0; }
+}
+
+@media (max-width: 760px) {
+  .owa-template-dialog { width: min(640px, calc(100vw - 18px)); max-height: calc(100dvh - 18px); }
+  .owa-template-dialog > header { padding: 16px 18px !important; }
+  .owa-template-dialog form { padding: 14px 18px 0; }
+  .owa-template-dialog form > footer { margin: 0 -18px; padding: 12px 18px; }
+  .owa-template-form-grid,
+  .owa-template-dialog fieldset,
+  .owa-template-source-grid { grid-template-columns: minmax(0, 1fr); }
+  .owa-template-source-grid label:last-child { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-template-card { transition: none; }
+  .owa-template-card:hover { transform: none; }
+}

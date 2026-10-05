@@ -1,0 +1,38 @@
+.orion-charts { color: #234658; min-width: 0; position: relative; font-size: 13px; line-height: 1.6; }
+.orion-charts button, .orion-charts select, .orion-charts summary { font: inherit; color: #254e68; }
+.orion-charts button, .orion-charts select { background: color-mix(in srgb, var(--owa-semantic-surface-control, #edf5f7) 66%, transparent); border: 1px solid rgba(63,110,140,.24); border-radius: 7px; padding: 7px 11px; }
+.orion-charts button { cursor: pointer; box-shadow: none; white-space: nowrap; }
+.orion-charts button:hover:not(:disabled) { background: rgba(218,238,244,.8); border-color: #83acbf; }
+.orion-charts button[aria-pressed="true"] { color: #174b79; background: rgba(206,229,246,.84); border-color: #79a1c3; }
+.orion-charts button[data-chart-available="false"]:not([aria-pressed="true"]) { color: #627783; }
+.orion-charts button:disabled { opacity: .55; cursor: not-allowed; }
+.orion-charts :is(button, select, summary, input):focus-visible { outline: 2px solid #387cab; outline-offset: 3px; }
+.orion-charts-gallery { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 0 14px; border-bottom: 1px solid rgba(66,111,136,.15); }
+.orion-charts-fields { display: grid; grid-template-columns: minmax(150px,1fr) minmax(160px,1.15fr) minmax(150px,1fr); align-items: end; gap: 14px; padding: 16px 0; }
+.orion-charts-fields > label { display: flex; flex-direction: column; gap: 6px; color: #3e5e6f; min-width: 0; }
+.orion-charts-fields select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.orion-charts-metric-picker { position: relative; align-self: end; margin: 0; border: 0; padding: 0; background: transparent; min-width: 0; }
+.orion-charts-metric-picker > summary { border: 1px solid rgba(63,110,140,.24); border-radius: 7px; padding: 7px 11px; cursor: pointer; background: rgba(235,247,248,.55); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.orion-charts-metric-list { position: absolute; top: calc(100% + 7px); left: 0; z-index: 12; padding: 10px; width: max(100%, 280px); max-width: 70vw; max-height: 300px; overflow: auto; border: 1px solid #9dbecb; border-radius: 9px; background: rgba(222,241,243,.98); box-shadow: 0 5px 16px rgba(24,65,82,.12); }
+.orion-charts-metric-list label { display: flex; align-items: start; gap: 8px; padding: 7px 5px; color: #294c60; cursor: pointer; }
+.orion-charts-metric-list input { margin-top: 4px; accent-color: #317aaa; }
+.orion-charts-fields .orion-charts-stack-confirm { grid-column: 1 / -1; flex-direction: row; align-items: start; font-size: 12px; }
+.orion-charts-stack-confirm input { margin-top: 4px; accent-color: #317aaa; }
+.orion-charts [hidden] { display: none !important; }
+.orion-charts-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-bottom: 8px; }
+.orion-charts-tools > span { flex: 1; font-size: 12px; color: #567281; margin-right: 8px; }
+.orion-charts-notice { margin: 4px 0 10px; padding: 10px 12px; color: #795821; background: rgba(243,229,197,.36); border: 1px solid rgba(171,133,68,.18); border-radius: 7px; }
+.orion-charts-notice:empty { display: none; }
+.orion-charts-canvas { width: 100%; height: 380px; min-width: 0; overflow: hidden; }
+.orion-charts-footnote { color: #486777; font-size: 12px; margin: 8px 0 12px; }
+.orion-charts-selection { border: 0; border-top: 1px solid rgba(66,111,136,.15); padding: 9px 0; margin: 0; background: transparent; }
+.orion-charts-selection > summary { cursor: pointer; color: #2f5770; padding: 3px 0; }
+.orion-charts-selection p { color: #486777; }
+.orion-charts-selection pre { font-size: 12px; line-height: 1.5; padding: 12px; border-radius: 7px; background: rgba(236,247,248,.4); color: #26485a; max-height: 250px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .orion-charts-gallery { gap: 6px; }
+  .orion-charts-gallery button { padding: 6px 9px; font-size: 12px; }
+  .orion-charts-fields { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .orion-charts-fields > label:last-of-type { grid-column: 1 / -1; }
+  .orion-charts-tools > span { flex-basis: 100%; }
+}

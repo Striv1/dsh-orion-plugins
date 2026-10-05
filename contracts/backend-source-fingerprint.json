@@ -1,0 +1,1405 @@
+{
+  "algorithm": "sha256-path-content-v1",
+  "sha256": "7964a84a604a94dbb7d8e45e5b09a4ead7997ac68e77c42624785bd47e2690f3",
+  "fileCount": 279,
+  "scope": [
+    "runtime source/resource allowlist including Makefile, scripts, migrations, templates, skills and report assets"
+  ],
+  "files": [
+    {
+      "path": "Makefile",
+      "bytes": 2597,
+      "sha256": "8b3c50dd08a2c10ca7b7e54e08615a9dde2324191ad83a73c9b7b734b7f82637"
+    },
+    {
+      "path": "database/migrations/orion_workflow/001_baseline.sql",
+      "bytes": 4937,
+      "sha256": "5e707c3908158924d705405924f5499e0e62958fc2a619c76b97f62457215835"
+    },
+    {
+      "path": "database/migrations/orion_workflow/002_realtime_document_current.sql",
+      "bytes": 1658,
+      "sha256": "0e91814984ff91f8217c3b5b47581bfb6bd35c5548d5e31495270c6f54f3227f"
+    },
+    {
+      "path": "database/orion_source_data_schema.sql",
+      "bytes": 10323,
+      "sha256": "d0c402fca95b015549ba3fb768ea0115933a0e2dbfcfc0ef8ccd3eab7c93de52"
+    },
+    {
+      "path": "docs/runtime-install.md",
+      "bytes": 3400,
+      "sha256": "b6790c1044766aaa5e46e4fc3c3fbbc5846a09bd071f91623ffca73e8b72d04e"
+    },
+    {
+      "path": "harness/__init__.py",
+      "bytes": 71,
+      "sha256": "e6801424f66743a41199a6530db89bc9a3567cd6558d492d27bcabeb962773ab"
+    },
+    {
+      "path": "harness/contracts/workflow-ui-actions.json",
+      "bytes": 3299,
+      "sha256": "c6fbf34d1b4403ff8d33776c35edce1880e5e83de377dccebe68c3cb116372f8"
+    },
+    {
+      "path": "harness/mapping_authoring_contract.py",
+      "bytes": 11445,
+      "sha256": "ed5ba710f3208c2605f414d47b104a297b098a4156010de46c49c438c8b882b1"
+    },
+    {
+      "path": "harness/mcp_argument_validation.py",
+      "bytes": 2180,
+      "sha256": "354ff74e70c821579886f8d129e61acaa0ed896a5a7d22daabf18bfec8360951"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/02-semantic-recognition/business-rule-candidates.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/04-ontology-design/ontology-design.yaml",
+      "bytes": 137,
+      "sha256": "4ec414045f29104217e4345d8a646c4b8406e5ed08275b95ace3e4d5a806c05b"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/05-ontology-build/ontology.ttl",
+      "bytes": 284250,
+      "sha256": "c860e36929f26e978b869d14edd7a2fd5f9b02b0c62f504e55d9bf937605d1b6"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/LICENSE",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/project.json",
+      "bytes": 172,
+      "sha256": "52b2199b7d055c8ed1bb7c788d33a8beb25eb1083752bd51973a3c17176dfbe9"
+    },
+    {
+      "path": "harness/ontology-templates/automatce-base-v1/workflow-state.json",
+      "bytes": 153,
+      "sha256": "721f3ae8b916855c173462687d518f34ff51ab5e09c3a6960c8db010796710d2"
+    },
+    {
+      "path": "harness/ontology-templates/catalog.json",
+      "bytes": 4409,
+      "sha256": "c8f0466a1d2863f3d16adb35594fbd838466395db0e88b2203f047480896bdce"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/02-semantic-recognition/business-rule-candidates.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/04-ontology-design/ontology-design.yaml",
+      "bytes": 152,
+      "sha256": "28b51be628ef67f365447392166b408703f95fcd2c7ecff3c6925065ea51bd80"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/05-ontology-build/catalog-v001.xml",
+      "bytes": 438,
+      "sha256": "7901a16cb8c754847bad877c5bc2acd3bd66393cdc8c7d258e64e5d361f7d074"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/05-ontology-build/ontology.rdf",
+      "bytes": 296207,
+      "sha256": "aa898340e1f3e72b151286fa58fec56c67a2977d2204f8882f43d6389c3fad10"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/LICENSE",
+      "bytes": 1086,
+      "sha256": "e0d12b2396d647877963940902672e6bbbd5211f34581581045e5612528f597c"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/project.json",
+      "bytes": 177,
+      "sha256": "9a60a958016f151b079a9b5eb3ff8b5cfd3cd9c78104273fb83984f28b2a98fd"
+    },
+    {
+      "path": "harness/ontology-templates/iof-supply-chain-202603/workflow-state.json",
+      "bytes": 150,
+      "sha256": "95b8c98b0b4f0181c750c93c6e83717c4890d33de0d2957d99e8bf3ed542c373"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/02-semantic-recognition/business-rule-candidates.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/04-ontology-design/ontology-design.yaml",
+      "bytes": 142,
+      "sha256": "77cecf6804153c10774b798ef67b254f425bf65ca7b153289cdee940b3097775"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/05-ontology-build/ontology.ttl",
+      "bytes": 217138,
+      "sha256": "220c9efa17a8eb5a3a2d212b8e70a6191b63802889b681089bc35cf128f67498"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/LICENSE",
+      "bytes": 10758,
+      "sha256": "517c707d9703f9552bec4bc1164ce67d1493339ed2b01fd5c21b75531d57fa30"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/project.json",
+      "bytes": 199,
+      "sha256": "f465e1a9d603f22dd1f47a9fb9562a811e42709f627814c473d6113ef096b0de"
+    },
+    {
+      "path": "harness/ontology-templates/openepcis-dpp-core-v098/workflow-state.json",
+      "bytes": 165,
+      "sha256": "59ed1f99f618f4f0bdbd34fa2d7a745d1ae5607845352fbc8c5f1ec7f49e5b4e"
+    },
+    {
+      "path": "harness/ontology-templates/orion-manufacturing-supply-quality-v1/02-semantic-recognition/business-rule-candidates.json",
+      "bytes": 615,
+      "sha256": "62b253aee7dee4a7389668c231cbb35339974ba668cc6e324bb5800c11d15611"
+    },
+    {
+      "path": "harness/ontology-templates/orion-manufacturing-supply-quality-v1/04-ontology-design/ontology-design.yaml",
+      "bytes": 745,
+      "sha256": "bdc6e394b726a6eba61fdc71e23ab76ba448025c130ddb3df7fb9a43fe868e1e"
+    },
+    {
+      "path": "harness/ontology-templates/orion-manufacturing-supply-quality-v1/05-ontology-build/ontology.ttl",
+      "bytes": 3887,
+      "sha256": "c4fa6c69fba3751a9c23a1765e2f5952f4914078e4c41ff1b571a543b46344ee"
+    },
+    {
+      "path": "harness/ontology-templates/orion-manufacturing-supply-quality-v1/project.json",
+      "bytes": 235,
+      "sha256": "af2160f30728ff03d47d5b1532c6707ff328300ec24bd1d5657ee4f2d8da4b42"
+    },
+    {
+      "path": "harness/ontology-templates/orion-manufacturing-supply-quality-v1/workflow-state.json",
+      "bytes": 193,
+      "sha256": "2069c15255d55656eb951c8fc9390f786067a796c2c6a0c7a4748eb11958b60e"
+    },
+    {
+      "path": "harness/orion_mapping_runtime_tools.py",
+      "bytes": 9954,
+      "sha256": "be3fb4aafe66445b31ff2b86706b226bcc6f569032e12896f734781a56c86440"
+    },
+    {
+      "path": "harness/orion_s3_checkpoint_handoff.py",
+      "bytes": 2206,
+      "sha256": "944e73eb72da4365f2d0db6e5e74c5ca13b7ea9e72c6b9dcc1fb640b3956225e"
+    },
+    {
+      "path": "harness/orion_workflow_action.py",
+      "bytes": 2621,
+      "sha256": "eb233800905f1bfa78e0d9f3e467f4a4a30065bb9936915899f7053eebd87c66"
+    },
+    {
+      "path": "harness/orion_workflow_contracts.py",
+      "bytes": 46106,
+      "sha256": "547b635fb7bd84e3925e5bd381ffef9c75fcb59d056d77ef1e452c1222ad9fff"
+    },
+    {
+      "path": "harness/orion_workflow_mcp.py",
+      "bytes": 108861,
+      "sha256": "3af15a3c0b84382a44525e84eec6a912ddef9a4ac0c4cdde772b61533c54a0a6"
+    },
+    {
+      "path": "harness/orion_workflow_tool_schemas.py",
+      "bytes": 72164,
+      "sha256": "42ce762e82714bf18f95bf91a9fefa886e923eab7229440e5bb5c243896fc15a"
+    },
+    {
+      "path": "harness/profile/agent-presets/engineering/persona.txt",
+      "bytes": 9388,
+      "sha256": "495ce3430518e0511281e556239e186aad1386e19c9dedb14c2804039f6bf3c7"
+    },
+    {
+      "path": "harness/profile/agent-presets/engineering/preset.yml",
+      "bytes": 180,
+      "sha256": "b2080fed39b81603a5a39453ea3a067e11dfbb9fcb9e182b311eb86f06fe9a9e"
+    },
+    {
+      "path": "harness/profile/agent-presets/ontology-qa/persona.txt",
+      "bytes": 8435,
+      "sha256": "3b17d4a6ce9e45eb9c9656d056eaf710a4dc66595ef3e129fec62d05378af424"
+    },
+    {
+      "path": "harness/profile/agent-presets/ontology-qa/preset.yml",
+      "bytes": 180,
+      "sha256": "41e34c0dd27cae5bdcdba619142b36bafdf1c1ac494a28da558f8f2ddfe8bf69"
+    },
+    {
+      "path": "harness/realtime_qa_mcp.py",
+      "bytes": 51666,
+      "sha256": "60de7b06fc69d69f2fca64ae52ce1688c3a242ef60d27aa92cacb561e43f5354"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/SKILL.md",
+      "bytes": 18582,
+      "sha256": "81123b679eef9ea1f051e29628a57e23e5df2f97b704d16ddc651ba927f32f0f"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/build-validate-release.md",
+      "bytes": 14812,
+      "sha256": "cca4857e6d98ee6d4cf7c43fd45156b502aa1b09c7813d22567168192de0595c"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/business-query-plans.md",
+      "bytes": 10200,
+      "sha256": "3c9d661bd66ec1288d7c1287d65745b8592dce92c2ab2ac5006d0f3b1410363e"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/execution-and-confirmation.md",
+      "bytes": 7554,
+      "sha256": "b5865a1be1be6f0eeb5512faf1f16764b4146e3e0304a565d60b41934a777815"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/intake-and-data.md",
+      "bytes": 18170,
+      "sha256": "0bbf5ff43b55cc79f481e9c305a5c4c3e59a3730e1df96b9f265289bb0bcfee8"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/mcp-recovery.md",
+      "bytes": 2206,
+      "sha256": "0e6f0cd8b54de8c6a9fce7a65165b7847d6df4a98425eebc473fea0ed397e472"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/semantic-modeling-boundaries.md",
+      "bytes": 6762,
+      "sha256": "b71d342da2124b8d5bb5401de3762d8ccbb1f6a26b3be1cf6015afed1587f0f1"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/semantics-and-mapping.md",
+      "bytes": 16642,
+      "sha256": "8b8e618b04a7df8ba6172d8695f5720e0309ca3a4c0bdd0ed1f53aa1c58ee915"
+    },
+    {
+      "path": "harness/skills/orion-ontology-engineer/references/tool-contracts.md",
+      "bytes": 36478,
+      "sha256": "d8cb38191aad559ad7b324503006a5ac7725ddf5fc03be0570260107dfd2140a"
+    },
+    {
+      "path": "harness/source_query_contract.py",
+      "bytes": 3001,
+      "sha256": "6375a916d40a5c8fff5bd530cf075746a353aa335adf1591f5e856d66543987b"
+    },
+    {
+      "path": "harness/workflow_action_contract.py",
+      "bytes": 2012,
+      "sha256": "540ce4ba6aafe4c293fd2e9b2b280dc60149798d0b10075560519cd8aeedbcea"
+    },
+    {
+      "path": "harness/wren_analysis_tools.py",
+      "bytes": 5633,
+      "sha256": "89f5ec52d38f47c8d41f0844570efaa7fffc5ebf5332359b7cda3707440690ec"
+    },
+    {
+      "path": "harness/wren_project_tools.py",
+      "bytes": 6765,
+      "sha256": "6d6e83fd3383abd30f4e9d17fedd573ebb13497d80619b013acc47fa3867b1e5"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1693,
+      "sha256": "8a24efce8d0f12fe4a66735739a6d24347c25aa70ddaeb615c6bbaeff0acf2d9"
+    },
+    {
+      "path": "scripts/build_ontology_graph.py",
+      "bytes": 20337,
+      "sha256": "57e2679dd29750ab38e059e16ababb3ab392d0612ad2836e9d90910a001ee9a8"
+    },
+    {
+      "path": "scripts/engineering_control.py",
+      "bytes": 10431,
+      "sha256": "ca62c30a3f0b9b58cbdd512789833c58dd5d00ca462bc971a3aa51d51deaea76"
+    },
+    {
+      "path": "scripts/ensure_semantica_runtime.sh",
+      "bytes": 14235,
+      "sha256": "f0cb83116b0e3a0e3ef159c090f273bcda21830ac7b8ffbffb7988474ba28663"
+    },
+    {
+      "path": "scripts/import_database_snapshot.py",
+      "bytes": 2066,
+      "sha256": "b0ec83ef3b26fe07c4ae05ca905c7ab20086f5fbd2bf42dd23cebc095d5832a0"
+    },
+    {
+      "path": "scripts/launch_orion_harness.py",
+      "bytes": 9782,
+      "sha256": "4ec739e82e5a50ee50010cd84efa852d941939a6e76e7d5b347c171e12b2452d"
+    },
+    {
+      "path": "scripts/managed_stage_bridge.py",
+      "bytes": 10570,
+      "sha256": "6d91916d86faa501e711fd8b646f5ca7fd523981812e2dab30f6d65976e562e9"
+    },
+    {
+      "path": "scripts/open_release_in_protege.py",
+      "bytes": 7186,
+      "sha256": "caf24d1f645feb7bb406b6cb71c7283ab09fe9dc8db209951fbc9168c1a990ce"
+    },
+    {
+      "path": "scripts/orion_runtime_manifest.py",
+      "bytes": 3837,
+      "sha256": "7683f6c23517384157348a165e15f00b9d472945fad023c375c4f0bc647bbab3"
+    },
+    {
+      "path": "scripts/prepare_orion_runtime.py",
+      "bytes": 6770,
+      "sha256": "3aded5e539761a7142109f0453e40dbfe11ee229cd280cf8d9765f49da6c545d"
+    },
+    {
+      "path": "scripts/prepare_s7_deployment_input.py",
+      "bytes": 8232,
+      "sha256": "ec8b95a4ad71b829e4c920c6cdbdc14ee653b158926fb7f9e2a136c1f0182667"
+    },
+    {
+      "path": "scripts/protege_role_router.py",
+      "bytes": 20227,
+      "sha256": "ec1797d5af1c6a6cd0d9b96992d840b71faaf9152445b4872fc1cc67d3be00d8"
+    },
+    {
+      "path": "scripts/register_realtime_runtime.py",
+      "bytes": 1099,
+      "sha256": "11262879d4c399d2640fe0dbfbccb181cf5cac9e8324a7247fe1c7cb3e28b818"
+    },
+    {
+      "path": "scripts/register_wren_source.py",
+      "bytes": 4980,
+      "sha256": "0916477998340718aa475ff315bdd341f8b4e59bdc1ce0ae3c48e53b8d7fa6bd"
+    },
+    {
+      "path": "scripts/render_ontop_release_deployment.py",
+      "bytes": 1391,
+      "sha256": "872359527623aa6032c6f8b49a4ce193fd6bb0b97f43e035193981a56cbe93af"
+    },
+    {
+      "path": "scripts/requirements-wren.txt",
+      "bytes": 755,
+      "sha256": "a89de0736b21ccd371522b63e23611b99c4c4a55088a73a23ce966d66f8cf326"
+    },
+    {
+      "path": "scripts/run_engineering_controller.py",
+      "bytes": 13766,
+      "sha256": "4466c6b5f4da6bd480b9c905d0ee96918cf3c40ce9c0540c06eb7e7a39cbe27b"
+    },
+    {
+      "path": "scripts/run_protege_build_stage.py",
+      "bytes": 30149,
+      "sha256": "8d83364feadd888063bd6207abd2429daf2ba8f6a181e45648f0e028082172fc"
+    },
+    {
+      "path": "scripts/run_quality_validation_stage.py",
+      "bytes": 104110,
+      "sha256": "131f8478ad37212469398b7aa7467fc64c8e9667d9083be142ca9f73ce431109"
+    },
+    {
+      "path": "scripts/run_s7_realtime_deployment.py",
+      "bytes": 994,
+      "sha256": "7182b052486ff85209e78b61ee3c04d9ed14d77d90ef0315891189340a6511a0"
+    },
+    {
+      "path": "scripts/semantica_runtime_config.py",
+      "bytes": 5135,
+      "sha256": "8fb7b5ab715f756184c2a08ab10cc6a28bad68b65c50a7866b9dc893f4eaf1e5"
+    },
+    {
+      "path": "scripts/semantica_validation_runtime.py",
+      "bytes": 3810,
+      "sha256": "5a7437ba7dbc4744f1fcbdf9bc79969928ceeae421ab17ae3c309a36159a0b4b"
+    },
+    {
+      "path": "scripts/sync_published_ontologies_to_semantica.py",
+      "bytes": 6230,
+      "sha256": "226d1ed9f1c4a4cdd219cf38b7b31ea87933812cf6303bbd2a94acb133a49669"
+    },
+    {
+      "path": "scripts/verify_ontop_release_deployment.py",
+      "bytes": 1614,
+      "sha256": "92338eaa6843d8690eb3445ee4539507ee3189dd0c0ca9aba14283b80e63ade7"
+    },
+    {
+      "path": "services/__init__.py",
+      "bytes": 54,
+      "sha256": "ab0586edfd0637dd645721d4dd439caae5b9cbda381c69de4a248d508ad986c3"
+    },
+    {
+      "path": "services/config.py",
+      "bytes": 2349,
+      "sha256": "1db31023ad9ce419a7dd8a649c2a7ffc9090b3fd7ea5c217c20345dd6741c37b"
+    },
+    {
+      "path": "services/fuseki_client/__init__.py",
+      "bytes": 34,
+      "sha256": "e54626b5db5bd9d2f39557710410d3214a7f7049d583af7639bac95501e1efae"
+    },
+    {
+      "path": "services/fuseki_client/client.py",
+      "bytes": 7582,
+      "sha256": "0ed406efe68619a02c1ed646194515056a97bc35e7d58f9884d83b0daec5b334"
+    },
+    {
+      "path": "services/ingestion/__init__.py",
+      "bytes": 41,
+      "sha256": "60564c775afe423c64f0072cd02a6453169bf7cf084fafe4b8c9a6e6b575b3c3"
+    },
+    {
+      "path": "services/ingestion/document_jobs.py",
+      "bytes": 19197,
+      "sha256": "d39271f94375e6f220ff7d4353bb5845cff69bd60d9aeff99d1a54be4b23b625"
+    },
+    {
+      "path": "services/ingestion/markdown_evidence.py",
+      "bytes": 2813,
+      "sha256": "3e81d31aec8cb13329547d2e5bcf326306b08cbad90aea19b23dfe3a026f9d72"
+    },
+    {
+      "path": "services/ingestion/message_attachments.py",
+      "bytes": 13696,
+      "sha256": "2422dc393c0a62c05c61507cbe1f261520062110f20c99e86283121bd08343e1"
+    },
+    {
+      "path": "services/ingestion/pdf_text_extract.swift",
+      "bytes": 873,
+      "sha256": "8b777770fcf40689ac9405098f2c4b12cc7af5c5c77add37baefccf2eeebc54c"
+    },
+    {
+      "path": "services/ingestion/s0_batch_executor.py",
+      "bytes": 145303,
+      "sha256": "3cdcfa3b1a988570e74fcb67121f27ab5cbbba1c2d91aaca8aad270a69a7deb8"
+    },
+    {
+      "path": "services/ingestion/source_preflight.py",
+      "bytes": 7215,
+      "sha256": "935ebfc8483231daaa1a3cafd634e793c9262ca6d503db32877410238384841f"
+    },
+    {
+      "path": "services/ingestion/unstructured_router.py",
+      "bytes": 10427,
+      "sha256": "d26935138959732e23df141a022d1833e2dde2189a16bc7fbdcdd32d9ad750e7"
+    },
+    {
+      "path": "services/ontology_contracts/__init__.py",
+      "bytes": 79,
+      "sha256": "84f0d1689281944b7fd092703de6fc6bbdfdecfec2a811211f2a4a30cb5c21b4"
+    },
+    {
+      "path": "services/ontology_contracts/business_query_plan.py",
+      "bytes": 5040,
+      "sha256": "1a7114eef48a439f4e29c783a0a46a5829a02bda3241e6b2f04372b507eef768"
+    },
+    {
+      "path": "services/ontology_contracts/closed_world_roles.py",
+      "bytes": 4627,
+      "sha256": "4503eff36d05f9390e57ac90e2543ae7b86ad410ec216b51e7b792a19b52c17d"
+    },
+    {
+      "path": "services/ontology_contracts/cq_answers.py",
+      "bytes": 37064,
+      "sha256": "014a7d037c3c246da78904ab6255a5d3a6576ca82373d1c4b71e4cc99c2265b4"
+    },
+    {
+      "path": "services/ontology_contracts/errors.py",
+      "bytes": 779,
+      "sha256": "5bff32da75a79be18426784cdb8898150f3881568e9862ad223e2b2b33ab3e7b"
+    },
+    {
+      "path": "services/ontology_contracts/nullable_bindings.py",
+      "bytes": 3395,
+      "sha256": "2eacb7e97b545711c7d91f0a7cee4b79ecddce6cf912a2e00774bdac454be8c6"
+    },
+    {
+      "path": "services/ontology_contracts/obda.py",
+      "bytes": 5092,
+      "sha256": "7c3d710e265c3a8d1977bdd49a11355de9b7b62aa3761d2c3995fce27ae31ee5"
+    },
+    {
+      "path": "services/ontology_contracts/rule_conditions.py",
+      "bytes": 1928,
+      "sha256": "1be4948aa75cf0d0b0695c48069d365edff2b8b18037a706404ebdaa7d3f0325"
+    },
+    {
+      "path": "services/ontology_contracts/rule_syntax.py",
+      "bytes": 3475,
+      "sha256": "52b228d5f774984a2b35e0dc55b36630211d02d035993bddf15aed36cf03df3e"
+    },
+    {
+      "path": "services/ontology_contracts/schema_snapshot.py",
+      "bytes": 4882,
+      "sha256": "a01ec0468df5082eb82e4787caa677bd88e6e9badbe41850f1f2e8736aa51f9b"
+    },
+    {
+      "path": "services/ontology_contracts/sparql_syntax.py",
+      "bytes": 1480,
+      "sha256": "b322f1bc4ba0975a19aae43a84c0de951cc4c13a7338700a6a7ec1fb11d5618c"
+    },
+    {
+      "path": "services/ontology_engineering/__init__.py",
+      "bytes": 722,
+      "sha256": "393d4738fdaa9c7acf7729c5561b59c9f2ce58d4f8ffec736590a1f8854fb30e"
+    },
+    {
+      "path": "services/ontology_engineering/axiom_applicability.py",
+      "bytes": 15999,
+      "sha256": "c1821d3ca4792a0809c1575b8b0df70c6649bc788e46462b69ebe88108b8a0c2"
+    },
+    {
+      "path": "services/ontology_engineering/axiom_checks.py",
+      "bytes": 1488,
+      "sha256": "ac0e1375d5de3b3a4d173c7492d93c6077c1025c06e84c01ce330791bbc7b3a2"
+    },
+    {
+      "path": "services/ontology_engineering/business_answer_contract.py",
+      "bytes": 2956,
+      "sha256": "cbdd73ac8d464250e2124f1165ef813cc14ae48cb8732b779a6226a60dd4cd7d"
+    },
+    {
+      "path": "services/ontology_engineering/business_mapping_scope.py",
+      "bytes": 4990,
+      "sha256": "229fb5b84493a2e526476340667be375c88c852f30b9bb015874c94737f5bedb"
+    },
+    {
+      "path": "services/ontology_engineering/business_modeling_contract.py",
+      "bytes": 8501,
+      "sha256": "3e14ecda93c202c0d5855da40486479857994c35cc093333a9e1641670380821"
+    },
+    {
+      "path": "services/ontology_engineering/business_preview.py",
+      "bytes": 17257,
+      "sha256": "3de7f15f09673fd4b4c9e9782300c0aee163ef659b59f840c85c13200e6861f6"
+    },
+    {
+      "path": "services/ontology_engineering/business_preview_diagnostics.py",
+      "bytes": 1776,
+      "sha256": "dc0b23e6c3e98778b19714ac5aaad9926a460bff9941331ee8718304b370f105"
+    },
+    {
+      "path": "services/ontology_engineering/business_preview_execution.py",
+      "bytes": 29102,
+      "sha256": "348b6a03b4ecfa32c7d38532b26f280615c2c29595541e1ca2ce310da3d047d7"
+    },
+    {
+      "path": "services/ontology_engineering/business_preview_inputs.py",
+      "bytes": 12304,
+      "sha256": "78f876eebebc2dfed0dd3cc5af6ce0ef4ba16377529ea5f26638ce95ad55b165"
+    },
+    {
+      "path": "services/ontology_engineering/business_preview_resources.py",
+      "bytes": 3520,
+      "sha256": "278e79a6f4f9bb524ff1d568809599bd53688b6725b24f08950e22ae7b9123d0"
+    },
+    {
+      "path": "services/ontology_engineering/business_quality.py",
+      "bytes": 12474,
+      "sha256": "5952bd33132f2479972143a0751d54e024a8687e08dfc41124011604d499e848"
+    },
+    {
+      "path": "services/ontology_engineering/business_query_compiler.py",
+      "bytes": 25532,
+      "sha256": "36b48daf86a1322f22563e954b9afd4bf08113b5fa76b11f4b70b1612591d7f0"
+    },
+    {
+      "path": "services/ontology_engineering/business_runtime_validation.py",
+      "bytes": 5702,
+      "sha256": "cffdffb37d3408f62ba569f85b694a7ffea38a909583bc9337da067945f6c87f"
+    },
+    {
+      "path": "services/ontology_engineering/business_source_contract.py",
+      "bytes": 1860,
+      "sha256": "30f843e6f6a8a85317b24a3eebb72b157d7853cdb7634ad5a3deb9b17a206c3f"
+    },
+    {
+      "path": "services/ontology_engineering/capability_planning.py",
+      "bytes": 9525,
+      "sha256": "619734afb4b5f0424245ff323f87d671e12be0f1dd66272cf90f313b7d1ea6ea"
+    },
+    {
+      "path": "services/ontology_engineering/closed_world_diagnostics.py",
+      "bytes": 11322,
+      "sha256": "9122e1dd13494c67933d1da87ebf65e792a31a0acd9335a6a18f15ecb80d4448"
+    },
+    {
+      "path": "services/ontology_engineering/contract_chain.py",
+      "bytes": 11508,
+      "sha256": "9c37d97a9f866f35e84fed2627310250f83cf92023afa6a9af77324d2edecccb"
+    },
+    {
+      "path": "services/ontology_engineering/cq_binding_guarantee.py",
+      "bytes": 5247,
+      "sha256": "c09e58011b6009c384f77a96456a4954f75a5c6ce611ea7ba515fe3332416ccf"
+    },
+    {
+      "path": "services/ontology_engineering/cq_failure_collector.py",
+      "bytes": 1741,
+      "sha256": "f358b87d8c16cb4543a78c79540f08b27ee2b38a8c9c331ed709b2b8cc666a14"
+    },
+    {
+      "path": "services/ontology_engineering/cq_graph_reachability.py",
+      "bytes": 10563,
+      "sha256": "34e77289a0616a05a3a39fe8a75b5b6a64e0bedc599004e827877ccd43fbed2a"
+    },
+    {
+      "path": "services/ontology_engineering/cq_semantics.py",
+      "bytes": 11506,
+      "sha256": "e4192e6f140d3c3271e6e222358308661c7c6f2838514c74df8e050c74144a0a"
+    },
+    {
+      "path": "services/ontology_engineering/cq_validation.py",
+      "bytes": 11070,
+      "sha256": "30f576e93e102d9c6d6d5bff6cb59a7a01693df66ad0f0723dd70f06dbffd16a"
+    },
+    {
+      "path": "services/ontology_engineering/delivery_packages.py",
+      "bytes": 26182,
+      "sha256": "228d69310e5b4c3817b98091f3677e2d558d9b84c91abbfc4778dbba659c2a1f"
+    },
+    {
+      "path": "services/ontology_engineering/dependency_graph.py",
+      "bytes": 2220,
+      "sha256": "e56002b530792dd7ab12d2e5d72f2ce2a2133e01b902a669534bf807c41f67d9"
+    },
+    {
+      "path": "services/ontology_engineering/design_localization.py",
+      "bytes": 1966,
+      "sha256": "36e475533f2e76b1ff70ad9f98481a76ec97ccaab41c420336c0727356c9dd93"
+    },
+    {
+      "path": "services/ontology_engineering/design_workspace.py",
+      "bytes": 17344,
+      "sha256": "83fd45ef066065da75d00d2fe7ffe89da53336b14dc54ca87eab284d019c7c93"
+    },
+    {
+      "path": "services/ontology_engineering/design_workspace_api.py",
+      "bytes": 6057,
+      "sha256": "e71658b67f18706011edadfeb1e2403974d106b8fff1337301129afae40b0097"
+    },
+    {
+      "path": "services/ontology_engineering/document_class_coverage.py",
+      "bytes": 2742,
+      "sha256": "c201a0662a2b15ef6719d4bcdebd3086eaba5e00bda742da6917bf7370d6dabd"
+    },
+    {
+      "path": "services/ontology_engineering/document_fact_materialization.py",
+      "bytes": 5446,
+      "sha256": "08fb03770f0eca2e4cb7f6eee56ca135d32b7ef12abd591b8f0e063ad7608ce1"
+    },
+    {
+      "path": "services/ontology_engineering/draft_batch.py",
+      "bytes": 3461,
+      "sha256": "b737f20c46832ccd3d2ae3b1582946e8ce0d4b417eb33219ef4e9552bde4c5e7"
+    },
+    {
+      "path": "services/ontology_engineering/draft_patch.py",
+      "bytes": 6285,
+      "sha256": "46a98c0d9da63340a48d68a715fdc95c6354465cfff082d4e421fb7d006c5591"
+    },
+    {
+      "path": "services/ontology_engineering/engineering_shadow.py",
+      "bytes": 2188,
+      "sha256": "a3d5adabdd6d607f685ad52dcfd422c9771e56bb366655b322fb918aca817cf8"
+    },
+    {
+      "path": "services/ontology_engineering/engineering_tasks.py",
+      "bytes": 24040,
+      "sha256": "771f4e4069bb0f8ef081401961561e183fd855b4585b6484218c0272279c25c0"
+    },
+    {
+      "path": "services/ontology_engineering/execution_policy.py",
+      "bytes": 13045,
+      "sha256": "96e564b3abad494c5ecc5e5f33a0db50f39ab3ad5119906aa955aa2cd6ffa7cc"
+    },
+    {
+      "path": "services/ontology_engineering/formal_facts.py",
+      "bytes": 10825,
+      "sha256": "1f8a79eb962ab8cde9e23b5074bb6c79ee198f8ffe3581efa79bbe7b0be0e550"
+    },
+    {
+      "path": "services/ontology_engineering/graph_checkpoint.py",
+      "bytes": 2857,
+      "sha256": "c5d65f7eb403c2b47198907d78130e00cd1de5dcd3d8cf291921ad61ddcf574b"
+    },
+    {
+      "path": "services/ontology_engineering/graph_union.py",
+      "bytes": 2025,
+      "sha256": "3181a794142f62df1831c12386c80ed6b5b92d1ef50ea6e294ae0ebec6335f8a"
+    },
+    {
+      "path": "services/ontology_engineering/input_contract_view.py",
+      "bytes": 2729,
+      "sha256": "92d4fe82c51139f31df737c480b9ce6952118518ee8076fc5c5f9ca063838dc4"
+    },
+    {
+      "path": "services/ontology_engineering/instance_exploration.py",
+      "bytes": 13834,
+      "sha256": "316f1d8cde19e26fcc4f6710aeaa7d5e66c575b1cee1513970863133d00980ba"
+    },
+    {
+      "path": "services/ontology_engineering/iri_terms.py",
+      "bytes": 2550,
+      "sha256": "0125d9dc3a251f25691fb67cfbde6982ccf03530790c16a8d71ead3ef1c797b6"
+    },
+    {
+      "path": "services/ontology_engineering/joint_design.py",
+      "bytes": 18059,
+      "sha256": "25c62a8173115eb4c41486b63b4f936e30941ad8f1fa6d25288ab4b816eabe16"
+    },
+    {
+      "path": "services/ontology_engineering/managed_executor.py",
+      "bytes": 4923,
+      "sha256": "92c524164f433b334ef627cccb0621d84d8efda8f8d8a0f943e2a1c1f58fc837"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_preflight.py",
+      "bytes": 6446,
+      "sha256": "8bac336cd8b9519b751d738f9cd7be68085774a31d1258708aac4c1dd5e56c96"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_quality.py",
+      "bytes": 6953,
+      "sha256": "cfbe735ae9f51f2e58d0b98285b8d3856d2aef5266f24fb206a51a9c17629a67"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_runtime_compiler.py",
+      "bytes": 27176,
+      "sha256": "e422f74bcf91b785152375bfe11aefdf5ab704c3a62dda46277262bfd38d315b"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_runtime_coverage.py",
+      "bytes": 2012,
+      "sha256": "62967c6c3947f85b7c5e301ba684b18dded1d8d3b40f5f2c1b536877e67d2e87"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_runtime_extension.py",
+      "bytes": 10894,
+      "sha256": "a78d561363fe801fbd3d2726b08edfd69542a4c96844e125ce7700bbf0b78a43"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_skeleton.py",
+      "bytes": 23943,
+      "sha256": "9a8a87a9ba4072ffbc3f24dbdbdbe1d00eb2f79db3018ad1522cb42d6d3e4693"
+    },
+    {
+      "path": "services/ontology_engineering/mapping_source_probe.py",
+      "bytes": 7997,
+      "sha256": "af1a56a00aa63241876f981e43f57958bccb76e72995b6b5890360f24905b9ea"
+    },
+    {
+      "path": "services/ontology_engineering/materialization.py",
+      "bytes": 8417,
+      "sha256": "2cef2fdd8a26524caa72e61ff8f7fedc020a6ccccad8790c53904437d20d98db"
+    },
+    {
+      "path": "services/ontology_engineering/materialized_graph.py",
+      "bytes": 333,
+      "sha256": "353c7cccc90bbf2a42943a1089e929c88e9d02eaf3f546b89302c317866b1d56"
+    },
+    {
+      "path": "services/ontology_engineering/ontology_types.py",
+      "bytes": 4594,
+      "sha256": "3ccb3843135ad5891bace0cb4841ba7a7e42a5d1f3e8fe07514b73e401901f16"
+    },
+    {
+      "path": "services/ontology_engineering/ontop_boolean_bind.py",
+      "bytes": 8887,
+      "sha256": "5287cc4af41472db19d9de64dd0923ffbc0dfaae01b0bdd31bc1c00837a2f0b1"
+    },
+    {
+      "path": "services/ontology_engineering/ontop_materialization.py",
+      "bytes": 14187,
+      "sha256": "7e058d3c623c110d0c71f32054642b572f8cc444784228059e6e61e7244ccddc"
+    },
+    {
+      "path": "services/ontology_engineering/package_archive.py",
+      "bytes": 12517,
+      "sha256": "1bb97a6e82d281dfbd4a90aca4c0affa2c7416ddfc69b6ef48ea66b06b36f958"
+    },
+    {
+      "path": "services/ontology_engineering/parsed_graph_reuse.py",
+      "bytes": 3035,
+      "sha256": "20d7d6d8ac68e0c33b87c0e4d1bf7d56e13a7a0c95bbb704d816f44e02d3e113"
+    },
+    {
+      "path": "services/ontology_engineering/preflight_operations.py",
+      "bytes": 7471,
+      "sha256": "04097e6e5dbc0f91e93a9456daca0307a6efadb1acd28869877076751b2d3cfc"
+    },
+    {
+      "path": "services/ontology_engineering/preflight_repair.py",
+      "bytes": 15705,
+      "sha256": "05fff16d141f5ee060adab78abe03a0de7a578deeebd3a5b55881485f379dab1"
+    },
+    {
+      "path": "services/ontology_engineering/project_artifact_read.py",
+      "bytes": 9705,
+      "sha256": "45daa105a9877aea1d0347fe062beeb17e576060b8bdd7d2adac984ef6dfe073"
+    },
+    {
+      "path": "services/ontology_engineering/protege_instance_preview.py",
+      "bytes": 4312,
+      "sha256": "ce3d744ec77a4d8f363371d94666bb510b1df2dd63ffff13d8272353232a9d2a"
+    },
+    {
+      "path": "services/ontology_engineering/rdf_builder.py",
+      "bytes": 7793,
+      "sha256": "a71c6ea8c1d6eecbc1555baffb87fb1e469a733132c8cacd1e97963164986290"
+    },
+    {
+      "path": "services/ontology_engineering/rdf_terms.py",
+      "bytes": 2729,
+      "sha256": "cbddd7470e70e2dd8d0b93c4606504aae33024dbf9d0314f48d9476171893830"
+    },
+    {
+      "path": "services/ontology_engineering/release_instance_connection.py",
+      "bytes": 7815,
+      "sha256": "4378fd40b3c942b002a0fbd7366941ab62d073a25b88c007d0c5ef831dd8372a"
+    },
+    {
+      "path": "services/ontology_engineering/repair_progress.py",
+      "bytes": 3659,
+      "sha256": "c481d1bcc942aef8417897ce3ade741b4237125cad9887fa8840ef72da0f156e"
+    },
+    {
+      "path": "services/ontology_engineering/report_assets/css/orion-report.css",
+      "bytes": 17321,
+      "sha256": "ca12fc9b91680b569fcfa3a47590f81428fdc5e5f33957db420f9ef7c4b0d678"
+    },
+    {
+      "path": "services/ontology_engineering/report_assets/js/echarts.min.js",
+      "bytes": 1030855,
+      "sha256": "e84270bd0cd5bdf60fefc26d00c2a391cb2e81f4d26a7a9ee16185a54773a3cf"
+    },
+    {
+      "path": "services/ontology_engineering/report_assets/js/orion-motion.js",
+      "bytes": 3106,
+      "sha256": "dda141d50a471e5b4bb18d7bcd1e9031e15efa03434184688651706cde654a70"
+    },
+    {
+      "path": "services/ontology_engineering/reporting.py",
+      "bytes": 101659,
+      "sha256": "9a5ebb9e66e016682883e2940bafe9af7069a83282f9cdf5a55c6f311cd22834"
+    },
+    {
+      "path": "services/ontology_engineering/revision_draft_inheritance.py",
+      "bytes": 14130,
+      "sha256": "17b85bb2ec10c7cf793b96917e6691bb3610816aef00542d923646c10226b6cb"
+    },
+    {
+      "path": "services/ontology_engineering/revision_reuse.py",
+      "bytes": 18618,
+      "sha256": "242fc0546328a0381532fa80be101642c6413d7c6591107deadfe3c8f87ee7b2"
+    },
+    {
+      "path": "services/ontology_engineering/rule_condition_binding.py",
+      "bytes": 7548,
+      "sha256": "fe9f0bc14a400dcb9c37021fe747d31829c09f1a8f675c980d580ab609f1b63c"
+    },
+    {
+      "path": "services/ontology_engineering/rule_premise_selectivity.py",
+      "bytes": 8315,
+      "sha256": "d67055d94a41b5dbc891a3caa325d5ff6a7690ceb8dfde9cd26cc6b86ea23eea"
+    },
+    {
+      "path": "services/ontology_engineering/rule_scenarios.py",
+      "bytes": 4049,
+      "sha256": "dd15de9d68b30295e538c4153ddfa70183518484bac37ffbf3e78b26db5ce6a9"
+    },
+    {
+      "path": "services/ontology_engineering/rule_term_contract.py",
+      "bytes": 2762,
+      "sha256": "984a15c70ab66f12d4cde3b51d2224d695bdd313fa1c785573d7e4b5f506a0fa"
+    },
+    {
+      "path": "services/ontology_engineering/runtime_capability_read.py",
+      "bytes": 3184,
+      "sha256": "0a1ca069d3000a6d95487e1c31f3cd3ac743eddf998e4f9f50c52e739f55590e"
+    },
+    {
+      "path": "services/ontology_engineering/s6_validation_receipts.py",
+      "bytes": 2413,
+      "sha256": "e4558c569d7a51e2e2275077ecdcaec00e934e4ddfa6c7e5e0547161200db678"
+    },
+    {
+      "path": "services/ontology_engineering/s7_runtime_retry.py",
+      "bytes": 3950,
+      "sha256": "77264fe447f0bac8651378fadc50f654a7c4b68cebe4cdc1ae970675d03b4b08"
+    },
+    {
+      "path": "services/ontology_engineering/semantic_artifact.py",
+      "bytes": 943,
+      "sha256": "b626cc330d7ccc34d7a38587091ca44e598c7ded881791a422c1d66158ce0cdd"
+    },
+    {
+      "path": "services/ontology_engineering/semantic_quality.py",
+      "bytes": 11447,
+      "sha256": "2db72e9f9215b808cc68c9d0a23a4f18bf1318a4832e763a0c787e2d059e351a"
+    },
+    {
+      "path": "services/ontology_engineering/semantica.py",
+      "bytes": 14794,
+      "sha256": "1648cd10d10d905b4d8ac47b62fa4127dff2ff4157325e9e79cb3a0462e5231f"
+    },
+    {
+      "path": "services/ontology_engineering/shacl_validation.py",
+      "bytes": 9571,
+      "sha256": "ed66949d53ed64d0c5408dafc5ce0b0011ff33fa89f1caa9985e0618a420d6f6"
+    },
+    {
+      "path": "services/ontology_engineering/source_changes.py",
+      "bytes": 7710,
+      "sha256": "d185bb3e9dfffdc4e3f285043a33a6efec1c045cb6967ca7db7bca1424f6037a"
+    },
+    {
+      "path": "services/ontology_engineering/source_scope.py",
+      "bytes": 39357,
+      "sha256": "253cc52f0c681721d505daa964200bb6d25fda9aa3c156630ee6280a23086b30"
+    },
+    {
+      "path": "services/ontology_engineering/sparql_execution.py",
+      "bytes": 17345,
+      "sha256": "29258135be6a57b2b90084850c2b08a89e85f180f9e07f1183577db54125da1b"
+    },
+    {
+      "path": "services/ontology_engineering/sparql_paths.py",
+      "bytes": 1733,
+      "sha256": "882b6058968091e120959b32f4fa0680ec4306b918aefb7313191f79450a69b9"
+    },
+    {
+      "path": "services/ontology_engineering/stage_checkpoint.py",
+      "bytes": 12335,
+      "sha256": "eb8884f9101b321741382fae20317b71cf5a5b129d9bf16c37cd9446cf56c173"
+    },
+    {
+      "path": "services/ontology_engineering/stage_contracts.py",
+      "bytes": 11228,
+      "sha256": "d1678a7cb4cecc3938cb52c5409fec14329bb4f170df9859f4a7644b0a86fe02"
+    },
+    {
+      "path": "services/ontology_engineering/stage_execution.py",
+      "bytes": 12029,
+      "sha256": "470830cc9276eacacc48d6acd5a171a6e38ef69342961149464bc292e852b2fa"
+    },
+    {
+      "path": "services/ontology_engineering/stage_execution_guidance.py",
+      "bytes": 9238,
+      "sha256": "bc0d2701bce813c77dd24b5e3f1ed0de779efe6802b48adbad74ad3032e66148"
+    },
+    {
+      "path": "services/ontology_engineering/stage_jobs.py",
+      "bytes": 14240,
+      "sha256": "77f02b118bded02beaffd195ac4390fc4afee2efe7839c8a3b02f8f5dc44e951"
+    },
+    {
+      "path": "services/ontology_engineering/stage_liveness.py",
+      "bytes": 6642,
+      "sha256": "e1e0bc2c979f919a136b50c97224ccc9a9b575718241930b1d7e214ec7bfe18b"
+    },
+    {
+      "path": "services/ontology_engineering/stage_submission_validation.py",
+      "bytes": 33008,
+      "sha256": "ac5bb2dba5b5dc094de231be2bd5b3059325e42173ec203d15502a4d7f56ee6c"
+    },
+    {
+      "path": "services/ontology_engineering/stage_tool_contract.py",
+      "bytes": 2386,
+      "sha256": "f1c273c3ca53d2338f2adfa3ef01abe68a53646af2ac86e937eb2ba100395937"
+    },
+    {
+      "path": "services/ontology_engineering/storage.py",
+      "bytes": 34829,
+      "sha256": "6b7ee7688976007e0521da135d54eeb0f2c5c22820760df9ca9cd77831b3d906"
+    },
+    {
+      "path": "services/ontology_engineering/validation_plan.py",
+      "bytes": 6494,
+      "sha256": "48c0868ee11dfb498702409db4099f5158012d9cd4ea0267cf1263967b5a3c1f"
+    },
+    {
+      "path": "services/ontology_engineering/workflow.py",
+      "bytes": 737261,
+      "sha256": "357e6bcc14fc2563c0cb9efdf127d66ea42bc078e074413b4990b53ca9460e45"
+    },
+    {
+      "path": "services/ontop_client/__init__.py",
+      "bytes": 50,
+      "sha256": "7bf45c58f060ac382a5f3d61b4d87d087fcc6ea0fbfaf57dcb32c52f1b4cbb48"
+    },
+    {
+      "path": "services/ontop_client/backend_validation.py",
+      "bytes": 10030,
+      "sha256": "482f0b4841da1ccc9b3bef9c3c800e852622675bba8939ede2c6df5bf2aa71c9"
+    },
+    {
+      "path": "services/ontop_client/client.py",
+      "bytes": 7814,
+      "sha256": "0241f63b99b3d3f31361b0383cda2a05daf92686760e6d801bf2002a08cfdd5f"
+    },
+    {
+      "path": "services/ontop_client/ontop_query_lint.py",
+      "bytes": 3355,
+      "sha256": "76d6ac1eb624cb0f91792c797f02abe6f2d3ec2f170cd2e0a3b30fe3a8ff2d28"
+    },
+    {
+      "path": "services/ontop_client/query_execution.py",
+      "bytes": 7804,
+      "sha256": "69792277e82ad0927193aeea848f4c98f342c637e4341aaf7c0569ba865792a9"
+    },
+    {
+      "path": "services/realtime_qa/__init__.py",
+      "bytes": 3042,
+      "sha256": "9597d2f5e45a218d2c0d2ca1a616753cc880c6c8a5087648896584ade7e3442b"
+    },
+    {
+      "path": "services/realtime_qa/analysis_assets.py",
+      "bytes": 23018,
+      "sha256": "4c0786b15e0d08c213e985c16bc3c45c024e178e66151ffe6d0c7e6abb4061e7"
+    },
+    {
+      "path": "services/realtime_qa/analytics_api.py",
+      "bytes": 22751,
+      "sha256": "b89852e08ec95d4b6f943304301ac49646dd8c6154d7476d07e93d0d52f6211b"
+    },
+    {
+      "path": "services/realtime_qa/analytics_execution.py",
+      "bytes": 7715,
+      "sha256": "1e2c018042028f7cd8d91bcd61e02c6d1a092b745d482296eae42a1897958da2"
+    },
+    {
+      "path": "services/realtime_qa/analytics_exports.py",
+      "bytes": 10944,
+      "sha256": "dde50a31cd8fe24e40578f11f54713ae1d24757c314b0a7836fee4a71a8a0125"
+    },
+    {
+      "path": "services/realtime_qa/analytics_models.py",
+      "bytes": 3887,
+      "sha256": "38b2dcddd8dfad3cfcf1b2d78f81e942ae99e1a60082f3a2853208bf2bb148af"
+    },
+    {
+      "path": "services/realtime_qa/answer.py",
+      "bytes": 21892,
+      "sha256": "b7d63c7f9062329a8792cf5e99dc1a3a62c745491777d1194886b333ec0953e8"
+    },
+    {
+      "path": "services/realtime_qa/api.py",
+      "bytes": 10794,
+      "sha256": "ca12baab5e5b044fba28afcf82cefa8a691c12fa73ab4ca7fe90a9c010511b15"
+    },
+    {
+      "path": "services/realtime_qa/binding.py",
+      "bytes": 29196,
+      "sha256": "27351e6646713a6ac7eed1d2d3a40e518a7b99f572268cdd5c2d02337922c9fd"
+    },
+    {
+      "path": "services/realtime_qa/capabilities.py",
+      "bytes": 4971,
+      "sha256": "354f9245364dbadbaf3a851ccbe7a80078bc92ec1c27b600de1d4137e2df20d9"
+    },
+    {
+      "path": "services/realtime_qa/capability_details.py",
+      "bytes": 21664,
+      "sha256": "137a46c04d13a4dfe268298c56cd52bcc48d1fc790757889e92bde4dd2bfa5f1"
+    },
+    {
+      "path": "services/realtime_qa/checked_query.py",
+      "bytes": 25144,
+      "sha256": "6825509f9b10ca71a12bc85c13823a5f96db8b36726c5b91c52c0e60d5561433"
+    },
+    {
+      "path": "services/realtime_qa/checked_query_api.py",
+      "bytes": 8801,
+      "sha256": "e995b0907b3c5f8822f66ac61ab93fb0cc33bc43003da3120a395f9756ef5b08"
+    },
+    {
+      "path": "services/realtime_qa/checked_structured.py",
+      "bytes": 16014,
+      "sha256": "254c5847c5d7353e0146512d815ff28cee57c5d058a54db017048673892f72ec"
+    },
+    {
+      "path": "services/realtime_qa/closed_world.py",
+      "bytes": 14953,
+      "sha256": "41e0916853d5ad6038c4caaa35f9eb9b22830c1264521c5944837c41e020d911"
+    },
+    {
+      "path": "services/realtime_qa/code_identity.py",
+      "bytes": 621,
+      "sha256": "a19f85aedb6bc1eb5d6caf7354918f1b38a91bf8af2c18e68b198743bc6f930d"
+    },
+    {
+      "path": "services/realtime_qa/cq_contract.py",
+      "bytes": 10000,
+      "sha256": "1e8a7c4e054529db487c8f35daddf95e86eb6dc564ceb4a029448d5415d9d06b"
+    },
+    {
+      "path": "services/realtime_qa/deployment.py",
+      "bytes": 11896,
+      "sha256": "b8dbe306424eb5265e3454a88513edb068dad7c6cbfb8a7c2ad36b48406250c3"
+    },
+    {
+      "path": "services/realtime_qa/deployment_automation.py",
+      "bytes": 52890,
+      "sha256": "94f32c4a674c7d631a7bea9e68a059e62c7deaae5fec8403d388075a6b44e623"
+    },
+    {
+      "path": "services/realtime_qa/deployment_input.py",
+      "bytes": 7879,
+      "sha256": "c48d32f76d32a5084d34513cdfa88c9698eba7f2d714c8d64acb91af8319467e"
+    },
+    {
+      "path": "services/realtime_qa/document_cq.py",
+      "bytes": 9147,
+      "sha256": "15d47fe9e48ba2eba26a7d55775261bb5e42756d53bf04ff1b0f5543cd0783b2"
+    },
+    {
+      "path": "services/realtime_qa/document_index.py",
+      "bytes": 3989,
+      "sha256": "0d3a55971db9989fb1d482273b25ea5f2f466caf162bc5761af84dfdae6b0095"
+    },
+    {
+      "path": "services/realtime_qa/evidence_absence.py",
+      "bytes": 6308,
+      "sha256": "ba8a10b9b4c7298536c4441f1afd359c214b7e4dda984ee207c01650e3e35a88"
+    },
+    {
+      "path": "services/realtime_qa/evidence_receipts.py",
+      "bytes": 7545,
+      "sha256": "5a6fe31d5c532ae22e1dc5af572b037fc1b44eefd76a16924db26ac6bbb09307"
+    },
+    {
+      "path": "services/realtime_qa/fact_binding_types.py",
+      "bytes": 5348,
+      "sha256": "b48fa14657d5dd6b60d8ebecfeb1783244a315ea490c5e234bdff5a94f578183"
+    },
+    {
+      "path": "services/realtime_qa/incremental_pipeline.py",
+      "bytes": 8390,
+      "sha256": "7e4c298ad8a27ae4732e765d5a73ff82fd2d59e3dde5945af1d5dc7cbd65f75f"
+    },
+    {
+      "path": "services/realtime_qa/json_values.py",
+      "bytes": 623,
+      "sha256": "4f58ea0826d96e929fc8a97306885f8c1b25fe3eebf55b7702ad0c84cdbffb9c"
+    },
+    {
+      "path": "services/realtime_qa/live_analytics.py",
+      "bytes": 9439,
+      "sha256": "75145178647e5d12e66c472976b607e7d8bf3b15f7f2903e9c36793baba66b2f"
+    },
+    {
+      "path": "services/realtime_qa/models.py",
+      "bytes": 15151,
+      "sha256": "6ec241f3d6f8e8562c35bbc4e6ce6523b81ba655d8d50b3cf84eac50d75f5463"
+    },
+    {
+      "path": "services/realtime_qa/postgres_readonly.py",
+      "bytes": 7069,
+      "sha256": "73bc5ecf2a754e9c20cb8c5c86ea5076292de838f500e2d1cc877d2662be501e"
+    },
+    {
+      "path": "services/realtime_qa/postgres_registry.py",
+      "bytes": 6083,
+      "sha256": "19e6f508d769910fdf49fbb2a670873339d1ab8d458374f66c9d3ab4ccc5f001"
+    },
+    {
+      "path": "services/realtime_qa/query_capabilities.py",
+      "bytes": 21662,
+      "sha256": "addaa6329380166c9cd233d6484b1502af6ba0c4b7378bed9c466dc55b149aa4"
+    },
+    {
+      "path": "services/realtime_qa/rdf_results.py",
+      "bytes": 3614,
+      "sha256": "b13d579f3adbd5d9040bd9286a3f3433c17179498075eaf03e17a19a71645370"
+    },
+    {
+      "path": "services/realtime_qa/reasoning.py",
+      "bytes": 26574,
+      "sha256": "2597b283e8c9871ebf61d913d3824cece2d671992d2c5d11c3789eb368ca0032"
+    },
+    {
+      "path": "services/realtime_qa/reasoning_contract.py",
+      "bytes": 43076,
+      "sha256": "4e44629863af82b5f867559b58fd2b189fefee9fbf00b6b8d775448a5bfa5def"
+    },
+    {
+      "path": "services/realtime_qa/reasoning_cq.py",
+      "bytes": 6527,
+      "sha256": "196a4b73e5a296be6a9cc4f86f95bad6cda6a9c4fa66871d6806c80459b528eb"
+    },
+    {
+      "path": "services/realtime_qa/registration.py",
+      "bytes": 6716,
+      "sha256": "29452c745d98b7a32800c39bc4c7e7319cc0c78c9308169a24267355d2945983"
+    },
+    {
+      "path": "services/realtime_qa/result_pages.py",
+      "bytes": 7967,
+      "sha256": "3aa8576d59b9242e5cb8c8948ca2c70ccafa52e2bc8bf6fa3c3f91e84d26d40d"
+    },
+    {
+      "path": "services/realtime_qa/row_fact_conditions.py",
+      "bytes": 5441,
+      "sha256": "b90972df3c607e19351af6f574a48f25ed7abf6464bd161a925eb45643e1da69"
+    },
+    {
+      "path": "services/realtime_qa/rule_cq_graph_contract.py",
+      "bytes": 3836,
+      "sha256": "fedd2c734e7f439c913d10a1239b8c31264f00733416268858aaa723f4cc0ab6"
+    },
+    {
+      "path": "services/realtime_qa/runtime.py",
+      "bytes": 15541,
+      "sha256": "994d39bcfe3a9505695a56916fb31e1d8b71d3f23ea6165c05bca6161aa29446"
+    },
+    {
+      "path": "services/realtime_qa/runtime_release.py",
+      "bytes": 52137,
+      "sha256": "d6c8b46002942f4c54b3be6854e2981e0cc7f2e8fddb23c2e24ce4ae6e011d0b"
+    },
+    {
+      "path": "services/realtime_qa/s0_adapter.py",
+      "bytes": 14039,
+      "sha256": "53d075804b66718bdd57e559c5a128ae2a385efcfeac39802a9837f49ec4a816"
+    },
+    {
+      "path": "services/realtime_qa/service.py",
+      "bytes": 39289,
+      "sha256": "08c1e063e50be7dc3c1605c9d798d6ff343e400516e9b849d4d0c7070fa4bdb2"
+    },
+    {
+      "path": "services/realtime_qa/source_provenance.py",
+      "bytes": 9198,
+      "sha256": "1c16b61dd67e47c6a975df36cc6ddefbaaacf29c745cdbb2cd5b56d5e80baf8a"
+    },
+    {
+      "path": "services/realtime_qa/sparql_terms.py",
+      "bytes": 3138,
+      "sha256": "8490aee9d165cdb6e7124f9672915a8f4186b393f407594067af6d91e8858a22"
+    },
+    {
+      "path": "services/realtime_qa/wren_analysis.py",
+      "bytes": 6846,
+      "sha256": "37e663e158220f70009e973b17462035bf3c7eb571217c9efa1e14f6a9c6ba29"
+    },
+    {
+      "path": "services/realtime_qa/wren_api.py",
+      "bytes": 5873,
+      "sha256": "a5dd736cbdfd7a8e182caec7a770069b712b1c53ac88bd7c346db9c49eaa66db"
+    },
+    {
+      "path": "services/realtime_qa/wren_models.py",
+      "bytes": 2715,
+      "sha256": "8a79408c4b1689451b8f4fed035357ff4e4e8a666014e5131055b01134c27323"
+    },
+    {
+      "path": "services/realtime_qa/wren_project.py",
+      "bytes": 31132,
+      "sha256": "854caa0a0fa24c996988b7b0f03c28429ba5d90a8ce0d36fc3e0ff42a1ceb0fa"
+    },
+    {
+      "path": "services/realtime_qa/wren_project_worker.py",
+      "bytes": 40047,
+      "sha256": "7c4bb0ebcb2395bf5aa607588511303b58687920a5a3cd520b65d8ea21e16dd4"
+    },
+    {
+      "path": "services/realtime_qa/wren_worker.py",
+      "bytes": 7541,
+      "sha256": "727563924008b44aefa0348b6912e5f85c9772ca9247a09951a9b6582bbac61b"
+    },
+    {
+      "path": "services/structured_data/__init__.py",
+      "bytes": 253,
+      "sha256": "df97a93a97267d1c1b64db0b897a9d04395942c4b4e04b3dc6404c14a7ad3439"
+    },
+    {
+      "path": "services/structured_data/application_submission.py",
+      "bytes": 8460,
+      "sha256": "15ef225f2d614a5d6e1b80e831854b5655bdd8ebb38e87b5ed723ad674dd9883"
+    },
+    {
+      "path": "services/structured_data/chat2db_source.py",
+      "bytes": 24224,
+      "sha256": "9465323d593046f327dbf2322469c6edd340b24afe1f76eccdfc8f275e41ef0d"
+    },
+    {
+      "path": "services/structured_data/execution_source.py",
+      "bytes": 4665,
+      "sha256": "d74878de83936e5e31f90442db0f078dbfd6ff2c0439620299160a18370c797e"
+    },
+    {
+      "path": "services/structured_data/live_query_plan.py",
+      "bytes": 5735,
+      "sha256": "83947f81b6a19471524f3ace9492d8f5e78868031ca5e08ba640c45819ad4e3a"
+    },
+    {
+      "path": "services/structured_data/multi_source.py",
+      "bytes": 17106,
+      "sha256": "a51198334ec43c236a90f32692b5e67ae023cd7ee4454e0da7596443b8170814"
+    },
+    {
+      "path": "services/structured_data/pipeline.py",
+      "bytes": 77199,
+      "sha256": "0ce7cc87a85a172867163639d4a75538c58147b80fcd24e90d8cb6e9171a26a7"
+    },
+    {
+      "path": "services/structured_data/release_contract.py",
+      "bytes": 11341,
+      "sha256": "3ec3e894e785d17a3452167f002494a08d5ee03e249250f901db54369f977ba1"
+    },
+    {
+      "path": "services/structured_data/semantic_projection.py",
+      "bytes": 10292,
+      "sha256": "06f0bd114550ebbda9b4b855dd52b155621d177df9110d7892939ffc32ad51fe"
+    },
+    {
+      "path": "services/structured_data/snapshot_capture.py",
+      "bytes": 9989,
+      "sha256": "53330d22d55cb35af63411069643aafa91d7f71a2ed87582b20c6375e4ea88ae"
+    },
+    {
+      "path": "services/structured_data/snapshot_handoff.py",
+      "bytes": 11672,
+      "sha256": "0426bc9597a64432b2a3eaa39522e32e4f353b09cd79bda23c58017184b624a6"
+    },
+    {
+      "path": "services/structured_data/snapshot_hub.py",
+      "bytes": 39670,
+      "sha256": "88cfcbc3973b3257933829acebadf8574e381a8b49d385ba14d7461f1d452f24"
+    },
+    {
+      "path": "services/structured_data/source_evidence.py",
+      "bytes": 18827,
+      "sha256": "1bfdc690f1d9c68c7cfc3b0914a1534e47b9fcfdcf4c4abdf830421070a0a406"
+    },
+    {
+      "path": "services/structured_data/source_metadata.py",
+      "bytes": 3052,
+      "sha256": "717e0474457a30fb5f2d23f2eecff4a8919fde9099fc84de92136e7a88200764"
+    },
+    {
+      "path": "services/structured_data/source_query.py",
+      "bytes": 9997,
+      "sha256": "9ab3f20f7adb2edf7b364e256fa409467d718d3261c6728873631b48cbd279ae"
+    },
+    {
+      "path": "services/structured_data/source_query_plan.py",
+      "bytes": 13112,
+      "sha256": "aca6c6af015a3b0ecbefc2f0a59e3228a46a5a9be34ef86c238ae4bb47d01649"
+    },
+    {
+      "path": "services/structured_data/source_registration.py",
+      "bytes": 16933,
+      "sha256": "0d4aefc3e9c0274fd0de63058ce463475cb113a69b820470cae39f9dbb438084"
+    },
+    {
+      "path": "uv.lock",
+      "bytes": 283879,
+      "sha256": "536ac0c1d3af2843834ae8994ee5ddc34555fda201cd02f9e823a7a190609e99"
+    },
+    {
+      "path": "vendor/echarts-LICENSE.txt",
+      "bytes": 11990,
+      "sha256": "634293835b43a6dd2094fa39182a3d9a6b9ca43b7fdb9ac354e8037af2a3093a"
+    },
+    {
+      "path": "vendor/echarts-NOTICE.txt",
+      "bytes": 168,
+      "sha256": "fa99ac3af859d0e13166906dc53a73ad34a08898da7e8ae83407275496e9e30c"
+    }
+  ]
+}

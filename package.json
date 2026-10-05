@@ -1,0 +1,28 @@
+{
+  "name": "dsh-orion-plugins",
+  "version": "1.0.0-rc.7",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build_orion_plugins.mjs",
+    "check": "node scripts/build_orion_plugins.mjs --check-only",
+    "test": "node scripts/test_plugins.mjs",
+    "pack:local": "node scripts/build_orion_plugins.mjs --pack",
+    "pack:runtime": "node scripts/package_orion_runtime.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.9",
+    "3d-force-graph": "1.74.5",
+    "force-graph": "1.47.0",
+    "three": "0.185.1",
+    "yaml": "2.9.0",
+    "@deepseek-ai/dsh": "0.2.0-rc.2"
+  }
+}

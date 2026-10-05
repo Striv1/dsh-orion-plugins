@@ -1,0 +1,465 @@
+.owa-ontology-context[hidden],
+.owa-ontology-registry-view[hidden] {
+  display: none !important;
+}
+
+.owa-ontology-context {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding: 11px 2px 0;
+  animation: owa-ontology-context-in 180ms ease both;
+}
+
+.owa-ontology-context-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px 8px;
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-ontology-context-heading > span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 720;
+  letter-spacing: .09em;
+}
+
+.owa-ontology-context-heading > small {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  overflow: hidden;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-ontology-context-heading > small strong {
+  color: var(--owa-semantic-accent);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.owa-ontology-context-heading > small i {
+  width: 1px;
+  height: 9px;
+  flex: 0 0 auto;
+  background: var(--owa-semantic-border-default);
+}
+
+.owa-ontology-new-project {
+  display: flex;
+  height: 42px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  padding: 0 12px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-control);
+  box-shadow: var(--owa-shadow-card);
+  color: var(--owa-semantic-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  transition: background var(--owa-motion-fast) var(--owa-ease-standard), border-color var(--owa-motion-fast) var(--owa-ease-standard), box-shadow var(--owa-motion-fast) var(--owa-ease-standard), color var(--owa-motion-fast) var(--owa-ease-standard), transform var(--owa-motion-fast) var(--owa-ease-standard);
+}
+
+.owa-ontology-new-project .owa-shell-icon { width: 17px; height: 17px; flex-basis: 17px; }
+.owa-ontology-new-project strong { font-size: 13px; font-weight: 650; line-height: 18px; }
+
+html[data-dsh-aqua] body .owa-ontology-new-project[data-ontology-action="new-project"] {
+  border-color: var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-control);
+  box-shadow: var(--owa-shadow-card);
+  color: var(--owa-semantic-accent);
+}
+
+@media (hover: hover) {
+  html[data-dsh-aqua] body .owa-ontology-new-project[data-ontology-action="new-project"]:hover:not(:disabled) {
+    border-color: var(--owa-semantic-border-strong);
+    background: var(--owa-semantic-surface-hover);
+    box-shadow: var(--owa-shadow-card);
+    color: var(--owa-semantic-accent-hover);
+    transform: translateY(-1px);
+  }
+}
+
+html[data-dsh-aqua] body .owa-ontology-new-project[data-ontology-action="new-project"].is-active {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-selected);
+  box-shadow: inset 3px 0 var(--owa-semantic-accent), var(--owa-shadow-card);
+  color: var(--owa-semantic-accent);
+}
+
+.owa-ontology-new-project:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-ontology-context > nav {
+  display: grid;
+  gap: 5px;
+}
+
+.owa-ontology-context > nav button {
+  display: grid;
+  min-height: 52px;
+  grid-template-columns: 19px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: background var(--owa-motion-standard) var(--owa-ease-standard), border-color var(--owa-motion-standard) var(--owa-ease-standard), color var(--owa-motion-standard) var(--owa-ease-standard), transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+@media (hover: hover) {
+  .owa-ontology-context > nav button:hover {
+    border-color: var(--owa-semantic-border-default);
+    background: var(--owa-semantic-surface-hover);
+    color: var(--owa-semantic-text-primary);
+    transform: translateX(1px);
+  }
+}
+
+.owa-ontology-context > nav button.is-active {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-selected);
+  color: var(--owa-semantic-accent);
+}
+
+.owa-ontology-context > nav button > span:last-child {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.owa-ontology-context > nav strong { font-size: 12px; font-weight: 650; }
+.owa-ontology-context > nav small { color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+
+.owa-ontology-recent {
+  display: flex;
+  min-height: 0;
+  flex: 0 1 auto;
+  flex-direction: column;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+  overflow: hidden;
+}
+
+.owa-ontology-recent > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 !important;
+  padding: 0 10px 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+}
+
+.owa-ontology-recent > header small {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.owa-ontology-recent > [data-ontology-recent] { display: flex; min-height: 0; flex-direction: column; }
+
+.owa-ontology-project-list {
+  display: grid;
+  min-height: 0;
+  gap: 2px;
+}
+
+.owa-ontology-project-list[data-expanded="true"] {
+  max-height: min(320px, 38vh);
+  padding-right: 3px;
+  overflow-y: auto;
+  scrollbar-color: var(--owa-semantic-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+.owa-ontology-recent-item {
+  display: flex;
+  min-height: 34px;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: background var(--owa-motion-standard) var(--owa-ease-standard), box-shadow var(--owa-motion-standard) var(--owa-ease-standard), color var(--owa-motion-standard) var(--owa-ease-standard), transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+@media (hover: hover) {
+  .owa-ontology-recent-item:hover {
+    background: var(--owa-semantic-surface-hover);
+    transform: translateX(1px);
+  }
+}
+.owa-ontology-recent-item.is-active {
+  background: var(--owa-semantic-surface-selected);
+  box-shadow: inset 2px 0 var(--owa-semantic-accent);
+}
+.owa-ontology-recent-item span {
+  overflow: hidden;
+  color: var(--owa-semantic-text-primary);
+  font-family: var(--owa-font-stack);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-ontology-recent-item small {
+  flex: 0 0 auto;
+  color: var(--owa-semantic-text-secondary);
+  font-family: var(--owa-font-stack);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.owa-ontology-recent-empty { margin: 6px 10px; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+
+.owa-ontology-project-toggle {
+  min-height: 32px;
+  margin-top: 3px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--owa-semantic-text-tertiary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}
+
+@media (hover: hover) {
+  .owa-ontology-project-toggle:hover { background: var(--owa-semantic-surface-hover); color: var(--owa-semantic-accent); }
+}
+.owa-ontology-project-toggle:focus-visible,
+.owa-ontology-recent-item:focus-visible,
+.owa-ontology-context > nav button:focus-visible { outline: 2px solid var(--owa-semantic-focus-ring); outline-offset: -2px; }
+
+.owa-ontology-registry-active > .owa-native-session-content,
+.owa-ontology-registry-active > .owa-engineering-view {
+  display: none !important;
+}
+
+.owa-ontology-registry-view {
+  display: flex;
+  container-type: inline-size;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 12px 16px 14px;
+  padding: clamp(20px, 2.6vw, 34px);
+  overflow-y: auto;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-panel);
+  background: var(--owa-semantic-surface-canvas);
+  backdrop-filter: blur(24px) saturate(118%);
+  box-shadow: var(--owa-shadow-panel);
+  color: var(--owa-semantic-text-primary);
+}
+
+.owa-registry-heading {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-registry-heading-copy > span { color: var(--owa-semantic-accent); font-size: 10px; font-weight: 720; letter-spacing: .14em; }
+.owa-registry-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 7px; }
+.owa-registry-heading h1 { margin: 0; color: var(--owa-semantic-text-primary); font-size: var(--owa-type-page-title); letter-spacing: -.03em; }
+.owa-registry-heading p { max-width: 720px; margin: 10px 0 0; color: var(--owa-semantic-text-secondary); font-size: 12px; line-height: 19px; }
+.owa-registry-summary { display: inline-flex; min-height: 28px; box-sizing: border-box; padding: 0 10px; align-items: center; gap: 6px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: var(--owa-radius-round); background: var(--owa-semantic-surface-panel-strong); color: var(--owa-semantic-text-secondary); white-space: nowrap; }
+.owa-registry-summary strong { color: var(--owa-semantic-accent); font-size: 14px; line-height: 1; }
+.owa-registry-summary span { font-size: 10px; }
+
+.owa-registry-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+
+.owa-registry-card {
+  display: flex;
+  overflow: hidden;
+  min-height: 286px;
+  box-sizing: border-box;
+  padding: 16px 16px 0;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+  flex-direction: column;
+  transition: border-color var(--owa-motion-standard) var(--owa-ease-standard), box-shadow var(--owa-motion-standard) var(--owa-ease-standard), transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+.owa-registry-card > header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; box-shadow: none !important; backdrop-filter: none !important; }
+.owa-registry-card-kicker { display: flex; align-items: center; gap: 8px; }
+.owa-registry-card-kicker span { color: var(--owa-semantic-accent); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.owa-registry-card-kicker b { padding-left: 8px; border-left: 1px solid var(--owa-semantic-border-subtle); color: var(--owa-semantic-text-tertiary); font-size: 10px; font-weight: 520; }
+.owa-registry-card > header > em { padding: 5px 9px; border-radius: var(--owa-radius-round); background: var(--owa-semantic-success-soft); color: var(--owa-semantic-success); font-size: 9px; font-style: normal; font-weight: 620; white-space: nowrap; }
+.owa-registry-card-summary { display: flex; min-width: 0; flex-direction: column; }
+.owa-registry-card h2 { min-height: 42px; margin: 10px 0 0; color: var(--owa-semantic-text-primary); font-size: 16px; line-height: 1.34; letter-spacing: -.015em; }
+.owa-registry-card-identity { display: grid; min-width: 0; margin-top: 6px; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.owa-registry-card-identity code { overflow: hidden; min-width: 0; color: var(--owa-semantic-text-tertiary); font-family: inherit; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-registry-card-identity span { color: var(--owa-semantic-text-tertiary) !important; font-size: 10px !important; font-weight: 450 !important; white-space: nowrap; }
+.owa-registry-card-quality { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-registry-card-quality span { color: var(--owa-semantic-text-tertiary); font-size: 10px; }
+.owa-registry-card-quality strong { color: var(--owa-semantic-text-secondary) !important; font-size: 10px; font-weight: 600; }
+.owa-registry-version-history { margin-top: 10px; border-top: 1px solid var(--owa-semantic-border-subtle); border-bottom: 1px solid var(--owa-semantic-border-subtle); }
+.owa-registry-version-history summary { display: flex; min-height: 34px; align-items: center; justify-content: space-between; gap: 10px; color: var(--owa-semantic-text-secondary); cursor: pointer; font-size: 10px; list-style: none; }
+.owa-registry-version-history summary::-webkit-details-marker { display: none; }
+.owa-registry-version-history summary::after { width: 6px; height: 6px; margin-left: 2px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; content: ""; transform: rotate(45deg); transition: transform var(--owa-motion-fast) var(--owa-ease-standard); }
+.owa-registry-version-history[open] summary::after { transform: rotate(225deg); }
+.owa-registry-version-history summary span { flex: 1; }
+.owa-registry-version-history summary b { color: var(--owa-semantic-accent); font-size: 10px; font-weight: 650; }
+.owa-registry-version-history ul { display: grid; gap: 0; margin: 0; padding: 0 0 7px; list-style: none; }
+.owa-registry-version-history li { display: grid; grid-template-columns: minmax(0, 1fr) auto; min-height: 30px; align-items: center; gap: 0 10px; border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-registry-version-history li[data-selected-version] { background: color-mix(in srgb, var(--owa-semantic-accent) 9%, transparent); }
+.owa-registry-version-history li > .owa-registry-version-select { display: flex; min-width: 0; flex: 1; align-items: center; justify-content: space-between; gap: 10px; padding-right: 9px; padding-left: 0; border: 0; border-radius: 0; background: transparent; text-align: left; }
+.owa-registry-version-select > span { display: flex; min-width: 0; align-items: center; gap: 8px; }
+.owa-registry-version-select > small { overflow: hidden; color: var(--owa-semantic-text-tertiary); font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-registry-version-history li b { color: var(--owa-semantic-text-primary); font-size: 10px; }
+.owa-registry-version-history li em { padding: 3px 6px; border-radius: var(--owa-radius-round); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-tertiary); font-size: 8px; font-style: normal; }
+.owa-registry-version-history li[data-version-status="CURRENT"] em { background: var(--owa-semantic-success-soft); color: var(--owa-semantic-success); }
+.owa-registry-version-history li[data-version-status="REVOKED"] em { background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning); }
+.owa-registry-version-history li > [data-registry-project] { min-height: 26px; padding: 0 7px; border: 0; background: transparent; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 26px; }
+.owa-registry-card[data-viewing-version="HISTORICAL"] > header > em { background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning); }
+.owa-registry-version-context { display: grid; margin-top: 10px; padding: 10px 11px; border: 1px solid var(--owa-semantic-warning-border); border-radius: var(--owa-radius-control); background: var(--owa-semantic-warning-soft); grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.owa-registry-version-context > div { display: grid; min-width: 0; gap: 3px; }
+.owa-registry-version-context strong { color: var(--owa-semantic-text-primary); font-size: 10px; }
+.owa-registry-version-context span { color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 1.45; }
+.owa-registry-version-context small { color: var(--owa-semantic-warning); font-size: 8px; }
+.owa-registry-card .owa-registry-version-context > button { min-height: 30px; align-self: center; padding: 0 9px; border-color: var(--owa-semantic-warning-border); background: transparent; color: var(--owa-semantic-text-primary); font-size: 9px; line-height: 28px; white-space: nowrap; }
+.owa-registry-runtime { display: grid; min-width: 0; gap: 5px; margin-top: 11px; padding: 10px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); }
+.owa-registry-runtime-label { color: var(--owa-semantic-text-secondary); font-size: 10px; font-weight: 650; }
+.owa-registry-runtime-identity { display: flex; min-width: 0; align-items: flex-start; gap: 8px; }
+.owa-registry-runtime-identity code { flex: 1; min-width: 0; overflow-wrap: anywhere; color: var(--owa-semantic-text-primary); font-size: 11px; line-height: 1.6; user-select: text; }
+.owa-registry-card .owa-registry-runtime-identity button { flex-shrink: 0; min-height: 26px; padding: 0 8px; color: var(--owa-semantic-accent); font-size: 10px; line-height: 24px; }
+.owa-registry-runtime > small { color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 1.5; }
+.owa-registry-runtime.is-compact { grid-column: 1 / -1; gap: 3px; margin: 0 0 7px; padding: 7px 8px; border: 0; }
+.owa-registry-runtime.is-compact code { font-size: 10px; }
+.owa-registry-card dl { display: grid; overflow: hidden; grid-template-columns: repeat(3, minmax(0,1fr)); margin: 10px 0 0; padding: 0; border: 1px solid var(--owa-semantic-border-subtle); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel); }
+.owa-registry-card dl div { min-width: 0; padding: 9px 11px; border-right: 1px solid var(--owa-semantic-border-subtle); background: transparent !important; }
+.owa-registry-card dl div:last-child { border-right: 0; }
+.owa-registry-card dt { color: var(--owa-semantic-text-tertiary); font-size: 10px; }
+.owa-registry-card dd { overflow: hidden; margin: 4px 0 0; color: var(--owa-semantic-text-primary); font-size: 16px; font-weight: 700; line-height: 1; text-overflow: ellipsis; white-space: nowrap; }
+.owa-registry-card > footer { display: flex; margin: auto -16px 0; padding: 10px 16px 12px; border-top: 1px solid var(--owa-semantic-border-subtle); background: color-mix(in srgb, var(--owa-semantic-surface-panel) 74%, transparent); flex-direction: column; gap: 6px; }
+.owa-registry-primary-actions { display: grid; overflow: visible; border: 0; border-radius: 0; grid-template-columns: 1.08fr 1fr 1fr; gap: 8px; background: transparent; }
+.owa-registry-secondary-actions { display: grid; align-items: center; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.owa-registry-card a, .owa-registry-card button, .owa-registry-state button, .owa-registry-error button { min-height: 38px; box-sizing: border-box; padding: 0 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-accent); cursor: pointer; font: inherit; font-size: 11px; line-height: 36px; text-decoration: none; transition: background var(--owa-motion-fast) var(--owa-ease-standard), border-color var(--owa-motion-fast) var(--owa-ease-standard), color var(--owa-motion-fast) var(--owa-ease-standard); }
+.owa-registry-card button.is-graph,
+.owa-registry-card button.is-semantica,
+.owa-registry-card button.is-protege { width: 100%; min-height: 34px; padding: 0 6px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); font-size: 10px; font-weight: 650; line-height: 32px; white-space: nowrap; }
+.owa-registry-card button.is-graph { background: var(--owa-semantic-accent); color: var(--owa-semantic-on-accent); }
+.owa-registry-card button.is-semantica,
+.owa-registry-card button.is-protege { background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-primary); }
+.owa-registry-secondary-actions a,
+.owa-registry-secondary-actions button { min-width: 0; min-height: 26px; padding: 0 6px; border: 0; border-right: 1px solid var(--owa-semantic-border-subtle); border-radius: 0; background: transparent; color: var(--owa-semantic-text-secondary); line-height: 26px; text-align: center; white-space: nowrap; }
+.owa-registry-secondary-actions > :last-child { border-right: 0; }
+.owa-registry-card button.is-protege.is-busy { cursor: progress; opacity: .72; }
+.owa-registry-notice { position: sticky; z-index: 6; right: 16px; bottom: 16px; align-self: flex-end; max-width: 420px; box-sizing: border-box; margin-top: 12px; padding: 11px 14px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel-strong); box-shadow: var(--owa-shadow-panel); color: var(--owa-semantic-text-primary); font-size: 10px; line-height: 17px; }
+.owa-registry-notice[data-tone="success"] { border-color: color-mix(in srgb, var(--owa-semantic-success) 42%, var(--owa-semantic-border-default)); }
+.owa-registry-notice[data-tone="error"] { border-color: var(--owa-semantic-warning-border); background: var(--owa-semantic-warning-soft); }
+.owa-registry-card a:focus-visible, .owa-registry-card button:focus-visible, .owa-registry-state button:focus-visible, .owa-registry-error button:focus-visible { outline: 2px solid var(--owa-semantic-focus-ring); outline-offset: 2px; }
+.owa-registry-card .is-muted { color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-registry-pagination { display: flex; min-height: 42px; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--owa-semantic-border-subtle); color: var(--owa-semantic-text-tertiary); font-size: 10px; }
+.owa-registry-page-controls { display: flex; align-items: center; gap: 6px; }
+.owa-registry-page-controls button { min-width: 34px; min-height: 34px; box-sizing: border-box; padding: 0 11px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-secondary); cursor: pointer; font: inherit; font-size: 10px; font-weight: 560; transition: background var(--owa-motion-fast) var(--owa-ease-standard), border-color var(--owa-motion-fast) var(--owa-ease-standard), color var(--owa-motion-fast) var(--owa-ease-standard); }
+.owa-registry-page-controls .owa-registry-page-number { padding: 0 8px; }
+.owa-registry-page-controls button[aria-current="page"] { border-color: var(--owa-semantic-accent); background: var(--owa-semantic-accent); color: var(--owa-semantic-on-accent); }
+.owa-registry-page-controls button:disabled { cursor: default; opacity: .42; }
+.owa-registry-page-controls button:focus-visible { outline: 2px solid var(--owa-semantic-focus-ring); outline-offset: 2px; }
+.owa-registry-page-ellipsis { display: inline-flex; width: 22px; height: 34px; align-items: center; justify-content: center; color: var(--owa-semantic-text-tertiary); }
+
+@media (hover: hover) and (pointer: fine) {
+  .owa-registry-card:hover { border-color: color-mix(in srgb, var(--owa-semantic-accent) 30%, var(--owa-semantic-border-default)); box-shadow: var(--owa-shadow-panel); transform: translateY(-2px); }
+  .owa-registry-card button.is-graph:hover { border-color: var(--owa-semantic-accent-hover); background: var(--owa-semantic-accent-hover); }
+  .owa-registry-card button.is-semantica:hover,
+  .owa-registry-card button.is-protege:hover,
+  .owa-registry-secondary-actions a:hover,
+  .owa-registry-secondary-actions button:hover { background: var(--owa-semantic-surface-hover); color: var(--owa-semantic-accent-hover); }
+  .owa-registry-page-controls button:hover:not(:disabled):not([aria-current="page"]) { border-color: var(--owa-semantic-border-strong); background: var(--owa-semantic-surface-hover); color: var(--owa-semantic-accent-hover); }
+}
+
+.owa-registry-state, .owa-registry-error { display: flex; min-height: 260px; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: var(--owa-semantic-text-secondary); text-align: center; }
+.owa-registry-state strong, .owa-registry-error strong { color: var(--owa-semantic-text-primary); font-size: 14px; }
+.owa-registry-state span, .owa-registry-state p, .owa-registry-error span { max-width: 480px; margin: 0; font-size: 10px; line-height: 17px; }
+.owa-registry-error { min-height: 180px; margin-top: 16px; border: 1px solid var(--owa-semantic-warning-border); border-radius: var(--owa-radius-card); background: var(--owa-semantic-warning-soft); }
+
+body.owa-sidebar-collapsed .owa-ontology-context { display: none !important; }
+
+@keyframes owa-ontology-context-in { from { opacity: 0; transform: translateY(4px); } }
+
+@container (max-width: 860px) {
+  .owa-registry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@container (max-width: 760px) {
+  .owa-registry-grid { grid-template-columns: minmax(0, 1fr); }
+  .owa-registry-card { min-height: 0; padding: 18px 18px 0; }
+  .owa-registry-card > footer { margin-right: -18px; margin-left: -18px; padding-right: 18px; padding-left: 18px; }
+  .owa-registry-primary-actions { grid-template-columns: minmax(0, 1fr); }
+  .owa-registry-secondary-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owa-registry-secondary-actions > :nth-child(2) { border-right: 0; }
+  .owa-registry-secondary-actions > :nth-child(-n+2) { border-bottom: 1px solid var(--owa-semantic-border-subtle); }
+  .owa-registry-card-identity { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+  .owa-registry-pagination { align-items: stretch; flex-direction: column; }
+  .owa-registry-page-controls { overflow-x: auto; padding: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-ontology-context { animation: none; }
+  .owa-ontology-new-project,
+  .owa-ontology-context > nav button,
+  .owa-ontology-recent-item,
+  .owa-ontology-project-toggle,
+  .owa-registry-card,
+  .owa-registry-card a,
+  .owa-registry-card button,
+  .owa-registry-page-controls button {
+    transition: none;
+  }
+
+  .owa-ontology-new-project:hover,
+  .owa-ontology-context > nav button:hover,
+  .owa-ontology-recent-item:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,4417 @@
+@font-face {
+  font-family: "ORION Noto Sans SC";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/NotoSansSC-VF.woff2") format("woff2-variations");
+}
+
+:root {
+  --owa-font-stack: "ORION Noto Sans SC", sans-serif;
+
+  /* ORION semantic foundations. Component styles consume these variables
+     through their existing aliases so the current runtime contract remains
+     backwards compatible while new surfaces stop inventing local values. */
+  --owa-semantic-text-primary: #17263b;
+  --owa-semantic-text-secondary: #536a84;
+  --owa-semantic-text-tertiary: #708198;
+  --owa-semantic-accent: #2563eb;
+  --owa-semantic-accent-hover: #1d4ed8;
+  --owa-semantic-accent-soft: #e7f0ff;
+  --owa-semantic-on-accent: #ffffff;
+  --owa-semantic-success: #15803d;
+  --owa-semantic-warning: #9a641b;
+  --owa-semantic-danger: #b83c49;
+  --owa-semantic-success-soft: rgba(21, 128, 61, .065);
+  --owa-semantic-warning-soft: rgba(154, 100, 27, .11);
+  --owa-semantic-danger-soft: rgba(184, 60, 73, .1);
+  --owa-semantic-success-border: rgba(21, 128, 61, .3);
+  --owa-semantic-warning-border: rgba(154, 100, 27, .3);
+  --owa-semantic-danger-border: rgba(184, 60, 73, .3);
+
+  --owa-semantic-surface-canvas: rgba(242, 245, 249, .98);
+  --owa-semantic-surface-navigation: rgba(230, 237, 246, .84);
+  --owa-semantic-surface-panel: rgba(249, 251, 253, .96);
+  --owa-semantic-surface-panel-strong: rgba(240, 244, 249, .98);
+  --owa-semantic-surface-overlay: rgba(247, 249, 252, .98);
+  --owa-semantic-surface-control: rgba(239, 244, 250, .96);
+  --owa-semantic-surface-hover: rgba(230, 238, 248, .98);
+  --owa-semantic-surface-input: rgba(252, 253, 255, .98);
+  --owa-semantic-surface-selected: rgba(214, 232, 253, .92);
+  --owa-semantic-frost-navigation: #e6edf6;
+  --owa-semantic-frost-workspace: #f2f5f9;
+  --owa-semantic-frost-context: #eaf0f6;
+  --owa-semantic-frost-panel: #f9fbfd;
+  --owa-semantic-frost-panel-strong: #f0f4f9;
+  --owa-semantic-frost-selected: #e1ebfa;
+  --owa-semantic-frost-hover: #e6eef8;
+  --owa-semantic-border-subtle: rgba(64, 100, 145, .14);
+  --owa-semantic-border-default: rgba(64, 100, 145, .22);
+  --owa-semantic-border-strong: rgba(64, 100, 145, .34);
+  --owa-semantic-focus-ring: rgba(37, 99, 235, .3);
+
+  --owa-space-1: 4px;
+  --owa-space-2: 8px;
+  --owa-space-3: 12px;
+  --owa-space-4: 16px;
+  --owa-space-6: 24px;
+  --owa-space-8: 32px;
+  --owa-radius-control: 10px;
+  --owa-radius-card: 14px;
+  --owa-radius-panel: 20px;
+  --owa-radius-dialog: 22px;
+  --owa-radius-round: 999px;
+  --owa-shadow-card: 0 1px 2px rgba(20, 46, 78, .04), 0 8px 22px rgba(20, 46, 78, .07);
+  --owa-shadow-panel: inset 0 1px rgba(255, 255, 255, .56), 0 14px 42px rgba(25, 56, 94, .12);
+  --owa-shadow-dialog: inset 0 1px rgba(255, 255, 255, .62), 0 28px 70px rgba(12, 34, 62, .27);
+  --owa-motion-fast: 120ms;
+  --owa-motion-standard: 180ms;
+  --owa-motion-slow: 240ms;
+  --owa-ease-standard: cubic-bezier(.2, .6, .35, 1);
+  --owa-ease-out: cubic-bezier(.2, .8, .2, 1);
+  --owa-type-page-title: clamp(24px, 2.2vw, 30px);
+
+  /* Compatibility aliases used by the existing ORION modules. */
+  --owa-primary: var(--owa-semantic-accent);
+  --owa-primary-soft: var(--owa-semantic-accent-soft);
+  --owa-border: var(--owa-semantic-border-default);
+  --owa-text: var(--owa-semantic-text-primary);
+  --owa-muted: var(--owa-semantic-text-secondary);
+  --owa-success: var(--owa-semantic-success);
+}
+
+body[data-ds-dark-theme] {
+  --owa-semantic-text-primary: #e8f1fc;
+  --owa-semantic-text-secondary: #a7b8cc;
+  --owa-semantic-text-tertiary: #8295ac;
+  --owa-semantic-accent: #83b2ef;
+  --owa-semantic-accent-hover: #6ea3e7;
+  --owa-semantic-accent-soft: rgba(70, 124, 218, .18);
+  --owa-semantic-on-accent: #07101e;
+  --owa-semantic-success: #8fd1a8;
+  --owa-semantic-warning: #e1b77c;
+  --owa-semantic-danger: #e29aa2;
+  --owa-semantic-success-soft: rgba(67, 155, 99, .12);
+  --owa-semantic-warning-soft: rgba(185, 126, 50, .18);
+  --owa-semantic-danger-soft: rgba(190, 75, 88, .18);
+  --owa-semantic-success-border: rgba(143, 209, 168, .38);
+  --owa-semantic-warning-border: rgba(225, 183, 124, .38);
+  --owa-semantic-danger-border: rgba(226, 154, 162, .38);
+  --owa-semantic-surface-canvas: rgba(18, 31, 46, .98);
+  --owa-semantic-surface-navigation: rgba(22, 37, 54, .92);
+  --owa-semantic-surface-panel: rgba(25, 41, 59, .88);
+  --owa-semantic-surface-panel-strong: rgba(31, 49, 69, .96);
+  --owa-semantic-surface-overlay: rgba(25, 33, 45, .98);
+  --owa-semantic-surface-control: rgba(30, 48, 67, .88);
+  --owa-semantic-surface-hover: rgba(48, 80, 116, .88);
+  --owa-semantic-surface-input: rgba(13, 25, 38, .88);
+  --owa-semantic-surface-selected: rgba(43, 77, 116, .9);
+  --owa-semantic-frost-navigation: #202b39;
+  --owa-semantic-frost-workspace: #19222e;
+  --owa-semantic-frost-context: #202c3a;
+  --owa-semantic-frost-panel: #222e3d;
+  --owa-semantic-frost-panel-strong: #283545;
+  --owa-semantic-frost-selected: #2c4261;
+  --owa-semantic-frost-hover: #2c3a4c;
+  --owa-semantic-border-subtle: rgba(151, 181, 219, .16);
+  --owa-semantic-border-default: rgba(151, 181, 219, .24);
+  --owa-semantic-border-strong: rgba(151, 181, 219, .38);
+  --owa-semantic-focus-ring: rgba(128, 174, 239, .34);
+  --owa-shadow-card: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px rgba(0, 0, 0, .2);
+  --owa-shadow-panel: inset 0 1px rgba(255, 255, 255, .07), 0 12px 38px rgba(2, 6, 14, .32);
+  --owa-shadow-dialog: inset 0 1px rgba(255, 255, 255, .06), 0 32px 80px rgba(0, 0, 0, .54);
+}
+
+html,
+html body,
+html button,
+html input,
+html textarea,
+html select,
+html code,
+html pre,
+html kbd,
+html samp,
+html[data-dsh-aqua],
+html[data-dsh-aqua] body,
+html[data-dsh-aqua] button,
+html[data-dsh-aqua] input,
+html[data-dsh-aqua] textarea,
+html[data-dsh-aqua] select {
+  font-family: var(--owa-font-stack) !important;
+}
+
+html[data-dsh-aqua] [data-dsh-wordmark] {
+  min-height: 34px;
+  gap: 8px;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dsh-aqua] [data-dsh-wordmark]::before,
+html[data-dsh-aqua] [data-dsh-wordmark]::after {
+  display: none !important;
+}
+
+.owa-action-card {
+  margin-top: 12px;
+  padding: 18px !important;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel-strong);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-action-card h2,
+.owa-action-card h3 {
+  margin-top: 0 !important;
+  color: var(--owa-text);
+}
+
+.owa-action-card table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-input);
+}
+
+.owa-action-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.owa-action-button {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-panel-strong);
+  color: var(--owa-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--owa-motion-fast) var(--owa-ease-standard), border-color var(--owa-motion-fast) var(--owa-ease-standard), transform var(--owa-motion-fast) var(--owa-ease-standard);
+}
+
+.owa-action-button:hover {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-hover);
+}
+
+.owa-action-button:active {
+  transform: translateY(1px);
+}
+
+.owa-action-button-primary {
+  border-color: var(--owa-primary);
+  background: var(--owa-primary);
+  color: var(--owa-semantic-on-accent);
+}
+
+.owa-action-button-primary:hover {
+  border-color: var(--owa-semantic-accent-hover);
+  background: var(--owa-semantic-accent-hover);
+}
+
+.owa-action-button:focus-visible {
+  outline: 3px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-action-button:disabled {
+  cursor: wait;
+  opacity: 0.56;
+}
+
+.owa-action-status {
+  margin-right: auto;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  color: var(--owa-muted);
+  font-size: 12px;
+}
+
+.owa-action-status-mark {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-warning);
+  box-shadow: 0 0 0 4px var(--owa-semantic-warning-soft);
+}
+
+.owa-action-status[data-state="pending"] .owa-action-status-mark,
+.owa-action-status[data-state="canceling"] .owa-action-status-mark {
+  background: var(--owa-semantic-accent);
+  box-shadow: 0 0 0 4px var(--owa-semantic-accent-soft);
+}
+
+.owa-action-status[data-state="completed"] .owa-action-status-mark {
+  background: var(--owa-semantic-success);
+  box-shadow: 0 0 0 4px var(--owa-semantic-success-soft);
+}
+
+.owa-action-status[data-state="cancelled"] .owa-action-status-mark {
+  background: var(--owa-semantic-text-tertiary);
+  box-shadow: 0 0 0 4px var(--owa-semantic-border-subtle);
+}
+
+.owa-action-status-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.owa-action-status-copy strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 17px;
+}
+
+.owa-action-status-copy small {
+  overflow: hidden;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-runtime-trace {
+  border-bottom: 1px solid var(--owa-border);
+  background: #ffffff;
+  color: var(--owa-text);
+}
+
+.owa-trace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px 10px;
+}
+
+.owa-trace-header strong {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.owa-trace-header span,
+.owa-trace-summary,
+.owa-trace-source,
+.owa-trace-latency {
+  color: var(--owa-muted);
+  font-size: 11px;
+}
+
+.owa-trace-timeline {
+  display: flex;
+  gap: 3px;
+  min-height: 34px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 0 20px;
+}
+
+.owa-trace-segment {
+  flex: 1 0 28px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.owa-trace-segment span {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  background: #c4b5fd;
+  transition: height 120ms ease, background 120ms ease;
+}
+
+.owa-trace-segment:hover span,
+.owa-trace-segment.is-selected span {
+  height: 12px;
+  background: var(--owa-primary);
+}
+
+.owa-trace-list {
+  max-height: min(54vh, 560px);
+  overflow: auto;
+  border-top: 1px solid #eef2f7;
+}
+
+.owa-trace-row {
+  display: grid;
+  grid-template-columns: 12px minmax(118px, 0.8fr) minmax(260px, 3fr) minmax(130px, 1fr) 74px 52px;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 8px 20px;
+  border: 0;
+  border-bottom: 1px solid #eef2f7;
+  background: #ffffff;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.owa-trace-open {
+  color: var(--owa-primary);
+  font-size: 11px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.owa-trace-open:hover {
+  text-decoration: underline;
+}
+
+.owa-trace-row:hover,
+.owa-trace-row.is-selected {
+  background: var(--owa-primary-soft);
+}
+
+.owa-trace-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px #dcfce7;
+}
+
+.owa-trace-step {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.owa-trace-detail {
+  overflow: hidden;
+  color: #334155;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-trace-latency {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.owa-trace-empty {
+  padding: 22px;
+  color: var(--owa-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.owa-default-trace-hidden {
+  display: none !important;
+}
+
+.owa-engineering-tab {
+  position: relative;
+}
+
+.owa-engineering-tab.is-active {
+  color: var(--owa-primary) !important;
+}
+
+.owa-engineering-tab.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--owa-primary);
+  content: "";
+}
+
+.owa-engineering-active > .owa-native-session-content {
+  display: none !important;
+}
+
+[data-orion-ontology-root="true"] {
+  min-width: 0;
+  min-height: 0;
+}
+
+.owa-engineering-view {
+  --owa-engineering-ease: var(--owa-ease-standard);
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  color: var(--owa-text);
+  text-rendering: geometricPrecision;
+}
+
+.owa-engineering-view[hidden] {
+  display: none !important;
+}
+
+.owa-engineering-loading {
+  display: flex;
+  min-height: 320px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--owa-muted);
+  font-size: 13px;
+}
+
+.owa-engineering-loading strong {
+  color: var(--owa-text);
+  font-size: 15px;
+}
+
+.owa-engineering-loading button {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--owa-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--owa-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.owa-engineering-loading.is-error strong {
+  color: #b45309;
+}
+
+.owa-mcp-control-panel {
+  min-width: 0;
+  padding: 18px 2px 24px;
+  color: var(--owa-text);
+}
+
+.owa-mcp-control-panel[hidden] {
+  display: none !important;
+}
+
+.owa-mcp-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 224px;
+  gap: 12px 18px;
+  padding: 16px 18px;
+  border: 1px solid var(--owa-border);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8fbff 0%, #ffffff 68%);
+}
+
+.owa-mcp-overview-copy h2 {
+  margin: 3px 0 4px;
+  color: var(--owa-text);
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.owa-mcp-overview-copy p {
+  max-width: 610px;
+  margin: 0;
+  color: var(--owa-muted);
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.owa-mcp-eyebrow {
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.owa-mcp-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(46px, 1fr));
+  width: 100%;
+  box-sizing: border-box;
+  align-self: center;
+  gap: 6px;
+}
+
+.owa-mcp-summary > span {
+  min-width: 46px;
+  padding: 6px 7px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--owa-muted);
+  font-size: 10px;
+  text-align: center;
+}
+
+.owa-mcp-summary strong {
+  display: block;
+  color: var(--owa-text);
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.owa-mcp-summary .is-ready strong {
+  color: #15803d;
+}
+
+.owa-mcp-summary .is-warning strong {
+  color: #b45309;
+}
+
+.owa-mcp-summary .is-offline strong {
+  color: #b91c1c;
+}
+
+.owa-mcp-toolbar {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #e2e8f0;
+  color: var(--owa-muted);
+  font-size: 11px;
+}
+
+.owa-mcp-toolbar > div {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.owa-mcp-toolbar button,
+.owa-mcp-empty button,
+.owa-mcp-action {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.owa-mcp-toolbar button:hover,
+.owa-mcp-empty button:hover,
+.owa-mcp-action:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.owa-mcp-toolbar button.is-primary {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
+.owa-mcp-toolbar button.is-primary:hover {
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+}
+
+.owa-mcp-toolbar button.is-primary:disabled {
+  border-color: #cbd5e1;
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.owa-mcp-toolbar button:disabled,
+.owa-mcp-action:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.owa-mcp-message {
+  grid-column: 1 / -1;
+  margin-top: -4px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 11px;
+}
+
+.owa-mcp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.owa-mcp-card {
+  display: flex;
+  min-width: 0;
+  min-height: 142px;
+  flex-direction: column;
+  padding: 13px 14px 11px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 3px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.owa-mcp-card.is-ready { border-left-color: #22c55e; }
+.owa-mcp-card.is-warning { border-left-color: #f59e0b; }
+.owa-mcp-card.is-offline { border-left-color: #ef4444; }
+
+.owa-mcp-card > header,
+.owa-mcp-card > header > div,
+.owa-mcp-card > footer,
+.owa-mcp-card > footer > div {
+  display: flex;
+  align-items: center;
+}
+
+.owa-mcp-card > header {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.owa-mcp-card > header > div {
+  min-width: 0;
+  gap: 8px;
+}
+
+.owa-mcp-card h3 {
+  overflow: hidden;
+  margin: 0;
+  color: var(--owa-text);
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-mcp-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #94a3b8;
+}
+
+.owa-mcp-card.is-ready .owa-mcp-dot { background: #22c55e; }
+.owa-mcp-card.is-warning .owa-mcp-dot { background: #f59e0b; }
+.owa-mcp-card.is-offline .owa-mcp-dot { background: #ef4444; }
+
+.owa-mcp-badge {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 7px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.owa-mcp-badge.is-ready { background: #ecfdf3; color: #15803d; }
+.owa-mcp-badge.is-warning { background: #fff7ed; color: #b45309; }
+.owa-mcp-badge.is-offline { background: #fef2f2; color: #b91c1c; }
+
+.owa-mcp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.owa-mcp-meta span {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.owa-mcp-card code {
+  overflow: hidden;
+  margin-top: 7px;
+  color: #475569;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-mcp-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 5px 0 9px;
+  color: var(--owa-muted);
+  font-size: 11px;
+  line-height: 15px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.owa-mcp-card > footer {
+  min-width: 0;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.owa-mcp-card > footer > span {
+  overflow: hidden;
+  color: #64748b;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-mcp-card > footer > div {
+  flex: 0 0 auto;
+  gap: 6px;
+}
+
+.owa-mcp-card > footer > em {
+  flex: 0 0 auto;
+  color: #94a3b8;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.owa-mcp-action {
+  min-height: 26px;
+  padding-inline: 8px;
+  font-size: 10px;
+}
+
+.owa-mcp-action.is-danger {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.owa-mcp-action.is-selected {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.owa-mcp-detail-panel {
+  scroll-margin-block: 12px;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid var(--owa-border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.owa-mcp-detail-panel > nav {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.owa-mcp-detail-panel > nav button {
+  min-height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.owa-mcp-detail-panel > nav button.is-active {
+  background: #fff;
+  color: #1d4ed8;
+  box-shadow: 0 0 0 1px #dbeafe;
+}
+
+.owa-mcp-detail-panel > nav .owa-mcp-detail-close {
+  width: 30px;
+  margin-left: auto;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.owa-mcp-detail-body {
+  padding: 16px;
+}
+
+.owa-mcp-detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.owa-mcp-detail-heading h3 {
+  margin: 3px 0 4px;
+  color: var(--owa-text);
+  font-size: 16px;
+}
+
+.owa-mcp-detail-heading p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--owa-muted);
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.owa-mcp-detail-heading > span {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 10px;
+}
+
+.owa-mcp-tool-search {
+  display: block;
+  margin-top: 12px;
+}
+
+.owa-mcp-tool-search > span,
+.owa-mcp-setting-grid label > span {
+  display: block;
+  margin-bottom: 6px;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.owa-mcp-tool-search input,
+.owa-mcp-setting-grid select {
+  width: 100%;
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 0 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: var(--owa-text);
+  font: inherit;
+  font-size: 11px;
+}
+
+.owa-mcp-tool-search input:focus,
+.owa-mcp-setting-grid select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.owa-mcp-tool-list {
+  max-height: 500px;
+  margin-top: 10px;
+  overflow: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.owa-mcp-tool-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.owa-mcp-tool-row:last-child { border-bottom: 0; }
+.owa-mcp-tool-row.is-disabled { background: #f8fafc; opacity: 0.72; }
+
+.owa-mcp-tool-copy { min-width: 0; }
+.owa-mcp-tool-copy > div { display: flex; align-items: center; gap: 7px; }
+.owa-mcp-tool-title strong { color: #0f172a; font-size: 12px; line-height: 18px; }
+.owa-mcp-tool-copy code { display: block; margin-top: 1px; color: #64748b; font-size: 9px; font-weight: 600; }
+.owa-mcp-tool-copy p { margin: 3px 0 0; color: #64748b; font-size: 10px; line-height: 15px; }
+.owa-mcp-tool-copy .owa-mcp-tool-note { color: #475569; }
+.owa-mcp-tool-copy small { display: block; margin-top: 4px; color: #94a3b8; font-size: 9px; }
+
+.owa-mcp-tool-original {
+  margin-top: 4px;
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.owa-mcp-tool-original summary {
+  width: max-content;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.owa-mcp-tool-original[open] {
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: #f8fafc;
+}
+
+.owa-mcp-switch {
+  margin-top: 4px;
+}
+
+.owa-mcp-risk {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 9px;
+}
+
+.owa-mcp-risk.is-read { background: #ecfdf3; color: #15803d; }
+.owa-mcp-risk.is-compute { background: #eff6ff; color: #1d4ed8; }
+.owa-mcp-risk.is-high { background: #fef2f2; color: #b91c1c; }
+
+.owa-mcp-switch {
+  display: inline-flex;
+  min-width: 78px;
+  min-height: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+  color: #64748b;
+  font: inherit;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.owa-mcp-switch span,
+.owa-mcp-setting-toggle > span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #94a3b8;
+}
+
+.owa-mcp-switch.is-on { border-color: #86efac; background: #f0fdf4; color: #15803d; }
+.owa-mcp-switch.is-on span { background: #22c55e; }
+
+.owa-mcp-setting-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.owa-mcp-setting-toggles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.owa-mcp-setting-toggle {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  color: #475569;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.owa-mcp-setting-toggle.is-wide { margin-top: 14px; }
+.owa-mcp-setting-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.owa-mcp-setting-toggle input:checked + span { background: #22c55e; box-shadow: 0 0 0 3px #dcfce7; }
+.owa-mcp-setting-toggle b { font-weight: 650; }
+.owa-mcp-setting-toggle em { margin-left: auto; color: #94a3b8; font-style: normal; }
+
+.owa-mcp-setting-note {
+  margin-top: 14px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.owa-mcp-save-settings {
+  min-height: 34px;
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.owa-mcp-detail-empty {
+  padding: 28px;
+  color: #94a3b8;
+  font-size: 11px;
+  text-align: center;
+}
+
+.owa-mcp-empty {
+  display: flex;
+  min-height: 320px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--owa-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.owa-mcp-empty strong {
+  color: var(--owa-text);
+  font-size: 15px;
+}
+
+.owa-mcp-empty.is-error strong { color: #b91c1c; }
+
+.owa-mcp-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: owa-mcp-spin 700ms linear infinite;
+}
+
+@keyframes owa-mcp-spin {
+  to { transform: rotate(360deg); }
+}
+
+body[data-ds-dark-theme] .owa-mcp-overview,
+body[data-ds-dark-theme] .owa-mcp-card,
+body[data-ds-dark-theme] .owa-mcp-detail-panel {
+  border-color: #334155;
+  background: #111827;
+}
+
+body[data-ds-dark-theme] .owa-mcp-summary > span,
+body[data-ds-dark-theme] .owa-mcp-toolbar button,
+body[data-ds-dark-theme] .owa-mcp-action,
+body[data-ds-dark-theme] .owa-mcp-tool-search input,
+body[data-ds-dark-theme] .owa-mcp-setting-grid select,
+body[data-ds-dark-theme] .owa-mcp-switch {
+  border-color: #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+body[data-ds-dark-theme] .owa-mcp-meta span,
+body[data-ds-dark-theme] .owa-mcp-message { background: #1e293b; }
+body[data-ds-dark-theme] .owa-mcp-card code { color: #cbd5e1; }
+body[data-ds-dark-theme] .owa-mcp-detail-panel > nav,
+body[data-ds-dark-theme] .owa-mcp-tool-row.is-disabled { background: #0f172a; }
+body[data-ds-dark-theme] .owa-mcp-tool-copy code { color: #e2e8f0; }
+body[data-ds-dark-theme] .owa-mcp-tool-title strong { color: #f8fafc; }
+body[data-ds-dark-theme] .owa-mcp-tool-original[open] { background: #0f172a; }
+
+.owa-engineering-shell {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: 242px minmax(520px, 1fr) 360px;
+  overflow: hidden;
+  background: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.owa-engineering-shell.is-stage-nav-collapsed {
+  grid-template-columns: 72px minmax(520px, 1fr) 360px;
+}
+
+.owa-engineering-shell.is-project-center {
+  grid-template-columns: 242px minmax(0, 1fr);
+}
+
+.owa-engineering-shell.is-project-center.is-stage-nav-collapsed {
+  grid-template-columns: 72px minmax(0, 1fr);
+}
+
+.owa-engineering-stage-rail {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  padding: 14px 10px 14px;
+  border-right: 1px solid #e5ebf3;
+  overflow: hidden;
+  background: #fbfcfe;
+}
+
+.owa-engineering-stage-rail > header {
+  display: flex;
+  min-height: 34px;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 0 12px 6px;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 160ms var(--owa-engineering-ease), transform 160ms var(--owa-engineering-ease);
+}
+
+.owa-engineering-stage-rail > header span {
+  color: var(--owa-muted);
+  font-size: 12px;
+}
+
+.owa-engineering-stage-rail > header strong {
+  overflow: hidden;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 550;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-project-center-entry {
+  display: grid;
+  min-height: 62px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 1px solid #dce5f1;
+  border-radius: 10px;
+  background: #fff;
+  color: #40536d;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.owa-project-center-entry:hover {
+  border-color: #b8cdf4;
+  background: #f7faff;
+}
+
+.owa-project-center-entry.is-selected {
+  border-color: #9fbdf5;
+  background: #edf4ff;
+  box-shadow: 0 5px 16px rgba(47, 111, 236, .08);
+  color: #235fc9;
+}
+
+.owa-project-center-short {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #edf3fb;
+  color: #3f648f;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.owa-project-center-entry.is-selected .owa-project-center-short {
+  background: var(--owa-primary);
+  color: #fff;
+}
+
+.owa-project-center-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.owa-project-center-copy strong {
+  font-size: 13px;
+  font-weight: 680;
+}
+
+.owa-project-center-copy small {
+  color: #8997a9;
+  font-size: 9px;
+}
+
+.owa-engineering-stage-rail nav {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.owa-engineering-stage {
+  position: relative;
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #526174;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.owa-engineering-stage::after {
+  position: absolute;
+  top: 48px;
+  bottom: -18px;
+  left: 26px;
+  width: 1px;
+  background: #d8e0eb;
+  content: "";
+}
+
+.owa-engineering-stage:last-child::after {
+  display: none;
+}
+
+.owa-engineering-stage:hover {
+  background: #f3f6fb;
+}
+
+.owa-engineering-stage.is-selected {
+  background: #eaf2ff;
+  color: #1747c5;
+}
+
+.owa-stage-code {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b9c7da;
+  border-radius: 50%;
+  background: #fff;
+  color: #61738c;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.owa-engineering-stage.is-passed .owa-stage-code {
+  border-color: #22b85c;
+  color: var(--owa-success);
+}
+
+.owa-engineering-stage.is-running .owa-stage-code,
+.owa-engineering-stage.is-blocked_human .owa-stage-code,
+.owa-engineering-stage.is-selected .owa-stage-code {
+  border-color: var(--owa-primary);
+  background: var(--owa-primary);
+  color: #fff;
+}
+
+.owa-engineering-stage.is-failed .owa-stage-code {
+  border-color: #e7a33c;
+  color: #b45309;
+}
+
+.owa-stage-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 140ms var(--owa-engineering-ease), transform 140ms var(--owa-engineering-ease);
+}
+
+.owa-stage-name {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-stage-current-badge {
+  flex: 0 0 auto;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--owa-primary) 12%, transparent);
+  color: var(--owa-primary);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.owa-stage-status,
+.owa-stage-count {
+  color: #91a0b4;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.owa-stage-count {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 140ms var(--owa-engineering-ease), transform 140ms var(--owa-engineering-ease);
+}
+
+.owa-engineering-stage.is-passed .owa-stage-status {
+  color: var(--owa-success);
+}
+
+.owa-engineering-stage.is-running .owa-stage-status,
+.owa-engineering-stage.is-blocked_human .owa-stage-status {
+  color: var(--owa-primary);
+}
+
+.owa-stage-nav-toggle {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0 0;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  background: #fff;
+  color: #4b5b70;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.owa-stage-nav-toggle:hover {
+  background: #f5f8fc;
+}
+
+.owa-stage-nav-toggle span {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.owa-stage-nav-toggle strong {
+  font-size: 11px;
+  font-weight: 550;
+  opacity: 1;
+  transition: opacity 120ms var(--owa-engineering-ease);
+}
+
+.is-stage-nav-collapsed .owa-engineering-stage-rail {
+  padding-inline: 8px;
+}
+
+.is-stage-nav-collapsed .owa-engineering-stage-rail > header,
+.is-stage-nav-collapsed .owa-project-center-copy,
+.is-stage-nav-collapsed .owa-stage-copy,
+.is-stage-nav-collapsed .owa-stage-count,
+.is-stage-nav-collapsed .owa-stage-nav-toggle strong {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.is-stage-nav-collapsed .owa-engineering-stage {
+  display: flex;
+  min-height: 58px;
+  justify-content: center;
+  padding-inline: 4px;
+}
+
+.is-stage-nav-collapsed .owa-project-center-entry {
+  display: flex;
+  min-height: 52px;
+  justify-content: center;
+  padding: 5px;
+}
+
+.is-stage-nav-collapsed .owa-engineering-stage::after {
+  left: 50%;
+}
+
+.is-stage-nav-collapsed .owa-stage-nav-toggle {
+  min-height: 38px;
+  padding: 0;
+}
+
+.owa-engineering-workspace {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.owa-project-center-workspace {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 34px clamp(24px, 4vw, 58px) 48px;
+  background: #f7f9fc;
+}
+
+.owa-project-center-hero,
+.owa-project-center-stats,
+.owa-project-center-section,
+.owa-project-governance-note {
+  width: min(100%, 1120px);
+  box-sizing: border-box;
+  margin-inline: auto;
+}
+
+.owa-project-center-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.owa-project-center-hero > div > span {
+  color: #4374bd;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.owa-project-center-hero h1 {
+  margin: 7px 0 0;
+  color: #142037;
+  font-size: 26px;
+  letter-spacing: -.02em;
+}
+
+.owa-project-center-hero p {
+  max-width: 660px;
+  margin: 10px 0 0;
+  color: #697a91;
+  font-size: 11px;
+  line-height: 19px;
+}
+
+.owa-project-center-hero > button {
+  min-height: 38px;
+  flex: 0 0 auto;
+  padding: 0 16px;
+  border: 1px solid var(--owa-primary);
+  border-radius: 8px;
+  background: var(--owa-primary);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.owa-project-center-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.owa-project-center-stats > button {
+  display: flex;
+  min-height: 76px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  padding: 13px 15px;
+  border: 1px solid #dfe6ef;
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.owa-project-center-stats > button:hover { border-color: #9fc5f3; background: #f7fbff; }
+.owa-project-center-stats > button.is-selected {
+  border-color: #69aaf5;
+  background: #edf6ff;
+  box-shadow: inset 0 0 0 1px rgba(63, 137, 225, 0.2);
+}
+.owa-project-center-stats > button:focus-visible {
+  outline: 3px solid rgba(63, 137, 225, 0.28);
+  outline-offset: 2px;
+}
+
+.owa-project-center-stats span { color: #78879b; font-size: 9px; }
+.owa-project-center-stats strong { color: #1d2e47; font-size: 20px; }
+
+.owa-project-center-section {
+  margin-top: 22px;
+  padding: 20px;
+  border: 1px solid #dfe6ef;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.owa-project-center-section > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e6ebf2;
+}
+
+.owa-project-center-section h2 { margin: 0; color: #1f3049; font-size: 14px; }
+.owa-project-center-section header p { margin: 6px 0 0; color: #7b899b; font-size: 9px; line-height: 15px; }
+.owa-project-center-section > header > span { padding: 4px 8px; border-radius: 999px; background: #eef3fa; color: #60738d; font-size: 8px; white-space: nowrap; }
+.owa-project-center-section.is-recycle { background: #fbfcfe; }
+.owa-project-card-list { display: grid; gap: 12px; margin-top: 16px; }
+
+.owa-project-card {
+  padding: 16px;
+  border: 1px solid #e0e6ef;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.owa-project-card.is-current { border-color: #a8c2f2; box-shadow: 0 4px 16px rgba(47, 111, 236, .07); }
+.owa-project-card.is-archived { background: #fcfcfd; }
+.owa-project-card > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.owa-project-card > header > div { min-width: 0; }
+.owa-project-card > header > div > span { color: #58749a; font-size: 8px; }
+.owa-project-card h3 { overflow: hidden; margin: 5px 0 0; color: #253750; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-project-card header small { display: block; overflow: hidden; margin-top: 5px; color: #95a1b1; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-project-card header em { padding: 4px 8px; border-radius: 999px; background: #edf3fb; color: #61758f; font-size: 8px; font-style: normal; white-space: nowrap; }
+.owa-project-card header em.is-published { background: #edf8f1; color: #2f8050; }
+.owa-project-card header em.is-blocked_human { background: #fff6e8; color: #946019; }
+.owa-project-card header em.is-archived { background: #f0f2f5; color: #737f8f; }
+
+.owa-project-progress-heading {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px 18px;
+  margin-top: 15px;
+  padding-top: 13px;
+  border-top: 1px solid #edf0f4;
+  color: #75859a;
+  font-size: 9px;
+}
+
+.owa-project-progress-heading strong { color: #425975; font-size: 9px; }
+.owa-project-progress-heading small { color: #8a98a9; font-size: 8px; }
+.owa-project-stage-grid { display: grid; grid-template-columns: repeat(8, minmax(58px, 1fr)); gap: 6px; margin-top: 10px; }
+
+.owa-project-stage {
+  display: flex;
+  min-width: 0;
+  min-height: 48px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 8px;
+  border: 1px solid #e0e6ef;
+  border-radius: 7px;
+  background: #fafbfd;
+  color: #758399;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.owa-project-stage:hover { border-color: #a9c2ef; background: #f4f8ff; }
+.owa-project-stage strong { color: #40536d; font-size: 9px; }
+.owa-project-stage span { overflow: hidden; width: 100%; font-size: 7px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-project-stage.is-passed { border-color: #c7e6d2; background: #f3fbf6; color: #2d8050; }
+.owa-project-stage.is-running,
+.owa-project-stage.is-blocked_human { border-color: #bdd0f5; background: #f1f6ff; color: #2d65c8; }
+.owa-project-stage.is-failed { border-color: #efd6b0; background: #fff9ef; color: #9a641b; }
+.owa-project-stage.is-not_applicable { background: #f4f5f7; color: #778392; }
+
+.owa-project-card > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.owa-project-card > footer > span { color: #8a98aa; font-size: 8px; }
+.owa-project-card > footer > div { display: flex; gap: 7px; }
+.owa-project-card > footer button { min-height: 30px; padding: 0 11px; border: 1px solid #cbd9ed; border-radius: 7px; background: #fff; color: #3f6292; cursor: pointer; font: inherit; font-size: 9px; }
+.owa-project-card > footer button:hover { border-color: #8fb0e9; background: #f5f8ff; }
+.owa-project-card > footer button.is-muted { border-color: #e0e5ec; color: #788697; }
+.owa-project-center-empty { padding: 28px 12px; color: #8794a5; font-size: 10px; text-align: center; }
+
+.owa-project-governance-note {
+  margin-top: 16px;
+  padding: 13px 15px;
+  border: 1px solid #dce5f1;
+  border-radius: 9px;
+  background: #f5f8fc;
+}
+
+.owa-project-governance-note strong { color: #40536d; font-size: 9px; }
+.owa-project-governance-note p { margin: 5px 0 0; color: #75859a; font-size: 8px; line-height: 14px; }
+
+.owa-engineering-hero,
+.owa-engineering-tabs,
+.owa-engineering-content {
+  width: min(100%, 730px);
+  box-sizing: border-box;
+  margin-inline: auto;
+}
+
+.owa-engineering-hero {
+  padding: 28px 28px 30px;
+}
+
+.owa-engineering-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8391a5;
+  font-size: 10px;
+}
+
+.owa-engineering-breadcrumb i {
+  color: #c3ccd8;
+  font-style: normal;
+}
+
+.owa-engineering-breadcrumb strong {
+  color: #36455a;
+  font-weight: 600;
+}
+
+.owa-intake-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  padding: 3px 8px;
+  border: 1px solid #d9e4f4;
+  border-radius: 999px;
+  background: #f4f8ff;
+  color: #315b9d;
+  font-family: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.owa-intake-mode span { color: #7890b3; font-size: 8px; }
+
+.owa-intake-mode strong {
+  color: inherit;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.owa-engineering-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.owa-engineering-title h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 720;
+  letter-spacing: -.02em;
+  line-height: 30px;
+}
+
+.owa-engineering-title > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.owa-engineering-title > span i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.owa-engineering-title > span.is-passed {
+  color: var(--owa-success);
+}
+
+.owa-engineering-title > span.is-running,
+.owa-engineering-title > span.is-blocked_human {
+  color: var(--owa-primary);
+}
+
+.owa-engineering-hero > p {
+  margin: 16px 0 0;
+  color: #65758a;
+  font-size: 11px;
+  line-height: 19px;
+}
+
+.owa-engineering-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+  color: #26364d;
+  font-size: 12px;
+}
+
+.owa-engineering-stats small {
+  overflow: hidden;
+  color: #9aa7b8;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-stage-stream {
+  margin: 0 0 14px;
+  overflow: hidden;
+  border: 1px solid #dce5f1;
+  border-radius: 12px;
+  background: #fbfcff;
+}
+
+.owa-stage-stream > header { display: flex; align-items: flex-start; flex-direction: column; gap: 5px; padding: 14px; border-bottom: 1px solid #e6ebf2; background: #fff; }
+.owa-stage-stream > header span { display: inline-flex; align-items: center; gap: 7px; color: #4972ad; font-size: 9px; font-weight: 650; }
+.owa-stage-stream > header span i { width: 6px; height: 6px; border-radius: 50%; background: #2f70ee; box-shadow: 0 0 0 3px #dfeaff; }
+.owa-stage-stream > header h2 { margin: 4px 0 0; color: #223650; font-size: 13px; }
+.owa-stage-stream > header p { margin: 0; color: #78879a; font-size: 8px; line-height: 14px; }
+.owa-stage-stream > header small { color: #52816a; font-size: 8px; }
+.owa-stage-stream > header button { padding: 0; border: 0; background: transparent; color: #346dcc; cursor: pointer; font: inherit; font-size: 8px; }
+.owa-stage-stream-list { max-height: 330px; overflow-y: auto; padding: 2px 12px 4px; }
+.owa-stage-stream-row { position: relative; display: grid; grid-template-columns: 43px 44px minmax(0, 1fr); gap: 6px; padding: 12px 0 12px 13px; border-bottom: 1px solid #edf0f5; }
+.owa-stage-stream-row:last-child { border-bottom: 0; }
+.owa-stage-stream-row::before { position: absolute; top: 18px; left: 0; width: 7px; height: 7px; border: 2px solid #8aaef1; border-radius: 50%; background: #fff; content: ""; }
+.owa-stage-stream-row:not(:last-child)::after { position: absolute; top: 29px; bottom: -6px; left: 4px; width: 1px; background: #dce5f3; content: ""; }
+.owa-stage-stream-row.is-succeeded::before { border-color: #61af7d; background: #e8f7ed; }
+.owa-stage-stream-row.is-failed::before { border-color: #d5626e; background: #fff0f2; }
+.owa-stage-stream-row.is-waiting::before { border-color: #d69b43; background: #fff7e9; }
+.owa-stage-stream-row.is-running::before { border-color: #2f70ee; background: #2f70ee; box-shadow: 0 0 0 4px #dfeaff; }
+.owa-stage-stream-row > time { color: #8a97a8; font-size: 9px; }
+.owa-stage-stream-row > em { color: #5f7188; font-size: 9px; font-style: normal; }
+.owa-stage-stream-row.is-succeeded > em { color: #2f8751; }
+.owa-stage-stream-row.is-failed > em { color: #b83c49; }
+.owa-stage-stream-row.is-waiting > em { color: #9a671e; }
+.owa-stage-stream-row.is-running > em { color: #2866d2; }
+.owa-stage-stream-row > div { min-width: 0; }
+.owa-stage-stream-row > div > strong { display: block; color: #2c3f59; font-size: 10px; }
+.owa-stage-stream-row > div > p { margin: 4px 0 0; color: #6f7f93; font-size: 9px; line-height: 15px; }
+.owa-stage-stream-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.owa-stage-stream-tools > small { color: #7f8da0; font-size: 8px; }
+.owa-stage-stream-tools > span { display: inline-flex; align-items: center; gap: 5px; padding: 4px 7px; border: 1px solid #d9e3f1; border-radius: 6px; background: #fff; }
+.owa-stage-stream-tools b { color: #426087; font-size: 8px; font-weight: 650; }
+.owa-stage-stream-tools code { color: #8996a6; font-family: ui-monospace,SFMono-Regular,Menlo,monospace; font-size: 7px; }
+.owa-stage-stream-row footer { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 8px; color: #8793a3; font-size: 8px; }
+.owa-stage-stream-row footer a,
+.owa-stage-stream-row footer button { padding: 0; border: 0; background: transparent; color: #346dcc; cursor: pointer; font: inherit; font-size: 8px; text-decoration: none; }
+.owa-stage-stream-row footer details { width: 100%; }
+.owa-stage-stream-row footer summary { color: #667a94; cursor: pointer; }
+.owa-stage-stream-row footer pre { max-height: 150px; margin: 7px 0 0; overflow: auto; padding: 10px; border: 1px solid #e0e6ef; border-radius: 7px; background: #f6f8fb; color: #4f627b; font: 8px/14px ui-monospace,SFMono-Regular,Menlo,monospace; white-space: pre-wrap; }
+.owa-stage-stream-all { width: calc(100% - 24px); min-height: 30px; margin: 4px 12px 12px; border: 1px solid #d4dfed; border-radius: 7px; background: #fff; color: #45627f; cursor: pointer; font: inherit; font-size: 9px; }
+
+.owa-engineering-storage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.owa-engineering-storage > div {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 5px 7px;
+  padding: 9px 10px;
+  border: 1px solid #e1e8f1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #40516a;
+  font-size: 9px;
+}
+
+.owa-engineering-storage i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c69026;
+}
+
+.owa-engineering-storage.is-connected i {
+  background: var(--owa-success);
+}
+
+.owa-engineering-storage span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-storage strong {
+  color: #26364d;
+  font-size: 9px;
+}
+
+.owa-engineering-storage small {
+  grid-column: 2 / -1;
+  color: #8795a8;
+  font-size: 8px;
+}
+
+@media (max-width: 920px) {
+  .owa-engineering-storage {
+    grid-template-columns: 1fr;
+  }
+}
+
+.owa-engineering-tabs {
+  display: flex;
+  gap: 28px;
+  padding: 0 28px;
+  border-bottom: 1px solid #dfe6ef;
+}
+
+.owa-engineering-tabs button {
+  position: relative;
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: #526174;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.owa-engineering-tabs button:hover,
+.owa-engineering-tabs button.is-active {
+  color: var(--owa-primary);
+}
+
+.owa-engineering-tabs button.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--owa-primary);
+  content: "";
+}
+
+.owa-engineering-tabs button span {
+  color: #96a3b4;
+  font-size: 9px;
+}
+
+.owa-engineering-content {
+  padding: 24px 28px 38px;
+}
+
+.owa-stage-summary-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #dfe6ef;
+}
+
+.owa-stage-summary-heading > div {
+  min-width: 0;
+}
+
+.owa-stage-summary-heading strong {
+  display: block;
+  color: #172033;
+  font-size: 15px;
+}
+
+.owa-stage-summary-heading p {
+  max-width: 720px;
+  margin: 7px 0 0;
+  color: #6f7f93;
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.owa-stage-summary-heading > a,
+.owa-stage-report-pending {
+  flex: none;
+  padding: 8px 11px;
+  border: 1px solid #cfdcf3;
+  border-radius: 8px;
+  background: #f5f8ff;
+  color: #3564c7;
+  font-size: 11px;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.owa-stage-summary-heading > a {
+  transition: border-color 180ms var(--owa-engineering-ease), background 180ms var(--owa-engineering-ease), transform 180ms var(--owa-engineering-ease);
+}
+
+.owa-stage-summary-heading > a:hover {
+  border-color: #8daef0;
+  background: #edf3ff;
+  transform: translateY(-1px);
+}
+
+.owa-stage-policy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: baseline;
+  margin: 12px 0 16px;
+  padding: 10px 14px;
+  border-left: 3px solid rgba(92, 149, 255, 0.72);
+  color: var(--owa-muted);
+  background: rgba(92, 149, 255, 0.07);
+  overflow: hidden;
+}
+
+.owa-stage-policy strong {
+  display: block;
+  color: var(--owa-text);
+  white-space: nowrap;
+}
+
+.owa-stage-policy span {
+  display: block;
+  max-width: 100%;
+  line-height: 1.6;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word;
+}
+
+.owa-stage-report-pending {
+  border-color: #e2e7ee;
+  background: #fafbfd;
+  color: #8794a6;
+}
+
+.owa-stage-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.owa-stage-metric {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 13px 14px 12px;
+  border: 1px solid #e1e7ef;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.owa-stage-metric::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: #7b91ff;
+  content: "";
+}
+
+.owa-stage-metric.is-tone-1::before {
+  background: #36b36a;
+}
+
+.owa-stage-metric.is-tone-2::before {
+  background: #9b75e8;
+}
+
+.owa-stage-metric.is-tone-3::before {
+  background: #e7a052;
+}
+
+.owa-stage-metric span,
+.owa-stage-metric small,
+.owa-stage-metric strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-stage-metric span {
+  color: #7d8b9f;
+  font-size: 9px;
+}
+
+.owa-stage-metric strong {
+  margin-top: 7px;
+  color: #172033;
+  font-size: 20px;
+  line-height: 22px;
+}
+
+.owa-stage-metric small {
+  margin-top: 5px;
+  color: #99a5b5;
+  font-size: 8px;
+}
+
+.owa-section-heading {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 230px 64px;
+  align-items: end;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #dfe6ef;
+  color: #8a98ab;
+  font-size: 10px;
+}
+
+.owa-section-heading strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.owa-section-heading span:last-child {
+  text-align: right;
+}
+
+.owa-mapping-row {
+  display: grid;
+  min-height: 66px;
+  grid-template-columns: 30px minmax(220px, 1fr) 230px 64px;
+  align-items: center;
+  border-bottom: 1px solid #e5ebf3;
+}
+
+.owa-mapping-kind {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #ede9fe;
+}
+
+.owa-mapping-kind.is-object {
+  background: #e9f8ed;
+}
+
+.owa-mapping-kind.is-data {
+  background: #fff1e8;
+}
+
+.owa-mapping-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.owa-mapping-copy strong {
+  overflow: hidden;
+  color: #182236;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-mapping-copy small,
+.owa-mapping-coverage small {
+  color: #7d8b9f;
+  font-size: 10px;
+}
+
+.owa-mapping-coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.owa-mapping-coverage > span {
+  display: block;
+  width: 176px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e6ebf2;
+}
+
+.owa-mapping-coverage i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  border-radius: inherit;
+  background: var(--owa-primary);
+}
+
+.owa-mapping-count {
+  color: #172033;
+  font-size: 12px;
+  text-align: right;
+}
+
+.owa-quality-section {
+  margin-top: 20px;
+}
+
+.owa-quality-section h3 {
+  margin: 0 0 10px;
+  color: #172033;
+  font-size: 13px;
+}
+
+.owa-quality-row {
+  display: grid;
+  min-height: 38px;
+  grid-template-columns: 22px 104px minmax(0, 1fr) 42px;
+  align-items: center;
+  color: #6f7f93;
+  font-size: 10px;
+}
+
+.owa-quality-row strong {
+  color: #28364a;
+  font-size: 11px;
+}
+
+.owa-quality-row em {
+  color: var(--owa-success);
+  font-style: normal;
+  text-align: right;
+}
+
+.owa-quality-check {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #25ad57;
+  border-radius: 50%;
+  background: #eaf8ef;
+}
+
+.owa-quality-row.is-evidence-check {
+  grid-template-columns: 22px 126px minmax(0, 1fr) 84px;
+  align-items: start;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.owa-quality-evidence-detail p,
+.owa-s6-validation-receipt p,
+.owa-s6-deployment-tasks p {
+  margin: 0 0 5px;
+  line-height: 1.6;
+}
+
+.owa-quality-evidence-detail details { margin-top: 6px; }
+.owa-quality-evidence-detail summary { cursor: pointer; }
+.owa-quality-evidence-detail details a,
+.owa-quality-evidence-detail details span { display: block; overflow-wrap: anywhere; }
+.owa-quality-row[data-check-status="FAILED"] em { color: #b42318; }
+.owa-quality-row[data-check-status="FAILED"] .owa-quality-check { border-color: #d92d20; background: #fff0ee; }
+.owa-quality-row[data-check-status="PASSED_WITH_NOTES"] em { color: #946200; }
+.owa-quality-row[data-check-status="NOT_APPLICABLE"] em { color: #6f7f93; }
+.owa-quality-row.is-evidence-check:not([data-check-status="PASSED"]):not([data-check-status="PASSED_WITH_NOTES"]):not([data-check-status="FAILED"]) .owa-quality-check { border-color: #a7b0be; background: #f3f5f7; }
+.owa-s6-validation-receipt,
+.owa-s6-deployment-tasks { margin: 12px 0; padding: 12px; background: #f5f7fa; border-radius: 8px; font-size: 12px; }
+.owa-s6-validation-receipt small { display: block; color: #6f7f93; overflow-wrap: anywhere; }
+.owa-s6-deployment-tasks h4 { margin: 0 0 8px; }
+.owa-s6-deployment-tasks article { margin-top: 12px; }
+.owa-s6-deployment-tasks article > span { margin-left: 12px; color: #6f7f93; }
+.owa-s6-evidence-notice { color: #6f7f93; font-size: 12px; line-height: 1.6; }
+
+.owa-event-stage-group {
+  margin-top: 26px;
+  border: 1px solid #dfe6ef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.owa-history-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border: 0;
+  background: #fff;
+  color: #19243a;
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.owa-history-toggle:hover {
+  background: #f8fafc;
+}
+
+.owa-history-toggle em {
+  color: #7d8b9f;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.owa-disclosure {
+  color: #64748b;
+  font-size: 9px;
+}
+
+.owa-history-list {
+  border-top: 1px solid #e6ebf2;
+}
+
+.owa-history-row {
+  display: grid;
+  min-height: 46px;
+  grid-template-columns: 66px 160px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid #edf1f5;
+  color: #6c7b8e;
+  font-size: 9px;
+}
+
+.owa-history-row:last-child {
+  border-bottom: 0;
+}
+
+.owa-history-row strong {
+  color: #9a5c12;
+  font-size: 10px;
+}
+
+.owa-engineering-decisions,
+.owa-engineering-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.owa-decision-summary-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #dfe6ef;
+}
+
+.owa-decision-summary-heading strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.owa-decision-summary-heading span {
+  color: #8a98ab;
+  font-size: 9px;
+  text-align: right;
+}
+
+.owa-engineering-decision {
+  padding: 16px 0;
+  border-bottom: 1px solid #e5ebf3;
+}
+
+.owa-engineering-decision > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.owa-engineering-decision strong {
+  color: #172033;
+  font-size: 12px;
+}
+
+.owa-engineering-decision > div span {
+  flex: 0 0 auto;
+  color: #9a5c12;
+  font-size: 9px;
+}
+
+.owa-engineering-decision > div span.is-resolved {
+  color: var(--owa-success);
+}
+
+.owa-engineering-decision p {
+  margin: 8px 0 4px;
+  color: #42526a;
+  font-size: 10px;
+  line-height: 18px;
+}
+
+.owa-engineering-decision small {
+  color: #8a98ab;
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.owa-engineering-decision small b {
+  color: #64748b;
+  font-weight: 650;
+}
+
+.owa-engineering-decision > a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--owa-primary);
+  font-size: 9px;
+  text-decoration: none;
+}
+
+.owa-activity-summary {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #dfe6ef;
+  background: linear-gradient(90deg, #f8faff, #fff);
+}
+
+.owa-activity-summary > div { display: flex; flex-direction: column; gap: 3px; }
+.owa-activity-summary strong { color: #25344c; font-size: 11px; }
+.owa-activity-summary span { color: #8291a5; font-size: 9px; }
+.owa-activity-summary p { margin: 0; color: #617188; font-size: 10px; line-height: 17px; }
+
+.owa-engineering-activity {
+  display: grid;
+  min-height: 58px;
+  grid-template-columns: 70px minmax(230px, 1fr) 128px 150px 60px;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e5ebf3;
+  color: #7a899c;
+  font-size: 9px;
+}
+
+.owa-engineering-activity.is-failed {
+  background: #fffbeb;
+}
+
+.owa-activity-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.owa-activity-copy strong,
+.owa-activity-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-activity-copy strong {
+  color: #28364a;
+  font-size: 10px;
+}
+
+.owa-activity-copy small {
+  color: #8492a6;
+  font-size: 9px;
+}
+
+.owa-engineering-activity a {
+  color: var(--owa-primary);
+  text-decoration: none;
+}
+
+.owa-activity-actor {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.owa-activity-actor b,
+.owa-audit-proof summary b {
+  color: #8a98ab;
+  font-size: 8px;
+  font-weight: 550;
+}
+
+.owa-activity-actor em {
+  overflow: hidden;
+  color: #56677e;
+  font-size: 9px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-audit-proof {
+  position: relative;
+  min-width: 0;
+}
+
+.owa-audit-proof summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #52657f;
+  cursor: pointer;
+  list-style: none;
+}
+
+.owa-audit-proof summary::-webkit-details-marker { display: none; }
+
+.owa-audit-proof summary span {
+  font-size: 9px;
+}
+
+.owa-audit-proof > div {
+  position: absolute;
+  z-index: 12;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  padding: 14px;
+  border: 1px solid #dce4ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 14px 38px #1323441f;
+}
+
+.owa-audit-proof > div strong { color: #1f2f46; font-size: 11px; }
+.owa-audit-proof > div p { margin: 5px 0 10px; color: #66768d; font-size: 9px; line-height: 15px; }
+.owa-audit-proof > div code { display: block; padding: 9px; border-radius: 7px; background: #f5f7fb; color: #52637c; font-size: 8px; line-height: 14px; white-space: pre-wrap; word-break: break-all; }
+.owa-audit-proof > div small { display: block; margin-top: 6px; color: #8290a3; font-size: 8px; }
+
+.owa-review-backdrop {
+  position: absolute;
+  z-index: 40;
+  inset: 0;
+  background: #12213b40;
+  backdrop-filter: blur(1px);
+}
+
+.owa-review-drawer {
+  position: absolute;
+  z-index: 41;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  width: min(520px, calc(100% - 40px));
+  flex-direction: column;
+  border-left: 1px solid var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-panel-strong);
+  box-shadow: var(--owa-shadow-dialog);
+}
+
+.owa-review-drawer > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-review-drawer > header span { color: var(--owa-semantic-accent); font-size: 10px; font-weight: 700; }
+.owa-review-drawer > header h2 { margin: 4px 0; color: var(--owa-semantic-text-primary); font-size: 19px; }
+.owa-review-drawer > header p { margin: 0; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 15px; }
+.owa-review-drawer > header button { padding: 6px 9px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-secondary); font: inherit; font-size: 9px; cursor: pointer; }
+
+.owa-review-body {
+  min-height: 0;
+  padding: 2px 24px 26px;
+  overflow-y: auto;
+}
+
+.owa-review-body > section { margin: 0; padding: 18px 0 0; border: 0; border-radius: 0; box-shadow: none; }
+.owa-review-body h3 { margin: 0 0 8px; color: var(--owa-semantic-text-primary); font-size: 12px; }
+.owa-review-body p { margin: 0; color: var(--owa-semantic-text-secondary); font-size: 11px; line-height: 19px; }
+.owa-review-question p { padding: 14px; border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-primary); font-size: 13px; font-weight: 620; }
+
+.owa-review-evidence { padding: 11px 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel); }
+.owa-review-evidence + .owa-review-evidence { margin-top: 7px; }
+.owa-review-evidence small,
+.owa-review-ai small { display: block; margin-top: 5px; color: var(--owa-semantic-text-tertiary); font-size: 8px; line-height: 14px; }
+.owa-review-muted { color: var(--owa-semantic-text-tertiary) !important; font-size: 9px !important; }
+.owa-review-ai { margin-top: 18px !important; padding: 14px !important; border: 1px solid var(--owa-semantic-border-default) !important; border-radius: var(--owa-radius-control) !important; background: var(--owa-semantic-accent-soft); }
+
+.owa-review-form { margin-top: 22px; }
+.owa-review-form fieldset { display: flex; margin: 0; padding: 0; border: 0; flex-direction: column; gap: 9px; }
+.owa-review-form legend { margin-bottom: 9px; color: var(--owa-semantic-text-primary); font-size: 12px; font-weight: 650; }
+.owa-review-option { display: flex; gap: 10px; padding: 13px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); cursor: pointer; }
+.owa-review-option:has(input:checked) { border-color: var(--owa-semantic-border-strong); background: var(--owa-semantic-surface-selected); box-shadow: 0 0 0 2px var(--owa-semantic-focus-ring); }
+.owa-review-option input { margin-top: 3px; accent-color: var(--owa-primary); }
+.owa-review-option > span { min-width: 0; }
+.owa-review-option strong { display: flex; align-items: center; gap: 8px; color: var(--owa-semantic-text-primary); font-size: 11px; }
+.owa-review-option strong em { padding: 2px 6px; border-radius: var(--owa-radius-round); background: color-mix(in srgb, var(--owa-semantic-success) 12%, transparent); color: var(--owa-semantic-success); font-size: 8px; font-style: normal; font-weight: 600; }
+.owa-review-option p { margin-top: 4px; font-size: 10px; }
+.owa-review-option small { display: block; margin-top: 7px; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 15px; }
+.owa-review-option small b { color: var(--owa-semantic-text-primary); }
+
+.owa-review-rationale { display: flex; margin-top: 18px; flex-direction: column; gap: 7px; color: var(--owa-semantic-text-primary); font-size: 11px; font-weight: 650; }
+.owa-review-rationale textarea { resize: vertical; padding: 10px 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-input); color: var(--owa-semantic-text-primary); font: inherit; font-size: 10px; line-height: 17px; }
+.owa-review-rationale textarea:focus { border-color: var(--owa-semantic-border-strong); outline: 2px solid var(--owa-semantic-focus-ring); }
+.owa-review-message { margin-top: 10px !important; color: var(--owa-semantic-warning) !important; font-size: 9px !important; }
+.owa-review-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+.owa-review-actions button { padding: 9px 13px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-secondary); font: inherit; font-size: 10px; cursor: pointer; }
+.owa-review-actions button.is-primary { border-color: var(--owa-semantic-accent); background: var(--owa-semantic-accent); color: var(--owa-semantic-on-accent); }
+.owa-review-actions button.is-danger { border-color: var(--owa-semantic-danger); background: var(--owa-semantic-danger); color: var(--owa-semantic-on-accent); }
+.owa-review-actions button:disabled { cursor: wait; opacity: .65; }
+
+@keyframes owaActionDialogIn {
+  from { opacity: 0; transform: translate(-50%, -47%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.owa-action-dialog {
+  position: absolute;
+  z-index: 42;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: min(680px, calc(100% - 48px));
+  max-height: calc(100% - 64px);
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-dialog);
+  background: var(--owa-semantic-surface-panel-strong);
+  box-shadow: var(--owa-shadow-dialog);
+  animation: owaActionDialogIn var(--owa-motion-slow) var(--owa-engineering-ease) both;
+}
+
+.owa-action-dialog > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+  background: linear-gradient(145deg, var(--owa-semantic-surface-navigation), var(--owa-semantic-surface-panel-strong) 68%);
+}
+
+.owa-action-dialog > header span { color: var(--owa-semantic-accent); font-size: 12px; font-weight: 700; }
+.owa-action-dialog > header h2 { margin: 5px 0; color: var(--owa-semantic-text-primary); font-size: 22px; }
+.owa-action-dialog > header p { max-width: 510px; margin: 0; color: var(--owa-semantic-text-secondary); font-size: 13px; line-height: 20px; }
+.owa-action-dialog > header button { flex: none; padding: 7px 11px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-secondary); font: inherit; font-size: 11px; cursor: pointer; }
+
+.owa-action-dialog-form {
+  min-height: 0;
+  padding: 20px 24px 22px;
+  overflow-y: auto;
+}
+
+.owa-action-dialog-form fieldset { margin: 0 0 20px; padding: 0; border: 0; }
+.owa-action-dialog-form legend { margin-bottom: 10px; color: var(--owa-semantic-text-primary); font-size: 13px; font-weight: 680; }
+.owa-action-stage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.owa-action-stage-option { display: flex; min-width: 0; gap: 9px; padding: 11px 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel); cursor: pointer; transition: border-color var(--owa-motion-standard) var(--owa-engineering-ease), background var(--owa-motion-standard) var(--owa-engineering-ease), transform var(--owa-motion-standard) var(--owa-engineering-ease); }
+.owa-action-stage-option:hover { border-color: var(--owa-semantic-border-strong); transform: translateY(-1px); }
+.owa-action-stage-option:has(input:checked) { border-color: var(--owa-semantic-border-strong); background: var(--owa-semantic-surface-selected); box-shadow: 0 0 0 2px var(--owa-semantic-focus-ring); }
+.owa-action-stage-option input { flex: none; margin-top: 3px; accent-color: var(--owa-primary); }
+.owa-action-stage-option span { min-width: 0; }
+.owa-action-stage-option strong { display: block; color: var(--owa-semantic-text-primary); font-size: 12px; }
+.owa-action-stage-option small { display: block; margin-top: 4px; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 15px; }
+
+.owa-action-reason { display: flex; flex-direction: column; gap: 7px; color: var(--owa-semantic-text-primary); font-size: 13px; font-weight: 650; }
+.owa-action-reason textarea { width: 100%; resize: vertical; padding: 11px 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-input); color: var(--owa-semantic-text-primary); font: inherit; font-size: 12px; line-height: 19px; }
+.owa-action-reason textarea:focus { border-color: var(--owa-semantic-border-strong); outline: 2px solid var(--owa-semantic-focus-ring); background: var(--owa-semantic-surface-panel-strong); }
+.owa-action-reason small { color: var(--owa-semantic-text-tertiary); font-size: 10px; font-weight: 400; line-height: 15px; }
+.owa-action-dialog .owa-review-actions button { padding: 10px 15px; font-size: 12px; }
+
+.owa-document-router-dialog {
+  --owa-document-accent-surface: var(--owa-semantic-accent-soft);
+  --owa-document-success-surface: var(--owa-semantic-success-soft);
+  --owa-document-warning-surface: var(--owa-semantic-warning-soft);
+  --owa-document-danger-surface: var(--owa-semantic-danger-soft);
+  --owa-document-success-border: var(--owa-semantic-success-border);
+  --owa-document-warning-border: var(--owa-semantic-warning-border);
+  --owa-document-danger-border: var(--owa-semantic-danger-border);
+  width: min(1040px, calc(100% - 48px));
+  max-height: calc(100% - 36px);
+}
+
+.owa-document-router-dialog > header { padding-top: 18px; padding-bottom: 15px; }
+.owa-document-router-dialog > header p { max-width: 720px; }
+
+.owa-document-router-body {
+  min-height: 0;
+  padding: 18px 22px 22px;
+  overflow-y: auto;
+  background: var(--owa-semantic-surface-canvas);
+}
+
+.owa-document-router-form { display: flex; flex-direction: column; gap: 15px; }
+
+.owa-document-intake-path {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-document-accent-surface);
+}
+
+.owa-document-intake-path span { align-self: center; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-document-intake-path strong { color: var(--owa-semantic-accent); font-size: 12px; }
+.owa-document-intake-path p { grid-column: 1 / -1; margin: 2px 0 0; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 15px; }
+
+.owa-document-loading {
+  display: flex;
+  min-height: 210px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--owa-semantic-text-tertiary);
+}
+
+.owa-document-loading strong { color: var(--owa-semantic-text-primary); font-size: 14px; }
+.owa-document-loading span { font-size: 10px; }
+
+.owa-document-route-summary {
+  display: grid;
+  grid-template-columns: minmax(270px, .9fr) minmax(430px, 1.25fr);
+  align-items: center;
+  gap: 20px;
+  padding: 15px 17px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: linear-gradient(135deg, var(--owa-document-accent-surface), var(--owa-semantic-surface-panel-strong) 72%);
+}
+
+.owa-document-route-summary strong { display: block; color: var(--owa-semantic-text-primary); font-size: 13px; }
+.owa-document-route-summary p { margin: 5px 0 0; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 17px; }
+
+.owa-document-route-steps {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.owa-document-route-steps span {
+  padding: 7px 9px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.owa-document-route-steps i { color: var(--owa-semantic-text-tertiary); font-size: 11px; font-style: normal; }
+.owa-document-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.owa-cq-intake { display: grid; gap: 8px; margin: 4px 0 2px; padding: 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); }
+.owa-cq-intake legend { padding: 0 5px; color: var(--owa-semantic-text-primary); font-size: 11px; font-weight: 700; }
+.owa-cq-intake label { display: flex; align-items: flex-start; gap: 8px; color: var(--owa-semantic-text-primary); font-size: 10px; cursor: pointer; }
+.owa-cq-intake label span { display: grid; gap: 2px; }
+.owa-cq-intake label small { color: var(--owa-semantic-text-tertiary); font-weight: 450; line-height: 15px; }
+
+.owa-document-router-form > label,
+.owa-document-form-grid > label,
+.owa-document-commit-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--owa-semantic-text-primary);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.owa-document-router-form input[type="text"],
+.owa-document-router-form input:not([type]),
+.owa-document-router-form textarea,
+.owa-document-commit-form textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-input);
+  color: var(--owa-semantic-text-primary);
+  font: inherit;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.owa-document-router-form textarea,
+.owa-document-commit-form textarea { resize: vertical; }
+
+.owa-document-router-form input:focus,
+.owa-document-router-form textarea:focus,
+.owa-document-commit-form textarea:focus {
+  border-color: var(--owa-semantic-border-strong);
+  outline: 2px solid var(--owa-semantic-focus-ring);
+}
+
+.owa-document-router-form label > small,
+.owa-document-commit-form label > small {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+.owa-document-commit-form textarea[aria-invalid="true"] {
+  border-color: var(--owa-semantic-danger);
+  outline: 2px solid color-mix(in srgb, var(--owa-semantic-danger) 22%, transparent);
+}
+
+.owa-document-commit-form label > .owa-document-field-error {
+  color: var(--owa-semantic-danger);
+  font-weight: 650;
+}
+
+.owa-document-router-form fieldset { margin: 0; padding: 0; border: 0; }
+.owa-document-router-form legend { margin-bottom: 8px; color: var(--owa-semantic-text-primary); font-size: 11px; font-weight: 650; }
+.owa-document-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.owa-document-source-grid > label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 11px 13px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  cursor: pointer;
+}
+
+.owa-document-source-grid > label:has(input:checked) {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-selected);
+  box-shadow: 0 0 0 2px var(--owa-semantic-focus-ring);
+}
+
+.owa-document-source-grid input { flex: none; margin-top: 2px; accent-color: var(--owa-primary); }
+.owa-document-source-grid span { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.owa-document-source-grid strong { color: var(--owa-semantic-text-primary); font-size: 11px; }
+.owa-document-source-grid small { color: var(--owa-semantic-text-tertiary); font-size: 9px; line-height: 14px; }
+.owa-document-upload-source { display: none !important; }
+.owa-document-router-form:has(input[name="document-source-mode"][value="upload"]:checked) .owa-document-local-source { display: none; }
+.owa-document-router-form:has(input[name="document-source-mode"][value="upload"]:checked) .owa-document-upload-source { display: flex !important; }
+.owa-document-upload-source input { padding: 9px; border: 1px dashed var(--owa-semantic-border-strong); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-input); color: var(--owa-semantic-text-secondary); font-size: 10px; font-weight: 400; }
+
+.owa-document-job-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 17px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-document-job-head > div:first-child span,
+.owa-document-job-head > div:first-child strong,
+.owa-document-job-head > div:first-child p { display: block; }
+.owa-document-job-head > div:first-child span { color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-document-job-head > div:first-child strong { margin-top: 3px; color: var(--owa-semantic-text-primary); font-size: 16px; }
+.owa-document-job-head > div:first-child p { margin: 4px 0 0; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 16px; }
+.owa-document-job-head.is-ready_for_review { border-color: var(--owa-document-success-border); background: var(--owa-document-success-surface); }
+.owa-document-job-head.is-failed { border-color: var(--owa-document-danger-border); background: var(--owa-document-danger-surface); }
+.owa-document-job-head.is-committed { border-color: var(--owa-semantic-border-strong); background: var(--owa-document-accent-surface); }
+.owa-document-progress { display: flex; min-width: 104px; flex-direction: column; align-items: flex-end; }
+.owa-document-progress strong { color: var(--owa-semantic-accent); font-size: 20px; }
+.owa-document-progress span { margin-top: 2px; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-document-live-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .75fr);
+  gap: 12px 20px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: linear-gradient(135deg, var(--owa-document-accent-surface), var(--owa-semantic-surface-panel-strong));
+}
+
+.owa-document-live-copy span,
+.owa-document-live-copy strong,
+.owa-document-live-copy p { display: block; }
+.owa-document-live-copy span { color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-document-live-copy strong { overflow: hidden; margin-top: 3px; color: var(--owa-semantic-text-primary); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-document-live-copy p { margin: 4px 0 0; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 15px; }
+.owa-document-page-meter { display: flex; align-items: center; gap: 10px; }
+.owa-document-page-meter > div { flex: 1; height: 7px; overflow: hidden; border-radius: var(--owa-radius-round); background: var(--owa-semantic-surface-selected); }
+.owa-document-page-meter i { display: block; height: 100%; border-radius: inherit; background: var(--owa-semantic-accent); transition: width var(--owa-motion-slow) var(--owa-engineering-ease); }
+.owa-document-page-meter strong { color: var(--owa-semantic-text-secondary); font-size: 10px; white-space: nowrap; }
+.owa-document-page-grid { display: flex; max-height: 76px; grid-column: 1 / -1; flex-wrap: wrap; gap: 5px; overflow-y: auto; }
+.owa-document-page-grid span { display: inline-flex; width: 25px; height: 22px; align-items: center; justify-content: center; border: 1px solid var(--owa-semantic-border-default); border-radius: 6px; background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-tertiary); font-size: 8px; }
+.owa-document-page-grid span.is-running { border-color: var(--owa-semantic-border-strong); background: var(--owa-document-accent-surface); color: var(--owa-semantic-accent); }
+.owa-document-page-grid span.is-succeeded { border-color: var(--owa-document-success-border); background: var(--owa-document-success-surface); color: var(--owa-semantic-success); }
+.owa-document-page-grid span.is-failed { border-color: var(--owa-document-danger-border); background: var(--owa-document-danger-surface); color: var(--owa-semantic-danger); }
+.owa-document-metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin-top: 12px; }
+.owa-document-metrics article { padding: 11px 12px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel); }
+.owa-document-metrics span { display: block; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-document-metrics strong { display: block; margin-top: 3px; color: var(--owa-semantic-text-primary); font-size: 17px; }
+
+.owa-document-file-list,
+.owa-document-warnings,
+.owa-document-commit-form,
+.owa-document-committed {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-document-file-list h3,
+.owa-document-warnings h3 { margin: 0 0 10px; color: var(--owa-semantic-text-primary); font-size: 12px; }
+.owa-document-file-list > small { display: block; margin-top: 9px; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+
+.owa-document-file {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.1fr) minmax(150px, .75fr) minmax(220px, 1.5fr);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-document-file:first-of-type { border-top: 0; }
+.owa-document-file > div { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.owa-document-file strong { overflow: hidden; color: var(--owa-semantic-text-primary); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-document-file > div span { color: var(--owa-semantic-success); font-size: 8px; }
+.owa-document-file.is-failed > div span { color: var(--owa-semantic-danger); }
+.owa-document-file p { margin: 0; color: var(--owa-semantic-accent); font-size: 9px; font-weight: 650; }
+.owa-document-file > small { color: var(--owa-semantic-text-tertiary); font-size: 9px; line-height: 15px; }
+.owa-document-file-pages { display: flex !important; max-height: 58px; grid-column: 1 / -1; flex-direction: row !important; flex-wrap: wrap; gap: 4px !important; overflow-y: auto; }
+.owa-document-file-pages span { display: inline-flex; width: 22px; height: 20px; align-items: center; justify-content: center; border: 1px solid var(--owa-semantic-border-default); border-radius: 5px; background: var(--owa-semantic-surface-control); color: var(--owa-semantic-text-tertiary); font-size: 8px; }
+.owa-document-file-pages span.is-running { border-color: var(--owa-semantic-border-strong); background: var(--owa-document-accent-surface); color: var(--owa-semantic-accent); }
+.owa-document-file-pages span.is-succeeded { border-color: var(--owa-document-success-border); background: var(--owa-document-success-surface); color: var(--owa-semantic-success); }
+.owa-document-file-pages span.is-failed { border-color: var(--owa-document-danger-border); background: var(--owa-document-danger-surface); color: var(--owa-semantic-danger); }
+.owa-document-warnings { border-color: var(--owa-document-warning-border); background: var(--owa-document-warning-surface); }
+.owa-document-warnings h3 { color: var(--owa-semantic-warning); }
+.owa-document-warnings ul { margin: 0; padding-left: 18px; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 17px; }
+
+.owa-document-report-link {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 8px 11px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-document-accent-surface);
+  color: var(--owa-semantic-accent);
+  font-size: 10px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.owa-document-commit-form > label { gap: 7px; }
+.owa-document-ready-explanation { margin-bottom: 12px; padding: 11px 13px; border: 1px solid var(--owa-document-success-border); border-radius: var(--owa-radius-control); background: var(--owa-document-success-surface); }
+.owa-document-ready-explanation strong { color: var(--owa-semantic-success); font-size: 11px; }
+.owa-document-ready-explanation p { margin: 4px 0 0; color: var(--owa-semantic-text-secondary); font-size: 9px; line-height: 16px; }
+.owa-structured-data-decision {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 12px;
+  padding: 12px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+}
+.owa-structured-data-decision legend {
+  padding: 0 6px;
+  color: var(--owa-semantic-text-primary);
+  font-size: 11px;
+  font-weight: 700;
+}
+.owa-document-committed { border-color: var(--owa-document-success-border); background: var(--owa-document-success-surface); }
+.owa-document-committed > strong { color: var(--owa-semantic-success); font-size: 14px; }
+.owa-document-committed > p { margin: 6px 0 0; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 17px; }
+.owa-document-committed .owa-review-actions a { padding: 9px 13px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-control); color: var(--owa-semantic-accent); font-size: 10px; text-decoration: none; }
+
+.owa-cq-review-form { margin-top: 18px; }
+.owa-cq-list { display: flex; flex-direction: column; gap: 12px; }
+.owa-cq-item { padding: 14px; border: 1px solid #dfe6ef; border-radius: 10px; background: #fbfcfe; }
+.owa-cq-item > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.owa-cq-item > div strong { color: #223149; font-size: 11px; }
+.owa-cq-item button,
+.owa-cq-review-form > button { padding: 6px 9px; border: 1px solid #d7e0eb; border-radius: 7px; background: #fff; color: #607087; font: inherit; font-size: 9px; cursor: pointer; }
+.owa-cq-item label { display: flex; margin-top: 9px; flex-direction: column; gap: 5px; color: #475a72; font-size: 9px; font-weight: 620; }
+.owa-cq-item textarea { width: 100%; resize: vertical; padding: 9px 10px; border: 1px solid #d7e0eb; border-radius: 7px; background: #fff; color: #26364d; font: inherit; font-size: 10px; line-height: 16px; }
+.owa-cq-item textarea:focus { border-color: #80a5f6; outline: 2px solid #dce8ff; }
+.owa-cq-item details { margin-top: 9px; color: #718198; font-size: 9px; }
+.owa-cq-item details summary { margin-bottom: 7px; cursor: pointer; }
+.owa-cq-item details pre { overflow: auto; padding: 9px 10px; border-radius: 7px; background: #f3f6fa; color: #43536a; font: 9px/15px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; }
+.owa-cq-review-form > button { margin-top: 12px; }
+
+.owa-engineering-empty {
+  padding: 34px 12px;
+  color: var(--owa-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.owa-engineering-context {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 60px 14px 34px;
+  border-left: 1px solid #e5ebf3;
+  background: #fbfcfe;
+}
+
+.owa-engineering-context > section {
+  padding: 16px;
+  margin: 0 0 14px;
+  border: 1px solid #dfe6ef;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.owa-engineering-context > .owa-stage-stream {
+  position: relative !important;
+  display: block !important;
+  min-height: 184px;
+  height: auto !important;
+  padding: 0;
+  overflow: hidden;
+  opacity: 1 !important;
+  visibility: visible !important;
+  content-visibility: visible !important;
+  contain: none !important;
+}
+.owa-engineering-context > .owa-stage-stream > * { opacity: 1 !important; visibility: visible !important; }
+.owa-engineering-context .owa-stage-stream-tools code { display: none; }
+
+.owa-engineering-context h2 {
+  margin: 0 0 12px;
+  color: #172033;
+  font-size: 13px;
+}
+
+.owa-engineering-context h2 span {
+  color: #7d8b9f;
+  font-weight: 400;
+}
+
+.owa-live-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.owa-live-heading h2 { margin-bottom: 0; }
+.owa-live-heading > span { display: inline-flex; align-items: center; gap: 5px; color: #52816a; font-size: 8px; }
+.owa-live-heading > span i { width: 6px; height: 6px; border-radius: 50%; background: #33a266; box-shadow: 0 0 0 3px #dff4e8; }
+.owa-live-current { display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; margin-top: 13px; padding: 11px; border: 1px solid #d9e5f5; border-radius: 8px; background: #f7faff; }
+.owa-live-current > span { grid-column: 1 / -1; color: #7a8ca5; font-size: 8px; }
+.owa-live-current strong { color: #263b59; font-size: 11px; }
+.owa-live-current em { align-self: center; color: #607087; font-size: 8px; font-style: normal; }
+.owa-live-current em.is-running,
+.owa-live-current em.is-blocked_human { color: var(--owa-primary); }
+.owa-live-current em.is-passed { color: var(--owa-success); }
+.owa-live-view-note { margin-top: 9px !important; color: #718198 !important; font-size: 9px !important; line-height: 15px !important; }
+.owa-live-jump,
+.owa-live-operations > button,
+.owa-live-document-summary button { width: 100%; min-height: 30px; margin-top: 8px; border: 1px solid #d4dfed; border-radius: 7px; background: #fff; color: #45627f; cursor: pointer; font: inherit; font-size: 9px; }
+.owa-live-document-summary { margin-top: 11px; padding: 10px; border: 1px solid #cfddf1; border-radius: 8px; background: #f8faff; }
+.owa-live-document-summary > div:first-child { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.owa-live-document-summary > div:first-child span { color: #7b8ca3; font-size: 8px; }
+.owa-live-document-summary > div:first-child strong { color: #315d9e; font-size: 9px; }
+.owa-live-document-summary > p { margin-top: 5px; font-size: 8px; line-height: 14px; }
+.owa-live-document-meter { height: 5px; margin-top: 8px; overflow: hidden; border-radius: 999px; background: #dfe8f5; }
+.owa-live-document-meter i { display: block; height: 100%; border-radius: inherit; background: #2f6fec; transition: width 220ms var(--owa-engineering-ease); }
+.owa-live-document-summary > small { display: block; margin-top: 5px; color: #6f8198; font-size: 8px; }
+.owa-live-operations { margin-top: 13px; padding-top: 12px; border-top: 1px solid #e7ecf3; }
+.owa-live-operations h3 { margin: 0 0 8px; color: #33465f; font-size: 10px; }
+.owa-live-operations ol { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.owa-live-operations li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 7px; }
+.owa-live-operations li time { padding-top: 1px; color: #93a0b1; font-size: 8px; }
+.owa-live-operations li > span { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.owa-live-operations li strong { color: #3b4e67; font-size: 9px; font-weight: 650; }
+.owa-live-operations li small { overflow: hidden; color: #7b899b; font-size: 8px; line-height: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-live-operations li.is-empty { display: block; color: #8290a2; font-size: 8px; line-height: 14px; }
+
+.owa-engineering-context p {
+  margin: 0;
+  color: #607087;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.owa-stage-purpose h3 {
+  margin: 16px 0 8px;
+  color: #334155;
+  font-size: 10px;
+}
+
+.owa-stage-purpose ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.owa-stage-purpose li {
+  position: relative;
+  padding-left: 13px;
+  color: #607087;
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.owa-stage-purpose li::before {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--owa-primary);
+  content: "";
+}
+
+.owa-engineering-context section > a,
+.owa-all-artifacts {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--owa-primary);
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.owa-evidence-item {
+  display: grid;
+  min-height: 43px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: 9px;
+}
+
+.owa-evidence-mark {
+  display: block;
+  width: 13px;
+  height: 16px;
+  grid-row: 1 / span 2;
+  align-self: center;
+  border: 1px solid #8da0b8;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.owa-evidence-item strong {
+  overflow: hidden;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-evidence-item small {
+  color: #8a98ab;
+  font-size: 8px;
+}
+
+.owa-engineering-primary {
+  display: flex;
+  width: 100%;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 1px solid var(--owa-primary);
+  border-radius: 7px;
+  background: var(--owa-primary);
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 140ms var(--owa-engineering-ease), transform 140ms var(--owa-engineering-ease);
+}
+
+.owa-engineering-primary:hover {
+  opacity: .92;
+  transform: translateY(-1px);
+}
+
+.owa-engineering-context .owa-next-step > a.owa-engineering-primary {
+  display: flex;
+  color: #fff;
+  font-size: 11px;
+}
+
+.owa-engineering-context .owa-next-step > button:not(.owa-engineering-primary) {
+  width: 100%;
+  min-height: 34px;
+  margin-top: 8px;
+  border: 1px solid #d7e0eb;
+  border-radius: 7px;
+  background: #fff;
+  color: #53657e;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.owa-stage-notice { margin-top: 10px !important; padding: 9px 10px; border: 1px solid #d8e6fb; border-radius: 7px; background: #f5f9ff; color: #315d9e !important; font-size: 9px !important; line-height: 15px !important; }
+
+.owa-current-project { display: flex; flex-direction: column; gap: 3px; padding: 10px; border: 1px solid #dce5f1; border-radius: 8px; background: #f8faff; }
+.owa-current-project span { color: #7a8ca5; font-size: 8px; }
+.owa-current-project strong { overflow: hidden; color: #263b59; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-current-project small { overflow: hidden; color: #8290a3; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-project-management > details { margin-top: 10px; }
+.owa-project-management > details > summary { display: flex; align-items: center; justify-content: space-between; color: #45627f; cursor: pointer; font-size: 9px; list-style: none; }
+.owa-project-management > details > summary::-webkit-details-marker { display: none; }
+.owa-project-management > details > summary span { padding: 2px 6px; border-radius: 999px; background: #edf3fb; color: #607a9c; font-size: 8px; }
+.owa-project-list { display: grid; max-height: 230px; gap: 5px; margin-top: 9px; overflow-y: auto; }
+.owa-project-switch { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 8px; border: 1px solid #e0e6ef; border-radius: 7px; background: #fff; color: inherit; cursor: pointer; font: inherit; text-align: left; }
+.owa-project-switch:hover { border-color: #a9c2ef; background: #f8faff; }
+.owa-project-switch.is-current { border-color: #b8cdf4; background: #f3f7ff; cursor: default; }
+.owa-project-switch > span { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.owa-project-switch strong,
+.owa-project-switch small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.owa-project-switch strong { color: #33465f; font-size: 9px; }
+.owa-project-switch small { color: #8a98ab; font-size: 7px; }
+.owa-project-switch em { color: #6d7e94; font-size: 8px; font-style: normal; white-space: nowrap; }
+.owa-project-management details > button { width: 100%; min-height: 31px; margin-top: 7px; border: 1px solid #d4dfed; border-radius: 7px; background: #fff; color: #45627f; cursor: pointer; font: inherit; font-size: 9px; }
+.owa-project-management details > button.is-muted { color: #7b8797; }
+.owa-project-management details > p { margin-top: 8px; color: #8794a6; font-size: 8px; line-height: 14px; }
+
+.owa-engineering-artifact {
+  display: grid;
+  min-height: 54px;
+  grid-template-columns: 18px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e7ecf3;
+  color: #253247;
+  text-decoration: none;
+}
+
+.owa-artifact-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--owa-primary);
+  opacity: .72;
+}
+
+.owa-artifact-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.owa-artifact-copy strong,
+.owa-artifact-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.owa-artifact-copy strong {
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.owa-artifact-copy small,
+.owa-engineering-artifact time {
+  color: #91a0b4;
+  font-size: 8px;
+}
+
+.owa-artifact-copy small {
+  display: -webkit-box;
+  line-height: 12px;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.owa-artifact-type {
+  padding: 3px 6px;
+  border: 1px solid #dbe5f2;
+  border-radius: 999px;
+  background: #f5f8fc;
+  color: #64748b;
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.owa-related-artifacts {
+  margin-top: auto !important;
+}
+
+.owa-context-empty {
+  color: #8a98ab;
+  font-size: 9px;
+}
+
+.owa-trace-detail-toggle {
+  position: relative;
+  min-height: 0;
+  padding: 0 0 11px;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  font: inherit;
+  font-size: 13px;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.owa-project-overview-link {
+  position: relative;
+  display: block;
+  min-height: 0;
+  padding: 0 0 11px;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 16px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.owa-project-overview-link:hover {
+  color: var(--owa-primary);
+}
+
+.owa-top-nav-actions {
+  display: contents;
+}
+
+.owa-trace-detail-toggle:hover,
+.owa-trace-detail-toggle.is-active {
+  color: var(--owa-primary);
+}
+
+.owa-trace-detail-toggle:focus {
+  outline: none;
+}
+
+.owa-trace-detail-toggle.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--owa-primary);
+  content: "";
+}
+
+.owa-business-detail-active > [role="tab"][aria-selected="true"] {
+  border-bottom-color: transparent !important;
+  color: #6b7280 !important;
+}
+
+.owa-business-detail-active > [role="tab"][aria-selected="true"]::after {
+  opacity: 0 !important;
+}
+
+@media (max-width: 1320px) {
+  .owa-engineering-shell {
+    grid-template-columns: 210px minmax(480px, 1fr) 310px;
+  }
+
+  .owa-engineering-shell.is-stage-nav-collapsed {
+    grid-template-columns: 64px minmax(480px, 1fr) 310px;
+  }
+
+  .owa-engineering-shell.is-project-center {
+    grid-template-columns: 210px minmax(0, 1fr);
+  }
+
+  .owa-engineering-shell.is-project-center.is-stage-nav-collapsed {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .owa-stage-count {
+    display: none;
+  }
+}
+
+@media (max-width: 1120px) {
+  .owa-engineering-shell,
+  .owa-engineering-shell.is-stage-nav-collapsed {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .owa-engineering-context {
+    display: none;
+  }
+
+  .owa-engineering-stage-rail {
+    padding-inline: 8px;
+  }
+
+  .owa-engineering-stage-rail > header,
+  .owa-project-center-copy,
+  .owa-stage-copy,
+  .owa-stage-count,
+  .owa-stage-nav-toggle strong {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  .owa-engineering-stage {
+    display: flex;
+    min-height: 58px;
+    justify-content: center;
+    padding-inline: 4px;
+  }
+
+  .owa-engineering-stage::after {
+    left: 50%;
+  }
+
+  .owa-project-center-entry {
+    display: flex;
+    min-height: 52px;
+    justify-content: center;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 959px) {
+  .owa-project-center-workspace { padding: 24px 18px 38px; }
+  .owa-project-center-hero { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .owa-project-center-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owa-project-stage-grid { grid-template-columns: repeat(4, minmax(58px, 1fr)); }
+  .owa-project-card > footer { align-items: flex-start; flex-direction: column; }
+  .owa-project-progress-heading { grid-template-columns: 1fr auto; }
+  .owa-project-progress-heading small { grid-column: 1 / -1; }
+
+  .owa-action-controls {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .owa-action-status,
+  .owa-action-buttons {
+    width: 100%;
+  }
+
+  .owa-action-buttons .owa-action-button {
+    flex: 1 1 0;
+  }
+
+  .owa-trace-row {
+    grid-template-columns: 12px minmax(100px, 0.8fr) minmax(160px, 2fr) 70px 48px;
+  }
+
+  .owa-trace-source {
+    display: none;
+  }
+
+  .owa-section-heading {
+    grid-template-columns: minmax(220px, 1fr) 170px 48px;
+  }
+
+  .owa-mapping-row {
+    grid-template-columns: 30px minmax(190px, 1fr) 170px 48px;
+  }
+
+  .owa-mapping-coverage > span {
+    width: 140px;
+  }
+
+  .owa-mcp-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-mcp-summary {
+    width: 100%;
+  }
+
+  .owa-mcp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-mcp-setting-grid,
+  .owa-mcp-setting-toggles {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-mcp-detail-heading {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .owa-stage-summary-heading {
+    flex-direction: column;
+  }
+
+  .owa-action-stage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-intake-option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-current-intake,
+  .owa-intake-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .owa-current-intake p {
+    text-align: left;
+  }
+
+  .owa-activity-summary {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .owa-document-route-summary,
+  .owa-document-form-grid,
+  .owa-document-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-document-route-steps {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .owa-document-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owa-document-live-progress {
+    grid-template-columns: 1fr;
+  }
+
+  .owa-document-page-grid {
+    grid-column: 1;
+  }
+
+  .owa-document-file {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .owa-stage-stream > header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .owa-stage-stream > header p {
+    text-align: left;
+  }
+
+  .owa-stage-stream-row {
+    grid-template-columns: 48px 58px minmax(0, 1fr);
+  }
+
+  .owa-stage-stream-tools code {
+    display: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-action-button,
+  .owa-engineering-view *,
+  .owa-engineering-view *::before,
+  .owa-engineering-view *::after {
+    transition: none;
+  }
+
+  .owa-action-dialog {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+
+  .owa-mcp-spinner {
+    animation: none;
+  }
+}
+
+/* Engineering is an ORION-owned surface, so it cannot rely on the host theme
+   to recolor its custom cards. Keep every stage readable over Aqua in dark
+   mode while retaining restrained glass transparency. */
+body[data-ds-dark-theme] .owa-engineering-view {
+  --owa-border: rgba(154, 181, 218, 0.2);
+  --owa-text: #eaf2fc;
+  --owa-muted: #9db0c8;
+  --owa-primary-soft: rgba(70, 124, 218, 0.16);
+  background: #0c131e;
+  color: var(--owa-text);
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-engineering-shell,
+  .owa-engineering-workspace
+) {
+  background: rgba(10, 17, 27, 0.76);
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  border-color: rgba(151, 181, 219, 0.17);
+  background: rgba(13, 22, 35, 0.72);
+}
+
+body[data-ds-dark-theme] .owa-project-center-workspace,
+body[data-ds-dark-theme] .owa-document-router-body {
+  background: rgba(9, 16, 26, 0.7);
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-project-center-entry,
+  .owa-project-center-stats > button,
+  .owa-project-center-section,
+  .owa-project-card,
+  .owa-project-governance-note,
+  .owa-stage-stream,
+  .owa-stage-stream > header,
+  .owa-stage-stream-tools > span,
+  .owa-engineering-storage > div,
+  .owa-stage-metric,
+  .owa-engineering-context > section,
+  .owa-action-dialog,
+  .owa-action-dialog > header,
+  .owa-action-stage-option,
+  .owa-intake-option,
+  .owa-intake-confirm,
+  .owa-current-intake,
+  .owa-document-intake-path,
+  .owa-document-route-summary,
+  .owa-document-route-steps span,
+  .owa-document-job-head,
+  .owa-document-live-progress,
+  .owa-document-metrics article,
+  .owa-document-file-list,
+  .owa-document-warnings,
+  .owa-document-commit-form,
+  .owa-document-committed,
+  .owa-live-current,
+  .owa-live-document-summary,
+  .owa-project-switch
+) {
+  border-color: rgba(151, 181, 219, 0.2);
+  background: rgba(18, 29, 44, 0.72);
+  box-shadow: none;
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-project-center-entry:hover,
+  .owa-project-center-entry.is-selected,
+  .owa-engineering-stage:hover,
+  .owa-engineering-stage.is-selected,
+  .owa-project-stage:hover,
+  .owa-action-stage-option:has(input:checked),
+  .owa-intake-option:has(input:checked),
+  .owa-document-source-grid > label:has(input:checked),
+  .owa-project-switch:hover,
+  .owa-project-switch.is-current
+) {
+  border-color: rgba(105, 154, 239, 0.56);
+  background: rgba(48, 94, 173, 0.2);
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-stage-code,
+  .owa-stage-nav-toggle,
+  .owa-project-center-short,
+  .owa-project-card > footer button,
+  .owa-stage-stream-all,
+  .owa-live-jump,
+  .owa-live-operations > button,
+  .owa-live-document-summary button,
+  .owa-engineering-context .owa-next-step > button:not(.owa-engineering-primary),
+  .owa-project-management details > button,
+  .owa-action-dialog > header button,
+  .owa-document-committed .owa-review-actions a,
+  .owa-document-source-grid > label,
+  .owa-document-page-grid span,
+  .owa-document-file-pages span
+) {
+  border-color: rgba(151, 181, 219, 0.22);
+  background: rgba(22, 35, 52, 0.78);
+  color: #b8c9df;
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-action-reason textarea,
+  .owa-intake-reason textarea,
+  .owa-document-router-form input[type="text"],
+  .owa-document-router-form input:not([type]),
+  .owa-document-router-form textarea,
+  .owa-document-commit-form textarea,
+  .owa-document-upload-source input,
+  .owa-stage-stream-row footer pre
+) {
+  border-color: rgba(151, 181, 219, 0.2);
+  background: rgba(8, 15, 24, 0.72);
+  color: #dce7f5;
+}
+
+body[data-ds-dark-theme] .owa-engineering-view :where(h1, h2, h3),
+body[data-ds-dark-theme] :where(
+  .owa-project-center-stats strong,
+  .owa-project-card h3,
+  .owa-engineering-breadcrumb strong,
+  .owa-engineering-title h1,
+  .owa-engineering-stats,
+  .owa-stage-stream-row > div > strong,
+  .owa-stage-summary-heading strong,
+  .owa-stage-metric strong,
+  .owa-engineering-decision strong,
+  .owa-engineering-activity strong,
+  .owa-engineering-artifact strong,
+  .owa-engineering-storage strong,
+  .owa-project-switch strong
+) {
+  color: #eaf2fc;
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-project-center-hero p,
+  .owa-project-center-section header p,
+  .owa-project-card header small,
+  .owa-project-card > footer > span,
+  .owa-project-governance-note p,
+  .owa-engineering-breadcrumb,
+  .owa-engineering-hero > p,
+  .owa-engineering-stats small,
+  .owa-stage-stream > header p,
+  .owa-stage-stream-row > time,
+  .owa-stage-stream-row > div > p,
+  .owa-stage-stream-row footer,
+  .owa-engineering-storage small,
+  .owa-stage-summary-heading p,
+  .owa-stage-metric span,
+  .owa-stage-metric small,
+  .owa-project-switch small,
+  .owa-engineering-context p
+) {
+  color: #91a5bf;
+}
+
+body[data-ds-dark-theme] :where(
+  .owa-engineering-tabs,
+  .owa-stage-summary-heading,
+  .owa-project-center-section > header,
+  .owa-project-progress-heading,
+  .owa-stage-stream > header,
+  .owa-stage-stream-row
+) {
+  border-color: rgba(151, 181, 219, 0.16);
+}
+
+/* Aqua integration contract -------------------------------------------------
+   Every ORION-owned engineering surface must inherit these semantic colors.
+   This block is intentionally gated by data-dsh-aqua: disabling the plugin
+   restores the original 3081 styles without a reload or a second stylesheet. */
+html[data-dsh-aqua] .owa-engineering-view {
+  --owa-eng-page: var(--owa-semantic-surface-canvas);
+  --owa-eng-rail: var(--owa-semantic-surface-navigation);
+  --owa-eng-card: var(--owa-semantic-surface-panel);
+  --owa-eng-card-strong: var(--owa-semantic-surface-panel-strong);
+  --owa-eng-control: var(--owa-semantic-surface-control);
+  --owa-eng-input: var(--owa-semantic-surface-input);
+  --owa-eng-selected: var(--owa-semantic-surface-selected);
+  --owa-eng-border: var(--owa-semantic-border-default);
+  --owa-eng-divider: var(--owa-semantic-border-subtle);
+  --owa-eng-text: var(--owa-semantic-text-primary);
+  --owa-eng-muted: var(--owa-semantic-text-secondary);
+  background: transparent !important;
+  color: var(--owa-eng-text);
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view {
+  --owa-eng-page: var(--owa-semantic-surface-canvas);
+  --owa-eng-rail: var(--owa-semantic-surface-navigation);
+  --owa-eng-card: var(--owa-semantic-surface-panel);
+  --owa-eng-card-strong: var(--owa-semantic-surface-panel-strong);
+  --owa-eng-control: var(--owa-semantic-surface-control);
+  --owa-eng-input: var(--owa-semantic-surface-input);
+  --owa-eng-selected: var(--owa-semantic-surface-selected);
+  --owa-eng-border: var(--owa-semantic-border-default);
+  --owa-eng-divider: var(--owa-semantic-border-subtle);
+  --owa-eng-text: var(--owa-semantic-text-primary);
+  --owa-eng-muted: var(--owa-semantic-text-secondary);
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-shell,
+  .owa-engineering-workspace,
+  .owa-project-center-workspace,
+  .owa-document-router-body
+) {
+  background: var(--owa-eng-page) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  border-color: var(--owa-eng-divider) !important;
+  background: var(--owa-eng-rail) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-entry,
+  .owa-project-center-stats > button,
+  .owa-project-center-section,
+  .owa-project-card,
+  .owa-project-governance-note,
+  .owa-stage-stream,
+  .owa-stage-stream > header,
+  .owa-stage-stream-tools > span,
+  .owa-engineering-storage > div,
+  .owa-stage-metric,
+  .owa-engineering-summary,
+  .owa-engineering-decisions,
+  .owa-engineering-activity-list,
+  .owa-engineering-decision,
+  .owa-engineering-activity,
+  .owa-history-list,
+  .owa-history-row,
+  .owa-engineering-context > section,
+  .owa-next-step,
+  .owa-related-artifacts,
+  .owa-review-drawer,
+  .owa-review-drawer > header,
+  .owa-review-evidence,
+  .owa-review-option,
+  .owa-review-ai,
+  .owa-action-dialog,
+  .owa-action-dialog > header,
+  .owa-action-stage-option,
+  .owa-intake-option,
+  .owa-intake-confirm,
+  .owa-cq-item,
+  .owa-document-intake-path,
+  .owa-document-route-summary,
+  .owa-document-route-steps span,
+  .owa-document-job-head,
+  .owa-document-live-progress,
+  .owa-document-metrics article,
+  .owa-document-file-list,
+  .owa-document-warnings,
+  .owa-document-commit-form,
+  .owa-document-committed,
+  .owa-document-ready-explanation,
+  .owa-live-current,
+  .owa-live-document-summary,
+  .owa-current-project,
+  .owa-project-switch
+) {
+  border-color: var(--owa-eng-border) !important;
+  background: var(--owa-eng-card) !important;
+  box-shadow: none !important;
+}
+
+/* The stage workspace already provides the page surface. Keep the summary
+   content on that surface instead of nesting a second glass card behind it. */
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-summary {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-stage-code,
+  .owa-stage-nav-toggle,
+  .owa-project-card > footer button,
+  .owa-stage-stream-all,
+  .owa-live-jump,
+  .owa-live-operations > button,
+  .owa-live-document-summary button,
+  .owa-history-toggle,
+  .owa-stage-summary-heading > a,
+  .owa-stage-report-pending,
+  .owa-engineering-context .owa-next-step > button:not(.owa-engineering-primary),
+  .owa-project-management details > button,
+  .owa-action-dialog > header button,
+  .owa-review-drawer > header button,
+  .owa-review-actions button:not(.is-primary):not(.is-danger),
+  .owa-document-committed .owa-review-actions a,
+  .owa-document-source-grid > label,
+  .owa-document-page-grid span,
+  .owa-document-file-pages span,
+  .owa-cq-item button,
+  .owa-cq-review-form > button,
+  .owa-current-intake em,
+  .owa-artifact-mark,
+  .owa-evidence-mark
+) {
+  border-color: var(--owa-eng-border) !important;
+  background: var(--owa-eng-control) !important;
+  color: var(--owa-eng-text) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-quality-check {
+  border-color: var(--owa-semantic-success-border) !important;
+  background: var(--owa-semantic-success-soft) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-action-reason textarea,
+  .owa-intake-reason textarea,
+  .owa-review-rationale textarea,
+  .owa-cq-item textarea,
+  .owa-document-router-form input[type="text"],
+  .owa-document-router-form input:not([type]),
+  .owa-document-router-form textarea,
+  .owa-document-commit-form textarea,
+  .owa-document-upload-source input,
+  .owa-stage-stream-row footer pre
+) {
+  border-color: var(--owa-eng-border) !important;
+  background: var(--owa-eng-input) !important;
+  color: var(--owa-eng-text) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-entry:hover,
+  .owa-project-center-entry.is-selected,
+  .owa-engineering-stage:hover,
+  .owa-engineering-stage.is-selected,
+  .owa-project-stage:hover,
+  .owa-action-stage-option:has(input:checked),
+  .owa-review-option:has(input:checked),
+  .owa-intake-option:has(input:checked),
+  .owa-document-source-grid > label:has(input:checked),
+  .owa-project-switch:hover,
+  .owa-project-switch.is-current
+) {
+  border-color: var(--owa-semantic-border-strong) !important;
+  background: var(--owa-eng-selected) !important;
+  color: var(--owa-eng-text) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-stage.is-running,
+  .owa-engineering-stage.is-blocked_human,
+  .owa-engineering-stage.is-selected
+) .owa-stage-code,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-entry.is-selected .owa-project-center-short {
+  border-color: var(--owa-primary) !important;
+  background: var(--owa-primary) !important;
+  color: var(--owa-semantic-on-accent) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-tabs,
+  .owa-stage-summary-heading,
+  .owa-project-center-section > header,
+  .owa-project-progress-heading,
+  .owa-stage-stream > header,
+  .owa-stage-stream-row,
+  .owa-engineering-artifact,
+  .owa-live-operations
+) {
+  border-color: var(--owa-eng-divider) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  h1,
+  h2,
+  h3,
+  strong,
+  .owa-stage-name,
+  .owa-engineering-tabs button,
+  .owa-history-toggle,
+  .owa-project-center-copy,
+  .owa-engineering-title,
+  .owa-artifact-copy
+) {
+  color: var(--owa-eng-text);
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  p,
+  small,
+  .owa-stage-status,
+  .owa-stage-count,
+  .owa-engineering-breadcrumb,
+  .owa-engineering-stats small,
+  .owa-history-toggle em,
+  .owa-context-empty
+) {
+  color: var(--owa-eng-muted);
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-intake-mode,
+  .owa-project-center-section > header > span,
+  .owa-artifact-type
+) {
+  border-color: var(--owa-eng-border) !important;
+  background: var(--owa-eng-control) !important;
+  color: var(--owa-eng-muted) !important;
+}
+
+/* Status surfaces must remain meaningful after the Aqua compatibility layer
+   applies its generic card/control material. */
+.owa-document-job-head.is-ready_for_review,
+.owa-document-ready-explanation,
+.owa-document-committed {
+  border-color: var(--owa-semantic-success-border) !important;
+  background: var(--owa-semantic-success-soft) !important;
+}
+
+.owa-document-job-head.is-failed {
+  border-color: var(--owa-semantic-danger-border) !important;
+  background: var(--owa-semantic-danger-soft) !important;
+}
+
+.owa-document-job-head.is-committed,
+.owa-document-page-grid span.is-running,
+.owa-document-file-pages span.is-running {
+  border-color: var(--owa-semantic-border-strong) !important;
+  background: var(--owa-semantic-accent-soft) !important;
+}
+
+.owa-document-page-grid span.is-running,
+.owa-document-file-pages span.is-running {
+  color: var(--owa-semantic-accent) !important;
+}
+
+.owa-document-page-grid span.is-succeeded,
+.owa-document-file-pages span.is-succeeded {
+  border-color: var(--owa-semantic-success-border) !important;
+  background: var(--owa-semantic-success-soft) !important;
+  color: var(--owa-semantic-success) !important;
+}
+
+.owa-document-page-grid span.is-failed,
+.owa-document-file-pages span.is-failed {
+  border-color: var(--owa-semantic-danger-border) !important;
+  background: var(--owa-semantic-danger-soft) !important;
+  color: var(--owa-semantic-danger) !important;
+}
+
+.owa-document-warnings {
+  border-color: var(--owa-semantic-warning-border) !important;
+  background: var(--owa-semantic-warning-soft) !important;
+}
+
+.owa-document-warnings h3 { color: var(--owa-semantic-warning) !important; }
+.owa-document-ready-explanation strong,
+.owa-document-committed > strong { color: var(--owa-semantic-success) !important; }
+
+
+/* Scoped engineering intake surfaces share the established Aqua semantic tokens. */
+.owa-engineering-start-template {
+  margin: 0 0 10px; border: 1px solid var(--owa-semantic-border-default); border-radius: 12px;
+  background: var(--owa-semantic-surface-panel-strong); color: var(--owa-semantic-text-primary); font-size: 13px;
+}
+.owa-engineering-start-template summary { padding: 11px 14px; cursor: pointer; font-weight: 600; }
+.owa-engineering-start-template summary span { margin-left: 12px; font-weight: 400; color: var(--owa-semantic-text-secondary); }
+/* The native overlay is absolutely pinned to the card's top. Keep its zero-height
+   anchor in flow after the intake panel so menus open above the actual editor,
+   without including the expanded template in their upward offset. */
+[data-composer-card]:has(> [data-orion-engineering-start]) > [class*="_overlayAnchor"] {
+  position: relative;
+  inset: auto;
+  height: 0;
+  flex: none;
+  z-index: 100;
+}
+[data-composer-card]:has(> [data-orion-engineering-start]) [data-trigger-menu] {
+  max-height: min(400px, 48dvh) !important;
+}
+.owa-engineering-start-fields { padding: 12px 16px 16px; display: grid; gap: 12px; border-top: 1px solid var(--owa-semantic-border-subtle); max-height: min(48dvh, 440px); overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; scrollbar-gutter: stable; }
+.owa-engineering-start-fields label { display: grid; gap: 5px; color: var(--owa-semantic-text-primary); }
+.owa-engineering-start-fields [hidden] { display: none; }
+.owa-engineering-start-fields p { margin: 0; line-height: 1.6; color: var(--owa-semantic-text-secondary); }
+.owa-engineering-start-fields [role="status"] { line-height: 1.5; color: var(--owa-semantic-text-secondary); overflow-wrap: anywhere; }
+.owa-engineering-start-template :is(textarea, select, input[type="search"]) {
+  width: 100%; box-sizing: border-box; padding: 8px 10px; font: inherit;
+  color: var(--owa-semantic-text-primary) !important; background: var(--owa-semantic-surface-input) !important;
+  border: 1px solid var(--owa-semantic-border-default) !important; border-radius: 8px; box-shadow: none !important;
+}
+.owa-engineering-start-template textarea { min-height: 0; max-height: 100px; resize: vertical; }
+.owa-engineering-start-template :is(textarea, input)::placeholder { color: var(--owa-semantic-text-tertiary); opacity: 1; }
+.owa-engineering-start-template option { color: var(--owa-semantic-text-primary); background: var(--owa-semantic-frost-workspace); }
+.owa-engineering-start-template button {
+  appearance: none; justify-self: start; min-height: 34px; padding: 7px 12px; border-radius: 8px;
+  font: inherit; font-weight: 500; cursor: pointer; text-shadow: none !important; box-shadow: none !important;
+  color: var(--owa-semantic-text-primary) !important; background: var(--owa-semantic-surface-control) !important;
+  border: 1px solid var(--owa-semantic-border-default) !important;
+}
+.owa-engineering-start-template button:hover:not(:disabled) { background: var(--owa-semantic-surface-hover) !important; border-color: var(--owa-semantic-border-strong) !important; }
+.owa-engineering-start-template :is([data-start-fill], [data-db-open], [data-db-close]) {
+  color: var(--owa-semantic-on-accent) !important; background: var(--owa-semantic-accent) !important; border-color: var(--owa-semantic-accent) !important;
+}
+.owa-engineering-start-template :is([data-start-fill], [data-db-open], [data-db-close]):hover:not(:disabled) {
+  background: var(--owa-semantic-accent-hover) !important; border-color: var(--owa-semantic-accent-hover) !important;
+}
+.owa-engineering-start-template :is(button, select, input, textarea, summary):focus-visible {
+  outline: 2px solid var(--owa-semantic-accent) !important; outline-offset: 3px; box-shadow: 0 0 0 4px var(--owa-semantic-focus-ring) !important;
+}
+.owa-engineering-start-template :is(button, select, input):disabled { opacity: .48; cursor: not-allowed; }
+.owa-start-database-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.owa-start-database-summary span { font-size: 12px; color: var(--owa-semantic-text-secondary); }
+.owa-start-database-summary button { flex-shrink: 0; }
+.owa-start-database-dialog {
+  width: min(720px, calc(100vw - 32px)); height: min(720px, 84vh); max-height: 84vh; padding: 0; box-sizing: border-box;
+  border: 1px solid var(--owa-semantic-border-strong) !important; border-radius: 16px;
+  background: var(--owa-semantic-frost-workspace) !important; color: var(--owa-semantic-text-primary) !important;
+  box-shadow: var(--owa-shadow-dialog); overflow: hidden; font: inherit;
+}
+.owa-start-database-dialog[open] { display: flex; flex-direction: column; gap: 0; }
+.owa-start-database-dialog::backdrop { background: var(--owa-semantic-surface-overlay); backdrop-filter: blur(5px); }
+.owa-start-database-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--owa-semantic-text-primary); }
+.owa-start-database-dialog > .owa-start-database-heading {
+  flex: 0 0 auto; padding: 16px 20px; border-bottom: 1px solid var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-panel-strong);
+}
+.owa-start-database-dialog > .owa-start-database-heading strong { font-size: 16px; font-weight: 650; }
+.owa-start-database-dialog > [data-db-body] { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 16px 20px; }
+.owa-start-database-footer {
+  flex: 0 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 20px;
+  border-top: 1px solid var(--owa-semantic-border-default); background: var(--owa-semantic-surface-panel-strong);
+}
+.owa-start-database-browser { display: grid; gap: 12px; }
+.owa-start-database-section { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: 10px; background: var(--owa-semantic-surface-panel); }
+.owa-start-database-hint { color: var(--owa-semantic-text-secondary); font-size: 12px; line-height: 1.6; }
+.owa-start-database-error { padding: 10px 12px; border: 1px solid var(--owa-semantic-warning-border); border-radius: 8px; background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning) !important; overflow-wrap: anywhere; }
+.owa-start-database-tables { max-height: 230px; overflow: auto; display: grid; gap: 4px; }
+.owa-start-database-tables label { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 7px; border: 1px solid transparent; }
+.owa-start-database-tables label:hover { background: var(--owa-semantic-surface-hover); }
+.owa-start-database-tables label:has(input:checked) { border-color: var(--owa-semantic-accent); background: var(--owa-semantic-surface-selected); }
+.owa-start-database-dialog input:is([type="checkbox"], [type="radio"]) { appearance: auto; width: 16px; height: 16px; flex: 0 0 auto; margin: 0; accent-color: var(--owa-semantic-accent); }
+.owa-start-database-selected { margin: 0; padding: 0; list-style: none; max-height: 180px; overflow: auto; }
+.owa-start-database-selected li { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--owa-semantic-border-subtle); }
+.owa-start-database-selected li:last-child { border-bottom: 0; }
+.owa-start-database-selected span { overflow-wrap: anywhere; line-height: 1.6; }
+.owa-start-database-selected button { flex-shrink: 0; }
+.owa-start-database-mode { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; }
+.owa-start-database-mode legend { margin-bottom: 7px; color: var(--owa-semantic-text-secondary); font-size: 12px; }
+.owa-start-database-mode label { display: flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid var(--owa-semantic-border-default); border-radius: 8px; background: var(--owa-semantic-surface-control); }
+.owa-start-database-mode label:has(input:checked) { background: var(--owa-semantic-surface-selected); border-color: var(--owa-semantic-accent); }
+.owa-start-database-bulk { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 2px 0; }
+.owa-start-database-bulk button { min-height: 32px; padding: 5px 10px; font-size: 12px; }
+.owa-start-database-notes { color: var(--owa-semantic-text-secondary); font-size: 12px; line-height: 1.6; }
+.owa-start-database-notes summary { padding: 6px 0; font-size: 12px; font-weight: 500; color: var(--owa-semantic-text-secondary); }
+.owa-start-database-notes[open] { padding-bottom: 8px; }
+.owa-start-database-dialog > .owa-start-database-heading .owa-start-database-hint { margin-top: 4px; font-weight: 400; }
+.owa-start-database-footer [data-db-footer-summary] { font-size: 12px; color: var(--owa-semantic-text-secondary); line-height: 1.5; }
+.owa-start-database-footer button { flex-shrink: 0; }
+
+/* Original AHS artwork, selected by the application's active theme. */
+body { --owa-ahs-logo: url("/ahs-wordmark-black.svg"); --owa-ahs-icon: url("/ahs-icon-black.svg"); }
+body[data-ds-dark-theme] { --owa-ahs-logo: url("/ahs-wordmark-white.svg"); --owa-ahs-icon: url("/ahs-icon-white.svg"); }
+.owa-ahs-icon { display: inline-block; flex: 0 0 auto; width: 30px; height: 30px; background: var(--owa-ahs-icon) center / contain no-repeat; }
+.owa-ahs-wordmark { display: block; width: 60px; height: 23px; background: var(--owa-ahs-logo) left center / contain no-repeat; }
+/* Aqua also tags the compact icon as a wordmark. Preserve its artwork instead
+   of applying the transparent wordmark container background to the icon. */
+html[data-dsh-aqua] [class*="railMark"] .owa-native-brand-logo.owa-ahs-icon {
+  width: 24px !important;
+  height: 24px !important;
+  min-height: 0 !important;
+  background: var(--owa-ahs-icon) center / contain no-repeat !important;
+}
+
+/* S4 form validation stays beside the edited fields. */
+.owa-cq-review-form .owa-review-message {
+  font-size: 13px !important;
+  line-height: 1.6;
+  color: var(--owa-semantic-danger, #b42318);
+}
+.owa-cq-review-form textarea[aria-invalid="true"] {
+  border-color: var(--owa-semantic-danger, #b42318) !important;
+  outline: 2px solid rgba(180, 35, 24, .16);
+}
+
+/* Native ask_user_question: a long question is the header, not the scroll body.
+   Bound that header so it cannot consume the choices and answer field. */
+[data-question-key] > section {
+  max-height: min(70vh, 640px);
+  max-height: min(70dvh, 640px);
+  min-height: 0;
+}
+[data-question-key] > section > header {
+  min-height: 0;
+  flex: 0 0 auto;
+}
+[data-question-key] > section > header h2 {
+  max-height: min(18vh, 160px);
+  max-height: min(18dvh, 160px);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+[data-question-key] [data-question-scroll] {
+  flex: 1 1 auto;
+  min-height: 80px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+[data-question-key] [data-question-scroll] > [class*="_detail"] {
+  flex: 0 0 auto;
+  max-height: min(22vh, 190px);
+  max-height: min(22dvh, 190px);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
+}
+[data-question-key] [data-question-scroll] > [role="radiogroup"],
+[data-question-key] [data-question-scroll] > [role="group"] {
+  flex-shrink: 0;
+}
+[data-question-key] [data-question-scroll] + div {
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+@media (max-height: 600px), (max-width: 480px) {
+  [data-question-key] > section > header { padding: 8px 12px 0; }
+  [data-question-key] > section > header h2 {
+    max-height: 14vh;
+    max-height: 14dvh;
+  }
+  [data-question-key] [data-question-scroll] { min-height: 64px; }
+  [data-question-key] [data-question-scroll] + div { margin-top: 6px; gap: 6px; }
+}
+
+/* Approved review belongs to the stage heading, not an alert banner. */
+.owa-engineering-title { flex-wrap: wrap; row-gap: 12px; }
+.owa-approved-review-trigger {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 8px 12px;
+  min-height: 36px;
+  max-width: 100%;
+  border: 1px solid var(--owa-eng-divider, #d7e2f0);
+  border-radius: 10px;
+  background: var(--owa-semantic-surface-control, #f7faff);
+  color: var(--owa-eng-text, #324963);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 18px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.owa-approved-review-trigger svg { flex-shrink: 0; }
+.owa-approved-review-trigger small {
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: rgba(71, 111, 164, .08);
+  color: var(--owa-semantic-text-secondary, #74849b);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.owa-approved-review-trigger:hover { border-color: #92b2df; background: rgba(228, 239, 255, .8); }
+.owa-approved-review-trigger:focus-visible { outline: 2px solid #3979d6; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .owa-approved-review-trigger { margin-left: 0; }
+}
+
+/* Wren result charts stay inside identity-verified evidence details. */
+.orion-analysis-chart { padding: 12px; border: 1px solid #9daaba55; border-radius: 8px; margin: 12px 0; }
+.orion-analysis-bars { display: grid; gap: 8px; max-height: 360px; overflow: auto; margin: 12px 0; }
+.orion-analysis-bar { display: grid; grid-template-columns: minmax(160px, 1fr) minmax(100px, 1fr); gap: 12px; text-align: left; padding: 8px; cursor: pointer; }
+.orion-analysis-bar meter { width: 100%; align-self: center; }
+
+/* Analysis stays on the existing 3081 aqua surface; only controls add light frost. */
+.orion-answer-analysis-launcher { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #294c5f; }
+.orion-answer-analysis-launcher .orion-analysis-open { color: #244e73; background: color-mix(in srgb, var(--owa-semantic-surface-control) 65%, transparent); border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); padding: 7px 14px; font: inherit; font-size: 13px; cursor: pointer; }
+.orion-answer-analysis-launcher .orion-analysis-open:hover { background: color-mix(in srgb, var(--owa-semantic-surface-hover) 75%, transparent); border-color: var(--owa-semantic-border-strong); }
+.orion-analysis-result-count { font-size: 12px; color: #415f70; }
+.orion-answer-analysis-dialog {
+  --orion-analysis-control: color-mix(in srgb, var(--owa-semantic-surface-control) 62%, transparent);
+  --orion-analysis-line: var(--owa-semantic-border-subtle);
+  width: min(1040px, 92vw);
+  max-width: 92vw;
+  height: min(780px, 85dvh);
+  max-height: 85dvh;
+  padding: 0;
+  margin: auto;
+  overflow: hidden;
+  color: #182b3a;
+  background: linear-gradient(135deg, rgba(228, 247, 247, .91), rgba(208, 236, 237, .88));
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  border: 1px solid rgba(150, 187, 196, .65);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(25, 56, 64, .14);
+}
+.orion-answer-analysis-dialog[open] { display: flex; flex-direction: column; }
+.orion-answer-analysis-dialog:not([open]) { display: none; }
+.orion-answer-analysis-dialog::backdrop { background: rgba(21, 66, 76, .12); backdrop-filter: blur(3px); }
+.orion-analysis-dialog-header { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px 12px; color: #203f50; background: transparent; }
+.orion-analysis-dialog-header h3 { margin: 0; color: #203f50; font-size: 17px; line-height: 1.4; font-weight: 650; }
+.orion-analysis-dialog-header .orion-analysis-close { flex: none; color: #294d60; background: var(--orion-analysis-control); border: 1px solid var(--owa-semantic-border-default); border-radius: 8px; padding: 6px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.orion-analysis-dialog-header .orion-analysis-close:hover { background: color-mix(in srgb, var(--owa-semantic-surface-hover) 75%, transparent); }
+.orion-answer-analysis-dialog .orion-answer-analysis-header { flex: none; padding: 0 20px 12px; border-bottom: 1px solid var(--orion-analysis-line); }
+.orion-answer-analysis-dialog .orion-answer-analysis-header select { max-width: 100%; width: 100%; }
+.orion-answer-analysis-dialog .orion-answer-analysis-content { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 20px 16px; }
+.orion-answer-analysis-dialog :is(button, select, summary):focus-visible,
+.orion-answer-analysis-launcher button:focus-visible { outline: 2px solid #3c80ba; outline-offset: 3px; }
+.orion-answer-analysis,
+.orion-analytics-workspace { --orion-analysis-control: color-mix(in srgb, var(--owa-semantic-surface-control) 62%, transparent); --orion-analysis-line: var(--owa-semantic-border-subtle); }
+.orion-answer-analysis { color: #182b3a; background: transparent; border: 0; border-top: 1px solid var(--orion-analysis-line); border-radius: 0; margin: 16px 0; min-width: 0; box-shadow: none; }
+.orion-answer-analysis-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--orion-analysis-line); background: transparent; border-radius: 0; }
+.orion-answer-analysis-header h3 { color: #214457; font-size: 15px; line-height: 1.4; font-weight: 650; margin: 0; }
+.orion-answer-analysis-header select { color: #294f65; background: var(--orion-analysis-control); border: 1px solid var(--owa-semantic-border-default); border-radius: 7px; padding: 7px 10px; max-width: min(68%, 420px); min-width: 0; font: inherit; text-overflow: ellipsis; }
+.orion-answer-analysis-content { min-width: 0; color: #182b3a; background: transparent; border-radius: 0; }
+.orion-answer-analysis-content > .orion-analytics-workspace { border: 0; border-radius: 0; margin: 0; padding: 14px 0; box-shadow: none; }
+.orion-analytics-workspace {
+  color: #182b3a;
+  background: transparent;
+  border: 1px solid var(--orion-analysis-line);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 12px 0;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  box-shadow: none;
+}
+.orion-analytics-workspace p { color: #344f60; margin: 7px 0; overflow-wrap: anywhere; }
+.orion-analytics-workspace strong { color: #182b3a; }
+.orion-analytics-workspace .orion-analytics-header { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.orion-analytics-workspace .orion-analytics-header > strong { font-size: 15px; font-weight: 650; }
+.orion-analytics-workspace .orion-analytics-count { flex-shrink: 0; color: #366074; background: var(--orion-analysis-control); border: 1px solid var(--orion-analysis-line); border-radius: 20px; padding: 2px 9px; font-size: 12px; }
+.orion-analytics-workspace .orion-analytics-toolbar { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-bottom: 13px; border-bottom: 1px solid var(--orion-analysis-line); }
+.orion-analytics-workspace .orion-analytics-views,
+.orion-analytics-workspace .orion-analytics-tools,
+.orion-analytics-workspace .orion-analytics-capabilities { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.orion-analytics-workspace button,
+.orion-analytics-workspace summary { color: #244d66; font: inherit; cursor: pointer; }
+.orion-analytics-workspace button { background: var(--orion-analysis-control); border: 1px solid var(--owa-semantic-border-default); border-radius: 7px; padding: 6px 11px; line-height: 1.4; box-shadow: none; }
+.orion-analytics-workspace button:hover:not(:disabled) { background: color-mix(in srgb, var(--owa-semantic-surface-hover) 72%, transparent); border-color: var(--owa-semantic-border-strong); }
+.orion-analytics-workspace button[aria-pressed="true"] { color: #234f91; background: color-mix(in srgb, var(--owa-semantic-accent-soft) 78%, transparent); border-color: #6d99c4; }
+.orion-analytics-workspace button:disabled { color: #617583; background: var(--orion-analysis-control); cursor: not-allowed; opacity: .65; }
+.orion-analytics-workspace :is(button, summary, input, textarea, select):focus-visible { outline: 2px solid #2385ad; outline-offset: 3px; }
+.orion-analytics-workspace .orion-analytics-canvas { margin: 14px 0; min-height: 96px; }
+.orion-analytics-workspace .orion-analytics-metric-picker { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #3f5d70; }
+.orion-analytics-workspace .orion-analytics-table-scroll { max-height: 440px; overflow: auto; border: 1px solid var(--orion-analysis-line); border-radius: 8px; }
+.orion-analytics-workspace table { border-collapse: collapse; width: 100%; margin: 0; background: transparent; color: #182b3a; font-size: 13px; }
+.orion-analytics-workspace th { position: sticky; top: 0; background: rgba(222, 241, 242, .74); backdrop-filter: blur(10px); color: #294759; font-weight: 600; text-align: left; }
+.orion-analytics-workspace th,
+.orion-analytics-workspace td { padding: 10px 12px; border: 0; border-bottom: 1px solid var(--orion-analysis-line); white-space: nowrap; text-align: left; }
+.orion-analytics-workspace tbody tr:nth-child(even) { background: rgba(240, 251, 252, .18); }
+.orion-analytics-workspace tbody tr:hover { background: rgba(220, 240, 246, .42); }
+.orion-analytics-workspace .orion-analytics-pagination { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: #637887; font-size: 12px; }
+.orion-analytics-workspace .orion-analysis-bar { grid-template-columns: minmax(140px, 1fr) minmax(100px, 2fr); border-bottom: 1px solid var(--orion-analysis-line); padding: 10px 0; cursor: default; }
+.orion-analytics-workspace .orion-analysis-bar meter { accent-color: #2586a7; }
+.orion-analytics-workspace svg { display: block; max-width: 100%; color: #176589; }
+.orion-analytics-workspace .orion-analytics-context { border-top: 1px solid var(--orion-analysis-line); padding-top: 10px; font-size: 12px; }
+.orion-analytics-workspace .orion-analytics-context p { margin: 4px 0; }
+.orion-analytics-workspace .orion-analytics-warning { color: #704512; background: var(--owa-semantic-warning-soft); padding: 8px 10px; border-radius: 6px; }
+.orion-analytics-workspace .orion-analytics-status:empty { display: none; }
+.orion-analytics-workspace .orion-analytics-status:not(:empty) { color: #28566d; background: var(--orion-analysis-control); border-radius: 7px; padding: 9px 11px; }
+.orion-analytics-workspace details { border: 0; margin: 0; padding: 0; background: transparent; color: #244d66; }
+.orion-analytics-workspace summary { list-style-position: inside; padding: 8px 0; font-weight: 550; }
+.orion-analytics-workspace .orion-analytics-more { margin-top: 12px; border-top: 1px solid var(--orion-analysis-line); }
+.orion-analytics-workspace .orion-analytics-more > summary { padding: 12px 0 4px; }
+.orion-analytics-workspace .orion-analytics-capabilities { margin: 12px 0; }
+.orion-analytics-workspace .orion-analytics-capability-pane { padding: 12px 0; border: 0; background: transparent; border-radius: 0; }
+.orion-analytics-workspace [hidden] { display: none !important; }
+.orion-analytics-workspace .orion-analytics-asset-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.orion-analytics-workspace .orion-analytics-asset-actions > p { flex-basis: 100%; }
+.orion-analytics-workspace input,
+.orion-analytics-workspace textarea,
+.orion-analytics-workspace select { color: #203746; background: var(--orion-analysis-control); border: 1px solid var(--owa-semantic-border-default); border-radius: 6px; padding: 8px 10px; font: inherit; box-sizing: border-box; }
+.orion-analytics-workspace input[type="text"] { flex: 1; min-width: 160px; }
+.orion-analytics-workspace textarea { display: block; width: 100%; min-height: 90px; margin: 8px 0; resize: vertical; }
+.orion-analytics-workspace pre { color: #334d5e; background: var(--orion-analysis-control); border: 1px solid var(--orion-analysis-line); border-radius: 6px; padding: 10px; max-height: 320px; overflow: auto; font-size: 12px; }
+.orion-analytics-workspace .orion-analytics-export-menu { position: relative; }
+.orion-analytics-workspace .orion-analytics-export-menu > summary { border: 1px solid var(--owa-semantic-border-default); border-radius: 7px; padding: 5px 11px; background: var(--orion-analysis-control); }
+.orion-analytics-workspace .orion-analytics-export-options { position: absolute; z-index: 8; top: calc(100% + 8px); right: 0; width: min(410px, 78vw); background: rgba(224, 241, 243, .94); backdrop-filter: blur(14px); border: 1px solid var(--owa-semantic-border-default); border-radius: 10px; box-shadow: 0 4px 14px #16395014; padding: 16px; max-height: 62vh; overflow: auto; }
+.orion-analytics-workspace .orion-analytics-export-task { padding-top: 14px; margin-top: 12px; border-top: 1px solid var(--orion-analysis-line); }
+.orion-analytics-workspace .orion-analytics-export-task input { width: 130px; margin: 5px 6px 8px 0; }
+.orion-analytics-workspace .orion-analytics-export-task button { margin: 4px 6px 4px 0; }
+@media (max-width: 640px) {
+  .orion-answer-analysis-dialog { width: 94vw; max-width: 94vw; height: 88dvh; max-height: 88dvh; border-radius: 12px; }
+  .orion-analysis-dialog-header { padding: 14px 14px 10px; }
+  .orion-answer-analysis-dialog .orion-answer-analysis-header { padding: 0 14px 10px; }
+  .orion-answer-analysis-dialog .orion-answer-analysis-content { padding: 0 14px 12px; }
+  .orion-answer-analysis-header { padding: 12px; }
+  .orion-answer-analysis-header select { max-width: 70%; }
+  .orion-analytics-workspace { padding: 12px; }
+  .orion-analytics-workspace .orion-analytics-header { flex-direction: column; gap: 6px; }
+  .orion-analytics-workspace .orion-analytics-toolbar { gap: 12px; }
+  .orion-analytics-workspace .orion-analytics-tools { margin-left: auto; }
+  .orion-analytics-workspace .orion-analysis-bar { grid-template-columns: 1fr; gap: 4px; }
+}

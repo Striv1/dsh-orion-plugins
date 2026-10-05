@@ -1,0 +1,857 @@
+.owa-engineering-view {
+  position: relative;
+  container-type: inline-size;
+  width: calc(100% - 32px);
+  height: calc(100% - 26px);
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 12px 16px 14px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-panel);
+  background: var(--owa-semantic-surface-canvas);
+  box-shadow: var(--owa-shadow-panel);
+}
+
+.owa-engineering-view::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(24px) saturate(118%);
+  content: "";
+  pointer-events: none;
+}
+
+.owa-engineering-shell,
+.owa-engineering-shell.is-stage-nav-collapsed,
+.owa-engineering-shell.is-project-center,
+.owa-engineering-shell.is-project-center.is-stage-nav-collapsed {
+  min-height: 0;
+  padding: 12px;
+  gap: 12px;
+  box-sizing: border-box;
+  grid-template-columns: 218px minmax(0, 1fr) 304px;
+  background: transparent;
+}
+
+.owa-engineering-view > .owa-engineering-shell { position: relative; z-index: 1; }
+
+/* Dialogs belong to the viewport, not the scrollable engineering canvas. */
+.owa-engineering-view > .owa-review-backdrop:has(+ .owa-action-dialog) {
+  position: fixed;
+  z-index: 2147481999;
+  inset: 0;
+}
+
+.owa-engineering-view > .owa-action-dialog {
+  position: fixed;
+  z-index: 2147482000;
+  top: 50%;
+  left: 50%;
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  transform: translate(-50%, -50%) !important;
+}
+
+.owa-engineering-view > .owa-document-router-dialog {
+  width: min(1040px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+}
+
+.owa-engineering-view > .owa-document-router-dialog:has(.owa-document-router-form.is-existing-project) {
+  width: min(760px, calc(100% - 24px));
+}
+
+html[data-dsh-aqua] body .owa-engineering-view > .owa-action-dialog > header {
+  margin: 0 !important;
+  padding: 18px 22px 15px !important;
+  border-radius: 0 !important;
+  background: rgba(228, 239, 250, .78) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.owa-document-router-dialog :where(
+  .owa-document-intake-path,
+  .owa-document-route-summary,
+  .owa-document-source-grid > label,
+  .owa-document-job-head,
+  .owa-document-live-progress,
+  .owa-document-file-list,
+  .owa-document-warnings,
+  .owa-document-commit-form,
+  .owa-document-committed
+) { border-radius: 12px; }
+
+.owa-document-router-dialog :where(input:not([type="radio"]):not([type="checkbox"]), textarea) {
+  border-radius: 10px;
+}
+
+.owa-document-route-steps i {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  overflow: hidden;
+  background: currentColor;
+  color: #8ca4c4;
+  font-size: 0;
+  -webkit-mask: url("/icons/arrow-right.svg") center / contain no-repeat;
+  mask: url("/icons/arrow-right.svg") center / contain no-repeat;
+}
+
+.owa-document-router-form > .owa-review-actions {
+  position: sticky;
+  z-index: 2;
+  bottom: -22px;
+  margin: 0 -22px -22px;
+  padding: 12px 22px;
+  border-top: 1px solid rgba(68, 101, 143, .16);
+  background: rgba(226, 238, 250, .96);
+}
+
+.owa-document-current-project {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px 13px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-document-current-project span,
+.owa-document-current-project small {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+}
+
+.owa-document-current-project strong {
+  overflow: hidden;
+  color: var(--owa-semantic-text-primary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-document-continue-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--owa-semantic-surface-panel-strong);
+}
+
+.owa-document-continue-upload > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.owa-document-continue-upload > header strong {
+  display: block;
+  color: var(--owa-semantic-text-primary);
+  font-size: 13px;
+}
+
+.owa-document-continue-upload > header p,
+.owa-document-empty-files {
+  margin: 4px 0 0;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.owa-document-continue-upload > header button {
+  flex: none;
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--owa-semantic-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+}
+
+.owa-document-picker-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.owa-document-picker-actions label {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 13px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-primary);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 650;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.owa-document-picker-actions label:hover {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-selected);
+}
+
+.owa-document-picker-actions input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.owa-document-selected-files {
+  display: grid;
+  max-height: 180px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.owa-document-selected-files li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+}
+
+.owa-document-selected-files li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-document-selected-files li small,
+.owa-document-selected-files li.is-more {
+  flex: none;
+  color: var(--owa-semantic-text-tertiary);
+}
+
+.owa-document-skipped-files {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: var(--owa-semantic-warning-soft);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.owa-document-skipped-files strong { flex: none; color: var(--owa-semantic-warning); }
+.owa-document-skipped-files span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.owa-document-review-note {
+  margin: 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 17px;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view > .owa-action-dialog > header,
+body[data-ds-dark-theme] .owa-document-router-form > .owa-review-actions {
+  background: rgba(24, 40, 57, .96) !important;
+}
+
+.owa-engineering-shell.is-stage-nav-collapsed { grid-template-columns: 70px minmax(0, 1fr) 304px; }
+.owa-engineering-shell.is-context-free { grid-template-columns: 218px minmax(0, 1fr); }
+.owa-engineering-shell.is-context-free.is-stage-nav-collapsed { grid-template-columns: 70px minmax(0, 1fr); }
+.owa-engineering-shell.is-project-center { grid-template-columns: 218px minmax(0, 1fr); }
+.owa-engineering-shell.is-project-center.is-stage-nav-collapsed { grid-template-columns: 70px minmax(0, 1fr); }
+
+.owa-engineering-stage-rail,
+.owa-engineering-workspace,
+.owa-project-center-workspace,
+.owa-engineering-context {
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-panel);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-engineering-stage-rail {
+  padding: 14px 10px;
+  border-right: 1px solid var(--owa-semantic-border-subtle);
+  overflow: hidden;
+}
+
+.owa-engineering-stage-rail > nav {
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.owa-engineering-stage-rail > nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.owa-engineering-workspace,
+.owa-project-center-workspace { overflow-x: hidden; background: var(--owa-semantic-surface-panel-strong); }
+.owa-engineering-context { padding: 18px 12px; border-left: 1px solid var(--owa-semantic-border-subtle); background: var(--owa-semantic-surface-navigation); }
+
+.owa-project-center-entry,
+.owa-stage-nav-toggle,
+.owa-engineering-context > section,
+.owa-project-center-stats article,
+.owa-project-center-section,
+.owa-project-card,
+.owa-engineering-content,
+.owa-engineering-hero {
+  border-color: var(--owa-semantic-border-subtle);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: none;
+}
+
+.owa-project-center-entry.is-selected,
+.owa-engineering-stage.is-selected {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-selected);
+  box-shadow: var(--owa-shadow-card);
+}
+
+@media (hover: hover) {
+  .owa-engineering-stage:hover,
+  .owa-stage-nav-toggle:hover,
+  .owa-project-center-entry:hover { background: var(--owa-semantic-surface-hover); }
+}
+
+.owa-project-center-workspace { padding: 32px clamp(22px, 3.2vw, 48px) 42px; }
+.owa-project-center-hero h1 { font-size: var(--owa-type-page-title); }
+.owa-project-center-hero p { font-size: 11px; line-height: 19px; }
+.owa-project-center-stats { gap: 9px; margin-top: 22px; }
+.owa-project-center-stats article { min-height: 72px; border-radius: 13px; }
+.owa-project-center-section { border-radius: 16px; }
+.owa-project-card { border-radius: 13px; }
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-stage-rail > header,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-section > header,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > header {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-stage-rail > header {
+  min-height: 24px;
+  margin: 10px 0 5px;
+  padding: 0 10px;
+  border: 0;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-section {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-section > header {
+  margin: 0;
+  padding: 0 2px 13px;
+  border: 0;
+  border-bottom: 1px solid rgba(73,105,142,.14);
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > header {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.owa-engineering-context > section {
+  margin-bottom: 10px;
+  padding: 14px;
+  border-radius: 13px;
+}
+
+.owa-engineering-context > .owa-stage-stream { background: transparent; }
+.owa-live-current,
+.owa-live-document-summary { border-color: rgba(72,112,163,.16); background: rgba(239,247,255,.46); }
+
+.owa-engineering-content { width: min(100%, 780px); }
+.owa-engineering-hero,
+.owa-engineering-tabs { width: min(100%, 780px); }
+.owa-engineering-tabs { background: rgba(244,248,253,.46); }
+
+body[data-ds-dark-theme] .owa-engineering-view {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-canvas);
+  box-shadow: var(--owa-shadow-panel);
+}
+
+body[data-ds-dark-theme] .owa-engineering-stage-rail,
+body[data-ds-dark-theme] .owa-engineering-workspace,
+body[data-ds-dark-theme] .owa-project-center-workspace,
+body[data-ds-dark-theme] .owa-engineering-context {
+  border-color: var(--owa-semantic-border-subtle);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+}
+
+body[data-ds-dark-theme] .owa-project-center-entry,
+body[data-ds-dark-theme] .owa-stage-nav-toggle,
+body[data-ds-dark-theme] .owa-engineering-context > section,
+body[data-ds-dark-theme] .owa-project-center-stats article,
+body[data-ds-dark-theme] .owa-project-center-section,
+body[data-ds-dark-theme] .owa-project-card,
+body[data-ds-dark-theme] .owa-engineering-content,
+body[data-ds-dark-theme] .owa-engineering-hero {
+  border-color: rgba(153,183,221,.14);
+  background: rgba(20,32,47,.36);
+}
+
+body[data-ds-dark-theme] .owa-project-center-entry.is-selected,
+body[data-ds-dark-theme] .owa-engineering-stage.is-selected { background: rgba(42,76,112,.64); }
+
+/* Engineering visual hierarchy v2 -----------------------------------------
+   Four stable levels: canvas -> navigation -> task surface -> action.
+   Cool-tinted transparency avoids the large white slabs that competed with
+   the settings shell while keeping every operational state readable. */
+.owa-engineering-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  background: currentColor;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.owa-engineering-icon.is-tools { -webkit-mask-image: url("/icons/tools.svg"); mask-image: url("/icons/tools.svg"); }
+.owa-engineering-icon.is-folder { -webkit-mask-image: url("/icons/folder.svg"); mask-image: url("/icons/folder.svg"); }
+.owa-engineering-icon.is-warning { -webkit-mask-image: url("/icons/warning-triangle.svg"); mask-image: url("/icons/warning-triangle.svg"); }
+.owa-engineering-icon.is-check { -webkit-mask-image: url("/icons/check-circle.svg"); mask-image: url("/icons/check-circle.svg"); }
+.owa-engineering-icon.is-archive { -webkit-mask-image: url("/icons/archive.svg"); mask-image: url("/icons/archive.svg"); }
+.owa-engineering-icon.is-play { -webkit-mask-image: url("/icons/play.svg"); mask-image: url("/icons/play.svg"); }
+.owa-engineering-icon.is-plus { -webkit-mask-image: url("/icons/plus.svg"); mask-image: url("/icons/plus.svg"); }
+.owa-engineering-icon.is-refresh { -webkit-mask-image: url("/icons/refresh.svg"); mask-image: url("/icons/refresh.svg"); }
+.owa-engineering-icon.is-arrow { -webkit-mask-image: url("/icons/arrow-right.svg"); mask-image: url("/icons/arrow-right.svg"); }
+.owa-engineering-icon.is-page { -webkit-mask-image: url("/icons/page.svg"); mask-image: url("/icons/page.svg"); }
+
+html[data-dsh-aqua] .owa-engineering-view {
+  --owa-eng-page: rgba(215, 229, 245, .46);
+  --owa-eng-rail: rgba(219, 233, 248, .56);
+  --owa-eng-card: rgba(226, 238, 250, .52);
+  --owa-eng-card-strong: rgba(228, 240, 251, .68);
+  --owa-eng-control: rgba(234, 243, 252, .62);
+  --owa-eng-input: rgba(239, 246, 253, .72);
+  --owa-eng-selected: rgba(202, 224, 251, .78);
+  --owa-eng-border: rgba(61, 96, 140, .24);
+  --owa-eng-divider: rgba(61, 96, 140, .16);
+  background:
+    radial-gradient(circle at 82% 4%, rgba(124, 167, 226, .18), transparent 31%),
+    linear-gradient(138deg, rgba(204, 222, 242, .74), rgba(228, 238, 249, .58)) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-shell {
+  background: transparent !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-workspace,
+  .owa-project-center-workspace
+) {
+  background:
+    linear-gradient(150deg, rgba(224, 236, 249, .62), rgba(211, 227, 245, .44)) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  background:
+    linear-gradient(165deg, rgba(220, 234, 249, .72), rgba(203, 222, 243, .54)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.46), 0 8px 26px rgba(38,70,108,.07) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-hero,
+  .owa-engineering-hero
+) {
+  border: 1px solid rgba(69, 107, 153, .22) !important;
+  background:
+    radial-gradient(circle at 92% 5%, rgba(91, 145, 220, .18), transparent 38%),
+    linear-gradient(140deg, rgba(207, 226, 247, .78), rgba(227, 238, 250, .58)) !important;
+  backdrop-filter: none !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.52), 0 12px 28px rgba(38,70,108,.09) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-hero {
+  align-items: center;
+  padding: 22px 24px;
+  border-radius: 18px;
+}
+
+.owa-project-center-hero > div > span,
+.owa-project-center-section h2,
+.owa-project-governance-note,
+.owa-project-card > footer button,
+.owa-project-create-button {
+  display: flex;
+  align-items: center;
+}
+
+.owa-project-center-hero > div > span { gap: 7px; }
+.owa-project-center-section h2 { gap: 8px; }
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-create-button,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button {
+  gap: 7px;
+  justify-content: center;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-create-button {
+  min-height: 38px;
+  padding-inline: 15px;
+  border: 1px solid rgba(47, 104, 195, .48) !important;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #3f7adb, #2f68c3) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px rgba(44, 97, 180, .18) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-create-button:hover {
+  background: linear-gradient(145deg, #4a85e5, #356fce) !important;
+  box-shadow: 0 11px 22px rgba(44, 97, 180, .24) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button:hover {
+  border-color: rgba(50, 111, 205, .48) !important;
+  box-shadow: 0 5px 12px rgba(42,74,113,.1) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-create-button:active,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button:active,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-stage:active {
+  box-shadow: inset 0 2px 5px rgba(27, 58, 96, .18) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(button, [role="button"]):focus-visible {
+  outline: 2px solid rgba(47, 111, 236, .7);
+  outline-offset: 2px;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats article {
+  display: grid;
+  min-width: 0;
+  min-height: 76px;
+  padding: 13px 14px;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  border-color: rgba(66, 102, 145, .21) !important;
+  background: linear-gradient(145deg, rgba(223, 236, 249, .72), rgba(210, 227, 245, .5)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.42) !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats article:hover {
+  z-index: 1;
+  border-color: rgba(58, 111, 182, .38) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.52), 0 8px 20px rgba(42,74,113,.1) !important;
+}
+
+.owa-project-center-stats article > .owa-engineering-icon { width: 20px; height: 20px; }
+.owa-project-center-stats article > div { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.owa-project-center-stats article.is-all { color: #4a719a; }
+.owa-project-center-stats article.is-active { color: #326fcd; }
+.owa-project-center-stats article.is-waiting { color: #a06b28; }
+.owa-project-center-stats article.is-published { color: #33825a; }
+.owa-project-center-stats article.is-archive { color: #6f7f93; }
+.owa-project-center-stats article span { color: var(--owa-eng-muted); }
+.owa-project-center-stats article strong { color: var(--owa-eng-text); }
+.owa-project-center-stats article span { font-size: 10px; }
+.owa-project-center-section header p { font-size: 10px; line-height: 17px; }
+.owa-project-center-section > header > span { font-size: 9px; }
+
+.owa-project-pagination {
+  display: flex;
+  min-height: 38px;
+  margin-top: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--owa-eng-muted);
+  font-size: 10px;
+}
+
+.owa-project-pagination > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.owa-project-pagination button {
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 9px;
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-eng-muted);
+  cursor: pointer;
+  font: inherit;
+}
+
+.owa-project-pagination button[aria-current="page"] {
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+}
+
+.owa-project-pagination button:disabled {
+  opacity: .42;
+  cursor: default;
+}
+
+.owa-project-pagination button:not(:disabled):active { transform: translateY(1px); }
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card {
+  border-color: rgba(67, 103, 146, .21) !important;
+  background: linear-gradient(145deg, rgba(227, 239, 251, .68), rgba(211, 228, 246, .46)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.42) !important;
+  transition: border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card:hover,
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card:focus-within {
+  border-color: rgba(58, 111, 182, .38) !important;
+  background: linear-gradient(145deg, rgba(231, 242, 253, .76), rgba(211, 229, 248, .58)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.52), 0 10px 24px rgba(42,74,113,.1) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card.is-current {
+  border-color: rgba(50, 111, 205, .44) !important;
+  box-shadow: inset 3px 0 #3f7bd8, inset 0 1px rgba(255,255,255,.48) !important;
+}
+
+.owa-project-card > header > div > span,
+.owa-project-card header small,
+.owa-project-card header em,
+.owa-project-progress-heading small,
+.owa-project-card > footer > span { font-size: 9px; }
+.owa-project-card h3 { font-size: 14px; }
+.owa-project-progress-heading,
+.owa-project-progress-heading strong { font-size: 10px; }
+.owa-project-stage span { font-size: 9px; }
+.owa-project-card > footer button { font-size: 10px; }
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-stage {
+  border-color: rgba(74, 105, 143, .18);
+  background: rgba(228, 238, 249, .58);
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-stage:hover {
+  border-color: rgba(58, 111, 182, .42) !important;
+  background: rgba(215, 231, 249, .78) !important;
+  box-shadow: 0 5px 12px rgba(42,74,113,.08);
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button {
+  min-height: 32px;
+  background: rgba(228, 239, 250, .72) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button.is-open {
+  border-color: rgba(50, 111, 205, .38) !important;
+  color: #2f67bd !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-card > footer button.is-archive {
+  color: #718096 !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-governance-note {
+  gap: 11px;
+  border-color: rgba(154, 110, 47, .24) !important;
+  background: linear-gradient(145deg, rgba(238, 232, 214, .52), rgba(222, 231, 240, .48)) !important;
+  color: #8c6429;
+}
+
+.owa-project-governance-note > .owa-engineering-icon { width: 18px; height: 18px; }
+.owa-project-governance-note > div { min-width: 0; }
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-entry,
+  .owa-stage-nav-toggle,
+  .owa-engineering-stage
+) {
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-entry,
+  .owa-stage-nav-toggle,
+  .owa-engineering-stage
+):hover {
+  box-shadow: inset 2px 0 rgba(63, 123, 216, .58) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-entry.is-selected,
+  .owa-engineering-stage.is-selected
+) {
+  box-shadow: inset 3px 0 #3f7bd8, inset 0 1px rgba(255,255,255,.42) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view {
+  --owa-eng-page: rgba(17, 29, 43, .62);
+  --owa-eng-rail: rgba(21, 35, 51, .72);
+  --owa-eng-card: rgba(27, 43, 61, .72);
+  --owa-eng-card-strong: rgba(31, 49, 69, .82);
+  --owa-eng-control: rgba(36, 54, 74, .82);
+  --owa-eng-input: rgba(12, 23, 36, .84);
+  --owa-eng-selected: rgba(46, 85, 132, .68);
+  background:
+    radial-gradient(circle at 82% 4%, rgba(67, 109, 171, .2), transparent 32%),
+    linear-gradient(138deg, rgba(17, 29, 43, .9), rgba(25, 40, 57, .78)) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view :where(
+  .owa-engineering-workspace,
+  .owa-project-center-workspace,
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  background: linear-gradient(150deg, rgba(28, 44, 62, .82), rgba(19, 32, 47, .7)) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view :where(
+  .owa-project-center-hero,
+  .owa-engineering-hero,
+  .owa-project-center-stats article,
+  .owa-project-card
+) {
+  border-color: rgba(143, 174, 211, .2) !important;
+  background: linear-gradient(145deg, rgba(34, 53, 74, .78), rgba(22, 37, 53, .68)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-governance-note {
+  background: linear-gradient(145deg, rgba(73, 60, 38, .46), rgba(27, 43, 60, .72)) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-stage {
+  border-color: rgba(143, 174, 211, .2) !important;
+  background: rgba(34, 52, 72, .82) !important;
+  color: #aebed1 !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-stage strong {
+  color: #e5eef9;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-stage.is-passed {
+  border-color: rgba(91, 177, 125, .34) !important;
+  background: rgba(34, 83, 59, .54) !important;
+  color: #8fd1a8 !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-stage:is(.is-running, .is-blocked_human) {
+  border-color: rgba(91, 143, 220, .4) !important;
+  background: rgba(40, 70, 110, .68) !important;
+  color: #a7c7f7 !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-stage.is-failed {
+  border-color: rgba(206, 150, 82, .36) !important;
+  background: rgba(91, 61, 31, .58) !important;
+  color: #e1b77c !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-card > footer button {
+  border-color: rgba(143, 174, 211, .22) !important;
+  background: rgba(35, 53, 73, .86) !important;
+  color: #afc3dc !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-card > footer button.is-open {
+  color: #9bc0f4 !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-card header em {
+  background: rgba(42, 61, 82, .88);
+  color: #b8c7d9;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-card header em.is-published {
+  background: rgba(35, 83, 59, .62);
+  color: #92d4aa;
+}
+
+@container (max-width: 1180px) {
+  .owa-engineering-shell.is-context-free,
+  .owa-engineering-shell,
+  .owa-engineering-shell.is-stage-nav-collapsed {
+    grid-template-columns: 190px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .owa-engineering-shell.is-stage-nav-collapsed { grid-template-columns: 70px minmax(0, 1fr); }
+  .owa-engineering-shell.is-project-center { grid-template-columns: 190px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+  .owa-engineering-shell.is-project-center.is-stage-nav-collapsed { grid-template-columns: 70px minmax(0, 1fr); }
+
+  .owa-engineering-stage-rail { grid-row: 1 / -1; }
+  .owa-engineering-context {
+    display: grid;
+    max-height: 224px;
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 10px;
+    overflow: auto;
+  }
+  .owa-engineering-context > section { min-height: 0; margin: 0; overflow: auto; }
+}
+
+@container (max-width: 760px) {
+  .owa-engineering-shell.is-context-free,
+  .owa-engineering-shell.is-context-free.is-stage-nav-collapsed,
+  .owa-engineering-shell,
+  .owa-engineering-shell.is-stage-nav-collapsed,
+  .owa-engineering-shell.is-project-center,
+  .owa-engineering-shell.is-project-center.is-stage-nav-collapsed {
+    grid-template-columns: 68px minmax(0, 1fr);
+  }
+
+  .owa-engineering-stage-rail { padding-inline: 7px; }
+  .owa-engineering-stage-rail > header,
+  .owa-project-center-copy,
+  .owa-stage-copy,
+  .owa-stage-count,
+  .owa-stage-nav-toggle strong { position: absolute; pointer-events: none; opacity: 0; }
+  .owa-engineering-stage { display: flex; min-height: 56px; justify-content: center; padding-inline: 3px; }
+  .owa-engineering-stage::after { left: 50%; }
+  .owa-project-center-entry { display: flex; min-height: 50px; justify-content: center; padding: 4px; }
+  .owa-engineering-context { grid-template-columns: minmax(0, 1fr); max-height: 300px; }
+  .owa-project-pagination { align-items: flex-start; flex-direction: column; }
+  .owa-project-pagination > div { max-width: 100%; flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-engineering-view *,
+  .owa-engineering-view *::before,
+  .owa-engineering-view *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; }
+}

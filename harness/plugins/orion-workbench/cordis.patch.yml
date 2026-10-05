@@ -1,0 +1,78 @@
+- insert:
+    - id: orion-workbench-skills
+      name: 'dsh-orion-workbench/skills'
+    - id: orion-runtime-manager
+      name: 'dsh-orion-workbench/runtime-manager'
+      config:
+        mode: !!js process.env.ORION_RUNTIME_MODE || 'external'
+        runtimeRoot: !!js process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT || null
+        python: !!js process.env.ORION_WORKFLOW_PYTHON || null
+        profileRoot: !!js process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')
+        stateRoot: !!js process.env.ORION_RUNTIME_STATE_ROOT || null
+        cacheRoot: !!js process.env.ORION_RUNTIME_CACHE_ROOT || null
+        port: !!js Number(process.env.ORION_RUNTIME_PORT || '8091')
+        environment:
+          ORION_S7_AUTO_DEPLOY: !!js process.env.ORION_S7_AUTO_DEPLOY || 'false'
+          ORION_SOURCE_DATA_READER_URL: !!js process.env.ORION_SOURCE_DATA_READER_URL || ''
+          ORION_WORKFLOW_METADATA_REQUIRED: !!js process.env.ORION_WORKFLOW_METADATA_REQUIRED || 'false'
+          ORION_WORKFLOW_DATABASE_URL: !!js process.env.ORION_WORKFLOW_DATABASE_URL || ''
+          ORION_ARTIFACT_BACKEND: !!js process.env.ORION_ARTIFACT_BACKEND || 'filesystem'
+          DATABASE_URL: !!js process.env.DATABASE_URL || ''
+          FUSEKI_URL: !!js process.env.FUSEKI_URL || 'http://127.0.0.1:3030/supply'
+          ONTOP_URL: !!js process.env.ONTOP_URL || 'http://127.0.0.1:8080/sparql'
+          SEMANTICA_API_URL: !!js process.env.SEMANTICA_API_URL || 'http://127.0.0.1:8001'
+          SEMANTICA_AUTO_SYNC: '0'
+    - id: orion-workbench
+      name: 'dsh-orion-workbench'
+      config:
+        backendRoot: !!js process.env.ORION_BACKEND_ROOT || null
+        python: !!js process.env.ORION_WORKFLOW_PYTHON || 'python3'
+        workflowHome: !!js process.env.ORION_WORKFLOW_HOME || dshHomePath('orion-workflows')
+        realtimeQaApiUrl: !!js process.env.ONTOLOGY_AGENT_API_URL || 'http://127.0.0.1:8091'
+        actor: !!js process.env.ORION_ACTOR || null
+        readOnly: true
+    - id: mcp-orion-workflow
+      name: '@deepseek-ai/dsh-mcp-client'
+      disabled: !!js "!(process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT)"
+      config:
+        serverName: orion_workflow
+        transport: stdio
+        command: !!js process.env.ORION_WORKFLOW_PYTHON || 'python3'
+        args: ['-m', 'harness.orion_workflow_mcp']
+        cwd: !!js process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT || '.'
+        env:
+          ORION_WORKFLOW_HOME: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/workflows' : process.env.ORION_WORKFLOW_HOME || dshHomePath('orion-workflows')"
+          ORION_DOCUMENT_INGESTION_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/document-inputs' : process.env.ORION_DOCUMENT_INGESTION_ROOT || dshHomePath('orion-document-inputs')"
+          ORION_DOCUMENT_INPUT_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/document-inputs' : process.env.ORION_DOCUMENT_INPUT_ROOT || dshHomePath('orion-document-inputs')"
+          ORION_WORKSPACE_REFERENCE_ROOTS: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/references' : process.env.ORION_WORKSPACE_REFERENCE_ROOTS || dshHomePath('orion-references')"
+          ORION_REALTIME_RUNTIME_REGISTRY: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/runtime-registry.json' : process.env.ORION_REALTIME_RUNTIME_REGISTRY || ''"
+          ORION_REALTIME_EVIDENCE_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/evidence' : process.env.ORION_REALTIME_EVIDENCE_ROOT || dshHomePath('orion-runtime/evidence')"
+          ORION_EXPLORATION_INDEX_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_CACHE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/cache') + '/exploration-index' : process.env.ORION_EXPLORATION_INDEX_ROOT || ''"
+          ORION_S7_AUTO_DEPLOY_CONFIG_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/ontop-config' : process.env.ORION_S7_AUTO_DEPLOY_CONFIG_ROOT || ''"
+          ORION_S7_AUTO_DEPLOY_ROOT: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/realtime-business' : process.env.ORION_S7_AUTO_DEPLOY_ROOT || ''"
+          ORION_S7_AUTO_DEPLOY: !!js process.env.ORION_S7_AUTO_DEPLOY || 'false'
+          SEMANTICA_ACTIVE_RUNTIME_CONFIG: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? (process.env.ORION_RUNTIME_STATE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/state') + '/semantica/active-runtime.json' : process.env.SEMANTICA_ACTIVE_RUNTIME_CONFIG || (process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT || '.') + '/.orion-semantica/active-runtime.json'"
+          PYTHONNOUSERSITE: '1'
+          PYTHONDONTWRITEBYTECODE: '1'
+          PYTHONPYCACHEPREFIX: !!js (process.env.ORION_RUNTIME_CACHE_ROOT || (process.env.ORION_RUNTIME_PROFILE_ROOT || dshHomePath('orion-runtime')) + '/cache') + '/pycache'
+          ORION_MCP_READ_ONLY: '1'
+          ORION_WORKFLOW_METADATA_REQUIRED: !!js process.env.ORION_WORKFLOW_METADATA_REQUIRED || 'false'
+          ORION_WORKFLOW_DATABASE_URL: !!js process.env.ORION_WORKFLOW_DATABASE_URL || ''
+          ORION_ARTIFACT_BACKEND: !!js process.env.ORION_ARTIFACT_BACKEND || 'filesystem'
+          SEMANTICA_AUTO_SYNC: '0'
+        toolCallTimeoutMs: 90000
+        failOnStartupError: false
+    - id: mcp-orion-realtime
+      name: '@deepseek-ai/dsh-mcp-client'
+      disabled: !!js "!(process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT) || process.env.ORION_ENABLE_REALTIME_QA_MCP !== '1'"
+      config:
+        serverName: orion_realtime
+        transport: stdio
+        command: !!js process.env.ORION_WORKFLOW_PYTHON || 'python3'
+        args: ['-m', 'harness.realtime_qa_mcp']
+        cwd: !!js process.env.ORION_RUNTIME_ROOT || process.env.ORION_BACKEND_ROOT || '.'
+        env:
+          ONTOLOGY_AGENT_API_URL: !!js "process.env.ORION_RUNTIME_MODE === 'managed' ? 'http://127.0.0.1:' + (process.env.ORION_RUNTIME_PORT || '8091') : process.env.ONTOLOGY_AGENT_API_URL || 'http://127.0.0.1:8091'"
+          ORION_MCP_READ_ONLY: '1'
+        toolCallTimeoutMs: 90000
+        failOnStartupError: false

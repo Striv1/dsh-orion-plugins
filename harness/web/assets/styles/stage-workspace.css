@@ -1,0 +1,1848 @@
+.owa-engineering-view .owa-engineering-workspace {
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 82% 0%, color-mix(in srgb, var(--owa-semantic-accent) 10%, transparent), transparent 34%),
+    linear-gradient(145deg, var(--owa-semantic-surface-panel), var(--owa-semantic-surface-panel-strong));
+}
+
+.owa-engineering-view .owa-stage-contract {
+  padding: 16px 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.owa-engineering-view .owa-stage-contract :is(h3, h4, p, ul) { margin: 0; }
+.owa-engineering-view .owa-stage-contract h3 { margin-bottom: 8px; color: var(--owa-semantic-text-primary); font-size: 14px; }
+.owa-engineering-view .owa-stage-contract h4 { margin-bottom: 5px; color: var(--owa-semantic-text-primary); font-size: 12px; }
+.owa-engineering-view .owa-stage-contract ul { padding-left: 17px; }
+.owa-engineering-view :is(.owa-stage-contract-grid, .owa-stage-collaboration) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 16px 22px;
+  margin-top: 16px;
+}
+.owa-engineering-view .owa-stage-collaboration { padding-top: 14px; border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-engineering-view .owa-source-scope-summary { margin-top: 14px; padding: 12px; border-left: 3px solid var(--owa-semantic-accent); background: var(--owa-semantic-accent-soft); }
+.owa-engineering-view .owa-source-scope-summary li > span { margin-left: 10px; color: var(--owa-semantic-text-tertiary); }
+.owa-engineering-view .owa-source-scope-summary > p { margin-top: 10px; }
+.owa-engineering-view .owa-joint-design-review { padding: 14px; border: 1px solid var(--owa-semantic-border-default); border-radius: var(--owa-radius-control); background: var(--owa-semantic-surface-panel); }
+.owa-engineering-view .owa-joint-design-summary { margin: 12px 0; color: var(--owa-semantic-text-secondary); line-height: 1.7; overflow-wrap: anywhere; }
+.owa-engineering-view .owa-joint-design-summary details { padding: 7px 0; border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-engineering-view .owa-joint-design-summary summary { display: flex; justify-content: space-between; gap: 12px; cursor: pointer; color: var(--owa-semantic-text-primary); }
+.owa-engineering-view .owa-joint-design-summary summary span { color: var(--owa-semantic-text-tertiary); }
+.owa-engineering-view .owa-joint-design-summary ul { padding-left: 20px; }
+.owa-engineering-view .owa-joint-design-summary pre { max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; }
+.owa-engineering-view .owa-joint-design-summary article { margin: 12px 0; }
+.owa-engineering-view .owa-joint-design-review code { overflow-wrap: anywhere; }
+
+.owa-engineering-view .owa-engineering-hero,
+.owa-engineering-view .owa-engineering-tabs,
+.owa-engineering-view .owa-engineering-content {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-hero,
+.owa-engineering-view .owa-engineering-hero {
+  margin: 0 !important;
+  padding: 18px 22px 14px;
+  border: 0 !important;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle) !important;
+  border-radius: 0 !important;
+  background: linear-gradient(150deg, var(--owa-semantic-surface-navigation), var(--owa-semantic-surface-panel)) !important;
+  box-shadow: none !important;
+}
+
+.owa-engineering-view .owa-artifact-format {
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+}
+
+.owa-engineering-view .owa-engineering-breadcrumb {
+  min-width: 0;
+  gap: 7px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-engineering-project-name {
+  overflow: hidden;
+  max-width: min(42%, 280px);
+  color: var(--owa-semantic-text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-engineering-breadcrumb strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 10px;
+}
+
+.owa-engineering-view .owa-intake-mode {
+  gap: 5px;
+  padding: 4px 8px;
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-selected);
+  color: var(--owa-semantic-accent);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-intake-mode span {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-engineering-title {
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.owa-engineering-view .owa-engineering-title h1 {
+  font-size: clamp(21px, 1.8vw, 24px);
+  line-height: 1.25;
+}
+
+.owa-engineering-view .owa-engineering-title > span {
+  min-height: 25px;
+  box-sizing: border-box;
+  padding: 0 9px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: 9999px;
+  background: var(--owa-semantic-surface-control);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-engineering-title > span i {
+  width: 6px;
+  height: 6px;
+  border: 0;
+  background: currentColor;
+}
+
+.owa-engineering-view .owa-engineering-stage-intro {
+  display: grid;
+  margin-top: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px 18px;
+}
+
+.owa-engineering-view .owa-engineering-stage-intro p {
+  margin: 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.owa-engineering-view .owa-stage-current-result {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 360px;
+  align-items: center;
+  gap: 7px;
+}
+
+.owa-engineering-view .owa-stage-current-result small {
+  flex: 0 0 auto;
+  padding: 3px 6px;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-accent);
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-stage-current-result strong {
+  overflow: hidden;
+  min-width: 0;
+  color: var(--owa-semantic-text-primary);
+  font-size: 10px;
+  font-weight: 640;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-engineering-truth-strip {
+  display: grid;
+  gap: 0;
+  padding: 10px 22px 9px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+  background: var(--owa-semantic-surface-navigation);
+}
+
+.owa-engineering-view .owa-engineering-truth-summary {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.owa-engineering-view .owa-engineering-truth-summary > span,
+.owa-engineering-view .owa-engineering-truth-summary > small,
+.owa-engineering-view .owa-engineering-truth-details span,
+.owa-engineering-view .owa-engineering-truth-details small {
+  overflow: hidden;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-engineering-truth-summary > strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+  font-weight: 680;
+}
+
+.owa-engineering-view .owa-engineering-truth-strip.is-ready .owa-engineering-truth-summary > strong { color: var(--owa-semantic-success); }
+.owa-engineering-view .owa-engineering-truth-strip.is-warning .owa-engineering-truth-summary > strong { color: var(--owa-semantic-danger); }
+.owa-engineering-view .owa-engineering-truth-strip.is-pending .owa-engineering-truth-summary > strong { color: var(--owa-semantic-warning); }
+
+.owa-engineering-view .owa-engineering-truth-disclosure {
+  min-width: 0;
+  margin-top: 5px;
+}
+
+.owa-engineering-view .owa-engineering-truth-disclosure summary {
+  width: max-content;
+  min-height: 28px;
+  margin-left: auto;
+  padding: 0 2px;
+  color: var(--owa-semantic-accent);
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.owa-engineering-view .owa-engineering-truth-disclosure summary:focus-visible {
+  border-radius: var(--owa-radius-control);
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-view .owa-engineering-truth-details {
+  display: grid;
+  margin-top: 5px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-canvas);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.owa-engineering-view .owa-engineering-truth-details > div {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  padding: 8px 12px;
+}
+
+.owa-engineering-view .owa-engineering-truth-details > div + div {
+  border-left: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-engineering-truth-details strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-engineering-truth-details .is-ready strong { color: var(--owa-semantic-success); }
+.owa-engineering-view .owa-engineering-truth-details .is-warning strong { color: var(--owa-semantic-danger); }
+.owa-engineering-view .owa-engineering-truth-details .is-pending strong { color: var(--owa-semantic-warning); }
+
+.owa-engineering-view .owa-engineering-truth-runtime-note {
+  display: block;
+  margin-top: 5px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+  text-align: right;
+}
+
+.owa-engineering-view .owa-engineering-tabs {
+  margin: 0 !important;
+  gap: 12px;
+  padding: 14px 22px 6px;
+  border-bottom-color: var(--owa-semantic-border-subtle);
+  background: var(--owa-semantic-surface-navigation);
+}
+
+.owa-engineering-view .owa-engineering-tabs button {
+  min-height: 40px;
+  padding: 0 7px;
+  font-size: 10px;
+}
+
+.owa-engineering-view .owa-engineering-tabs button span {
+  padding: 1px 5px;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-engineering-content {
+  margin: 0 !important;
+  padding: 16px 22px 26px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.owa-engineering-view .owa-stage-overview-layout {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 31%);
+  align-items: start;
+  gap: 12px;
+}
+
+.owa-engineering-view .owa-stage-overview-layout > .owa-engineering-summary,
+.owa-engineering-view .owa-stage-overview-context {
+  min-width: 0;
+}
+
+.owa-engineering-view .owa-stage-overview-context {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--owa-semantic-surface-panel) 72%, transparent);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-engineering-view .owa-stage-overview-context > section {
+  min-width: 0;
+  margin: 0;
+  padding: 15px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.owa-engineering-view .owa-stage-overview-context > section + section {
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-next-step > p {
+  -webkit-line-clamp: 3;
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-next-step :is(button, a),
+.owa-engineering-view .owa-stage-overview-context .owa-all-artifacts {
+  border-radius: 9999px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-next-step > :is(button, a) ~ :is(button, a) {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-current-actions {
+  display: grid;
+  gap: 6px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-current-actions > :is(button, a) {
+  width: 100%;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-current-actions > button {
+  border: 1px solid var(--owa-semantic-border-default) !important;
+  background: var(--owa-semantic-surface-control) !important;
+  box-shadow: none !important;
+  color: var(--owa-semantic-text-secondary) !important;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-current-actions > [data-engineering-action="revision-from-release"] {
+  border-color: color-mix(in srgb, var(--owa-semantic-accent) 38%, var(--owa-semantic-border-default)) !important;
+  background: color-mix(in srgb, var(--owa-semantic-accent-soft) 42%, var(--owa-semantic-surface-control)) !important;
+  color: var(--owa-semantic-accent) !important;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-current-actions > .is-danger {
+  border-color: var(--owa-semantic-danger-border) !important;
+  background: var(--owa-semantic-danger-soft) !important;
+  color: var(--owa-semantic-danger) !important;
+}
+
+@media (hover: hover) {
+  .owa-engineering-view .owa-stage-overview-context .owa-current-actions > [data-engineering-action="revision-from-release"]:hover {
+    border-color: var(--owa-semantic-accent) !important;
+    background: var(--owa-semantic-surface-selected) !important;
+    color: var(--owa-semantic-accent-hover) !important;
+  }
+
+  .owa-engineering-view .owa-stage-overview-context .owa-current-actions > .is-danger:hover {
+    border-color: var(--owa-semantic-danger) !important;
+    background: color-mix(in srgb, var(--owa-semantic-danger-soft) 76%, var(--owa-semantic-surface-control)) !important;
+  }
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-related-artifacts {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-related-artifacts .owa-engineering-artifact {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact > summary {
+  display: grid;
+  min-height: 54px;
+  box-sizing: border-box;
+  grid-template-columns: 15px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 9px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--owa-semantic-surface-control) 62%, transparent);
+  cursor: pointer;
+  list-style: none;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact > summary::-webkit-details-marker {
+  display: none;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact > summary:hover,
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact[open] > summary {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-copy strong {
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-copy small {
+  display: -webkit-box !important;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 8px;
+  line-height: 12px;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-labels {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-type {
+  display: inline-flex !important;
+}
+
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-format {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 7px;
+  letter-spacing: .05em;
+}
+
+.owa-engineering-view .owa-artifact-disclosure {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-engineering-artifact[open] .owa-artifact-disclosure {
+  color: var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-artifact-detail {
+  margin: -1px 0 2px;
+  padding: 11px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  background: var(--owa-semantic-surface-panel-strong);
+}
+
+.owa-engineering-view .owa-artifact-detail dl {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.owa-engineering-view .owa-artifact-detail dl > div {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 7px;
+}
+
+.owa-engineering-view .owa-artifact-detail :is(dt, dd) {
+  margin: 0;
+  font-size: 8px;
+  line-height: 13px;
+}
+
+.owa-engineering-view .owa-artifact-detail dt {
+  color: var(--owa-semantic-text-tertiary);
+}
+
+.owa-engineering-view .owa-artifact-detail dd {
+  min-width: 0;
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-engineering-view .owa-artifact-detail code {
+  overflow-wrap: anywhere;
+  color: var(--owa-semantic-text-tertiary);
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+}
+
+.owa-engineering-view .owa-artifact-detail > a {
+  display: inline-flex;
+  min-height: 28px;
+  margin-top: 10px;
+  padding: 0 11px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: 9999px;
+  color: var(--owa-semantic-text-primary);
+  font-size: 8px;
+  text-decoration: none;
+}
+
+.owa-engineering-view .owa-artifact-detail > a:hover {
+  border-color: var(--owa-semantic-text-primary);
+  background: var(--owa-semantic-text-primary);
+  color: var(--owa-semantic-surface-panel);
+}
+
+.owa-engineering-view .owa-stage-summary-heading {
+  align-items: center;
+  padding-bottom: 11px;
+  border-bottom-color: var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-stage-summary-heading > div {
+  display: grid;
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-stage-summary-heading strong { font-size: 14px; }
+.owa-engineering-view .owa-stage-summary-heading p { margin-top: 5px; font-size: 9px; line-height: 16px; }
+
+.owa-engineering-view .owa-stage-summary-heading > a,
+.owa-engineering-view .owa-stage-report-pending {
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-color: var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-stage-metric-grid {
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.owa-engineering-view .owa-stage-metric {
+  min-height: 62px;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border-color: var(--owa-semantic-border-default);
+  border-radius: 8px;
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: none;
+}
+
+.owa-engineering-view .owa-stage-metric::before {
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 2px;
+  height: auto;
+  border-radius: 0 999px 999px 0;
+}
+
+.owa-engineering-view .owa-stage-metric strong { margin-top: 3px; font-size: 17px; line-height: 20px; }
+.owa-engineering-view .owa-stage-metric small { margin-top: 2px; }
+
+.owa-engineering-view .owa-quality-section { margin-top: 15px; }
+
+.owa-engineering-view .owa-quality-section h3 { margin-bottom: 6px; }
+
+.owa-engineering-view .owa-stage-section-heading { margin-bottom: 6px; }
+
+.owa-engineering-view .owa-quality-row {
+  min-height: 36px;
+  grid-template-columns: 20px 96px minmax(0, 1fr) auto;
+  gap: 0 7px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-quality-row:last-child { border-bottom: 0; }
+.owa-engineering-view .owa-quality-row em { padding-left: 10px; font-size: 9px; }
+
+.owa-engineering-view .owa-event-stage-group {
+  margin-top: 18px;
+  border-color: var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-engineering-view .owa-history-toggle {
+  min-height: 36px;
+  background: transparent;
+}
+
+.owa-engineering-view .owa-history-toggle:hover { background: var(--owa-semantic-surface-control); }
+
+.owa-engineering-view .owa-activity-summary {
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 18px;
+  margin-bottom: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: linear-gradient(120deg, var(--owa-semantic-surface-selected), var(--owa-semantic-surface-panel));
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-engineering-view .owa-activity-summary > em,
+.owa-engineering-view .owa-decision-summary-heading > em {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 30px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--owa-semantic-surface-selected);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-activity-summary > em b,
+.owa-engineering-view .owa-decision-summary-heading > em b {
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+}
+
+.owa-engineering-view .owa-engineering-decisions {
+  align-content: start;
+  gap: 10px;
+}
+
+.owa-engineering-view .owa-decision-summary-heading {
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.owa-engineering-view .owa-decision-summary-heading > div {
+  display: grid;
+  gap: 3px;
+}
+
+.owa-engineering-view .owa-decision-summary-heading > div > span {
+  text-align: left;
+}
+
+.owa-engineering-view .owa-engineering-decision.is-key-decision {
+  padding: 0;
+  border: 0;
+}
+
+.owa-engineering-view .owa-engineering-decision > .owa-decision-card {
+  display: block;
+  padding: 11px 12px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-engineering-view .owa-revision-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-control);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-engineering-view .owa-revision-card > header,
+.owa-engineering-view .owa-revision-card > header > div,
+.owa-engineering-view .owa-revision-meta,
+.owa-engineering-view .owa-revision-metric,
+.owa-engineering-view .owa-revision-report-link {
+  display: flex;
+}
+
+.owa-engineering-view .owa-revision-card > header {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.owa-engineering-view .owa-revision-card > header > div {
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-revision-card > header span,
+.owa-engineering-view .owa-revision-meta,
+.owa-engineering-view .owa-revision-metric small,
+.owa-engineering-view .owa-revision-report-link small {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-revision-card > header strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 14px;
+}
+
+.owa-engineering-view .owa-revision-card > header em {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid var(--owa-semantic-warning-border);
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-warning-soft);
+  color: var(--owa-semantic-warning);
+  font-size: 9px;
+  font-style: normal;
+}
+
+.owa-engineering-view .owa-revision-card > header em.is-resolved {
+  border-color: var(--owa-semantic-success-border);
+  background: var(--owa-semantic-success-soft);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-revision-reason {
+  margin: 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.owa-engineering-view .owa-revision-meta {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+
+.owa-engineering-view .owa-revision-meta b {
+  color: var(--owa-semantic-text-secondary);
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-revision-meta code {
+  margin-left: auto;
+  color: var(--owa-semantic-text-tertiary);
+  font-family: var(--owa-system-font);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-revision-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.owa-engineering-view .owa-revision-metric {
+  position: relative;
+  min-height: 88px;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-panel);
+  transition: transform var(--owa-motion-fast) var(--owa-engineering-ease), border-color var(--owa-motion-fast) ease, background-color var(--owa-motion-fast) ease;
+}
+
+.owa-engineering-view .owa-revision-metric::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--owa-semantic-accent);
+  content: "";
+}
+
+.owa-engineering-view .owa-revision-metric.is-added::before { background: var(--owa-semantic-success); }
+.owa-engineering-view .owa-revision-metric.is-modified::before { background: var(--owa-semantic-warning); }
+.owa-engineering-view .owa-revision-metric.is-removed::before { background: var(--owa-semantic-danger); }
+
+.owa-engineering-view .owa-revision-metric > span {
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-revision-metric > strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.owa-engineering-view .owa-revision-metric.is-added > strong { color: var(--owa-semantic-success); }
+.owa-engineering-view .owa-revision-metric.is-modified > strong { color: var(--owa-semantic-warning); }
+.owa-engineering-view .owa-revision-metric.is-removed > strong { color: var(--owa-semantic-danger); }
+.owa-engineering-view .owa-revision-metric.is-affected > strong { color: var(--owa-semantic-accent); }
+
+.owa-engineering-view .owa-revision-metric > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-revision-metric > div > span {
+  padding: 3px 6px;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-accent);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-revision-card > footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2px;
+}
+
+.owa-engineering-view .owa-revision-report-link {
+  min-height: 44px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 11px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-panel);
+  color: var(--owa-semantic-accent);
+  text-decoration: none;
+  transition: transform var(--owa-motion-fast) var(--owa-engineering-ease), border-color var(--owa-motion-fast) ease, background-color var(--owa-motion-fast) ease;
+}
+
+.owa-engineering-view .owa-revision-report-link > span {
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-revision-report-link:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-view .owa-revision-report-pending {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+
+@media (hover: hover) {
+  .owa-engineering-view .owa-revision-metric:hover,
+  .owa-engineering-view .owa-revision-report-link:hover {
+    border-color: var(--owa-semantic-border-strong);
+    background: var(--owa-semantic-surface-hover);
+    transform: translateY(-1px);
+  }
+}
+
+.owa-engineering-view .owa-decision-card > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.owa-engineering-view .owa-decision-card > header > div {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-decision-card > header > div > span,
+.owa-engineering-view .owa-decision-body > div > span {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-decision-card > header strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+}
+
+.owa-engineering-view .owa-decision-card > header > em {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--owa-semantic-warning) 10%, transparent);
+  color: var(--owa-semantic-warning);
+  font-size: 9px;
+  font-style: normal;
+}
+
+.owa-engineering-view .owa-decision-card > header > em.is-resolved {
+  background: color-mix(in srgb, var(--owa-semantic-success) 10%, transparent);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-decision-body {
+  display: grid;
+  margin-top: 8px;
+  grid-template-columns: minmax(150px, .8fr) minmax(220px, 1.2fr);
+  gap: 10px;
+}
+
+.owa-engineering-view .owa-decision-body > div {
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-engineering-view .owa-decision-body p {
+  margin: 4px 0 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.owa-engineering-view .owa-activity-timeline {
+  display: grid;
+}
+
+.owa-engineering-view .owa-engineering-activity {
+  position: relative;
+  min-height: 66px;
+  grid-template-columns: 76px minmax(220px, 1fr) minmax(240px, .9fr);
+  gap: 12px;
+  padding: 7px 8px 7px 0;
+  border-bottom-color: var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-activity-time {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  gap: 8px;
+  color: var(--owa-semantic-text-tertiary);
+}
+
+.owa-engineering-view .owa-activity-time::before {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: 4px;
+  width: 1px;
+  background: var(--owa-semantic-border-default);
+  content: "";
+}
+
+.owa-engineering-view .owa-engineering-activity:first-child .owa-activity-time::before { top: 50%; }
+.owa-engineering-view .owa-engineering-activity:last-child .owa-activity-time::before { bottom: 50%; }
+
+.owa-engineering-view .owa-activity-time > i {
+  position: relative;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  border: 2px solid var(--owa-semantic-accent);
+  border-radius: 50%;
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-engineering-view .owa-engineering-activity.is-failed .owa-activity-time > i,
+.owa-engineering-view .owa-engineering-activity.is-blocked .owa-activity-time > i {
+  border-color: var(--owa-semantic-warning);
+}
+
+.owa-engineering-view .owa-activity-copy {
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-activity-copy strong {
+  font-size: 11px;
+}
+
+.owa-engineering-view .owa-activity-copy small {
+  overflow: visible;
+  color: var(--owa-semantic-text-secondary);
+  line-height: 15px;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.owa-engineering-view .owa-activity-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.owa-engineering-view .owa-activity-tools > span {
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-activity-meta {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(90px, 1fr) minmax(100px, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+}
+
+.owa-engineering-view .owa-activity-meta > a {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-selected);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-activity-meta > a:focus-visible,
+.owa-engineering-view .owa-audit-proof > summary:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-view .owa-audit-proof > div {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-panel-strong);
+  box-shadow: var(--owa-shadow-dialog);
+}
+
+.owa-engineering-view .owa-audit-proof > div strong { color: var(--owa-semantic-text-primary); }
+.owa-engineering-view .owa-audit-proof > div p,
+.owa-engineering-view .owa-audit-proof > div small { color: var(--owa-semantic-text-secondary); }
+.owa-engineering-view .owa-audit-proof > div code {
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-engineering-view .owa-engineering-context {
+  padding: 12px;
+  background: linear-gradient(155deg, var(--owa-semantic-surface-navigation), var(--owa-semantic-surface-panel));
+}
+
+.owa-engineering-view .owa-engineering-context > section,
+.owa-engineering-view .owa-engineering-context > .owa-stage-stream {
+  border-color: var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-engineering-view .owa-stage-stream > header {
+  gap: 5px;
+  padding: 10px 12px 8px;
+  border-bottom: 0;
+  background: transparent;
+}
+
+.owa-engineering-view .owa-stage-stream > header h2 {
+  display: flex;
+  margin-top: 2px;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.owa-engineering-view .owa-stage-stream > header h2 small {
+  padding: 2px 6px;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.owa-engineering-view .owa-stage-stream > header h2 small.is-passed {
+  background: color-mix(in srgb, var(--owa-semantic-success) 12%, transparent);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-stage-stream > header h2 small:is(.is-running, .is-blocked_human) {
+  background: color-mix(in srgb, var(--owa-semantic-accent) 12%, transparent);
+  color: var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-stage-stream > header h2 small:is(.is-failed, .is-invalidated) {
+  background: color-mix(in srgb, var(--owa-semantic-warning) 12%, transparent);
+  color: var(--owa-semantic-warning);
+}
+
+.owa-engineering-view .owa-stage-stream > header .owa-stage-current-link {
+  display: grid;
+  width: 100%;
+  min-height: 32px;
+  box-sizing: border-box;
+  margin-top: 3px;
+  padding: 5px 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 2px 8px;
+  border: 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  transition: border-color var(--owa-motion-fast) var(--owa-ease-standard), background var(--owa-motion-fast) var(--owa-ease-standard), transform var(--owa-motion-fast) var(--owa-ease-standard);
+}
+
+.owa-engineering-view .owa-stage-stream > header .owa-stage-current-link:hover {
+  color: var(--owa-semantic-accent);
+  transform: translateX(2px);
+}
+
+.owa-engineering-view .owa-stage-current-link span {
+  display: block;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 8px;
+  font-weight: 550;
+}
+
+.owa-engineering-view .owa-stage-current-link strong {
+  color: var(--owa-semantic-text-primary);
+  font-size: 10px;
+}
+
+.owa-engineering-view .owa-stage-current-link em {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  color: var(--owa-semantic-accent);
+  font-size: 9px;
+  font-style: normal;
+}
+
+.owa-engineering-view .owa-stage-current-state {
+  display: inline-flex;
+  margin-top: 4px;
+  padding: 4px 7px;
+  border-radius: var(--owa-radius-round);
+  background: color-mix(in srgb, var(--owa-semantic-success) 14%, transparent);
+}
+
+.owa-engineering-view .owa-engineering-stage.is-selected:not(.is-workflow-current) .owa-stage-code {
+  border-color: var(--owa-semantic-accent);
+  background: transparent;
+  color: var(--owa-semantic-accent);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--owa-semantic-accent) 10%, transparent);
+}
+
+.owa-engineering-view .owa-engineering-stage.is-workflow-current .owa-stage-code {
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+}
+
+.owa-engineering-view .owa-artifact-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--owa-semantic-accent);
+  opacity: .68;
+}
+
+.owa-engineering-view .owa-stage-stream-list { max-height: 286px; padding-inline: 10px; }
+.owa-engineering-view .owa-stage-stream-row { grid-template-columns: 40px 38px minmax(0, 1fr); }
+.owa-engineering-view .owa-stage-stream-all {
+  min-height: 36px;
+  border-color: var(--owa-semantic-border-default);
+  border-radius: 2px;
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-engineering-view .owa-next-step,
+.owa-engineering-view .owa-related-artifacts { background: var(--owa-semantic-surface-panel); }
+
+.owa-engineering-view .owa-next-step > h2,
+.owa-engineering-view .owa-related-artifacts > h2 {
+  display: flex;
+  margin-bottom: 7px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+}
+
+.owa-engineering-view .owa-related-artifacts > h2 span {
+  display: inline-flex;
+  min-width: 22px;
+  min-height: 22px;
+  padding-inline: 6px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-next-step > p {
+  display: -webkit-box;
+  margin-bottom: 8px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--owa-semantic-text-secondary);
+  line-height: 15px;
+}
+
+.owa-engineering-view .owa-stage-policy-summary {
+  display: block;
+  margin: -2px 0 10px;
+  padding-left: 9px;
+  border-left: 2px solid var(--owa-semantic-accent);
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+  line-height: 14px;
+}
+
+.owa-engineering-view .owa-next-step :is(button, a),
+.owa-engineering-view .owa-related-artifacts > .owa-all-artifacts {
+  min-height: 32px;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.owa-engineering-view .owa-next-step :is(button, a):focus-visible,
+.owa-engineering-view .owa-related-artifacts :is(a, button):focus-visible,
+.owa-engineering-view .owa-stage-stream-all:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-view .owa-context-invalidated {
+  display: block;
+  margin: 0 0 8px;
+  padding: 8px 9px;
+  border-radius: var(--owa-radius-control);
+  background: color-mix(in srgb, var(--owa-semantic-warning) 10%, transparent);
+  color: var(--owa-semantic-warning);
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.owa-engineering-view .owa-rollback-impact {
+  display: grid;
+  gap: 11px;
+  padding: 13px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-semantic-surface-panel);
+}
+
+.owa-engineering-view .owa-rollback-impact > header,
+.owa-engineering-view .owa-rollback-impact > header div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.owa-engineering-view .owa-rollback-impact > header span,
+.owa-engineering-view .owa-rollback-impact > header em,
+.owa-engineering-view .owa-rollback-impact article span,
+.owa-engineering-view .owa-rollback-impact article small {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+  font-style: normal;
+}
+
+.owa-engineering-view .owa-rollback-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.owa-engineering-view .owa-rollback-impact article {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-engineering-view .owa-rollback-impact article strong { color: var(--owa-semantic-text-primary); font-size: 17px; }
+.owa-engineering-view .owa-rollback-impact article small { line-height: 15px; }
+.owa-engineering-view .owa-rollback-impact > p { margin: 0; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 17px; }
+.owa-engineering-view .owa-rollback-impact > p.is-danger { color: var(--owa-semantic-danger); }
+
+body[data-ds-dark-theme] .owa-engineering-view .owa-rollback-impact {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-panel);
+}
+
+body[data-ds-dark-theme] .owa-engineering-view .owa-rollback-impact article { background: var(--owa-semantic-surface-control); }
+body[data-ds-dark-theme] .owa-engineering-view .owa-rollback-impact article strong { color: var(--owa-semantic-text-primary); }
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-workspace,
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-workspace {
+  background: var(--owa-semantic-surface-panel);
+}
+
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-hero,
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-tabs,
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-context,
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-context > section,
+body[data-ds-dark-theme] .owa-engineering-view .owa-engineering-context > .owa-stage-stream,
+body[data-ds-dark-theme] .owa-engineering-view .owa-stage-metric,
+body[data-ds-dark-theme] .owa-engineering-view .owa-event-stage-group,
+body[data-ds-dark-theme] .owa-engineering-view .owa-activity-summary {
+  border-color: var(--owa-semantic-border-subtle);
+  background: var(--owa-semantic-surface-panel);
+  box-shadow: var(--owa-shadow-card);
+}
+
+body[data-ds-dark-theme] .owa-engineering-view .owa-stage-stream > header .owa-stage-current-link {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-selected);
+}
+
+@container (max-width: 1180px) {
+  .owa-engineering-view .owa-related-artifacts > .owa-engineering-artifact {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .owa-engineering-view .owa-related-artifacts > .owa-engineering-artifact :is(.owa-artifact-type, time) { display: none; }
+
+  .owa-engineering-view .owa-related-artifacts .owa-artifact-copy small {
+    display: none;
+    overflow: hidden;
+    line-height: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+  }
+
+  .owa-engineering-view .owa-related-artifacts > .owa-all-artifacts {
+    min-height: 26px;
+    margin-top: 0;
+    border: 0;
+    background: transparent;
+    color: var(--owa-semantic-accent);
+    text-align: left;
+  }
+}
+
+@container (max-width: 760px) {
+  .owa-engineering-view .owa-engineering-hero { padding: 18px 18px 15px; }
+  .owa-engineering-view .owa-engineering-truth-strip { padding-inline: 18px; }
+  .owa-engineering-view .owa-engineering-truth-details { grid-template-columns: minmax(0, 1fr); }
+  .owa-engineering-view .owa-engineering-truth-details > div + div { border-top: 1px solid var(--owa-semantic-border-subtle); border-left: 0; }
+  .owa-engineering-view .owa-engineering-tabs { padding-inline: 12px; overflow-x: auto; }
+  .owa-engineering-view .owa-engineering-tabs button { flex: 0 0 auto; }
+  .owa-engineering-view .owa-engineering-content { padding: 17px 18px 26px; }
+  .owa-engineering-view .owa-stage-overview-layout { grid-template-columns: minmax(0, 1fr); }
+  .owa-engineering-view .owa-engineering-stage-intro { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .owa-engineering-view .owa-stage-current-result { max-width: none; align-items: flex-start; flex-direction: column; }
+  .owa-engineering-view .owa-stage-current-result strong { white-space: normal; }
+  .owa-engineering-view .owa-rollback-impact-grid { grid-template-columns: minmax(0, 1fr); }
+  .owa-engineering-view .owa-rollback-impact > header { align-items: flex-start; flex-direction: column; }
+  .owa-engineering-view .owa-stage-summary-heading { align-items: stretch; flex-direction: column; }
+  .owa-engineering-view .owa-stage-summary-heading > a,
+  .owa-engineering-view .owa-stage-report-pending { align-self: flex-start; }
+  .owa-engineering-view .owa-stage-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owa-engineering-view .owa-quality-row { grid-template-columns: 20px 86px minmax(0, 1fr); padding-block: 6px; }
+  .owa-engineering-view .owa-quality-row em { grid-column: 2 / -1; padding: 0; text-align: left; }
+  .owa-engineering-view .owa-activity-summary { grid-template-columns: minmax(0, 1fr) auto; gap: 7px 10px; }
+  .owa-engineering-view .owa-activity-summary > p { grid-column: 1 / -1; }
+  .owa-engineering-view .owa-decision-summary-heading { align-items: flex-start; }
+  .owa-engineering-view .owa-decision-summary-heading > div { min-width: 0; }
+  .owa-engineering-view .owa-revision-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owa-engineering-view .owa-revision-meta code { width: 100%; margin-left: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .owa-engineering-view .owa-revision-report-link { width: 100%; }
+  .owa-engineering-view .owa-decision-body { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  .owa-engineering-view .owa-engineering-activity {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 8px;
+    padding-block: 9px;
+  }
+  .owa-engineering-view .owa-activity-meta {
+    grid-column: 2;
+    grid-template-columns: minmax(90px, 1fr) minmax(100px, 1fr) auto;
+  }
+}
+
+@container (max-width: 460px) {
+  .owa-engineering-view .owa-revision-card { padding: 13px; }
+  .owa-engineering-view .owa-revision-metrics { grid-template-columns: minmax(0, 1fr); }
+  .owa-engineering-view .owa-revision-report-link { align-items: flex-start; flex-direction: column; gap: 2px; }
+}
+
+/* Legacy releases are immutable. Keep the revision entry next to the warning
+   instead of making users discover it indirectly from the S7 action panel. */
+.owa-engineering-view .owa-project-governance-note .owa-governance-action {
+  min-height: 36px;
+  margin-left: auto;
+  padding: 0 14px;
+  flex: 0 0 auto;
+  border: 1px solid var(--owa-semantic-warning-border);
+  border-radius: var(--owa-radius-control);
+  background: color-mix(in srgb, var(--owa-semantic-warning-soft) 76%, var(--owa-eng-control));
+  color: var(--owa-semantic-warning);
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 650;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.owa-engineering-view .owa-project-governance-note .owa-governance-action:hover {
+  border-color: var(--owa-semantic-warning);
+  background: color-mix(in srgb, var(--owa-semantic-warning-soft) 92%, var(--owa-eng-control));
+  transform: translateY(-1px);
+}
+
+.owa-engineering-view .owa-project-governance-note .owa-governance-action:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+@container (max-width: 720px) {
+  .owa-engineering-view .owa-project-governance-note { flex-wrap: wrap; }
+  .owa-engineering-view .owa-project-governance-note .owa-governance-action {
+    width: 100%;
+    margin-left: 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-engineering-view .owa-revision-metric,
+  .owa-engineering-view .owa-revision-report-link {
+    transition: none;
+  }
+
+  .owa-engineering-view .owa-revision-metric:hover,
+  .owa-engineering-view .owa-revision-report-link:hover {
+    transform: none;
+  }
+}
+
+/* Stage guidance stays compact; the complete contract is available on demand. */
+.owa-engineering-view .owa-stage-contract-overview,
+.owa-engineering-view .owa-stage-contract-acceptance {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+.owa-engineering-view .owa-stage-contract-label {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 11px;
+  font-weight: 600;
+}
+.owa-engineering-view .owa-stage-contract-overview p {
+  color: var(--owa-semantic-text-primary);
+  font-weight: 550;
+}
+.owa-engineering-view .owa-stage-contract-acceptance { margin-top: 9px; }
+.owa-engineering-view .owa-stage-contract-acceptance ul { padding: 0; list-style: none; }
+.owa-engineering-view .owa-stage-contract-acceptance li + li { margin-top: 4px; }
+.owa-engineering-view .owa-stage-contract-details {
+  margin-top: 12px;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+.owa-engineering-view .owa-stage-contract-details > summary {
+  padding-top: 10px;
+  color: var(--owa-semantic-accent);
+  cursor: pointer;
+  font-size: 11px;
+  width: fit-content;
+}
+.owa-engineering-view .owa-stage-contract-details > summary span {
+  margin-left: 12px;
+  color: var(--owa-semantic-text-tertiary);
+  font-weight: 400;
+}
+.owa-engineering-view .owa-stage-contract-details[open] > summary { margin-bottom: 12px; }
+.owa-engineering-view .owa-stage-contract-details > summary:focus-visible {
+  outline: 2px solid var(--owa-semantic-accent);
+  outline-offset: 4px;
+}
+
+/* Stage details disclose explanations on demand, while results and actions stay visible. */
+.owa-engineering-view :is(.owa-stage-disclosure, .owa-stage-timing-details) > summary {
+  cursor: pointer;
+  padding: 10px 0;
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.owa-engineering-view :is(.owa-stage-disclosure, .owa-stage-timing-details) > summary::marker {
+  color: var(--owa-semantic-text-tertiary);
+}
+.owa-engineering-view :is(.owa-stage-disclosure, .owa-stage-timing-details) > summary > * {
+  margin-right: 14px;
+}
+.owa-engineering-view .owa-stage-disclosure > summary > span,
+.owa-engineering-view :is(.owa-stage-timing-count, .owa-stage-timing-hint) {
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 11px;
+  font-weight: 400;
+}
+.owa-engineering-view .owa-stage-timing-summary em {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--owa-semantic-text-primary);
+}
+.owa-engineering-view .owa-stage-timing-summary b { font-weight: 400; }
+.owa-engineering-view .owa-stage-timing-body em { font-style: normal; }
+.owa-engineering-view :is(.owa-stage-disclosure-body, .owa-stage-timing-body) {
+  margin: 4px 0 10px;
+  padding: 12px 14px;
+  border-left: 2px solid var(--owa-semantic-border-subtle);
+  color: var(--owa-semantic-text-secondary);
+  font-size: 12px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.owa-engineering-view .owa-stage-timing-body > p { margin-top: 12px; }
+.owa-engineering-view .owa-stage-timing-body > .owa-stage-contract-grid:first-child { margin-top: 0; }
+.owa-engineering-view .owa-stage-timing-history { margin-top: 12px; }
+.owa-engineering-view .owa-stage-timing-history > summary,
+.owa-engineering-view .owa-stage-outcome > summary { color: var(--owa-semantic-accent); cursor: pointer; font-size: 11px; }
+.owa-engineering-view .owa-stage-outcome { margin-top: 7px; }
+.owa-engineering-view .owa-stage-metric-notes { margin-top: 6px; }
+.owa-engineering-view .owa-stage-metric-notes dl > div + div { margin-top: 10px; }
+.owa-engineering-view .owa-stage-metric-notes dt { font-weight: 600; }
+.owa-engineering-view .owa-stage-metric-notes dd { margin: 3px 0 0; }
+.owa-engineering-view .owa-stage-contract:has(> .owa-stage-disclosure),
+.owa-engineering-view .owa-stage-timing { padding: 3px 0; }
+.owa-engineering-view .owa-quality-section.owa-stage-disclosure { border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-engineering-view .owa-stage-disclosure.needs-attention > summary > span { color: var(--owa-semantic-text-primary); font-weight: 600; }
+.owa-engineering-view [data-engineering-disclosure] > summary:focus-visible {
+  outline: 2px solid var(--owa-semantic-accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+@media (max-width: 700px) {
+  .owa-engineering-view .owa-stage-timing-summary > span { display: inline-block; }
+  .owa-engineering-view :is(.owa-stage-disclosure-body, .owa-stage-timing-body) { padding: 10px; }
+}
+
+.owa-gate-receipt-summary { display: flex; flex-wrap: wrap; gap: 5px 16px; align-items: baseline; margin-bottom: 12px; }
+.owa-gate-receipt-summary strong { font-size: 12px; color: var(--owa-semantic-text-primary); }
+.owa-gate-receipt-summary small, .owa-gate-empty { color: var(--owa-semantic-text-tertiary); font-size: 11px; }
+.owa-gate-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.owa-gate-item { padding: 11px 13px; border: 1px solid var(--owa-semantic-border-subtle); border-radius: 9px; }
+.owa-gate-item > div { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.owa-gate-item strong { font-size: 12px; font-weight: 550; }
+.owa-gate-item em { font-size: 11px; font-style: normal; white-space: nowrap; color: var(--owa-semantic-text-tertiary); }
+.owa-gate-item em[data-result="PASSED"] { color: var(--owa-semantic-success); }
+.owa-gate-item em[data-result="FAILED"] { color: var(--owa-semantic-danger); }
+.owa-gate-item details { margin-top: 6px; font-size: 10px; color: var(--owa-semantic-text-tertiary); overflow-wrap: anywhere; }
+.owa-gate-item summary { cursor: pointer; width: fit-content; }
+.owa-gate-item details p { margin: 6px 0; }
+.owa-gate-item a { color: var(--owa-semantic-accent); }
+
+/* Result and next action are the entry point; supporting evidence is opt-in. */
+.owa-engineering-view .owa-engineering-truth-strip.is-ready {
+  position: relative;
+  padding-block: 8px;
+  background: transparent;
+}
+.owa-engineering-view .owa-engineering-truth-strip.is-ready .owa-engineering-truth-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-right: 110px;
+}
+.owa-engineering-view .owa-engineering-truth-summary > span { font-size: 11px; flex-shrink: 0; }
+.owa-engineering-view .owa-engineering-truth-strip.is-ready .owa-engineering-truth-disclosure { margin-top: 0; }
+.owa-engineering-view .owa-engineering-truth-strip.is-ready .owa-engineering-truth-disclosure > summary {
+  position: absolute;
+  top: 4px;
+  right: 22px;
+  font-size: 11px;
+  font-weight: 400;
+}
+.owa-engineering-view .owa-engineering-truth-description {
+  margin: 12px 0 8px;
+  font-size: 12px;
+  color: var(--owa-semantic-text-secondary);
+}
+.owa-engineering-view .owa-stage-result-label {
+  font-size: 11px;
+  color: var(--owa-semantic-text-tertiary);
+  margin-bottom: 5px;
+}
+.owa-engineering-view .owa-stage-summary-heading { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; align-items: start; padding-bottom: 6px; }
+.owa-engineering-view .owa-stage-summary-heading > div > strong {
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 650;
+}
+.owa-engineering-view .owa-stage-summary-heading p { font-size: 12px; line-height: 1.75; }
+.owa-engineering-view .owa-s7-validation-progress > details > summary { font-size: 11px; }
+.owa-engineering-view .owa-stage-summary-heading > a {
+  min-height: 32px;
+  padding: 6px 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.owa-engineering-view .owa-stage-metric-grid { margin-block: 12px 16px; gap: 8px; }
+.owa-engineering-view .owa-stage-metric { padding: 10px 12px; min-height: 62px; box-sizing: border-box; }
+.owa-engineering-view .owa-stage-metric::before { display: none; }
+.owa-engineering-view .owa-stage-metric strong { font-size: 22px; line-height: 1.3; }
+.owa-engineering-view .owa-stage-metric > span { font-size: 12px; }
+.owa-engineering-view .owa-stage-supporting-details { border-top: 1px solid var(--owa-semantic-border-subtle); }
+.owa-engineering-view .owa-stage-supporting-body { padding: 4px 12px 12px; }
+.owa-engineering-view .owa-stage-overview-context { box-shadow: none; }
+.owa-engineering-view .owa-stage-overview-context .owa-next-step { padding: 16px; }
+.owa-engineering-view .owa-stage-overview-context .owa-next-step > h2 { font-size: 14px; margin-bottom: 8px; }
+.owa-engineering-view .owa-stage-overview-context .owa-next-step > p {
+  display: block;
+  overflow: visible;
+  font-size: 12px;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+.owa-engineering-view .owa-stage-overview-context .owa-next-step .owa-engineering-primary {
+  min-height: 38px;
+  font-size: 12px;
+}
+.owa-engineering-view .owa-stage-artifacts-disclosure > summary { padding: 0; }
+.owa-engineering-view .owa-stage-artifacts-disclosure > summary > span { display: block; margin: 5px 0 0 16px; }
+.owa-engineering-view .owa-stage-artifacts-body { margin-top: 12px; }
+.owa-engineering-view .owa-stage-artifacts-body > details { border-bottom: 1px solid var(--owa-semantic-border-subtle); }
+.owa-engineering-view .owa-stage-maintenance { grid-column: 1 / -1; margin-top: 8px; }
+.owa-engineering-view .owa-stage-maintenance > summary {
+  color: var(--owa-semantic-text-tertiary);
+  cursor: pointer;
+  font-size: 11px;
+  padding-block: 6px;
+}
+.owa-engineering-view .owa-stage-maintenance > div { display: grid; gap: 8px; margin-top: 8px; }
+.owa-engineering-view .owa-stage-maintenance .is-danger { color: var(--owa-semantic-danger); }
+.owa-engineering-view .owa-quality-section.needs-attention {
+  padding: 8px 12px;
+  border: 1px solid var(--owa-semantic-danger);
+  border-radius: 8px;
+}
+@container (max-width: 760px) {
+  .owa-engineering-view .owa-stage-overview-context { grid-row: 1; }
+  .owa-engineering-view .owa-stage-summary-heading > div > strong { font-size: 17px; }
+  .owa-engineering-view .owa-engineering-truth-strip.is-ready .owa-engineering-truth-summary { flex-wrap: wrap; gap: 3px 8px; }
+}
+
+/* Artifact rows live inside the default-open artifact section. */
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact > summary {
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  grid-template-areas: "icon title action" "icon labels action";
+  gap: 5px 10px;
+  padding: 12px 10px;
+}
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-icon {
+  grid-area: icon;
+  width: 18px;
+  height: 18px;
+}
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-copy { grid-area: title; }
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-copy strong {
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-labels {
+  grid-area: labels;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-format { font-size: 10px; }
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-disclosure {
+  grid-area: action;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Show stage meaning alongside the actual checks without opening nested panels. */
+.owa-engineering-view .owa-stage-contract-highlights {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+.owa-engineering-view .owa-stage-contract-highlights > div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.owa-engineering-view .owa-stage-contract-highlights :is(p, ul) {
+  margin: 8px 0 0;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 12px;
+  line-height: 1.75;
+}
+.owa-engineering-view .owa-stage-contract-highlights ul { padding-left: 18px; }
+.owa-engineering-view .owa-stage-contract-highlights .owa-stage-contract-label {
+  color: var(--owa-semantic-text-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 1100px) {
+  .owa-engineering-view .owa-stage-contract-highlights { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+}
+
+.owa-engineering-view .owa-gate-more { margin-top: 10px; }
+.owa-engineering-view .owa-gate-more > summary {
+  width: fit-content;
+  padding: 6px 0;
+  color: var(--owa-semantic-accent);
+  font-size: 12px;
+  cursor: pointer;
+}
+.owa-engineering-view .owa-gate-more[open] > summary { margin-bottom: 8px; }
+
+/* Consistent reading rhythm for stage results and their supporting evidence. */
+.owa-engineering-view .owa-stage-overview-layout { gap: 16px; }
+.owa-engineering-view .owa-stage-summary-heading > a {
+  justify-self: start;
+  min-height: 28px;
+  padding: 2px 0;
+  font-size: 12px;
+  line-height: 24px;
+  color: var(--owa-semantic-accent) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+.owa-engineering-view .owa-stage-result-label { display: block; margin-bottom: 4px; font-size: 12px; }
+.owa-engineering-view .owa-stage-overview-context .owa-related-artifacts { padding: 14px 16px; }
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-primary { border-radius: var(--owa-radius-control); }
+.owa-engineering-view .owa-gate-item { padding: 10px 12px; }
+.owa-engineering-view .owa-gate-item strong { font-size: 12px; line-height: 1.6; }
+.owa-engineering-view .owa-gate-item details { font-size: 11px; line-height: 1.6; }
+.owa-engineering-view .owa-stage-overview-context .owa-engineering-artifact > summary { padding: 10px; }
+@container (max-width: 760px) {
+  .owa-engineering-view .owa-stage-overview-layout { gap: 12px; }
+}
+
+.owa-engineering-view .owa-engineering-tabs button { font-size: 12px; }
+.owa-engineering-view .owa-engineering-tabs button span { font-size: 10px; }
+.owa-engineering-view .owa-engineering-stage-intro p { font-size: 12px; line-height: 1.65; }
+.owa-engineering-view .owa-engineering-breadcrumb { font-size: 11px; }
+.owa-engineering-view .owa-engineering-breadcrumb strong { font-size: 11px; }
+
+/* Result, metrics, and evidence form three explicit reading groups. */
+.owa-engineering-view .owa-stage-summary-heading {
+  padding: 14px 16px;
+  border: 1px solid var(--owa-semantic-border-subtle) !important;
+  border-radius: 12px;
+  background: var(--owa-semantic-surface-panel) !important;
+}
+.owa-engineering-view .owa-stage-result-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+.owa-engineering-view .owa-stage-result-toolbar > a {
+  padding: 2px 0;
+  color: var(--owa-semantic-accent) !important;
+  font-size: 12px;
+  line-height: 1.6;
+  text-decoration: none;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.owa-engineering-view .owa-stage-result-toolbar > a:hover { text-decoration: underline; }
+.owa-engineering-view .owa-stage-result-toolbar .owa-stage-result-label { margin: 0; }
+.owa-engineering-view .owa-stage-result-toolbar .owa-stage-report-pending { font-size: 12px; }
+.owa-engineering-view .owa-stage-metric-grid {
+  padding: 8px 0;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 12px;
+  background: var(--owa-semantic-surface-panel);
+  gap: 0;
+}
+html[data-dsh-aqua] body .owa-engineering-view .owa-stage-metric {
+  background: transparent !important;
+  border-radius: 0;
+  padding: 6px 14px;
+  min-height: 58px;
+}
+html[data-dsh-aqua] body .owa-engineering-view .owa-stage-metric + .owa-stage-metric {
+  border-left: 1px solid var(--owa-semantic-border-subtle) !important;
+}
+.owa-engineering-view .owa-stage-overview-context {
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.owa-engineering-view .owa-stage-overview-context > section {
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 12px;
+  background: var(--owa-semantic-surface-panel);
+}
+.owa-engineering-view .owa-stage-overview-context .owa-next-step > p { font-size: 13px; line-height: 1.65; }
+.owa-engineering-view .owa-stage-overview-context .owa-artifact-copy strong { font-size: 13px; line-height: 1.5; }
+.owa-engineering-view .owa-gate-item strong { font-size: 13px; }
+.owa-engineering-view .owa-stage-disclosure-body { padding: 10px 0; border-left: 0; }
+.owa-engineering-view .owa-gate-receipt-summary { margin-bottom: 10px; }
+
+/* Keep navigation usable while the workspace itself scrolls. */
+.owa-engineering-workspace > .owa-engineering-hero,
+.owa-engineering-workspace > .owa-engineering-tabs,
+.owa-engineering-workspace > .owa-engineering-truth-strip { flex-shrink: 0; }
+
+.owa-engineering-view .owa-release-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 10px; }
+.owa-engineering-view .owa-release-badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: var(--owa-radius-round); font-size: 12px; font-weight: 600; line-height: 20px; border: 1px solid transparent; }
+.owa-engineering-view .owa-release-badge.is-published { background: var(--owa-semantic-accent-soft); color: var(--owa-semantic-accent); border-color: var(--owa-semantic-border-default); }
+.owa-engineering-view .owa-release-badge.is-runtime-verified,
+.owa-engineering-view .owa-release-badge.is-runtime-not-applicable { background: var(--owa-semantic-success-soft); color: var(--owa-semantic-success); border-color: var(--owa-semantic-success-border); }
+.owa-engineering-view .owa-release-badge.is-runtime-verifying,
+.owa-engineering-view .owa-release-badge.is-runtime-unknown { background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning); border-color: var(--owa-semantic-warning-border); }
+.owa-engineering-view .owa-release-badge.is-runtime-failed,
+.owa-engineering-view .owa-release-badge.is-revoked { background: var(--owa-semantic-danger-soft); color: var(--owa-semantic-danger); border-color: var(--owa-semantic-danger-border); }

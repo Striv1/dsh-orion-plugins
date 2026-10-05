@@ -1,0 +1,258 @@
+.owa-global-product-nav {
+  display: grid;
+  gap: 6px;
+  padding: 7px 2px 10px;
+  border-bottom: 0;
+}
+
+.owa-global-product-nav button {
+  display: flex;
+  min-width: 0;
+  min-height: 40px;
+  align-items: center;
+  gap: 11px;
+  padding: 0 11px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 18px;
+  text-align: left;
+  transition: background var(--owa-motion-standard) var(--owa-ease-standard), border-color var(--owa-motion-standard) var(--owa-ease-standard), color var(--owa-motion-standard) var(--owa-ease-standard), transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+.owa-global-product-nav button > span:last-child {
+  font-family: var(--owa-font-stack);
+  font-size: 13px;
+  font-synthesis: none;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+@media (hover: hover) {
+  .owa-global-product-nav button:hover {
+    border-color: var(--owa-semantic-border-default);
+    background: var(--owa-semantic-surface-hover);
+    color: var(--owa-semantic-text-primary);
+    transform: translateX(1px);
+  }
+}
+
+.owa-global-product-nav button.is-active {
+  border-color: var(--owa-semantic-border-default);
+  background: var(--owa-semantic-surface-selected);
+  box-shadow: inset 0 1px var(--owa-semantic-border-subtle);
+  color: var(--owa-semantic-accent);
+}
+
+.owa-shell-icon {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  background: currentColor;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.owa-shell-icon.is-chat { -webkit-mask-image: url("/icons/chat-bubble.svg"); mask-image: url("/icons/chat-bubble.svg"); }
+.owa-shell-icon.is-network { -webkit-mask-image: url("/icons/network.svg"); mask-image: url("/icons/network.svg"); }
+.owa-shell-icon.is-tools { -webkit-mask-image: url("/icons/tools.svg"); mask-image: url("/icons/tools.svg"); }
+.owa-shell-icon.is-database { -webkit-mask-image: url("/icons/database.svg"); mask-image: url("/icons/database.svg"); }
+
+/* The chat and ontology creation actions are one product-level component.
+   Keep their geometry and interaction feedback identical while their labels
+   and icons continue to communicate two different creation scopes. */
+body [data-orion-new-session="true"],
+html[data-dsh-aqua][data-dsh-float] body [data-orion-new-session="true"][data-dsh-surface] {
+  min-height: 42px;
+  height: 42px;
+  gap: 9px;
+  margin: 0 2px 10px;
+  padding: 0 12px;
+  border: 1px solid var(--owa-semantic-border-default);
+  border-radius: 12px;
+  background: var(--owa-semantic-surface-control);
+  box-shadow: var(--owa-shadow-card);
+  color: var(--owa-semantic-accent);
+  font-size: 13px;
+  font-weight: 650;
+  transition: background var(--owa-motion-standard) var(--owa-ease-standard), border-color var(--owa-motion-standard) var(--owa-ease-standard), box-shadow var(--owa-motion-standard) var(--owa-ease-standard), color var(--owa-motion-standard) var(--owa-ease-standard), transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+body [data-orion-new-session="true"] > svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+body [data-orion-new-session="true"] > span {
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 18px;
+}
+
+@media (hover: hover) {
+  html[data-dsh-aqua] body [data-orion-new-session="true"]:hover:not(:disabled) {
+    border-color: var(--owa-semantic-border-strong);
+    background: var(--owa-semantic-surface-hover);
+    box-shadow: var(--owa-shadow-card);
+    color: var(--owa-semantic-accent-hover);
+    transform: translateY(-1px);
+  }
+}
+
+body [data-orion-new-session="true"]:focus-visible {
+  outline: 2px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-tab {
+  display: none !important;
+}
+
+body[data-orion-primary="ontology"] [data-orion-chat-sidebar="true"],
+body[data-orion-primary="ontology"] [data-orion-session-header="true"] {
+  display: none !important;
+}
+
+body[data-orion-primary="ontology"] [data-orion-ontology-root="true"] {
+  min-height: 0;
+  flex: 1;
+}
+
+body.owa-sidebar-collapsed .owa-global-product-nav {
+  width: 40px;
+  justify-items: center;
+  gap: 8px;
+  padding: 8px 0 0;
+  border-bottom: 0;
+}
+
+body.owa-sidebar-collapsed .owa-global-product-nav button {
+  width: 40px;
+  min-height: 40px;
+  justify-content: center;
+  padding: 0;
+  border-radius: 12px;
+}
+
+body.owa-sidebar-collapsed .owa-global-product-nav button > span:last-child {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* The upstream collapsed sidebar loses its flexible session list when ORION's
+   ontology workspace is active. Rebuild the rail geometry around stable data
+   markers so the footer remains at the bottom and every control shares one
+   optical grid instead of forming a tall nested pill. */
+html[data-dsh-aqua][data-dsh-float] body.owa-sidebar-collapsed [data-orion-sidebar-root="true"] {
+  box-sizing: border-box;
+  width: 54px;
+  min-width: 54px;
+  padding: 14px 7px 10px;
+  overflow: visible;
+}
+
+body.owa-sidebar-collapsed [data-orion-sidebar-footer="true"] {
+  width: 40px;
+  margin-top: auto;
+}
+
+body.owa-sidebar-collapsed [data-orion-global-settings="true"] {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+@media (hover: hover) {
+  body.owa-sidebar-collapsed [data-orion-global-settings="true"]:hover {
+    border-color: var(--owa-semantic-border-default);
+    background: var(--owa-semantic-surface-hover);
+    color: var(--owa-semantic-text-primary);
+  }
+}
+
+body.owa-sidebar-collapsed [data-orion-sidebar-toggle="true"] {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+}
+
+body.owa-sidebar-collapsed [data-orion-sidebar-toggle="true"] [class*="panelIcon"] {
+  display: none;
+}
+
+html[data-dsh-aqua][data-dsh-float] body.owa-sidebar-collapsed
+  [data-dsh-frame][data-sidebar-collapsed] [class*="sidebarCol"] {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+html[data-dsh-aqua][data-dsh-float] body.owa-sidebar-collapsed
+  [data-dsh-frame][data-sidebar-collapsed] [class*="sidebarCol"] > [data-dsh-aqua-glow] {
+  display: none !important;
+}
+
+html[data-dsh-aqua][data-dsh-float] body[data-orion-primary="ontology"]
+  [data-dsh-frame] [class*="sidebarCol"] {
+  background: var(--owa-semantic-surface-navigation);
+}
+
+body.owa-sidebar-collapsed [data-orion-sidebar-root="true"] .owa-native-brand-logo {
+  width: 24px;
+  height: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-global-product-nav button,
+  body [data-orion-new-session="true"] { transition: none; }
+
+  .owa-global-product-nav button:hover,
+  body [data-orion-new-session="true"]:hover { transform: none; }
+}
+
+/* Compact rail: one hit-area grid for native actions and product navigation. */
+body.owa-sidebar-collapsed [data-orion-sidebar-root="true"] :is(
+  .owa-global-product-nav button,
+  [data-orion-new-session="true"],
+  button[aria-label="添加工作区"],
+  button[aria-label="搜索会话"],
+  [data-orion-global-settings="true"]
+) {
+  box-sizing: border-box;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+}
+body.owa-sidebar-collapsed .owa-global-product-nav button:not(.is-active) {
+  color: var(--owa-semantic-text-primary);
+}
+body.owa-sidebar-collapsed .owa-global-product-nav .owa-shell-icon {
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+}

@@ -1,0 +1,22 @@
+version: 1.0.0
+ontology_iri: https://orion.local/templates/manufacturing-supply-quality/1.0.0
+title: 制造业供应链与来料质量本体模板
+constraints:
+  - id: TPL-SQ-001
+    label: 采购订单必须关联供应商
+  - id: TPL-SQ-002
+    label: 采购订单必须包含物料
+  - id: TPL-SQ-003
+    label: 来料批次必须来源于采购订单
+  - id: TPL-SQ-004
+    label: 来料批次必须接受检验
+  - id: TPL-SQ-005
+    label: 检验结果必须记录结论
+  - id: TPL-SQ-006
+    label: 不合格结果必须形成质量异常
+  - id: TPL-SQ-007
+    label: 质量异常必须关联风险事件
+  - id: TPL-SQ-008
+    label: 风险事件必须有处置任务
+  - id: TPL-SQ-009
+    label: 处置任务必须明确责任组织

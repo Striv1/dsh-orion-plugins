@@ -1,0 +1,4 @@
+version: 0.9.8
+ontology_iri: https://ref.openepcis.io/extensions/common/core/
+title: OpenEPCIS 数字产品护照核心本体
+constraints: []

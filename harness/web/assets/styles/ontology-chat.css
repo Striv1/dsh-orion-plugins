@@ -1,0 +1,279 @@
+/* Harness keeps the sidebar control in a blank session header. Aqua's generic
+   glass header treatment should only frame headers that have session content. */
+[data-dsh-float] [data-slot="conversation.session.header"] > header[class*="_headerBlank"] {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.owa-chat-build-transfer button {
+  border: 0;
+  font: inherit;
+}
+
+.owa-chat-build-transfer {
+  display: flex;
+  width: min(calc(100% - 32px), 812px);
+  box-sizing: border-box;
+  margin: 0 auto 10px;
+  padding: 12px 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--owa-semantic-warning-soft) 78%, var(--owa-semantic-surface-panel));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--owa-semantic-warning) 24%, transparent);
+  color: var(--owa-semantic-text-primary);
+}
+
+.owa-chat-build-transfer strong { font-size: 12px; }
+.owa-chat-build-transfer p { margin: 3px 0 0; color: var(--owa-semantic-text-secondary); font-size: 10px; line-height: 15px; }
+.owa-chat-build-transfer > div:last-child { display: flex; flex: 0 0 auto; gap: 6px; }
+.owa-chat-build-transfer button {
+  min-height: 30px;
+  padding: 0 11px;
+  border-radius: 9px;
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font-size: 10px;
+}
+.owa-chat-build-transfer button.is-primary { background: var(--owa-semantic-accent); color: var(--owa-semantic-on-accent); }
+
+.owa-engineering-session-hidden,
+.owa-engineering-preset-hidden { display: none !important; }
+
+/* Programmatic preset changes briefly open the native Harness menu while its
+   portal is mounting. Keep that implementation detail out of the rendered
+   route transition; manual preset menus remain unchanged. */
+html[data-owa-native-preset-switching] [role="menu"]:has([role="menuitem"]),
+[data-owa-native-preset-menu] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+
+/* The engineering conversation is returned to native chat before React and
+   the requested chat preset have both settled. Keep that incomplete state
+   invisible; the preset selector releases it when the target mode is ready. */
+[data-owa-native-conversation-restoring="true"] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+
+/* Keep the native Harness workspace and preset controls visible. They are the
+   authoritative session context and must remain interactive when users create
+   or switch conversations. */
+[data-owa-chat-context-row] {
+  display: flex;
+  visibility: visible;
+}
+
+:is([data-orion-ontology-binding], [data-orion-engineering-binding]) {
+  display: flex;
+  min-width: 0;
+  min-height: 34px;
+  box-sizing: border-box;
+  margin: 8px 10px 0;
+  padding: 0 11px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--owa-semantic-accent) 18%, var(--owa-semantic-border-subtle));
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--owa-semantic-accent-soft) 54%, var(--owa-semantic-surface-panel));
+  color: var(--owa-semantic-text-primary);
+}
+:is([data-orion-ontology-binding], [data-orion-engineering-binding]) > span {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+:is([data-orion-ontology-binding], [data-orion-engineering-binding]) i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: var(--owa-semantic-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--owa-semantic-accent) 10%, transparent);
+}
+:is([data-orion-ontology-binding], [data-orion-engineering-binding]) strong {
+  max-width: min(36vw, 380px);
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:is([data-orion-ontology-binding], [data-orion-engineering-binding]) small {
+  flex: 0 0 auto;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+[data-orion-ontology-binding][data-state="binding"] i { animation: owa-ontology-binding-pulse 1.2s ease-in-out infinite; }
+[data-orion-ontology-binding][data-state="error"] {
+  border-color: color-mix(in srgb, var(--owa-semantic-danger) 28%, var(--owa-semantic-border-subtle));
+  background: color-mix(in srgb, var(--owa-semantic-danger-soft) 58%, var(--owa-semantic-surface-panel));
+}
+[data-orion-ontology-binding][data-state="error"] > span { flex-wrap: wrap; }
+[data-orion-ontology-binding][data-state="error"] small {
+  flex: 1 1 100%;
+  color: var(--owa-semantic-danger);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+[data-orion-ontology-binding][data-state="error"] i {
+  background: var(--owa-semantic-danger);
+  box-shadow: none;
+}
+
+[data-orion-engineering-binding] {
+  border-color: color-mix(in srgb, var(--owa-semantic-success) 22%, var(--owa-semantic-border-subtle));
+  background: color-mix(in srgb, var(--owa-semantic-success-soft) 56%, var(--owa-semantic-surface-panel));
+}
+
+[data-orion-engineering-binding] i {
+  background: var(--owa-semantic-success);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--owa-semantic-success) 10%, transparent);
+}
+
+[data-orion-answer-sources] {
+  width: fit-content;
+  max-width: 100%;
+  margin: 10px 0 2px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+}
+[data-orion-answer-sources] summary {
+  display: flex;
+  min-height: 26px;
+  padding: 0 8px;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--owa-semantic-surface-control) 72%, transparent);
+  cursor: pointer;
+  list-style: none;
+}
+[data-orion-answer-sources] summary::-webkit-details-marker { display: none; }
+[data-orion-answer-sources] summary > span:first-child { margin-right: 2px; }
+[data-orion-answer-sources] summary [data-source] {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--owa-semantic-surface-selected);
+  color: var(--owa-semantic-text-secondary);
+}
+[data-orion-answer-sources] > div {
+  padding: 7px 9px 2px;
+  color: var(--owa-semantic-text-tertiary);
+  line-height: 1.5;
+}
+[data-orion-answer-sources] > div > p { margin: 0 0 6px; }
+[data-orion-answer-sources] [data-evidence-bundle-v2] {
+  width: min(680px, calc(100vw - 64px));
+}
+[data-orion-answer-sources] [data-evidence-bundle-v2] section {
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+[data-orion-answer-sources] [data-evidence-bundle-v2] section > strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+}
+[data-orion-answer-sources] [data-evidence-bundle-v2] ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 3px;
+  list-style: none;
+}
+[data-orion-answer-sources] [data-evidence-bundle-v2] li {
+  overflow-wrap: anywhere;
+}
+
+[data-orion-evidence-detail] {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--owa-semantic-text-secondary);
+}
+[data-orion-evidence-detail] > div {
+  padding: 8px 0;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+[data-orion-evidence-detail] pre {
+  margin: 4px 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+[data-orion-evidence-detail] ol {
+  padding-left: 22px;
+}
+[data-orion-evidence-detail] ol > li {
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 8px;
+}
+[data-evidence-pagination] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+[data-orion-evidence-detail] button {
+  border: 1px solid var(--owa-semantic-border-subtle);
+  border-radius: 6px;
+  padding: 3px 8px;
+  background: var(--owa-semantic-surface-control);
+  color: inherit;
+  cursor: pointer;
+}
+[data-orion-evidence-detail] button:disabled { opacity: .45; cursor: default; }
+
+@keyframes owa-ontology-binding-pulse {
+  50% { opacity: .45; transform: scale(.84); }
+}
+
+.owa-engineering-native-conversation [data-owa-engineering-project-context] {
+  display: flex;
+  min-width: 0;
+  min-height: 34px;
+  margin: 6px 10px 0;
+  padding: 4px 4px 4px 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-text-secondary);
+}
+.owa-engineering-native-conversation [data-owa-engineering-project-context] > span { display: flex; min-width: 0; align-items: center; gap: 7px; }
+.owa-engineering-native-conversation [data-owa-engineering-project-context] i { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--owa-semantic-accent); }
+.owa-engineering-native-conversation [data-owa-engineering-project-context] strong { overflow: hidden; color: var(--owa-semantic-text-primary); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-engineering-native-conversation [data-owa-engineering-project-context] small { flex: 0 0 auto; color: var(--owa-semantic-text-tertiary); font-size: 9px; }
+.owa-engineering-native-conversation [data-owa-engineering-project-context] button { min-height: 26px; padding: 0 8px; border: 0; border-radius: 8px; background: var(--owa-semantic-surface-control); color: var(--owa-semantic-accent); cursor: pointer; font: inherit; font-size: 9px; }
+
+@media (max-width: 760px) {
+  .owa-chat-build-transfer { align-items: stretch; flex-direction: column; }
+  .owa-chat-build-transfer > div:last-child { justify-content: flex-end; }
+  :is([data-orion-ontology-binding], [data-orion-engineering-binding]) { align-items: flex-start; flex-direction: column; gap: 3px; padding-block: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-chat-build-transfer button { transition: none; }
+  [data-orion-ontology-binding][data-state="binding"] i { animation: none; }
+}

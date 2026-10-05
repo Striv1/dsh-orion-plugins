@@ -1,0 +1,65 @@
+.orion-answer-analysis-dialog { width: min(1160px, 94vw); max-width: 94vw; height: min(860px, 89dvh); max-height: 89dvh; }
+.orion-answer-analysis-dialog .orion-answer-analysis-header:has(select[hidden]) { display: none; }
+.orion-answer-analysis-content > .orion-analysis-studio { border: 0; margin: 0; padding: 0; }
+.orion-analysis-studio .orion-studio-navigation { display: flex; gap: 4px; padding: 12px 0 14px; border-bottom: 1px solid var(--orion-analysis-line); overflow-x: auto; scrollbar-width: thin; }
+.orion-analysis-studio .orion-studio-navigation > button { flex: none; padding: 9px 14px; background: transparent; border-color: transparent; border-radius: 8px; font-weight: 550; white-space: nowrap; }
+.orion-analysis-studio .orion-studio-navigation > button[aria-selected="true"] { background: rgba(246, 253, 255, .63); border-color: rgba(119, 172, 190, .48); color: #14546e; box-shadow: 0 2px 5px #23485b08; }
+.orion-analysis-studio .orion-studio-page { min-height: 320px; padding: 20px 0 6px; }
+.orion-analysis-studio .orion-studio-page > .orion-analytics-workspace { border: 0; margin: 0; padding: 0; }
+.orion-analysis-studio h4 { color: #1b4051; font-size: 15px; font-weight: 600; margin: 0 0 14px; }
+.orion-analysis-studio .orion-studio-page > section + section { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--orion-analysis-line); }
+.orion-analysis-studio .orion-studio-field { display: grid; gap: 7px; color: #365769; margin: 0 0 16px; font-size: 12px; }
+.orion-analysis-studio .orion-studio-field input,
+.orion-analysis-studio .orion-studio-field select,
+.orion-analysis-studio .orion-studio-field textarea { min-width: 0; width: 100%; font-size: 13px; margin: 0; }
+.orion-analysis-studio .orion-studio-query-modes,
+.orion-analysis-studio .orion-studio-query-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+.orion-analysis-studio .orion-studio-query-actions { margin-top: 18px; }
+.orion-analysis-studio .orion-studio-query-actions button { background: #287d93; color: #fff; border-color: #287d93; padding: 9px 20px; }
+.orion-analysis-studio .orion-studio-query-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.orion-analysis-studio fieldset { margin: 0; padding: 12px 16px; min-width: 0; border: 1px solid var(--orion-analysis-line); border-radius: 9px; }
+.orion-analysis-studio legend { padding: 0 6px; font-weight: 550; }
+.orion-analysis-studio .orion-studio-check { display: flex; gap: 9px; align-items: center; padding: 6px 0; overflow-wrap: anywhere; }
+.orion-analysis-studio .orion-studio-check input { margin: 0; accent-color: #287d93; }
+.orion-analysis-studio .orion-studio-query-time { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; grid-column: 1/-1; }
+.orion-analysis-studio .orion-studio-filters { grid-column: 1/-1; padding: 14px 0; border-top: 1px solid var(--orion-analysis-line); border-bottom: 1px solid var(--orion-analysis-line); }
+.orion-analysis-studio .orion-studio-filters > strong { display: block; margin-bottom: 10px; }
+.orion-analysis-studio .orion-studio-filter-row { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(95px, .65fr) minmax(100px, 1fr) auto; gap: 8px; margin-bottom: 10px; }
+.orion-analysis-studio .orion-studio-filter-row > :is(input,select) { width: 100%; min-width: 0; }
+.orion-analysis-studio .orion-studio-note { font-size: 12px; color: #506977; grid-column: 1/-1; }
+.orion-analysis-studio .orion-studio-query-output { margin-top: 24px; }
+.orion-analysis-studio textarea[aria-label="语义 SQL"] { min-height: 180px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.orion-analysis-studio textarea[aria-label="SQL 参数 JSON"] { min-height: 60px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.orion-analysis-studio .orion-studio-save { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--orion-analysis-line); }
+.orion-analysis-studio .orion-analytics-saved-asset { padding: 18px 0; border-bottom: 1px solid var(--orion-analysis-line); }
+.orion-analysis-studio .orion-analytics-saved-asset > strong { display: block; margin-bottom: 10px; }
+.orion-analysis-studio .orion-analytics-saved-asset > button { margin-right: 8px; }
+.orion-analysis-studio .orion-analytics-saved-asset > div:not(:empty) { margin-top: 16px; }
+.orion-analysis-studio .orion-analytics-header { margin-bottom: 18px; }
+.orion-analysis-studio .orion-analytics-toolbar { padding-bottom: 16px; }
+.orion-analysis-studio .orion-analytics-canvas { margin: 20px 0; }
+.orion-analysis-studio .orion-analytics-context { margin-top: 22px; padding-top: 14px; }
+.orion-analysis-studio .orion-analytics-asset-filter { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0; }
+.orion-analysis-studio .orion-analytics-catalog-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.orion-analysis-studio .orion-analytics-catalog-header > button { flex: none; }
+.orion-analysis-studio .orion-analytics-memory-search { display: grid; grid-template-columns: minmax(220px, 1fr) auto auto; gap: 10px; align-items: center; margin: 20px 0 0; }
+.orion-analysis-studio .orion-analytics-memory-search > input { min-width: 0; width: 100%; margin: 0; }
+.orion-analysis-studio .orion-analytics-memory-search > button { flex: none; margin: 0; white-space: nowrap; }
+.orion-analysis-studio .orion-analytics-memory-matches:not(:empty) { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--orion-analysis-line); }
+@media (max-width: 760px) {
+  .orion-analysis-studio .orion-analytics-memory-search { grid-template-columns: minmax(0, 1fr); }
+}
+.orion-analysis-studio .orion-analytics-saved-asset > label { display: inline-flex; align-items: center; gap: 7px; margin-right: 14px; }
+.orion-analysis-studio .orion-analytics-report-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 18px; }
+.orion-analysis-studio .orion-analytics-report-card { min-width: 0; padding: 16px; border: 1px solid var(--orion-analysis-line); border-radius: 10px; background: #edfafa30; }
+.orion-analysis-studio .orion-analytics-report-card[data-width="full"] { grid-column: 1/-1; }
+.orion-analysis-studio .orion-analytics-report-card > .orion-analytics-workspace { border: 0; padding: 0; margin-bottom: 0; }
+.orion-analysis-studio .orion-analytics-report-layout { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.orion-analysis-studio .orion-analytics-report-layout > button { padding: 4px 7px; font-size: 12px; }
+@media (max-width: 720px) {
+  .orion-analysis-studio .orion-studio-query-fields { grid-template-columns: 1fr; }
+  .orion-analysis-studio .orion-analytics-report-board { grid-template-columns: 1fr; }
+  .orion-analysis-studio .orion-studio-filter-row { grid-template-columns: 1fr 1fr; }
+  .orion-analysis-studio .orion-studio-navigation > button { padding: 8px 10px; }
+  .orion-analysis-studio .orion-studio-page { padding-top: 16px; }
+}

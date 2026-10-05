@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "actions": {
+    "start_business_preview": {
+      "endpoint": "business-preview",
+      "actorField": null
+    },
+    "create_ontology_project": {
+      "endpoint": "workflow-create",
+      "actorField": null
+    },
+    "resolve_mapping_option": {
+      "endpoint": "mapping-option",
+      "actorField": null
+    },
+    "record_s0_scope_decision": {
+      "endpoint": "workflow-action",
+      "actorField": "decided_by"
+    },
+    "start_document_ingestion_job": {
+      "endpoint": "document-job",
+      "actorField": "actor"
+    },
+    "preflight_workspace_snapshot": {
+      "endpoint": "document-job",
+      "actorField": null
+    },
+    "reconcile_document_source_identities": {
+      "endpoint": "workflow-action",
+      "actorField": "actor"
+    },
+    "record_data_understanding": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "record_document_understanding": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "record_semantic_candidates": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "prepare_mapping_review": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "prepare_ontology_design_review": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "record_ontology_build": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "preflight_stage_submission": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "commit_preflight_stage_submission": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "record_quality_validation": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "retry_failed_stage": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "retry_release_runtime_deployment": {
+      "endpoint": "workflow-action",
+      "actorField": "requested_by"
+    },
+    "resume_active_revision": {
+      "endpoint": "workflow-action",
+      "actorField": null
+    },
+    "resolve_competency_question_review": {
+      "endpoint": "workflow-action",
+      "actorField": "decided_by"
+    },
+    "preview_stage_rollback": {
+      "endpoint": "workflow-action",
+      "actorField": "requested_by"
+    },
+    "reopen_stage_for_correction": {
+      "endpoint": "workflow-action",
+      "actorField": "requested_by"
+    },
+    "defer_ontology_publication": {
+      "endpoint": "workflow-action",
+      "actorField": "decided_by"
+    },
+    "resume_ontology_publication": {
+      "endpoint": "workflow-action",
+      "actorField": "resumed_by"
+    },
+    "publish_ontology_package": {
+      "endpoint": "workflow-action",
+      "actorField": "approved_by"
+    },
+    "revoke_ontology_release": {
+      "endpoint": "workflow-action",
+      "actorField": "revoked_by"
+    },
+    "create_revision_from_release": {
+      "endpoint": "workflow-action",
+      "actorField": "requested_by"
+    },
+    "archive_ontology_project": {
+      "endpoint": "workflow-action",
+      "actorField": "archived_by"
+    },
+    "restore_ontology_project": {
+      "endpoint": "workflow-action",
+      "actorField": "restored_by"
+    },
+    "replace_document_sources": {
+      "endpoint": "workflow-action",
+      "actorField": "actor"
+    }
+  }
+}

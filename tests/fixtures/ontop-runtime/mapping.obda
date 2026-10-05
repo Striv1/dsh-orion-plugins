@@ -1,0 +1,8 @@
+[PrefixDeclaration]
+ex: https://example.com/ontology/runtime-test#
+
+[MappingDeclaration] @collection [[
+mappingId Entity
+target <https://example.com/resource/runtime-test/entity-{code}> a ex:Entity ; ex:code {code} .
+source SELECT code FROM __TEST_ENTITY_TABLE__
+]]

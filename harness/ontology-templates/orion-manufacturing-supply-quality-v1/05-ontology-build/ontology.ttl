@@ -1,0 +1,51 @@
+@prefix orion: <https://orion.local/templates/manufacturing-supply-quality/1.0.0#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://orion.local/templates/manufacturing-supply-quality/1.0.0> a owl:Ontology ;
+  rdfs:label "制造业供应链与来料质量本体模板"@zh ;
+  dcterms:description "用于供应商、采购订单、物料、来料批次、质量检验、异常风险与处置任务建模的 ORION 工程基线。"@zh ;
+  owl:versionInfo "1.0.0" .
+
+orion:Organization a owl:Class ; rdfs:label "组织"@zh .
+orion:Supplier a owl:Class ; rdfs:subClassOf orion:Organization ; rdfs:label "供应商"@zh .
+orion:ResponsibleOrganization a owl:Class ; rdfs:subClassOf orion:Organization ; rdfs:label "责任组织"@zh .
+orion:Material a owl:Class ; rdfs:label "物料"@zh .
+orion:PurchaseOrder a owl:Class ; rdfs:label "采购订单"@zh .
+orion:IncomingBatch a owl:Class ; rdfs:label "来料批次"@zh .
+orion:Inspection a owl:Class ; rdfs:label "质量检验"@zh .
+orion:InspectionResult a owl:Class ; rdfs:label "检验结果"@zh .
+orion:QualityIssue a owl:Class ; rdfs:label "质量异常"@zh .
+orion:RiskEvent a owl:Class ; rdfs:label "风险事件"@zh .
+orion:DispositionTask a owl:Class ; rdfs:label "处置任务"@zh .
+
+orion:placedWith a owl:ObjectProperty, owl:FunctionalProperty ;
+  rdfs:label "向供应商下单"@zh ; rdfs:domain orion:PurchaseOrder ; rdfs:range orion:Supplier .
+orion:ordersMaterial a owl:ObjectProperty ;
+  rdfs:label "订购物料"@zh ; rdfs:domain orion:PurchaseOrder ; rdfs:range orion:Material .
+orion:receivedAgainst a owl:ObjectProperty, owl:FunctionalProperty ;
+  rdfs:label "对应采购订单"@zh ; rdfs:domain orion:IncomingBatch ; rdfs:range orion:PurchaseOrder .
+orion:inspectsBatch a owl:ObjectProperty, owl:FunctionalProperty ;
+  rdfs:label "检验来料批次"@zh ; rdfs:domain orion:Inspection ; rdfs:range orion:IncomingBatch .
+orion:hasInspectionResult a owl:ObjectProperty, owl:FunctionalProperty ;
+  rdfs:label "形成检验结果"@zh ; rdfs:domain orion:Inspection ; rdfs:range orion:InspectionResult .
+orion:raisesQualityIssue a owl:ObjectProperty ;
+  rdfs:label "触发质量异常"@zh ; rdfs:domain orion:InspectionResult ; rdfs:range orion:QualityIssue .
+orion:createsRiskEvent a owl:ObjectProperty ;
+  rdfs:label "形成风险事件"@zh ; rdfs:domain orion:QualityIssue ; rdfs:range orion:RiskEvent .
+orion:assignedTo a owl:ObjectProperty, owl:FunctionalProperty ;
+  rdfs:label "分派给"@zh ; rdfs:domain orion:DispositionTask ; rdfs:range orion:ResponsibleOrganization .
+
+orion:businessId a owl:DatatypeProperty ; rdfs:label "业务编号"@zh ; rdfs:range xsd:string .
+orion:supplierCode a owl:DatatypeProperty ; rdfs:label "供应商编码"@zh ; rdfs:domain orion:Supplier ; rdfs:range xsd:string .
+orion:materialCode a owl:DatatypeProperty ; rdfs:label "物料编码"@zh ; rdfs:domain orion:Material ; rdfs:range xsd:string .
+orion:orderQuantity a owl:DatatypeProperty ; rdfs:label "订单数量"@zh ; rdfs:domain orion:PurchaseOrder ; rdfs:range xsd:decimal .
+orion:batchNumber a owl:DatatypeProperty ; rdfs:label "批次号"@zh ; rdfs:domain orion:IncomingBatch ; rdfs:range xsd:string .
+orion:inspectionConclusion a owl:DatatypeProperty ; rdfs:label "检验结论"@zh ; rdfs:domain orion:InspectionResult ; rdfs:range xsd:string .
+orion:riskLevel a owl:DatatypeProperty ; rdfs:label "风险等级"@zh ; rdfs:domain orion:RiskEvent ; rdfs:range xsd:string .
+orion:taskStatus a owl:DatatypeProperty ; rdfs:label "任务状态"@zh ; rdfs:domain orion:DispositionTask ; rdfs:range xsd:string .
+orion:occurredAt a owl:DatatypeProperty ; rdfs:label "发生时间"@zh ; rdfs:range xsd:dateTime .
+

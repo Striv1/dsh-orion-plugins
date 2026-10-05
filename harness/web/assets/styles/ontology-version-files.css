@@ -1,0 +1,372 @@
+.owa-version-files-overlay[hidden] { display: none !important; }
+
+body.owa-version-files-open { overflow: hidden; }
+
+.owa-version-files-overlay {
+  --owa-vf-bg: #f7f9fc;
+  --owa-vf-panel: #ffffff;
+  --owa-vf-rail: #fbfcfe;
+  --owa-vf-line: #d9e1ec;
+  --owa-vf-line-soft: #e8edf4;
+  --owa-vf-ink: #17263b;
+  --owa-vf-muted: #64758a;
+  --owa-vf-faint: #8997a9;
+  --owa-vf-blue: #2563eb;
+  --owa-vf-blue-strong: #1d4ed8;
+  --owa-vf-blue-soft: #edf4ff;
+  position: fixed;
+  z-index: 2147482100;
+  inset: 0;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 2vw, 32px);
+  background: rgba(20, 36, 57, .34);
+}
+
+body[data-ds-dark-theme] .owa-version-files-overlay {
+  --owa-vf-bg: #111c2a;
+  --owa-vf-panel: #152334;
+  --owa-vf-rail: #132031;
+  --owa-vf-line: #314257;
+  --owa-vf-line-soft: #26374a;
+  --owa-vf-ink: #edf4fc;
+  --owa-vf-muted: #a6b5c8;
+  --owa-vf-faint: #7f91a8;
+  --owa-vf-blue: #72a8f5;
+  --owa-vf-blue-strong: #8bb8f7;
+  --owa-vf-blue-soft: #203a5e;
+  background: rgba(2, 8, 16, .62);
+}
+
+.owa-version-files-dialog {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  width: min(1504px, 100%);
+  height: min(1020px, calc(100vh - 24px));
+  min-height: 560px;
+  box-sizing: border-box;
+  border: 1px solid var(--owa-vf-line);
+  border-radius: 18px;
+  background: var(--owa-vf-bg);
+  box-shadow: 0 28px 80px rgba(18, 36, 61, .24);
+  color: var(--owa-vf-ink);
+  font-family: var(--owa-font-stack);
+  grid-template-rows: 64px auto auto minmax(0, 1fr) 72px;
+}
+
+/* The Aqua compatibility layer stamps a broad `[data-dsh-float] header`
+   rule on the document. Version files deliberately use a solid asset-ledger
+   surface, so its structural headers must not inherit that glass treatment. */
+.owa-version-files-overlay :is(
+  .owa-version-files-header,
+  .owa-version-files-main > header,
+  .owa-version-file-folder > header
+) {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.owa-version-files-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--owa-vf-line) !important;
+  background: var(--owa-vf-panel) !important;
+}
+
+.owa-version-files-title { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.owa-version-files-title strong { color: var(--owa-vf-blue); font-size: 18px; font-weight: 760; letter-spacing: .02em; }
+.owa-version-files-title h2 { margin: 0; padding-left: 16px; border-left: 1px solid var(--owa-vf-line); color: var(--owa-vf-ink); font-size: 22px; font-weight: 680; line-height: 30px; letter-spacing: -.015em; }
+.owa-version-files-header > button {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.owa-version-files-header > button img { width: 22px; height: 22px; opacity: .78; }
+
+.owa-version-files-identity {
+  display: grid;
+  min-height: 98px;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+  align-items: end;
+  gap: 28px;
+  padding: 20px 28px 14px;
+  background: var(--owa-vf-panel);
+}
+.owa-version-files-identity > div { display: grid; min-width: 0; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: 14px; }
+.owa-version-files-identity h3 { overflow: hidden; margin: 0; color: var(--owa-vf-ink); font-size: 20px; font-weight: 680; line-height: 30px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-files-identity > div > span { color: var(--owa-vf-muted); font-size: 14px; white-space: nowrap; }
+.owa-version-files-identity p { display: flex; grid-column: 1 / -1; align-items: center; gap: 9px; margin: 2px 0 0; color: var(--owa-vf-faint); font-size: 11px; line-height: 18px; }
+.owa-version-files-identity p b { color: var(--owa-vf-muted); font-weight: 560; }
+.owa-version-files-identity p i { font-style: normal; }
+.owa-version-files-identity code { overflow: hidden; color: var(--owa-vf-faint); font-family: var(--owa-font-stack); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-files-identity label { display: grid; gap: 5px; }
+.owa-version-files-identity label > span { position: absolute; overflow: hidden; width: 1px; height: 1px; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.owa-version-files-identity input {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 14px;
+  border: 1px solid var(--owa-vf-line);
+  border-radius: 9px;
+  outline: 0;
+  background: var(--owa-vf-panel);
+  color: var(--owa-vf-ink);
+  font: inherit;
+  font-size: 12px;
+}
+.owa-version-files-identity input::placeholder { color: var(--owa-vf-faint); }
+.owa-version-files-identity input:focus { border-color: var(--owa-vf-blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--owa-vf-blue) 18%, transparent); }
+
+.owa-version-files-toolbar {
+  display: flex;
+  min-height: 62px;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 10px 28px 14px;
+  border-bottom: 1px solid var(--owa-vf-line);
+  background: var(--owa-vf-panel);
+}
+.owa-version-files-scope { display: flex; min-width: 0; align-items: center; gap: 12px; }
+.owa-version-files-scope > span { color: var(--owa-vf-muted); font-size: 11px; white-space: nowrap; }
+.owa-version-files-scope > div { display: inline-flex; overflow: hidden; border: 1px solid var(--owa-vf-line); border-radius: 8px; background: var(--owa-vf-panel); }
+.owa-version-files-scope button { min-height: 36px; padding: 0 17px; border: 0; border-right: 1px solid var(--owa-vf-line); background: transparent; color: var(--owa-vf-muted); cursor: pointer; font: inherit; font-size: 11px; }
+.owa-version-files-scope button:last-child { border-right: 0; }
+.owa-version-files-scope button[aria-pressed="true"] { background: var(--owa-vf-blue-soft); color: var(--owa-vf-blue); font-weight: 680; }
+.owa-version-files-scope p { margin: 0; color: var(--owa-vf-faint); font-size: 10px; line-height: 16px; }
+
+.owa-version-files-layout { display: grid; min-width: 0; min-height: 0; grid-template-columns: 300px minmax(0, 1fr); }
+.owa-version-files-groups {
+  display: flex;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 14px 16px 24px;
+  border-right: 1px solid var(--owa-vf-line);
+  background: var(--owa-vf-rail);
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+.owa-version-files-groups button {
+  position: relative;
+  display: grid;
+  min-height: 54px;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 8px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--owa-vf-muted);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.owa-version-files-groups button::before { position: absolute; top: 10px; bottom: 10px; left: 0; width: 3px; border-radius: 3px; background: transparent; content: ""; }
+.owa-version-files-groups strong { overflow: hidden; color: var(--owa-vf-ink); font-size: 13px; font-weight: 620; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-files-groups b { display: inline-flex; min-width: 28px; height: 28px; align-items: center; justify-content: center; border: 1px solid var(--owa-vf-line-soft); border-radius: 50%; background: var(--owa-vf-panel); color: var(--owa-vf-muted); font-size: 10px; font-weight: 650; }
+.owa-version-files-groups button[aria-current="page"] { background: var(--owa-vf-blue-soft); }
+.owa-version-files-groups button[aria-current="page"]::before { background: var(--owa-vf-blue); }
+.owa-version-files-groups button[aria-current="page"] strong,
+.owa-version-files-groups button[aria-current="page"] b { color: var(--owa-vf-blue); }
+
+.owa-version-files-main { display: grid; min-width: 0; min-height: 0; background: var(--owa-vf-panel); grid-template-rows: 82px 44px minmax(0, 1fr); }
+.owa-version-files-main > header { display: flex; min-height: 82px; box-sizing: border-box; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 28px !important; border: 0 !important; border-bottom: 1px solid var(--owa-vf-line) !important; background: var(--owa-vf-panel) !important; }
+.owa-version-files-main > header > div { min-width: 0; }
+.owa-version-files-main > header span { color: var(--owa-vf-blue); font-size: 10px; font-weight: 720; letter-spacing: .08em; }
+.owa-version-files-main > header h3 { margin: 2px 0 0; color: var(--owa-vf-ink); font-size: 18px; font-weight: 680; line-height: 25px; }
+.owa-version-files-main > header p { overflow: hidden; margin: 2px 0 0; color: var(--owa-vf-muted); font-size: 10px; line-height: 16px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-files-main > header > b { color: var(--owa-vf-muted); font-size: 11px; font-weight: 560; white-space: nowrap; }
+.owa-version-files-columns { display: grid; min-width: 0; grid-template-columns: minmax(300px, 1.2fr) minmax(280px, 1.3fr) 300px; align-items: center; gap: 22px; padding: 0 28px; border-bottom: 1px solid var(--owa-vf-line); background: var(--owa-vf-bg); color: var(--owa-vf-muted); font-size: 11px; }
+
+.owa-version-files-list { min-height: 0; padding: 0 28px 30px; overflow-y: auto; scrollbar-color: var(--owa-vf-line) transparent; scrollbar-width: thin; }
+.owa-version-file-folder { margin: 0; }
+.owa-version-file-folder > header { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0 5px !important; border: 0 !important; border-bottom: 1px solid var(--owa-vf-line) !important; background: transparent !important; }
+.owa-version-file-folder > header strong { color: var(--owa-vf-ink); font-size: 11px; font-weight: 670; }
+.owa-version-file-folder > header span { color: var(--owa-vf-faint); font-size: 9px; }
+.owa-version-file-row { display: grid; min-height: 78px; box-sizing: border-box; grid-template-columns: minmax(300px, 1.2fr) minmax(280px, 1.3fr) 300px; align-items: center; gap: 22px; padding: 12px 0; border-bottom: 1px solid var(--owa-vf-line-soft); background: transparent; }
+.owa-version-file-copy { display: grid; min-width: 0; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 12px; }
+.owa-version-file-copy > img { width: 26px; height: 26px; opacity: .72; }
+.owa-version-file-copy > div { display: grid; min-width: 0; gap: 3px; }
+.owa-version-file-copy > div > div { display: flex; min-width: 0; align-items: center; gap: 7px; }
+.owa-version-file-copy strong { overflow: hidden; color: var(--owa-vf-ink); font-size: 13px; font-weight: 660; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-file-copy span,
+.owa-version-file-copy em { flex: 0 0 auto; padding: 2px 6px; border-radius: 5px; background: var(--owa-vf-bg); color: var(--owa-vf-muted); font-size: 8px; font-style: normal; }
+.owa-version-file-copy em { background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning); }
+.owa-version-file-copy code { overflow: hidden; color: var(--owa-vf-faint); font-family: var(--owa-font-stack); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.owa-version-file-purpose { min-width: 0; margin: 0; color: var(--owa-vf-muted); font-size: 11px; line-height: 18px; }
+.owa-version-file-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.owa-version-file-actions :is(a, button) { display: inline-flex; min-width: 64px; min-height: 36px; box-sizing: border-box; align-items: center; justify-content: center; padding: 0 12px; border: 1px solid var(--owa-vf-line); border-radius: 7px; background: var(--owa-vf-panel); color: var(--owa-vf-muted); cursor: pointer; font: inherit; font-size: 11px; text-decoration: none; white-space: nowrap; }
+.owa-version-file-actions a:first-child { border-color: var(--owa-vf-blue); background: var(--owa-vf-blue); color: #fff; font-weight: 650; }
+.owa-version-file-actions button { min-width: 88px; }
+.owa-version-file-actions button:disabled { cursor: progress; opacity: .58; }
+
+.owa-version-files-footer { display: flex; align-items: center; justify-content: flex-end; padding: 0 28px; border-top: 1px solid var(--owa-vf-line); background: var(--owa-vf-panel); }
+.owa-version-files-footer button { min-width: 96px; min-height: 38px; padding: 0 18px; border: 1px solid var(--owa-vf-line); border-radius: 8px; background: var(--owa-vf-panel); color: var(--owa-vf-ink); cursor: pointer; font: inherit; font-size: 11px; }
+.owa-version-files-empty { display: flex; min-height: 260px; align-items: center; justify-content: center; flex-direction: column; gap: 6px; color: var(--owa-vf-faint); text-align: center; }
+.owa-version-files-empty strong { color: var(--owa-vf-ink); font-size: 13px; }
+.owa-version-files-empty span { font-size: 10px; }
+.owa-version-files-notice { position: absolute; z-index: 2; right: 28px; bottom: 86px; max-width: 420px; padding: 11px 14px; border: 1px solid var(--owa-vf-line); border-radius: 8px; background: var(--owa-vf-panel); box-shadow: 0 16px 40px rgba(18, 36, 61, .18); color: var(--owa-vf-ink); font-size: 10px; line-height: 17px; }
+.owa-version-files-notice[data-tone="success"] { border-color: var(--owa-semantic-success-border); }
+.owa-version-files-notice[data-tone="error"] { border-color: var(--owa-semantic-warning-border); background: var(--owa-semantic-warning-soft); }
+
+.owa-version-files-header button:focus-visible,
+.owa-version-files-groups button:focus-visible,
+.owa-version-file-actions :is(a, button):focus-visible,
+.owa-version-files-footer button:focus-visible { outline: 2px solid var(--owa-vf-blue); outline-offset: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .owa-version-files-header > button:hover,
+  .owa-version-files-footer button:hover,
+  .owa-version-file-actions :is(a, button):hover { border-color: var(--owa-vf-blue); color: var(--owa-vf-blue-strong); }
+  .owa-version-file-actions a:first-child:hover { background: var(--owa-vf-blue-strong); color: #fff; }
+  .owa-version-files-groups button:hover:not([aria-current="page"]) { background: var(--owa-vf-bg); }
+  .owa-version-file-row:hover { background: var(--owa-vf-blue-soft); }
+}
+
+@media (max-width: 980px) {
+  .owa-version-files-dialog { height: calc(100vh - 24px); }
+  .owa-version-files-identity { grid-template-columns: minmax(0, 1fr) 300px; }
+  .owa-version-files-layout { grid-template-columns: 210px minmax(0, 1fr); }
+  .owa-version-files-columns,
+  .owa-version-file-row { grid-template-columns: minmax(210px, 1fr) minmax(190px, 1fr) 94px; gap: 14px; }
+  .owa-version-file-actions { flex-direction: column; align-items: stretch; gap: 4px; }
+  .owa-version-file-actions :is(a, button) { min-width: 0; min-height: 28px; }
+}
+
+@media (max-width: 720px) {
+  .owa-version-files-overlay { padding: 0; }
+  .owa-version-files-dialog { width: 100%; height: 100vh; min-height: 0; border: 0; border-radius: 0; grid-template-rows: 56px auto auto minmax(0, 1fr) 60px; }
+  .owa-version-files-identity { grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 12px; padding: 16px; }
+  .owa-version-files-identity h3 { font-size: 17px; }
+  .owa-version-files-toolbar { padding: 8px 16px 12px; }
+  .owa-version-files-scope { align-items: flex-start; flex-wrap: wrap; }
+  .owa-version-files-scope p { width: 100%; }
+  .owa-version-files-layout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .owa-version-files-groups { padding: 8px 12px; border-right: 0; border-bottom: 1px solid var(--owa-vf-line); flex-direction: row; overflow-x: auto; }
+  .owa-version-files-groups button { min-width: 150px; min-height: 44px; }
+  .owa-version-files-main { grid-template-rows: auto minmax(0, 1fr); }
+  .owa-version-files-main > header { min-height: 70px; padding: 12px 16px; }
+  .owa-version-files-columns { display: none; }
+  .owa-version-files-list { padding: 0 16px 24px; }
+  .owa-version-file-row { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 14px 0; }
+  .owa-version-file-purpose { padding-left: 42px; }
+  .owa-version-file-actions { padding-left: 42px; flex-direction: row; justify-content: flex-start; }
+  .owa-version-files-footer { padding: 0 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .owa-version-file-row,
+  .owa-version-file-actions :is(a, button),
+  .owa-version-files-groups button { transition: none; }
+}
+
+/* File guidance and read-only previews share the existing light/dark palette. */
+.owa-vf-view-label { display:flex; align-items:center; gap:8px; color:var(--owa-vf-muted); font-size:12px; }
+.owa-vf-view-label select { padding:8px; border:1px solid var(--owa-vf-line); border-radius:6px; background:var(--owa-vf-panel); color:var(--owa-vf-ink); }
+.owa-version-file-purpose p { margin:6px 0; line-height:1.65; }
+.owa-vf-role { color:var(--owa-vf-blue); font-size:11px; font-weight:650; }
+.owa-vf-guide { font-size:11px; line-height:1.7; }
+.owa-vf-guide summary { cursor:pointer; color:var(--owa-vf-muted); }
+.owa-vf-guide dl { display:grid; gap:4px; margin:10px 0; }
+.owa-vf-guide dt { font-weight:650; color:var(--owa-vf-ink); }
+.owa-vf-guide dd { margin:0 0 8px; overflow-wrap:anywhere; }
+.owa-vf-guide small { color:var(--owa-vf-muted); }
+.owa-version-file-actions { flex-wrap:wrap; }
+.owa-version-file-actions .owa-vf-preview-button { background:var(--owa-vf-blue); color:#fff; }
+.owa-file-preview { --p-bg:#fff; --p-ink:#192c43; --p-muted:#52667c; --p-line:#dbe4ee; --p-soft:#f3f6fa; box-sizing:border-box; width:min(1080px,96vw); height:92vh; max-height:92vh; padding:0; border:1px solid var(--p-line); border-radius:12px; background:var(--p-bg); color:var(--p-ink); }
+body[data-ds-dark-theme] .owa-file-preview { --p-bg:#111e2d; --p-ink:#e2edf8; --p-muted:#a8bad0; --p-line:#35475e; --p-soft:#192a3d; }
+.owa-file-preview::backdrop { background:rgba(5,14,28,.55); }
+.owa-file-preview[open] { display:flex; flex-direction:column; }
+.owa-file-preview > header { display:flex; flex-shrink:0; align-items:center; justify-content:space-between; gap:12px; margin:0!important; padding:16px 24px!important; border:0!important; border-bottom:1px solid var(--p-line)!important; border-radius:0!important; background:var(--p-bg)!important; }
+.owa-file-preview h2 { margin:3px 0 0; font-size:19px; overflow-wrap:anywhere; }
+.owa-file-preview small,.owa-vfp-note { color:var(--p-muted); }
+.owa-file-preview button { padding:8px 12px; border:1px solid var(--p-line); border-radius:6px; color:var(--p-ink); background:var(--p-soft); cursor:pointer; white-space:nowrap; }
+.owa-vfp-context { flex-shrink:0; max-height:30vh; overflow:auto; padding:16px 24px; background:var(--p-soft); border-bottom:1px solid var(--p-line); font-size:13px; line-height:1.6; }
+.owa-vfp-context p { margin:6px 0; }
+.owa-file-preview a { color:#3579ef; }
+.owa-vfp-content { flex:1; overflow:auto; padding:24px; font-size:14px; line-height:1.8; }
+.owa-file-preview pre { white-space:pre-wrap; overflow-wrap:anywhere; padding:12px; background:var(--p-soft); color:var(--p-ink); font-size:12px; }
+.owa-file-preview code { overflow-wrap:anywhere; background:var(--p-soft); }
+.owa-file-preview details { margin:8px 0; border-bottom:1px solid var(--p-line); padding-bottom:8px; }
+.owa-file-preview summary { cursor:pointer; overflow-wrap:anywhere; font-weight:600; }
+.owa-file-preview dl { display:grid; grid-template-columns:minmax(100px,170px) minmax(0,1fr); gap:8px 16px; }
+.owa-file-preview dt { color:var(--p-muted); overflow-wrap:anywhere; }
+.owa-file-preview dd { margin:0; overflow-wrap:anywhere; }
+.owa-file-preview .owa-vfp-table-line { margin:0; padding:2px 8px; }
+@media(max-width:900px) { .owa-version-files-toolbar { display:flex; flex-wrap:wrap; gap:10px; } .owa-version-file-row,.owa-version-files-columns { grid-template-columns:minmax(170px,1fr) minmax(200px,1.3fr); } .owa-version-file-actions { grid-column:1/-1; } .owa-file-preview dl { grid-template-columns:1fr; } }
+.owa-vfp-table { overflow-x:auto; }
+.owa-vfp-table table { width:100%; border-collapse:collapse; text-align:left; }
+.owa-vfp-table :is(th,td) { padding:10px; border-bottom:1px solid var(--p-line); vertical-align:top; min-width:130px; overflow-wrap:anywhere; }
+.owa-vfp-table td small { display:block; font-size:11px; }
+
+/* Reading surface: keep collections full width instead of nesting inside field columns. */
+.owa-file-preview { width:min(1380px,97vw); height:95vh; max-height:95vh; box-shadow:0 24px 90px #0004; }
+.owa-vfp-context { padding:10px 28px; max-height:22vh; }
+.owa-vfp-context > p { margin:0 0 4px; }
+.owa-vfp-context > details { display:block; margin:4px 0; border:0; padding:0; }
+.owa-vfp-context > a { font-size:12px; }
+.owa-vfp-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 28px; border-bottom:1px solid var(--p-line); flex-shrink:0; }
+.owa-vfp-toolbar > div { display:flex; gap:4px; }
+.owa-vfp-toolbar button { border-color:transparent; background:transparent; font-size:13px; }
+.owa-vfp-toolbar button[aria-pressed="true"] { background:var(--p-soft); border-color:var(--p-line); font-weight:700; }
+.owa-vfp-toolbar > span { color:var(--p-muted); font-size:12px; }
+.owa-vfp-content { padding:28px 36px 64px; scrollbar-gutter:stable; }
+.owa-vfp-content > :first-child { margin-top:0; }
+.owa-vfp-document { max-width:880px; margin:auto; line-height:1.95; font-size:15px; }
+.owa-vfp-document h1 { font-size:28px; letter-spacing:-.5px; line-height:1.4; margin:0 0 28px; padding-bottom:18px; border-bottom:1px solid var(--p-line); }
+.owa-vfp-document h2 { font-size:21px; line-height:1.5; margin:36px 0 16px; }
+.owa-vfp-document h3 { font-size:17px; line-height:1.6; margin:28px 0 12px; overflow-wrap:anywhere; }
+.owa-vfp-document p { margin:12px 0; }
+.owa-vfp-document li { padding:3px 0; }
+.owa-vfp-document blockquote { margin:18px 0; border-left:3px solid #6b91c4; background:var(--p-soft); padding:12px 18px; color:var(--p-muted); }
+.owa-vfp-document hr { border:0; border-top:1px solid var(--p-line); margin:30px 0; }
+.owa-vfp-content pre { padding:18px 20px; border:1px solid var(--p-line); border-radius:8px; line-height:1.75; tab-size:2; }
+.owa-vfp-content :not(pre) > code { padding:2px 5px; border-radius:4px; font-size:.88em; }
+.owa-vfp-content .owa-vfp-source { margin:0; font-size:13px; }
+.owa-vfp-section { margin:24px 0; min-width:0; }
+.owa-vfp-section > h3 { margin:0 0 14px; font-size:16px; padding-bottom:10px; border-bottom:1px solid var(--p-line); }
+.owa-vfp-section h3 small { margin-left:10px; font-size:11px; font-weight:400; }
+.owa-file-preview .owa-vfp-fields { grid-template-columns:minmax(140px,210px) minmax(0,1fr); margin:0; gap:0; border:1px solid var(--p-line); border-radius:8px; overflow:hidden; }
+.owa-vfp-fields > dt,.owa-vfp-fields > dd { padding:10px 16px; border-bottom:1px solid var(--p-line); }
+.owa-vfp-fields > dt { background:var(--p-soft); font-size:12px; }
+.owa-vfp-fields > dt small { display:block; font-size:10px; opacity:.8; }
+.owa-vfp-fields > :nth-last-child(-n+2) { border-bottom:0; }
+.owa-vfp-content details { border:1px solid var(--p-line); border-radius:8px; padding:0; margin:10px 0; overflow:hidden; }
+.owa-vfp-content summary { padding:12px 16px; background:var(--p-soft); font-size:13px; }
+.owa-vfp-content details > :not(summary) { margin:16px; }
+.owa-vfp-content details .owa-vfp-section { padding:0 8px; }
+.owa-vfp-table { border:1px solid var(--p-line); border-radius:8px; margin:12px 0 24px; }
+.owa-vfp-table table { font-size:13px; }
+.owa-vfp-table th { background:var(--p-soft); font-size:12px; white-space:nowrap; }
+.owa-vfp-table :is(th,td) { padding:14px 16px; min-width:150px; }
+.owa-vfp-table tbody tr:hover { background:var(--p-soft); }
+.owa-vfp-table td small { margin-top:6px; line-height:1.6; }
+.owa-vfp-boolean { font-family:monospace; font-weight:600; }
+.owa-file-preview button:focus-visible,.owa-file-preview summary:focus-visible { outline:2px solid #5288d5; outline-offset:2px; }
+@media(max-width:700px) {
+  .owa-file-preview > header { padding:12px 16px!important; }
+  .owa-file-preview h2 { font-size:16px; }
+  .owa-vfp-context,.owa-vfp-toolbar { padding:8px 16px; }
+  .owa-vfp-content { padding:20px 16px 40px; }
+  .owa-file-preview .owa-vfp-fields { grid-template-columns:minmax(95px,30%) minmax(0,1fr); }
+  .owa-vfp-fields > dt,.owa-vfp-fields > dd { padding:8px; }
+  .owa-vfp-document h1 { font-size:23px; }
+}

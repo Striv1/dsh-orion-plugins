@@ -1,0 +1,6 @@
+@prefix ex: <https://example.com/ontology/runtime-test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+<https://example.com/ontology/runtime-test> a owl:Ontology .
+ex:Entity a owl:Class .
+ex:code a owl:DatatypeProperty ; rdfs:domain ex:Entity .

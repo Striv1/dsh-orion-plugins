@@ -1,0 +1,4 @@
+PREFIX ex: <https://example.com/ontology/runtime-test#>
+SELECT ?entity WHERE {
+  ?entity a ex:Entity ; ex:code "{{entity_code}}" .
+}

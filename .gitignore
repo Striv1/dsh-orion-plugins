@@ -1,0 +1,60 @@
+# Dependencies and generated packages
+node_modules/
+dist/
+build/
+*.tgz
+*.tar.gz
+*.whl
+*.egg-info/
+
+# Local runtimes, environments and application Profiles
+.venv/
+.venvs/
+.orion-runtime/
+.orion-workflows/
+.orion-semantica/
+.orion-export-owner.json
+profiles/
+homes/
+state/
+cache/
+logs/
+distribution/
+backups/
+retired-launchers/
+
+# Credentials and generated machine-specific configuration
+.env
+.env.*
+.credentials*
+.npmrc
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.private.*
+runtime-environment.json
+runtime-manager.json
+orion-desktop-overrides.json
+
+# Local acceptance artifacts: share separately only after a deliberate review
+receipts/
+screenshots/
+docs/evidence/
+docs/local/
+docs/*交付说明*.md
+docs/*待验收*.md
+*.screenshot.png
+*.screenshot.jpg
+*.receipt.json
+*.files.json
+*.build-receipt.json
+
+# Language/tool caches and operating-system noise
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.log
+.DS_Store

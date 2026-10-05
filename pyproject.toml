@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dsh-orion-runtime"
+version = "1.0.0rc6"
+description = "ORION AI production ontology engineering and reasoning platform"
+readme = "docs/runtime-install.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "fastapi==0.116.1",
+  "httpx==0.28.1",
+  "mcp==1.29.0",
+  "minio==7.2.20",
+  "openpyxl==3.1.5",
+  "owlrl==7.1.4",
+  "pillow==11.3.0",
+  "psycopg[binary]==3.2.9",
+  "PyMySQL==1.1.2",
+  "pydantic==2.11.7",
+  "python-docx==1.2.0",
+  "pyshacl==0.30.1",
+  "PyYAML==6.0.2",
+  "rdflib==7.1.4",
+  "SQLAlchemy==2.0.43",
+  "uvicorn[standard]==0.35.0",
+]
+
+[dependency-groups]
+dev = [
+  "playwright==1.54.0",
+  "pytest==8.4.1",
+  "pytest-asyncio==1.1.0",
+  "pytest-cov==6.2.1",
+  "ruff==0.12.9",
+]
+
+[tool.hatch.build]
+exclude = [
+  "**/__pycache__/**",
+  "**/node_modules/**",
+  "**/.credentials*",
+  "**/.env",
+  "**/.DS_Store",
+]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["services", "harness", "scripts", "database", "pyproject.toml", "uv.lock", "Makefile", "contracts", "docs/runtime-install.md", "vendor/echarts-LICENSE.txt", "vendor/echarts-NOTICE.txt"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["services", "harness"]
+
+[tool.pytest.ini_options]
+cache_dir = ".orion-runtime/cache/pytest"
+testpaths = ["tests"]
+addopts = "-q --strict-markers --import-mode=importlib"
+markers = [
+  "integration: requires local infrastructure",
+  "e2e: end-to-end golden path",
+  "visual: browser screenshot validation",
+]
+
+[tool.ruff]
+cache-dir = ".orion-runtime/cache/ruff"
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

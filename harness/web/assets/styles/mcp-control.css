@@ -1,0 +1,164 @@
+/* Expand only the native settings dialog currently showing MCP management. */
+[role="dialog"]:has([data-plugin-panel]) {
+  width: min(1180px, calc(100% - 24px)) !important;
+  max-width: calc(100% - 24px) !important;
+  height: min(900px, calc(100dvh - 48px)) !important;
+  max-height: calc(100dvh - 48px) !important;
+}
+
+.owa-engineering-plugin { min-width: 0; }
+.owa-engineering-plugin > h2 { font-size: 18px; color: var(--owa-semantic-text-primary); }
+.owa-engineering-plugin > p { font-size: 13px; line-height: 1.6; color: var(--owa-semantic-text-secondary); }
+
+.owa-mcp-control-panel {
+  --owa-mcp-surface: var(--owa-semantic-surface-panel);
+  --owa-mcp-surface-strong: var(--owa-semantic-surface-panel-strong);
+  --owa-mcp-border-soft: var(--owa-semantic-border-subtle);
+  container-type: inline-size;
+  padding: 16px 2px 24px;
+}
+
+.owa-mcp-control-panel .owa-mcp-overview {
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 250px);
+  gap: 14px 20px;
+  padding: 17px 18px;
+  border-color: var(--owa-mcp-border-soft);
+  border-radius: var(--owa-radius-card);
+  background: linear-gradient(145deg, var(--owa-semantic-accent-soft), var(--owa-mcp-surface));
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-mcp-control-panel .owa-mcp-overview-copy h2 {
+  margin: 0 0 5px;
+  color: var(--owa-semantic-text-primary);
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.owa-mcp-control-panel .owa-mcp-overview-copy p {
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.owa-mcp-control-panel .owa-mcp-summary { gap: 7px; }
+
+.owa-mcp-control-panel .owa-mcp-summary > span {
+  padding: 7px 5px;
+  border-color: var(--owa-mcp-border-soft);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-tertiary);
+  box-shadow: none;
+}
+
+.owa-mcp-control-panel .owa-mcp-summary strong { color: var(--owa-semantic-text-primary); font-size: 15px; }
+.owa-mcp-control-panel .owa-mcp-summary .is-ready strong { color: var(--owa-semantic-success); }
+.owa-mcp-control-panel .owa-mcp-summary .is-warning strong { color: var(--owa-semantic-warning); }
+.owa-mcp-control-panel .owa-mcp-summary .is-offline strong { color: var(--owa-semantic-danger); }
+
+.owa-mcp-control-panel .owa-mcp-toolbar {
+  padding-top: 12px;
+  border-top-color: var(--owa-mcp-border-soft);
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+}
+
+.owa-mcp-control-panel .owa-mcp-toolbar button,
+.owa-mcp-control-panel .owa-mcp-action,
+.owa-mcp-control-panel .owa-mcp-empty button {
+  border-color: var(--owa-semantic-border-default);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-primary);
+}
+
+.owa-mcp-control-panel .owa-mcp-toolbar button:hover,
+.owa-mcp-control-panel .owa-mcp-action:hover,
+.owa-mcp-control-panel .owa-mcp-empty button:hover {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-semantic-surface-selected);
+}
+
+.owa-mcp-control-panel .owa-mcp-toolbar button.is-primary {
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-mcp-control-panel .owa-mcp-grid { gap: 10px; margin-top: 11px; }
+
+.owa-mcp-control-panel .owa-mcp-card {
+  min-height: 138px;
+  padding: 13px 14px 11px;
+  border-color: var(--owa-mcp-border-soft);
+  border-left-width: 3px;
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-mcp-surface);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-mcp-control-panel .owa-mcp-card.is-ready { border-left-color: var(--owa-semantic-success); }
+.owa-mcp-control-panel .owa-mcp-card.is-warning { border-left-color: var(--owa-semantic-warning); }
+.owa-mcp-control-panel .owa-mcp-card.is-offline { border-left-color: var(--owa-semantic-danger); }
+.owa-mcp-control-panel .owa-mcp-card.is-ready .owa-mcp-dot { background: var(--owa-semantic-success); }
+.owa-mcp-control-panel .owa-mcp-card.is-warning .owa-mcp-dot { background: var(--owa-semantic-warning); }
+.owa-mcp-control-panel .owa-mcp-card.is-offline .owa-mcp-dot { background: var(--owa-semantic-danger); }
+
+.owa-mcp-control-panel .owa-mcp-card > header {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.owa-mcp-control-panel .owa-mcp-card h3 { color: var(--owa-semantic-text-primary); font-size: 13px; }
+
+.owa-mcp-control-panel .owa-mcp-badge {
+  border: 1px solid transparent;
+  border-radius: var(--owa-radius-round);
+  background: var(--owa-semantic-surface-control);
+}
+
+.owa-mcp-control-panel .owa-mcp-badge.is-ready { border-color: var(--owa-semantic-success-border); background: var(--owa-semantic-success-soft); color: var(--owa-semantic-success); }
+.owa-mcp-control-panel .owa-mcp-badge.is-warning { border-color: var(--owa-semantic-warning-border); background: var(--owa-semantic-warning-soft); color: var(--owa-semantic-warning); }
+.owa-mcp-control-panel .owa-mcp-badge.is-offline { border-color: var(--owa-semantic-danger-border); background: var(--owa-semantic-danger-soft); color: var(--owa-semantic-danger); }
+
+.owa-mcp-control-panel .owa-mcp-meta span {
+  background: var(--owa-semantic-surface-selected);
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-mcp-control-panel .owa-mcp-card code { color: var(--owa-semantic-text-secondary); }
+.owa-mcp-control-panel .owa-mcp-card p { color: var(--owa-semantic-text-tertiary); }
+
+.owa-mcp-control-panel .owa-mcp-card > footer {
+  border-top-color: var(--owa-semantic-border-subtle);
+}
+
+.owa-mcp-control-panel .owa-mcp-detail-panel {
+  border-color: var(--owa-mcp-border-soft);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-mcp-surface-strong);
+  box-shadow: var(--owa-shadow-card);
+}
+
+.owa-mcp-control-panel .owa-mcp-detail-panel > nav {
+  border-bottom-color: var(--owa-mcp-border-soft);
+  background: var(--owa-semantic-surface-navigation);
+}
+
+@container (max-width: 660px) {
+  .owa-mcp-control-panel .owa-mcp-overview { grid-template-columns: minmax(0, 1fr); }
+  .owa-mcp-control-panel .owa-mcp-summary { grid-template-columns: repeat(4, minmax(54px, 1fr)); }
+  .owa-mcp-control-panel .owa-mcp-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@container (max-width: 480px) {
+  .owa-mcp-control-panel .owa-mcp-toolbar { align-items: stretch; flex-direction: column; gap: 9px; }
+  .owa-mcp-control-panel .owa-mcp-toolbar > div { width: 100%; }
+  .owa-mcp-control-panel .owa-mcp-toolbar button { flex: 1 1 0; }
+  .owa-mcp-control-panel .owa-mcp-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

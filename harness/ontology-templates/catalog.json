@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "templates": [
+    {
+      "id": "orion-manufacturing-supply-quality-v1",
+      "kind": "ORION_TEMPLATE",
+      "name": "制造业供应链与来料质量本体模板",
+      "short_name": "制造业供应链与来料质量",
+      "version": "1.0.0",
+      "domain": "制造业供应链与来料质量",
+      "description": "覆盖供应商、采购订单、物料、来料批次、检验结果、质量异常、风险事件与处置任务，作为客户本体工程的可复用建设基线。",
+      "status": "VERIFIED",
+      "status_label": "已验证",
+      "source_label": "ORION 验证发布资产抽象",
+      "source_url": "",
+      "license": "ORION Internal",
+      "source_ref": "orion-template/1.0.0",
+      "ontology_path": "05-ontology-build/ontology.ttl",
+      "create_enabled": true,
+      "stats": {
+        "classes": 11,
+        "object_properties": 8,
+        "data_properties": 9,
+        "constraints": 9
+      },
+      "default_questions": [
+        {
+          "question": "哪些供应商的来料质量异常正在影响关键采购订单？",
+          "expected": "返回供应商、来料批次、异常检验结果、受影响订单和可追溯证据。",
+          "priority": "HIGH"
+        },
+        {
+          "question": "某个来料批次应该触发哪些质量处置任务？",
+          "expected": "根据检验结论和质量规则返回处置类型、责任方与依据。",
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "iof-supply-chain-202603",
+      "kind": "INDUSTRY_REFERENCE",
+      "name": "IOF 供应链参考本体",
+      "short_name": "IOF Supply Chain",
+      "version": "2026.03",
+      "domain": "工业制造与供应链",
+      "description": "Industrial Ontologies Foundry 的供应链参考本体，用于制造业供应链和物流概念对齐。作为行业参考查看，不直接替代客户工程。",
+      "status": "REFERENCE",
+      "status_label": "行业参考",
+      "source_label": "Industrial Ontologies Foundry",
+      "source_url": "https://github.com/iofoundry/ontology/tree/Release_202603/supplychain",
+      "license": "MIT",
+      "source_ref": "Release_202603@95d824638874ef9b45c93ef99908280295626865",
+      "ontology_path": "05-ontology-build/ontology.rdf",
+      "create_enabled": false,
+      "stats": {
+        "classes": 151,
+        "object_properties": 18,
+        "data_properties": 1,
+        "constraints": 0
+      }
+    },
+    {
+      "id": "automatce-base-v1",
+      "kind": "INDUSTRY_REFERENCE",
+      "name": "AutoMatCE 汽车循环经济本体",
+      "short_name": "AutoMatCE Base",
+      "version": "1.0.0",
+      "domain": "汽车循环经济",
+      "description": "面向汽车产品、材料、拆解、再利用、回收、足迹与物流的应用本体基线。作为行业参考查看，不直接替代客户工程。",
+      "status": "REFERENCE",
+      "status_label": "行业参考",
+      "source_label": "MaterialDigital",
+      "source_url": "https://github.com/materialdigital/automatce/tree/v1.0.0",
+      "license": "CC BY 4.0",
+      "source_ref": "v1.0.0@3a50735f8ed6fcb3caa94db1838337d60fa98fd4",
+      "ontology_path": "05-ontology-build/ontology.ttl",
+      "create_enabled": false,
+      "stats": {
+        "classes": 349,
+        "object_properties": 12,
+        "data_properties": 0,
+        "constraints": 0
+      }
+    },
+    {
+      "id": "openepcis-dpp-core-v098",
+      "kind": "INDUSTRY_REFERENCE",
+      "name": "OpenEPCIS 数字产品护照核心本体",
+      "short_name": "OpenEPCIS DPP Core",
+      "version": "0.9.8",
+      "domain": "数字产品护照与产品追溯",
+      "description": "面向 ESPR、GS1 与数字产品护照场景的核心语义词汇。当前版本作为行业参考，需要经过 ORION 适配验证后才能转为工程模板。",
+      "status": "REFERENCE",
+      "status_label": "行业参考",
+      "source_label": "OpenEPCIS",
+      "source_url": "https://github.com/openepcis/openepcis-dpp-ready/tree/v0.9.8/extensions/common/core",
+      "license": "Apache-2.0",
+      "source_ref": "v0.9.8@9b31e170fbf1a219e46f12f02c10468f061782bf",
+      "ontology_path": "05-ontology-build/ontology.ttl",
+      "create_enabled": false,
+      "stats": {
+        "classes": 62,
+        "object_properties": 73,
+        "data_properties": 110,
+        "constraints": 0
+      }
+    }
+  ]
+}

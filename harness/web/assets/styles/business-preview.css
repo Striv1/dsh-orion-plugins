@@ -1,0 +1,26 @@
+.owa-business-preview { color: var(--owa-eng-text, var(--owa-semantic-text-primary)); overflow-wrap: anywhere; }
+.owa-business-preview p { margin: 8px 0; line-height: 1.6; }
+.owa-business-preview-toolbar, .owa-business-preview-plan > header, .owa-business-preview-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.owa-business-preview button, .owa-business-preview select { border: 1px solid var(--owa-eng-border, #cbd5e1); border-radius: 8px; padding: 8px 12px; font: inherit; color: inherit; background: var(--owa-eng-surface, var(--owa-semantic-surface-primary, #fff)); }
+.owa-business-preview button { cursor: pointer; }
+.owa-business-preview button:disabled, .owa-business-preview select:disabled { cursor: not-allowed; opacity: .55; }
+.owa-business-preview :is(button, select, summary, [tabindex]):focus-visible { outline: 2px solid var(--owa-semantic-accent, #2563eb); outline-offset: 3px; }
+.owa-business-preview-notice { padding: 12px 16px; border-radius: 10px; background: rgba(105, 145, 205, .09); font-size: 13px; }
+.owa-business-preview-plan { margin: 16px 0; padding: 16px; border: 1px solid var(--owa-eng-border, #cbd5e1); border-radius: 12px; }
+.owa-business-preview-plan h3 { margin: 0; font-size: 16px; }
+.owa-business-preview-status { font-size: 13px; font-weight: 600; }
+.owa-business-preview-plan[data-preview-status="PASSED"] .owa-business-preview-status { color: var(--owa-semantic-success, #13734d); }
+.owa-business-preview-plan:is([data-preview-status="FAILED"], [data-preview-status="INTERRUPTED"], [data-preview-status="STALE"], [data-preview-status="UNKNOWN"]) .owa-business-preview-status, .owa-business-preview-error { color: var(--owa-semantic-danger, #aa341a); }
+.owa-business-preview-controls { justify-content: flex-start; margin: 12px 0; }
+.owa-business-preview-controls label { display: flex; align-items: center; gap: 8px; }
+.owa-business-preview-controls select { max-width: min(300px, 55vw); }
+.owa-business-preview-meta, .owa-business-preview-sources { font-size: 12px; color: var(--owa-eng-muted, var(--owa-semantic-text-secondary)); }
+.owa-business-preview-questions, .owa-business-preview-diagnostics, .owa-business-preview-sources ul { padding-left: 20px; }
+.owa-business-preview-diagnostics { padding: 8px 12px 8px 28px; border-left: 3px solid var(--owa-eng-border, #cbd5e1); }
+.owa-business-preview-table { overflow: auto; max-height: 340px; margin: 12px 0; }
+.owa-business-preview table { border-collapse: collapse; width: 100%; text-align: left; font-size: 13px; }
+.owa-business-preview caption { text-align: left; padding-bottom: 8px; }
+.owa-business-preview :is(th, td) { padding: 8px 12px; border-bottom: 1px solid var(--owa-eng-border, #cbd5e1); vertical-align: top; min-width: 100px; max-width: 360px; }
+.owa-business-preview-technical { margin-top: 12px; }
+.owa-business-preview-technical summary { cursor: pointer; font-size: 13px; }
+.owa-business-preview-technical pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; max-height: 260px; padding: 12px; background: rgba(105, 145, 205, .06); font-size: 12px; }

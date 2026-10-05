@@ -1,0 +1,640 @@
+/*
+ * One adjustable glass system for Ontology Center.
+ * The Aqua plugin owns blur, wallpaper, hue and brightness globally, plus one
+ * Ontology Center surface-strength control. These surfaces only consume those
+ * live variables, matching the native sidebar without touching business UI.
+ */
+html[data-dsh-aqua] {
+  --owa-system-font: var(--owa-font-stack, "ORION Noto Sans SC", sans-serif);
+  --owa-color-text-primary: var(--owa-semantic-text-primary);
+  --owa-color-text-secondary: var(--owa-semantic-text-secondary);
+  --owa-color-text-tertiary: var(--owa-semantic-text-tertiary);
+  --owa-color-accent: var(--owa-semantic-accent);
+  --owa-color-success: var(--owa-semantic-success);
+  --owa-color-warning: var(--owa-semantic-warning);
+  --owa-color-danger: var(--owa-semantic-danger);
+  --owa-ontology-glass-light: var(--dsh-aqua-glass-card-light, var(--owa-semantic-surface-panel));
+  --owa-ontology-glass-dark: var(--dsh-aqua-glass-card-dark, var(--owa-semantic-surface-panel));
+  --owa-ontology-line-light: var(--owa-semantic-border-subtle);
+  --owa-ontology-line-dark: var(--owa-semantic-border-subtle);
+  --owa-ontology-hover-light: var(--owa-semantic-surface-selected);
+  --owa-ontology-hover-dark: var(--owa-semantic-surface-selected);
+}
+
+/* Dark semantic values are owned by body[data-ds-dark-theme]. Rebind the
+   compatibility aliases at that scope so sidebar descendants do not inherit
+   aliases that were resolved against the light :root values on html. */
+html[data-dsh-aqua] body[data-ds-dark-theme] {
+  --owa-color-text-primary: var(--owa-semantic-text-primary);
+  --owa-color-text-secondary: var(--owa-semantic-text-secondary);
+  --owa-color-text-tertiary: var(--owa-semantic-text-tertiary);
+  --owa-color-accent: var(--owa-semantic-accent);
+  --owa-color-success: var(--owa-semantic-success);
+  --owa-color-warning: var(--owa-semantic-warning);
+  --owa-color-danger: var(--owa-semantic-danger);
+  --owa-ontology-line-light: var(--owa-semantic-border-subtle);
+  --owa-ontology-line-dark: var(--owa-semantic-border-subtle);
+  --owa-ontology-hover-light: var(--owa-semantic-surface-selected);
+  --owa-ontology-hover-dark: var(--owa-semantic-surface-selected);
+}
+
+
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] :is(.owa-engineering-view, .owa-ontology-registry-view) {
+  border: 1px solid var(--owa-semantic-border-default) !important;
+  border-radius: var(--owa-radius-panel) !important;
+  background: transparent !important;
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px)) !important;
+  box-shadow: var(--owa-shadow-panel) !important;
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"][data-ds-dark-theme] :is(.owa-engineering-view, .owa-ontology-registry-view) {
+  border-color: var(--owa-semantic-border-default) !important;
+  background: transparent !important;
+  box-shadow: var(--owa-shadow-panel) !important;
+}
+
+/* The engineering shell already owns the single plugin-controlled blur layer. */
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-engineering-view::before {
+  backdrop-filter: none !important;
+}
+
+/* The engineering shell is one canvas. Its columns are layout, not cards. */
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-workspace,
+  .owa-engineering-workspace,
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view :where(
+  .owa-project-center-workspace,
+  .owa-engineering-workspace
+) {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-stage-rail {
+  border-color: var(--owa-ontology-line-light) !important;
+  border-radius: 0 !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-engineering-context {
+  border-left-color: var(--owa-ontology-line-light) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view :where(
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  border-color: var(--owa-ontology-line-dark) !important;
+}
+
+/* Engineering overlays use the exact native Settings-dialog material. */
+html[data-dsh-aqua] body :is(
+  .owa-engineering-view > .owa-action-dialog,
+  .owa-engineering-view > .owa-review-drawer,
+  .owa-intake-layer > .owa-intake-dialog
+) {
+  border: 0 !important;
+  border-radius: var(--owa-radius-card) !important;
+  background: var(--owa-semantic-surface-overlay) !important;
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px)) !important;
+  box-shadow: var(--owa-shadow-dialog) !important;
+}
+
+
+
+html[data-dsh-aqua] body .owa-engineering-view > :where(
+  .owa-action-dialog,
+  .owa-review-drawer
+) > header,
+html[data-dsh-aqua] body .owa-engineering-view .owa-document-router-body,
+html[data-dsh-aqua] body .owa-document-router-form > .owa-review-actions {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-intake-layer {
+  --owa-eng-page: transparent;
+  --owa-eng-rail: var(--owa-region-navigation);
+  --owa-eng-card: var(--owa-surface-panel);
+  --owa-eng-card-strong: var(--owa-surface-panel-strong);
+  --owa-eng-control: var(--owa-surface-control);
+  --owa-eng-input: var(--owa-surface-input);
+  --owa-eng-selected: var(--owa-surface-selected);
+}
+
+/* Interaction geometry retained from the retired visual layers. Surface,
+   border and shadow decisions live only in the canonical token layer below. */
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-center-stats article {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-center-stats article:hover {
+  background: var(--owa-surface-hover) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-card-list {
+  gap: 10px;
+}
+
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-grid {
+  gap: 18px;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-project-card,
+  .owa-project-stage,
+  .owa-engineering-stage,
+  .owa-engineering-tabs button,
+  .owa-quality-row,
+  .owa-history-row,
+  .owa-engineering-artifact,
+  .owa-engineering-context > section
+),
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card {
+  transition:
+    background var(--owa-motion-standard) var(--owa-ease-standard),
+    box-shadow var(--owa-motion-standard) var(--owa-ease-standard),
+    transform var(--owa-motion-standard) var(--owa-ease-standard);
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-card:not(.is-current):hover,
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage:hover,
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card:hover {
+  transform: translateY(-2px);
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage::after {
+  opacity: .18;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage:hover {
+  transform: none;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage.is-selected {
+  transform: translateX(3px);
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage.is-selected:not(.is-workflow-current) .owa-stage-code {
+  border-color: var(--owa-color-accent) !important;
+  background: transparent !important;
+  color: var(--owa-color-accent) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage.is-workflow-current .owa-stage-code {
+  border-color: var(--owa-color-accent) !important;
+  background: var(--owa-color-accent) !important;
+  color: var(--owa-semantic-on-accent) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-tabs button {
+  min-height: 36px;
+  padding-inline: 14px;
+  border-radius: var(--owa-radius-control);
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-tabs button:hover {
+  transform: none;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-tabs button.is-active::after {
+  display: none;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :where(
+  .owa-quality-row,
+  .owa-history-row,
+  .owa-engineering-artifact
+):hover {
+  transform: none;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-context > section:hover {
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  html[data-dsh-aqua] body .owa-intake-layer > .owa-intake-dialog {
+    border-radius: var(--owa-radius-card) !important;
+  }
+}
+
+/* One adjustable hierarchy for every ontology screen. The strength variable
+   is local to this product route, so chat and other plugin surfaces keep their
+   existing global frost setting. Reading surfaces retain a 90% opacity floor, inputs 96%, and dialogs 98%.
+   The slider adjusts atmosphere without exposing wallpaper behind dense text. */
+html[data-dsh-aqua] body[data-orion-primary="ontology"] {
+  --owa-ontology-surface-strength: var(--dsh-aqua-ontology-surface-strength, .6);
+  --owa-system-font: var(--owa-font-stack, "ORION Noto Sans SC", sans-serif);
+  --owa-color-text-primary: var(--owa-semantic-text-primary);
+  --owa-color-text-secondary: var(--owa-semantic-text-secondary);
+  --owa-color-text-tertiary: var(--owa-semantic-text-tertiary);
+  --owa-color-accent: var(--owa-semantic-accent);
+  --owa-color-success: var(--owa-semantic-success);
+  --owa-color-warning: var(--owa-semantic-warning);
+  --owa-color-danger: var(--owa-semantic-danger);
+  --owa-region-navigation: color-mix(in srgb, var(--owa-semantic-frost-navigation) calc(68% + 18% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-region-workspace: color-mix(in srgb, var(--owa-semantic-frost-workspace) calc(90% + 8% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-region-context: color-mix(in srgb, var(--owa-semantic-frost-context) calc(92% + 6% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-panel: color-mix(in srgb, var(--owa-semantic-frost-panel) calc(92% + 6% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-panel-strong: color-mix(in srgb, var(--owa-semantic-frost-panel-strong) calc(94% + 4% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-control: color-mix(in srgb, var(--owa-semantic-frost-panel) calc(92% + 6% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-input: color-mix(in srgb, var(--owa-semantic-frost-panel-strong) calc(96% + 3% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-selected: color-mix(in srgb, var(--owa-semantic-frost-selected) calc(90% + 8% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-hover: color-mix(in srgb, var(--owa-semantic-frost-hover) calc(92% + 6% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-overlay: color-mix(in srgb, var(--owa-semantic-frost-panel-strong) calc(98% + 2% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-surface-shadow: var(--owa-shadow-card);
+}
+
+/* Rebind the legacy semantic surface names once at the module boundary. This
+   lets S0-S7 forms, document cards, Registry details and version files follow
+   the same slider without maintaining a selector for every nested component. */
+html[data-dsh-aqua] body[data-orion-primary="ontology"] :is(
+  .owa-ontology-context,
+  .owa-engineering-view,
+  .owa-ontology-registry-view,
+  .owa-intake-layer,
+  .owa-version-files-overlay,
+  .owa-ontology-templates-view
+) {
+  --owa-semantic-surface-canvas: transparent;
+  --owa-semantic-surface-navigation: var(--owa-region-navigation);
+  --owa-semantic-surface-panel: var(--owa-surface-panel);
+  --owa-semantic-surface-panel-strong: var(--owa-surface-panel-strong);
+  --owa-semantic-surface-control: var(--owa-surface-control);
+  --owa-semantic-surface-input: var(--owa-surface-input);
+  --owa-semantic-surface-selected: var(--owa-surface-selected);
+  --owa-semantic-surface-hover: var(--owa-surface-hover);
+  --owa-semantic-surface-overlay: var(--owa-surface-overlay);
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-engineering-view {
+  --owa-eng-page: transparent;
+  --owa-eng-rail: var(--owa-region-navigation);
+  --owa-eng-card: var(--owa-surface-panel);
+  --owa-eng-card-strong: var(--owa-surface-panel-strong);
+  --owa-eng-control: var(--owa-surface-control);
+  --owa-eng-input: var(--owa-surface-input);
+  --owa-eng-selected: var(--owa-surface-selected);
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] [class*="sidebarCol"] {
+  background: var(--owa-region-navigation) !important;
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-ontology-context {
+  background: transparent !important;
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-version-files-overlay {
+  --owa-vf-bg: var(--owa-region-workspace);
+  --owa-vf-panel: var(--owa-surface-panel-strong);
+  --owa-vf-rail: var(--owa-region-navigation);
+}
+
+/* Typography and semantic color contract: one product font, one neutral text
+   ladder, one accent, and three state colors. Monospace remains code-only. */
+html[data-dsh-aqua] body :is(
+  .owa-ontology-context,
+  .owa-engineering-view,
+  .owa-ontology-registry-view
+) {
+  --owa-text: var(--owa-color-text-primary);
+  --owa-muted: var(--owa-color-text-secondary);
+  --owa-primary: var(--owa-color-accent);
+  --owa-success: var(--owa-color-success);
+  color: var(--owa-color-text-primary) !important;
+  font-family: var(--owa-system-font) !important;
+}
+
+html[data-dsh-aqua] body :is(
+  .owa-ontology-context,
+  .owa-engineering-view,
+  .owa-ontology-registry-view
+) :where(button, input, textarea, select, option) {
+  font-family: var(--owa-system-font) !important;
+}
+
+html[data-dsh-aqua] body .owa-ontology-context :is(
+  .owa-ontology-recent-item span,
+  .owa-ontology-recent-item small
+) {
+  font-family: var(--owa-system-font) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-sidebar-root] :where(
+  .owa-brand-name,
+  .owa-ontology-context span,
+  .owa-ontology-context strong
+) {
+  color: var(--owa-color-text-primary) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-sidebar-root] :where(
+  .owa-ontology-context small,
+  .owa-ontology-project-toggle
+) {
+  color: var(--owa-color-text-secondary) !important;
+}
+
+html[data-dsh-aqua] body :is(
+  .owa-engineering-view,
+  .owa-ontology-registry-view
+) :where(h1, h2, h3, h4),
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-stage-summary-heading strong,
+  .owa-decision-summary-heading strong,
+  .owa-section-heading strong,
+  .owa-stage-metric strong,
+  .owa-project-card h3,
+  .owa-engineering-decision strong,
+  .owa-activity-copy strong
+) {
+  color: var(--owa-color-text-primary) !important;
+}
+
+html[data-dsh-aqua] body :is(
+  .owa-engineering-view,
+  .owa-ontology-registry-view
+) strong {
+  color: var(--owa-color-text-primary);
+}
+
+html[data-dsh-aqua] body :is(
+  .owa-engineering-view,
+  .owa-ontology-registry-view
+) :where(p, small, time),
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-engineering-breadcrumb,
+  .owa-decision-summary-heading span,
+  .owa-stage-metric span,
+  .owa-project-progress-heading small,
+  .owa-stage-stream-row > em,
+  .owa-engineering-activity
+) {
+  color: var(--owa-color-text-secondary) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-engineering-project-name,
+  .owa-intake-mode span,
+  .owa-engineering-tabs button span,
+  .owa-quality-row > span:not(.owa-quality-check),
+  .owa-disclosure,
+  .owa-stage-stream-row footer,
+  .owa-stage-stream-row footer summary
+) {
+  color: var(--owa-color-text-secondary) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :where(a:not(.owa-engineering-primary)) {
+  color: var(--owa-color-accent);
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-stage-metric::before {
+  background: var(--owa-color-accent) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage-rail {
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: var(--owa-region-navigation) !important;
+  box-shadow: var(--owa-surface-shadow) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-engineering-workspace,
+  .owa-project-center-workspace
+) {
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: var(--owa-region-workspace) !important;
+  box-shadow: var(--owa-surface-shadow) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-context {
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: var(--owa-region-context) !important;
+  box-shadow: var(--owa-surface-shadow) !important;
+}
+
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-ontology-registry-view {
+  border: 0 !important;
+  background: var(--owa-region-workspace) !important;
+  box-shadow: var(--owa-surface-shadow) !important;
+}
+
+/* Keep Registry and Template titles readable when a bright wallpaper passes through the
+   workspace. The overlay token deliberately retains a dark readability floor
+   even when the Ontology Center background-strength slider is set to zero. */
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-template-heading,
+html[data-dsh-aqua] body[data-orion-primary="ontology"] .owa-registry-heading {
+  box-sizing: border-box;
+  padding: 4px 0 20px;
+  border: 0 !important;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle) !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* The hero and tab strip belong to the workspace, not to a second card. */
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-engineering-hero,
+  .owa-engineering-tabs
+) {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-tabs button.is-active {
+  background: var(--owa-surface-selected) !important;
+  box-shadow: var(--owa-shadow-card) !important;
+}
+
+/* All four stage tabs use one panel treatment. This explicitly removes the
+   legacy fixed 52% decision/activity card that produced the white patch. */
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-content > :is(
+  .owa-engineering-summary,
+  .owa-engineering-decisions,
+  .owa-engineering-activity-list
+) {
+  box-sizing: border-box;
+  padding: 16px 18px !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  background: var(--owa-surface-panel) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-decision-summary-heading,
+  .owa-section-heading,
+  .owa-engineering-decision,
+  .owa-engineering-activity,
+  .owa-history-list,
+  .owa-history-row,
+  .owa-quality-row,
+  .owa-stage-stream-row,
+  .owa-engineering-artifact
+) {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-stage-metric,
+  .owa-event-stage-group,
+  .owa-activity-summary,
+  .owa-stage-stream-all,
+  .owa-live-current,
+  .owa-live-document-summary,
+  .owa-rollback-impact,
+  .owa-rollback-impact article
+) {
+  border: 0 !important;
+  background: var(--owa-surface-panel-strong) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :where(
+  .owa-engineering-decision,
+  .owa-engineering-activity,
+  .owa-history-row,
+  .owa-quality-row,
+  .owa-stage-stream-row,
+  .owa-engineering-artifact
+):hover {
+  background: var(--owa-surface-hover) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-context > :is(
+  section,
+  .owa-stage-stream
+) {
+  border: 1px solid var(--owa-semantic-border-subtle) !important;
+  border-radius: 18px !important;
+  background: var(--owa-surface-panel) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-context > :is(
+  section,
+  .owa-stage-stream
+):hover {
+  background: var(--owa-surface-panel-strong) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Project Center and Registry share the same panel/selected/hover hierarchy. */
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-project-center-stats,
+  .owa-project-card
+),
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card {
+  border: 0 !important;
+  background: var(--owa-surface-panel) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-card.is-current {
+  border: 0 !important;
+  background: var(--owa-surface-panel-strong) !important;
+  box-shadow: inset 3px 0 var(--owa-color-accent), var(--owa-shadow-card) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-engineering-stage.is-selected {
+  border: 0 !important;
+  background: var(--owa-surface-selected) !important;
+  box-shadow: var(--owa-shadow-card) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage {
+  border: 1px solid var(--owa-semantic-border-subtle) !important;
+  background: var(--owa-semantic-surface-control) !important;
+  color: var(--owa-semantic-text-secondary) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage.is-passed {
+  border-color: var(--owa-semantic-success-border) !important;
+  background: var(--owa-semantic-success-soft) !important;
+  color: var(--owa-semantic-success) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage.is-running {
+  border-color: var(--owa-semantic-border-strong) !important;
+  background: var(--owa-semantic-accent-soft) !important;
+  color: var(--owa-semantic-accent) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage:is(.is-blocked_human, .is-deferred, .is-invalidated) {
+  border-color: var(--owa-semantic-warning-border) !important;
+  background: var(--owa-semantic-warning-soft) !important;
+  color: var(--owa-semantic-warning) !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-stage.is-failed {
+  border-color: var(--owa-semantic-danger-border) !important;
+  background: var(--owa-semantic-danger-soft) !important;
+  color: var(--owa-semantic-danger) !important;
+}
+
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card {
+  background: var(--owa-surface-panel-strong) !important;
+  border: 1px solid var(--owa-semantic-border-subtle) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-engineering-view :is(
+  .owa-project-card,
+  .owa-project-stage
+):hover {
+  background: var(--owa-surface-hover) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card:hover {
+  background: var(--owa-surface-panel-strong) !important;
+  border-color: color-mix(in srgb, var(--owa-semantic-accent) 30%, var(--owa-semantic-border-default)) !important;
+  box-shadow: var(--owa-surface-shadow) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-dsh-aqua] body .owa-engineering-view :where(
+    .owa-project-card,
+    .owa-project-stage,
+    .owa-engineering-stage,
+    .owa-engineering-tabs button,
+    .owa-quality-row,
+    .owa-history-row,
+    .owa-engineering-artifact,
+    .owa-engineering-context > section
+  ),
+  html[data-dsh-aqua] body .owa-ontology-registry-view .owa-registry-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Sections organize cards without a second filled container. */
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-center-section {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html[data-dsh-aqua] body .owa-engineering-view .owa-project-card {
+  border: 1px solid var(--owa-semantic-border-subtle) !important;
+}

@@ -1,0 +1,4 @@
+version: 1.0.0
+ontology_iri: https://w3id.org/pmd/automatce/automatce-base.ttl
+title: AutoMatCE 汽车循环经济本体
+constraints: []

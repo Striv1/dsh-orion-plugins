@@ -1,0 +1,11 @@
+import { spawnSync } from 'node:child_process';
+import { readdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const args=process.argv.slice(2);
+if(args.length&&!(args.length===2&&args[0]==='--runtime-root'))throw new Error('Usage: node scripts/test_plugins.mjs [--runtime-root DIR]');
+const files=(await readdir(new URL('../tests/js/',import.meta.url))).filter(name=>name.endsWith('.test.mjs')).sort().map(name=>'tests/js/'+name);
+const result=spawnSync(process.execPath,['--test',...files],{cwd:root,stdio:'inherit',env:{...process.env,ORION_DSH_RUNTIME_ROOT:resolve(args[1]||process.env.ORION_DSH_RUNTIME_ROOT||root)}});
+if(result.error)throw result.error;
+process.exitCode=result.status??1;

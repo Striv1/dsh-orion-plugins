@@ -1,0 +1,855 @@
+/* Project Center header hierarchy: one title band and one integrated status band. */
+.owa-engineering-view .owa-project-center-workspace {
+  padding: 26px clamp(22px, 3.2vw, 48px) 42px;
+}
+
+.owa-engineering-view .owa-project-center-hero,
+.owa-engineering-view .owa-project-center-stats,
+.owa-engineering-view .owa-project-center-section,
+.owa-engineering-view .owa-project-governance-note {
+  width: min(100%, 1120px);
+  max-width: none;
+  margin-inline: auto !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-hero,
+.owa-engineering-view .owa-project-center-hero {
+  min-height: 0;
+  margin-top: 0 !important;
+  padding: 4px 2px 20px !important;
+  align-items: center;
+  border: 0 !important;
+  border-bottom: 1px solid var(--owa-eng-divider) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.owa-engineering-view .owa-project-center-hero h1 {
+  margin-top: 6px;
+  font-size: var(--owa-type-page-title);
+  line-height: 1.2;
+}
+
+.owa-engineering-view .owa-project-center-hero p {
+  margin-top: 8px;
+  line-height: 18px;
+}
+
+.owa-engineering-view .owa-project-create-button {
+  min-height: 40px !important;
+  padding-inline: 17px !important;
+}
+
+.owa-engineering-view .owa-project-center-stats {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 14px;
+  padding: 7px;
+  border: 1px solid var(--owa-eng-divider);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-eng-rail);
+  box-shadow: var(--owa-shadow-card);
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button {
+  min-height: 58px;
+  padding: 9px 14px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 9px;
+  border: 0 !important;
+  border-radius: var(--owa-radius-control);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button + button {
+  box-shadow: inset 1px 0 var(--owa-eng-divider) !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button:hover {
+  z-index: auto;
+  border-color: transparent !important;
+  background: var(--owa-eng-control) !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button + button:hover {
+  box-shadow: inset 1px 0 var(--owa-eng-divider) !important;
+}
+
+.owa-engineering-view .owa-project-center-stats > button strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.owa-engineering-view .owa-project-center-section {
+  margin-top: 18px;
+}
+
+.owa-engineering-view .owa-project-center-tools {
+  display: grid;
+  width: min(100%, 1120px);
+  margin: 14px auto 0;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+}
+
+.owa-engineering-view .owa-project-center-tools > label {
+  display: grid;
+  grid-template-rows: 14px 42px;
+  align-content: start;
+  gap: 6px;
+}
+
+.owa-engineering-view .owa-project-center-tools > label > span,
+.owa-engineering-view .owa-project-kind-filter > span {
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-project-center-tools input {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid var(--owa-eng-border);
+  border-radius: var(--owa-radius-control);
+  outline: 0;
+  background: var(--owa-eng-input);
+  color: var(--owa-eng-text);
+  font: inherit;
+  font-size: 12px;
+}
+
+.owa-engineering-view .owa-project-center-tools input::placeholder {
+  color: var(--owa-semantic-text-tertiary);
+}
+
+.owa-engineering-view .owa-project-center-tools input:focus-visible {
+  border-color: var(--owa-semantic-border-strong);
+  box-shadow: 0 0 0 3px var(--owa-semantic-focus-ring);
+}
+
+.owa-engineering-view .owa-project-kind-filter {
+  display: grid;
+  grid-template-rows: 14px 42px;
+  align-content: start;
+  gap: 6px;
+}
+
+.owa-engineering-view .owa-project-kind-filter > div {
+  display: flex;
+  height: 42px;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--owa-eng-divider);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-eng-rail);
+}
+
+.owa-engineering-view .owa-project-kind-filter button,
+.owa-engineering-view .owa-project-center-section.is-recycle > header > button,
+.owa-engineering-view .owa-project-family-actions button,
+.owa-engineering-view .owa-project-version-actions button {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: var(--owa-radius-control);
+  background: transparent;
+  color: var(--owa-semantic-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 630;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-kind-filter button {
+  padding: 0 11px;
+}
+
+.owa-engineering-view .owa-project-kind-filter button:hover,
+.owa-engineering-view .owa-project-kind-filter button[aria-pressed="true"] {
+  border-color: var(--owa-eng-border);
+  background: var(--owa-eng-control);
+  color: var(--owa-eng-text);
+}
+
+.owa-engineering-view .owa-project-kind-filter button[aria-pressed="true"] {
+  color: var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-project-kind-filter button:focus-visible,
+.owa-engineering-view .owa-project-center-section.is-recycle > header > button:focus-visible,
+.owa-engineering-view .owa-project-family-actions button:focus-visible,
+.owa-engineering-view .owa-project-version-actions button:focus-visible {
+  outline: 3px solid var(--owa-semantic-focus-ring);
+  outline-offset: 2px;
+}
+
+.owa-engineering-view .owa-project-family-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.owa-engineering-view .owa-project-family {
+  overflow: hidden;
+  border: 1px solid var(--owa-eng-border);
+  border-radius: var(--owa-radius-card);
+  background: var(--owa-eng-card);
+}
+
+.owa-engineering-view .owa-project-family.is-current {
+  border-color: var(--owa-semantic-border-strong);
+  box-shadow: inset 3px 0 var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-project-family.needs-attention {
+  border-color: var(--owa-semantic-warning-border);
+}
+
+.owa-engineering-view .owa-project-family-summary {
+  display: grid;
+  min-height: 88px;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  grid-template-columns: minmax(250px, 2fr) minmax(96px, .65fr) minmax(98px, .65fr) minmax(116px, .8fr) auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.owa-engineering-view .owa-project-family-identity,
+.owa-engineering-view .owa-project-family-status,
+.owa-engineering-view .owa-project-family-progress,
+.owa-engineering-view .owa-project-family-updated,
+.owa-engineering-view .owa-project-version-identity,
+.owa-engineering-view .owa-project-version-state,
+.owa-engineering-view .owa-project-version-progress {
+  min-width: 0;
+}
+
+.owa-engineering-view .owa-project-family-identity > span,
+.owa-engineering-view .owa-project-family-status > span,
+.owa-engineering-view .owa-project-family-progress > span,
+.owa-engineering-view .owa-project-family-updated > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.owa-engineering-view .owa-project-family-identity h3 {
+  overflow: hidden;
+  margin: 0;
+  color: var(--owa-eng-text);
+  font-size: 14px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-family-identity small,
+.owa-engineering-view .owa-project-family-progress small {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 10px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-family-status em,
+.owa-engineering-view .owa-project-version-state em {
+  display: inline-flex;
+  min-height: 24px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  align-items: center;
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-accent);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.owa-engineering-view :is(.owa-project-family-status, .owa-project-version-state) em.is-published {
+  background: var(--owa-semantic-success-soft);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view :is(.owa-project-family-status, .owa-project-version-state) em:is(.is-blocked_human, .is-qa_failed, .is-runtime_failed, .is-stage_failed, .is-failed) {
+  background: var(--owa-semantic-warning-soft);
+  color: var(--owa-semantic-warning);
+}
+
+.owa-engineering-view :is(.owa-project-family-status, .owa-project-version-state) em.is-archived {
+  background: var(--owa-eng-control);
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-engineering-view .owa-project-family-progress strong,
+.owa-engineering-view .owa-project-family-updated strong {
+  display: block;
+  overflow: hidden;
+  color: var(--owa-eng-text);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-family-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.owa-engineering-view .owa-project-family-actions button,
+.owa-engineering-view .owa-project-version-actions button,
+.owa-engineering-view .owa-project-center-section.is-recycle > header > button {
+  padding: 0 10px;
+  border-color: var(--owa-eng-border);
+  background: var(--owa-eng-control);
+}
+
+.owa-engineering-view .owa-project-family-actions button.is-primary {
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+}
+
+.owa-engineering-view .owa-project-family-actions button:hover,
+.owa-engineering-view .owa-project-version-actions button:hover,
+.owa-engineering-view .owa-project-center-section.is-recycle > header > button:hover {
+  border-color: var(--owa-semantic-border-strong);
+  background: var(--owa-eng-selected);
+  color: var(--owa-eng-text);
+}
+
+.owa-engineering-view .owa-project-family-actions button.is-primary:hover {
+  border-color: var(--owa-semantic-accent);
+  background: var(--owa-semantic-accent);
+  color: var(--owa-semantic-on-accent);
+  filter: brightness(.96);
+}
+
+.owa-engineering-view .owa-project-version-list {
+  padding: 0 15px 12px;
+  border-top: 1px solid var(--owa-eng-divider);
+  background: color-mix(in srgb, var(--owa-eng-rail) 56%, transparent);
+}
+
+.owa-engineering-view .owa-project-version {
+  display: grid;
+  min-height: 62px;
+  padding: 10px 0;
+  grid-template-columns: minmax(210px, 1.5fr) minmax(112px, .75fr) minmax(96px, .65fr) minmax(118px, .8fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.owa-engineering-view .owa-project-version + .owa-project-version {
+  border-top: 1px solid var(--owa-eng-divider);
+}
+
+.owa-engineering-view .owa-project-version-identity strong,
+.owa-engineering-view .owa-project-version-progress strong {
+  display: block;
+  color: var(--owa-eng-text);
+  font-size: 11px;
+}
+
+.owa-engineering-view .owa-project-version-identity span,
+.owa-engineering-view .owa-project-version-identity code,
+.owa-engineering-view .owa-project-version-progress span,
+.owa-engineering-view .owa-project-version time {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--owa-semantic-text-tertiary);
+  font-family: inherit;
+  font-size: 9px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-version-warning {
+  display: block;
+  margin-top: 5px;
+  color: var(--owa-semantic-warning);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-project-version-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.owa-engineering-view .owa-project-center-section.is-recycle > header {
+  align-items: center;
+}
+
+.owa-engineering-view .owa-project-center-section.is-recycle:not(.is-expanded) {
+  padding-block: 15px;
+}
+
+.owa-engineering-view .owa-project-card-list {
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.owa-engineering-view .owa-project-card {
+  padding: 14px 15px;
+}
+
+.owa-engineering-view .owa-project-card > header {
+  align-items: center;
+}
+
+.owa-engineering-view .owa-project-card > header > div > span {
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-weight: 620;
+}
+
+.owa-engineering-view .owa-project-card h3 {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.owa-engineering-view .owa-project-card header small {
+  margin-top: 3px;
+  color: var(--owa-semantic-text-tertiary);
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-project-card .owa-release-contract-notice {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 24px;
+  margin-top: 8px;
+  padding: 0 9px 0 7px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--owa-semantic-warning-border);
+  border-radius: var(--owa-radius-control);
+  background: color-mix(in srgb, var(--owa-semantic-warning-soft) 72%, var(--owa-eng-card));
+  color: var(--owa-semantic-warning);
+  line-height: 1;
+}
+
+.owa-engineering-view .owa-project-card .owa-release-contract-notice .owa-engineering-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+.owa-engineering-view .owa-project-card .owa-release-contract-notice span,
+.owa-engineering-view .owa-project-card .owa-release-contract-notice b {
+  overflow: hidden;
+  color: inherit;
+  font-size: 9px;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-card .owa-release-contract-notice b {
+  padding-left: 6px;
+  border-left: 1px solid color-mix(in srgb, var(--owa-semantic-warning) 28%, transparent);
+  font-weight: 540;
+  opacity: .82;
+}
+
+.owa-engineering-view .owa-project-card .owa-release-contract-notice.is-current {
+  border-color: var(--owa-semantic-success-border);
+  background: color-mix(in srgb, var(--owa-semantic-success-soft) 72%, var(--owa-eng-card));
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-project-card header em {
+  display: inline-flex;
+  min-height: 24px;
+  padding: 0 9px;
+  align-items: center;
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-accent);
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.owa-engineering-view .owa-project-card header em.is-published {
+  background: var(--owa-semantic-success-soft);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-project-card header em.is-blocked_human {
+  background: var(--owa-semantic-warning-soft);
+  color: var(--owa-semantic-warning);
+}
+
+.owa-engineering-view .owa-project-card header em.is-archived {
+  background: var(--owa-semantic-surface-control);
+  color: var(--owa-semantic-text-secondary);
+}
+
+.owa-engineering-view .owa-project-progress-heading {
+  display: flex;
+  margin-top: 11px;
+  padding-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+}
+
+.owa-engineering-view .owa-project-progress-heading > span {
+  margin-right: auto;
+}
+
+.owa-engineering-view .owa-project-progress-heading strong,
+.owa-engineering-view .owa-project-progress-heading small {
+  font-size: 9px;
+}
+
+.owa-engineering-view .owa-project-stage-grid {
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.owa-engineering-view .owa-project-stage {
+  min-height: 38px;
+  padding: 5px 7px;
+  gap: 2px;
+}
+
+.owa-engineering-view .owa-project-stage span {
+  font-size: 8px;
+}
+
+.owa-engineering-view .owa-project-revision-group {
+  overflow: hidden;
+  margin-top: 11px;
+  border: 1px solid var(--owa-eng-divider);
+  border-radius: var(--owa-radius-control);
+  background: color-mix(in srgb, var(--owa-eng-rail) 64%, transparent);
+}
+
+.owa-engineering-view .owa-project-revision-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--owa-eng-text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.owa-engineering-view .owa-project-revision-toggle:hover {
+  background: var(--owa-eng-control);
+}
+
+.owa-engineering-view .owa-project-revision-toggle:focus-visible,
+.owa-engineering-view .owa-project-revision-row > button:focus-visible {
+  outline: 3px solid var(--owa-semantic-focus-ring);
+  outline-offset: -3px;
+}
+
+.owa-engineering-view .owa-project-revision-toggle > span {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.owa-engineering-view .owa-project-revision-toggle strong {
+  font-size: 10px;
+}
+
+.owa-engineering-view .owa-project-revision-toggle small,
+.owa-engineering-view .owa-project-revision-toggle b {
+  overflow: hidden;
+  color: var(--owa-semantic-text-secondary);
+  font-size: 9px;
+  font-weight: 540;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-revision-toggle b {
+  flex: 0 0 auto;
+  color: var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-project-revision-list {
+  padding: 0 10px 7px;
+  border-top: 1px solid var(--owa-eng-divider);
+}
+
+.owa-engineering-view .owa-project-revision-row {
+  display: grid;
+  min-height: 58px;
+  padding: 8px 0;
+  grid-template-columns: minmax(210px, 1.5fr) minmax(105px, .65fr) minmax(110px, .75fr) minmax(118px, .8fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.owa-engineering-view .owa-project-revision-row + .owa-project-revision-row {
+  border-top: 1px solid var(--owa-eng-divider);
+}
+
+.owa-engineering-view .owa-project-revision-row.is-current {
+  box-shadow: inset 2px 0 var(--owa-semantic-accent);
+}
+
+.owa-engineering-view .owa-project-revision-identity,
+.owa-engineering-view .owa-project-revision-state,
+.owa-engineering-view .owa-project-revision-progress {
+  min-width: 0;
+}
+
+.owa-engineering-view .owa-project-revision-identity strong,
+.owa-engineering-view .owa-project-revision-progress strong {
+  display: block;
+  overflow: hidden;
+  color: var(--owa-eng-text);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-revision-identity span,
+.owa-engineering-view .owa-project-revision-identity code,
+.owa-engineering-view .owa-project-revision-progress span,
+.owa-engineering-view .owa-project-revision-row time {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--owa-semantic-text-tertiary);
+  font-family: inherit;
+  font-size: 9px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-revision-state em {
+  display: inline-flex;
+  min-height: 23px;
+  padding: 0 8px;
+  align-items: center;
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-semantic-accent-soft);
+  color: var(--owa-semantic-accent);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-revision-state em.is-published {
+  background: var(--owa-semantic-success-soft);
+  color: var(--owa-semantic-success);
+}
+
+.owa-engineering-view .owa-project-revision-state em:is(.is-blocked_human, .is-qa_failed, .is-runtime_failed, .is-stage_failed, .is-failed) {
+  background: var(--owa-semantic-warning-soft);
+  color: var(--owa-semantic-warning);
+}
+
+.owa-engineering-view .owa-project-revision-row > button {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--owa-eng-border);
+  border-radius: var(--owa-radius-control);
+  background: var(--owa-eng-control);
+  color: var(--owa-eng-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.owa-engineering-view .owa-project-card > footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--owa-semantic-border-subtle);
+}
+
+.owa-engineering-view .owa-project-card > footer button {
+  min-height: 36px !important;
+  padding-inline: 12px;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-center-hero {
+  border-bottom-color: var(--owa-eng-divider) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-center-stats {
+  border-color: var(--owa-eng-divider);
+  background: var(--owa-eng-rail);
+  box-shadow: var(--owa-shadow-card);
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-center-stats > button {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-center-stats > button + button {
+  box-shadow: inset 1px 0 var(--owa-eng-divider) !important;
+}
+
+html[data-dsh-aqua] body[data-ds-dark-theme] .owa-engineering-view .owa-project-center-stats > button:hover {
+  background: var(--owa-eng-control) !important;
+}
+
+@container (max-width: 980px) {
+  .owa-engineering-view .owa-project-center-workspace {
+    padding: 22px 20px 36px;
+  }
+
+  .owa-engineering-view .owa-project-center-stats {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .owa-engineering-view .owa-project-center-stats > button {
+    grid-column: auto;
+  }
+
+  html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button,
+  html[data-dsh-aqua] .owa-engineering-view .owa-project-center-stats > button + button {
+    background: var(--owa-eng-control) !important;
+    box-shadow: none !important;
+  }
+
+  .owa-engineering-view .owa-project-family-summary {
+    grid-template-columns: minmax(240px, 1.7fr) repeat(3, minmax(94px, .7fr));
+  }
+
+  .owa-engineering-view .owa-project-family-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .owa-engineering-view .owa-project-version {
+    grid-template-columns: minmax(210px, 1.5fr) minmax(110px, .75fr) minmax(96px, .65fr) minmax(118px, .8fr);
+  }
+
+  .owa-engineering-view .owa-project-version-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .owa-engineering-view .owa-project-revision-row {
+    grid-template-columns: minmax(210px, 1.5fr) minmax(105px, .65fr) minmax(110px, .75fr) minmax(118px, .8fr);
+  }
+
+  .owa-engineering-view .owa-project-revision-row > button {
+    justify-self: start;
+  }
+}
+
+@container (max-width: 840px) {
+  html[data-dsh-aqua] .owa-engineering-view .owa-project-center-hero,
+  .owa-engineering-view .owa-project-center-hero {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+@container (max-width: 620px) {
+  .owa-engineering-view .owa-project-center-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owa-engineering-view .owa-project-center-stats > button {
+    grid-column: auto;
+  }
+
+  .owa-engineering-view .owa-project-center-tools {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .owa-engineering-view .owa-project-kind-filter > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .owa-engineering-view .owa-project-kind-filter button {
+    padding-inline: 6px;
+  }
+
+  .owa-engineering-view .owa-project-family-summary,
+  .owa-engineering-view .owa-project-version {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owa-engineering-view .owa-project-family-identity,
+  .owa-engineering-view .owa-project-family-actions,
+  .owa-engineering-view .owa-project-version-identity,
+  .owa-engineering-view .owa-project-version-actions {
+    grid-column: 1 / -1;
+  }
+
+  .owa-engineering-view .owa-project-family-actions,
+  .owa-engineering-view .owa-project-version-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owa-engineering-view .owa-project-family-actions button,
+  .owa-engineering-view .owa-project-version-actions button {
+    width: 100%;
+  }
+
+  .owa-engineering-view .owa-project-revision-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owa-engineering-view .owa-project-revision-identity,
+  .owa-engineering-view .owa-project-revision-row > button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .owa-engineering-view .owa-project-center-workspace {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  html[data-dsh-aqua] .owa-engineering-view .owa-project-center-hero,
+  .owa-engineering-view .owa-project-center-hero {
+    align-items: flex-start !important;
+  }
+}

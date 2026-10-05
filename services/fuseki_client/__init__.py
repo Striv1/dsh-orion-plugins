@@ -1,0 +1,2 @@
+"""Fuseki named graph client."""
+

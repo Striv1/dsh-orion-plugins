@@ -1,0 +1,253 @@
+/* Published ontology workspace. Geometry follows the local reference while
+   chrome and canvas labels follow the active ORION/desktop theme. */
+body.owa-graph-open { overflow: hidden !important; }
+.owa-graph-dialog {
+ --graph-canvas-bg: var(--owa-semantic-surface-canvas, var(--dsw-alias-bg-base, #f2f5f9));
+ --graph-chrome-bg: var(--owa-semantic-surface-navigation, var(--dsw-alias-bg-layer-2, #e6edf6));
+ --graph-panel-bg: var(--owa-semantic-surface-panel, var(--dsw-alias-bg-layer-1, #f9fbfd));
+ --graph-popup-bg: var(--owa-semantic-surface-overlay, var(--dsw-alias-bg-overlay, #f7f9fc));
+ --graph-control-bg: var(--owa-semantic-surface-control, var(--dsw-specific-selector, #eff4fa));
+ --graph-input-bg: var(--owa-semantic-surface-input, var(--dsw-specific-input-major, #fcfdff));
+ --graph-hover-bg: var(--owa-semantic-surface-hover, #e6eef8);
+ --graph-selected-bg: var(--owa-semantic-surface-selected, #d6e8fd);
+ --graph-text: var(--owa-semantic-text-primary, var(--dsw-alias-label-primary, #17263b));
+ --graph-muted: var(--owa-semantic-text-secondary, var(--dsw-alias-label-secondary, #536a84));
+ --graph-faint: var(--owa-semantic-text-tertiary, #708198);
+ --graph-line: var(--owa-semantic-border-default, var(--dsw-alias-border-l2, rgba(64,100,145,.22)));
+ --graph-line-strong: var(--owa-semantic-border-strong, rgba(64,100,145,.34));
+ --graph-focus: var(--owa-semantic-accent, #2563eb);
+ --graph-shadow: var(--owa-shadow-dialog, 0 8px 30px #16395024);
+ --graph-label-outline: var(--owa-semantic-frost-workspace, #f2f5f9);
+ --graph-label-selected-bg: var(--owa-semantic-frost-selected, #e1ebfa);
+ --graph-label-hover-bg: var(--owa-semantic-frost-hover, #e6eef8);
+ --graph-node-stroke: #526a81;
+ --graph-grid: rgba(64,100,145,.12);
+ --graph-layer-grid: rgba(64,100,145,.22);
+ --graph-edge-inheritance: rgba(82,101,119,.64);
+ --graph-edge-inheritance-active: rgba(38,58,79,.95);
+ --graph-edge-relation: rgba(119,77,172,.72);
+ --graph-edge-relation-active: rgba(99,53,143,.95);
+ --graph-edge-faded: rgba(72,94,121,.2);
+ --graph-edge-instance: rgba(82,111,132,.5);
+ --graph-edge-instance-active: rgba(38,72,97,.95);
+ --graph-edge-instance-hover: rgba(82,111,132,.68);
+ --graph-edge-instance-faded: rgba(72,94,121,.18);
+ --graph-relation-label: #774dac;
+ --graph-inheritance-label: #526577;
+ --graph-icon-filter: none;
+ --graph-brand-filter: brightness(0) saturate(100%);
+ position: fixed; z-index: 2147483000; inset: 0; background: var(--graph-canvas-bg); color: var(--graph-text); font: 14px/1.55 var(--owa-font-stack, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif); color-scheme: light;
+}
+body[data-ds-dark-theme] .owa-graph-dialog {
+ --graph-node-stroke: #6885a3;
+ --graph-grid: rgba(151,181,219,.12);
+ --graph-layer-grid: rgba(151,181,219,.22);
+ --graph-edge-inheritance: rgba(195,205,219,.58);
+ --graph-edge-inheritance-active: rgba(235,242,251,.95);
+ --graph-edge-relation: rgba(196,165,255,.72);
+ --graph-edge-relation-active: rgba(214,193,255,.95);
+ --graph-edge-faded: rgba(136,155,180,.22);
+ --graph-edge-instance: rgba(163,185,211,.5);
+ --graph-edge-instance-active: rgba(232,241,252,.95);
+ --graph-edge-instance-hover: rgba(163,185,211,.68);
+ --graph-edge-instance-faded: rgba(136,155,180,.2);
+ --graph-relation-label: #c4a5ff;
+ --graph-inheritance-label: #c3cddb;
+ --graph-icon-filter: invert(1);
+ --graph-brand-filter: none;
+ color-scheme: dark;
+}
+.owa-graph-dialog *, .owa-graph-dialog *::before, .owa-graph-dialog *::after { box-sizing: border-box; }
+.owa-graph-dialog [hidden] { display: none !important; }
+/* This is a body portal, outside AppFrame. Its frame-local leading clearance
+   cannot be inherited here. Reserve the html-owned native chrome strip before
+   laying out header, tabs and canvas; the browser fallback keeps a zero inset. */
+.owa-graph-shell { position: absolute; inset: var(--dsh-frame-top-clearance, 0px) 0 0; width: 100%; overflow: hidden; background: transparent; color: var(--graph-text); }
+.owa-graph-dialog .owa-graph-shell :is(button,input,select) { font: inherit; color: var(--graph-text); }
+.owa-graph-shell button { cursor: pointer; box-shadow: none; }
+.owa-graph-shell button:hover, .owa-graph-shell summary:hover { background-color: var(--graph-hover-bg); color: var(--graph-text); }
+.owa-graph-shell :is(button,input,select,summary):focus-visible { outline: 2px solid var(--graph-focus); outline-offset: 2px; }
+.owa-graph-shell > .owa-graph-header { position: absolute; inset: 0 0 auto; height: 56px; min-height: 56px; display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 16px; margin: 0 !important; padding: 0 20px !important; border: 0 !important; border-bottom: 1px solid var(--graph-line) !important; border-radius: 0 !important; background: var(--graph-chrome-bg) !important; box-shadow: none !important; }
+.owa-graph-title { display: flex; align-items: center; gap: 20px; min-width: 0; }
+.owa-graph-brand { width: 77px; height: 32px; object-fit: contain; filter: var(--graph-brand-filter); }
+.owa-graph-divider { color: var(--graph-faint); font-size: 20px; }
+.owa-graph-title > div { min-width: 0; }
+.owa-graph-title h2 { margin: 0; color: var(--graph-text); line-height: 20px; font-size: 13px; font-weight: 500; max-width: 560px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.owa-graph-title p { margin: 0; color: var(--graph-muted); font-size: 11px; line-height: 16px; }
+.owa-graph-toolbar { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.owa-graph-readonly { font-size: 12px; color: var(--graph-muted); }
+.owa-graph-close { padding: 5px 10px; border: 1px solid var(--graph-line); border-radius: 6px; background: transparent; font-size: 12px !important; }
+.owa-graph-views { position: absolute; z-index: 25; top: 56px; left: 0; right: 0; height: 44px; display: flex; align-items: stretch; gap: 12px; padding: 0 20px; border-bottom: 1px solid var(--graph-line); background: var(--graph-chrome-bg); }
+.owa-graph-views > button { display: flex; align-items: center; gap: 8px; min-width: 66px; padding: 0 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--graph-muted); font-size: 14px; }
+.owa-graph-views > button.is-active { border-bottom-color: var(--graph-text); color: var(--graph-text); }
+.owa-graph-nav-icon { color: var(--graph-muted); font-size: 17px; }
+.owa-graph-display { margin-left: auto; position: relative; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-display summary { cursor: pointer; padding: 12px 8px; list-style: none; }
+.owa-graph-display-menu { position: absolute; top: 44px; right: 0; width: 250px; padding: 12px; background: var(--graph-popup-bg); border: 1px solid var(--graph-line-strong); border-radius: 8px; box-shadow: var(--graph-shadow); }
+.owa-graph-display-menu button { border: 0; padding: 6px 10px; background: transparent; border-radius: 5px; font-size: 12px; }
+.owa-graph-mode { display: flex; gap: 4px; margin-bottom: 12px; background: var(--graph-control-bg); border-radius: 6px; }
+.owa-graph-mode .is-active { background: var(--graph-selected-bg); }
+.owa-graph-hierarchy { display: flex; gap: 8px; align-items: center; margin: 8px 0; font-size: 12px; }
+.owa-graph-hierarchy input { accent-color: var(--graph-focus); }
+.owa-graph-body { position: absolute; inset: 100px 0 0; display: grid; grid-template-columns: 256px minmax(0,1fr); }
+.owa-graph-left { position: relative; z-index: 4; min-height: 0; overflow-y: auto; padding: 12px; border-right: 1px solid var(--graph-line); background: var(--graph-chrome-bg); scrollbar-width: thin; }
+.owa-graph-list-search, .owa-graph-search { width: 100%; height: 34px; border: 1px solid var(--graph-line); border-radius: 8px; background: var(--graph-input-bg); padding: 0 10px; color: var(--graph-text); font-size: 13px !important; }
+.owa-graph-list-search::placeholder, .owa-graph-search input::placeholder { color: var(--graph-faint); }
+.owa-graph-schema-home { display: block; width: 100%; height: 40px; margin: 7px 0; padding: 0 10px; border: 0; background: transparent; text-align: left; color: var(--graph-muted) !important; font-size: 13px !important; }
+.owa-graph-categories { display: flex; padding: 4px; border-radius: 8px; background: var(--graph-control-bg); margin: 0 0 12px; }
+.owa-graph-categories button { flex: 1; height: 26px; border: 0; border-radius: 6px; background: transparent; color: var(--graph-muted); font-size: 13px; }
+.owa-graph-categories [aria-pressed="true"] { background: var(--graph-selected-bg); color: var(--graph-text); }
+.owa-graph-node-list { display: grid; gap: 2px; }
+.owa-graph-node-list button { display: flex; align-items: center; gap: 9px; width: 100%; min-width: 0; height: 32px; padding: 0 12px; border: 0; border-radius: 7px; background: transparent; text-align: left; font-size: 13px; }
+.owa-graph-node-list button.is-selected { background: var(--graph-selected-bg); }
+.owa-graph-node-list button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.owa-graph-node-list i { flex-shrink: 0; height: 10px; width: 10px; }
+.owa-graph-node-list .is-individual { border-radius: 50%; }
+.owa-graph-node-list p { color: var(--graph-muted); font-size: 12px; padding: 0 10px; }
+.owa-graph-list-count { margin-top: 16px; }
+.owa-graph-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; background-color: transparent; }
+.owa-graph-canvas { position: absolute; inset: 0; }
+.owa-graph-canvas-tools { position: absolute; top: 12px; left: 12px; z-index: 5; display: flex; align-items: center; gap: 8px; }
+.owa-graph-search { width: 240px; display: flex; align-items: center; background: var(--graph-input-bg); }
+.owa-graph-search input { outline: none; border: 0; width: 100%; background: transparent; font-size: 13px; }
+.owa-graph-edge-key { display: flex; gap: 6px; }
+.owa-graph-edge-key span { border: 1px solid var(--graph-line); border-radius: 20px; padding: 4px 10px; background: var(--graph-panel-bg); font-size: 12px; }
+.owa-graph-edge-key span:first-child { color: var(--graph-inheritance-label); }
+.owa-graph-edge-key span:last-child { color: var(--graph-relation-label); }
+.owa-graph-count { position: absolute; z-index: 5; top: 14px; right: 12px; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-badge { position: absolute; z-index: 5; left: 12px; bottom: 12px; display: flex; flex-direction: column; padding: 3px; border: 1px solid var(--graph-line); border-radius: 8px; background: var(--graph-control-bg); }
+.owa-graph-badge button { height: 28px; width: 28px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: var(--graph-muted); font-size: 18px; }
+.owa-graph-detail { display: none; position: absolute; z-index: 10; right: 12px; top: 12px; bottom: 12px; width: 416px; overflow: auto; border: 1px solid var(--graph-line); border-radius: 12px; background: var(--graph-popup-bg); scrollbar-width: thin; box-shadow: var(--graph-shadow); }
+.owa-graph-shell.has-selection .owa-graph-detail { display: block; }
+.owa-graph-shell.has-selection .owa-graph-count { display: none; }
+.owa-graph-detail-head { display: flex; align-items: center; gap: 9px; min-height: 52px; padding: 12px 16px; border-bottom: 1px solid var(--graph-line); flex-wrap: wrap; }
+.owa-graph-detail-head i { width: 10px; height: 10px; flex-shrink: 0; }
+.owa-graph-detail-head h3 { flex: 1; min-width: 0; margin: 0; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.owa-graph-detail-head > button { order: 3; border: 0; background: transparent; color: var(--graph-muted); font-size: 20px; padding: 0 3px; }
+.owa-graph-detail-head code { width: 100%; color: var(--graph-muted); overflow-wrap: anywhere; font-size: 11px; }
+.owa-graph-detail-head em { color: var(--graph-muted); font-size: 12px; font-style: normal; }
+.owa-graph-detail-tabs { display: flex; margin: 12px 16px 0; padding: 3px; border: 1px solid var(--graph-line); border-radius: 8px; }
+.owa-graph-detail-tabs button { flex: 1; min-height: 26px; padding: 2px 8px; border: 0; border-radius: 5px; background: transparent; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-detail-tabs .is-active { background: var(--graph-selected-bg); color: var(--graph-text); }
+.owa-graph-detail-panel { padding: 0 16px 20px; }
+.owa-graph-detail section { margin-top: 16px; }
+.owa-graph-detail > section { margin: 16px; }
+.owa-graph-detail h4 { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 7px; color: var(--graph-muted); font-size: 12px; font-weight: 400; }
+.owa-graph-detail h4 span { font-size: 12px; }
+.owa-graph-summary, .owa-graph-detail li { margin: 0; padding: 10px 12px; border: 1px solid var(--graph-line); border-radius: 8px; background: var(--graph-panel-bg); color: var(--graph-text); font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
+.owa-graph-detail ul { display: grid; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.owa-graph-detail li { display: grid; gap: 5px; }
+.owa-graph-detail li span { color: var(--graph-muted); font-size: 12px; }
+.owa-graph-detail li strong { font-weight: 400; }
+.owa-graph-identifier { margin: 20px 0 0; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-identifier summary { cursor: pointer; }
+.owa-graph-identifier code { display: block; overflow-wrap: anywhere; margin-top: 8px; font-size: 11px; }
+.owa-graph-relations { display: grid; gap: 8px; }
+.owa-graph-relations button { display: grid; gap: 4px; width: 100%; padding: 10px 12px; border: 1px solid var(--graph-line); border-radius: 8px; background: var(--graph-panel-bg); text-align: left; }
+.owa-graph-relations span, .owa-graph-relations small { font-size: 12px; color: var(--graph-muted); overflow-wrap: anywhere; }
+.owa-graph-relations strong { font-size: 13px; font-weight: 500; }
+.owa-graph-relations i, .owa-graph-relations em { font-style: normal; margin-left: 5px; }
+.owa-graph-action { margin: 12px 0; padding: 7px 12px; border: 1px solid var(--graph-line); border-radius: 6px; background: var(--graph-control-bg); font-size: 13px !important; }
+.owa-graph-endpoints { display: flex; gap: 8px; }
+.owa-graph-map-head, .owa-graph-legend, .owa-graph-hint { display: none; }
+.owa-graph-hops { display: flex; gap: 4px; margin: 8px 0; }
+.owa-graph-hops button { flex: 1; padding: 4px; border: 1px solid var(--graph-line); background: var(--graph-popup-bg); border-radius: 6px; }
+.owa-graph-hops b { display: none; }
+.owa-graph-hops small { font-size: 12px; color: var(--graph-muted); }
+.owa-graph-hops .is-active { background: var(--graph-selected-bg); }
+.owa-graph-instance-controls { display: grid; gap: 10px; margin-bottom: 12px; }
+.owa-graph-instance-controls label { display: grid; gap: 5px; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-instance-controls select, .owa-graph-filter select { width: 100%; height: 32px; padding: 0 8px; border: 1px solid var(--graph-line); border-radius: 6px; background: var(--graph-popup-bg); font-size: 12px; }
+.owa-graph-preview-scope { margin: 12px 0; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-preview-scope summary { cursor: pointer; }
+.owa-graph-preview-scope p { line-height: 1.8; }
+.owa-graph-search-status { font-size: 12px; color: var(--graph-muted); }
+.owa-graph-search-status:empty { display: none; }
+.owa-graph-loading, .owa-graph-empty { position: absolute; z-index: 3; inset: 54px 0 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; text-align: center; color: var(--graph-muted); pointer-events: none; }
+.owa-graph-empty strong, .owa-graph-loading strong { font-size: 14px; font-weight: 400; }
+.owa-graph-empty span, .owa-graph-loading span { max-width: 430px; font-size: 12px; }
+.owa-graph-loading i { width: 24px; height: 24px; border: 2px solid var(--graph-line); border-top-color: var(--graph-muted); border-radius: 50%; animation: owa-graph-spin 1s linear infinite; }
+.owa-graph-filter-info { position: absolute; top: 55px; left: 12px; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-tip { position: absolute; z-index: 12; max-width: 260px; padding: 10px 12px; border: 1px solid var(--graph-line-strong); border-radius: 8px; background: var(--graph-popup-bg); pointer-events: none; font-size: 12px; }
+.owa-graph-tip span, .owa-graph-tip small { color: var(--graph-muted); margin-left: 8px; }
+.owa-graph-footer { position: absolute; right: 12px; bottom: 10px; pointer-events: none; color: var(--graph-muted); font-size: 11px; }
+.owa-graph-footer > div:first-child, .owa-graph-shell.has-selection .owa-graph-footer { display: none; }
+/* Keep the sidebar surface visible; hiding it exposed the gray dialog beneath. */
+.owa-graph-shell.is-loading .owa-graph-left { position: relative; background: var(--graph-chrome-bg); }
+.owa-graph-shell.is-loading .owa-graph-left > * { visibility: hidden; }
+.owa-graph-shell.is-loading .owa-graph-left::after { content: ""; position: absolute; inset: 16px 14px; border-radius: 7px; background: linear-gradient(var(--graph-control-bg),var(--graph-control-bg)) 0 0/100% 32px no-repeat, linear-gradient(var(--graph-control-bg),var(--graph-control-bg)) 0 62px/48% 12px no-repeat, repeating-linear-gradient(to bottom,var(--graph-control-bg) 0 10px,transparent 10px 34px) 0 112px/80% 180px no-repeat; }
+.owa-graph-canvas { opacity: 1; transition: opacity 180ms ease-out; }
+.owa-graph-shell.is-loading .owa-graph-canvas { opacity: 0; transition: none; }
+.owa-graph-shell.is-loading :is(.owa-graph-canvas-tools,.owa-graph-count,.owa-graph-badge,.owa-graph-filter-info) { visibility: hidden; }
+.owa-graph-shell.is-loading :is(.owa-graph-views,.owa-graph-left,.owa-graph-stage) { pointer-events: none; }
+.owa-graph-shell { background: transparent; }
+@media(prefers-reduced-motion:reduce) { .owa-graph-canvas { transition: none; } }
+@keyframes owa-graph-spin { to { transform: rotate(360deg); } }
+@media(max-width: 1000px) {
+ .owa-graph-title h2 { max-width: 380px; }
+ .owa-graph-body { grid-template-columns: 224px minmax(0,1fr); }
+ .owa-graph-detail { width: 360px; }
+ .owa-graph-edge-key { display: none; }
+ .owa-graph-search { width: 210px; }
+}
+@media(max-width: 700px) {
+ .owa-graph-shell > .owa-graph-header { padding: 0 12px !important; gap: 8px; }
+ .owa-graph-brand { width: 55px; }
+ .owa-graph-divider, .owa-graph-readonly { display: none; }
+ .owa-graph-title { gap: 10px; }
+ .owa-graph-title h2 { max-width: 180px; }
+ .owa-graph-close { max-width: 90px; font-size: 11px !important; }
+ .owa-graph-body { grid-template-columns: 168px minmax(0,1fr); }
+ .owa-graph-left { padding: 8px; }
+ .owa-graph-node-list button { padding: 0 5px; font-size: 12px; }
+ .owa-graph-search { width: 150px; }
+ .owa-graph-count { top: 54px; font-size: 10px; }
+ .owa-graph-detail { width: auto; left: 8px; right: 8px; top: 65px; bottom: 8px; }
+ .owa-graph-shell.has-selection .owa-graph-detail { z-index: 15; }
+}
+@media(prefers-reduced-motion:reduce) { .owa-graph-loading i { animation: none; } }
+.owa-graph-filter-toggle { height: 32px; border: 1px solid var(--graph-line); border-radius: 6px; padding: 0 10px; background: var(--graph-control-bg); color: var(--graph-muted); font-size: 12px !important; }
+.owa-graph-shell[data-view="instances"] .owa-graph-body { grid-template-columns: minmax(0,1fr); }
+.owa-graph-shell[data-view="instances"] .owa-graph-left { display: none; }
+.owa-graph-shell[data-view="instances"].show-object-filter .owa-graph-left { display: block; position: absolute; z-index: 8; top: 54px; left: 12px; bottom: 12px; width: 244px; border: 1px solid var(--graph-line); border-radius: 10px; background: var(--graph-popup-bg); }
+
+.owa-graph-shell :is(h2,h3,h4,button,input,select,p,summary) { font-family: inherit; }
+.owa-graph-left { display: flex; flex-direction: column; overflow: hidden; }
+.owa-graph-left > :not(.owa-graph-node-list) { flex-shrink: 0; }
+.owa-graph-node-list { display: block; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.owa-graph-node-list button { margin-bottom: 2px; }
+.owa-graph-shell[data-view="instances"].show-object-filter .owa-graph-left { display: flex; }
+.owa-graph-nav-icon { display: inline-block; width: 16px; height: 16px; background: url('/icons/network.svg') center/contain no-repeat; filter: var(--graph-icon-filter); opacity: .65; }
+.owa-graph-schema-home { display: flex; align-items: center; gap: 8px; }
+.owa-graph-node-appearance { display: flex; align-items: center; gap: 12px; height: 34px; color: var(--graph-muted); font-size: 12px; }
+.owa-graph-node-appearance i { display: inline-block; width: 16px; height: 16px; outline: 1px solid var(--graph-line); outline-offset: 7px; margin: 8px; }
+/* Pointer feedback stays lighter than a persistent selection. */
+.owa-graph-node-list button { transition: background-color 120ms ease, color 120ms ease; }
+.owa-graph-node-list button.is-hovered { background: var(--graph-hover-bg); }
+.owa-graph-node-list button:is(:hover,:focus-visible,.is-hovered) i { box-shadow: 0 0 5px var(--node-accent), 0 0 13px color-mix(in srgb,var(--node-accent) 55%,transparent); }
+.owa-graph-node-list button.is-selected { background: var(--graph-selected-bg); }
+.owa-graph-node-list button.is-selected i { box-shadow: 0 0 8px color-mix(in srgb,var(--node-accent) 45%,transparent); }
+.owa-graph-search:focus-within, .owa-graph-list-search:focus { border-color: var(--graph-focus); }
+.owa-graph-detail-tabs button, .owa-graph-badge button { transition: background-color 120ms ease, color 120ms ease; }
+.owa-graph-relations button:hover { border-color: var(--graph-line-strong); background: var(--graph-hover-bg); }
+@media(prefers-reduced-motion:reduce) { .owa-graph-node-list button, .owa-graph-detail-tabs button, .owa-graph-badge button { transition: none; } }
+
+.owa-graph-tab-icon { display: block; width: 15px; height: 15px; flex-shrink: 0; }
+
+@media (forced-colors: active) {
+ .owa-graph-dialog, body[data-ds-dark-theme] .owa-graph-dialog {
+  --graph-canvas-bg: Canvas; --graph-chrome-bg: Canvas; --graph-panel-bg: Canvas;
+  --graph-popup-bg: Canvas; --graph-control-bg: Canvas; --graph-input-bg: Canvas;
+  --graph-text: CanvasText; --graph-muted: CanvasText; --graph-faint: CanvasText;
+  --graph-line: CanvasText; --graph-line-strong: CanvasText; --graph-focus: Highlight;
+  --graph-selected-bg: Highlight; --graph-hover-bg: Canvas;
+  --graph-label-outline: Canvas; --graph-label-selected-bg: Canvas; --graph-label-hover-bg: Canvas;
+  --graph-node-stroke: CanvasText; --graph-grid: GrayText; --graph-layer-grid: GrayText;
+  --graph-edge-inheritance: CanvasText; --graph-edge-inheritance-active: Highlight;
+  --graph-edge-relation: CanvasText; --graph-edge-relation-active: Highlight;
+  --graph-edge-instance: CanvasText; --graph-edge-instance-active: Highlight;
+  --graph-edge-faded: GrayText; --graph-edge-instance-faded: GrayText; --graph-edge-instance-hover: CanvasText;
+  --graph-relation-label: CanvasText; --graph-inheritance-label: CanvasText;
+ }
+ .owa-graph-dialog .owa-graph-shell :is(.is-active,[aria-pressed="true"]) { color: HighlightText; }
+}

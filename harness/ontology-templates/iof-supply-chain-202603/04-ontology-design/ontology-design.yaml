@@ -1,0 +1,4 @@
+version: 2026.03
+ontology_iri: https://spec.industrialontologies.org/ontology/supplychain/SupplyChain/
+title: IOF 供应链参考本体
+constraints: []

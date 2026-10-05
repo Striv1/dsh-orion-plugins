@@ -1,0 +1,2 @@
+# PDF fixtures are binary documents; preserve their exact bytes and xref offsets.
+*.pdf binary

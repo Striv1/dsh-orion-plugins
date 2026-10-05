@@ -1,0 +1,334 @@
+/* The workbench is an owned main-slot page. Native shell and business status
+   layers keep their own ownership; Aqua only supplies the shared material. */
+[data-orion-workbench-root] {
+  font-family: var(--owa-font-stack, var(--dsw-font-family, sans-serif));
+  color: var(--owa-semantic-text-primary, var(--dsw-alias-label-primary));
+  background: var(--owa-semantic-surface-canvas, var(--dsw-alias-bg-base));
+  --owa-system-font: var(--owa-font-stack, var(--dsw-font-family, sans-serif));
+  --owa-color-text-primary: var(--owa-semantic-text-primary);
+  --owa-color-text-secondary: var(--owa-semantic-text-secondary);
+  --owa-color-text-tertiary: var(--owa-semantic-text-tertiary);
+  --owa-color-accent: var(--owa-semantic-accent);
+  --owa-color-success: var(--owa-semantic-success);
+  --owa-color-warning: var(--owa-semantic-warning);
+  --owa-color-danger: var(--owa-semantic-danger);
+}
+
+[data-orion-workbench-root] > .orion-workbench-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  flex: none;
+  padding: 20px 28px 14px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.orion-workbench-heading,
+.orion-workbench-actions,
+.orion-workbench-actions button,
+.orion-workbench-sections button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.orion-workbench-heading strong { font-size: 20px; font-weight: 600; line-height: 28px; letter-spacing: .01em; }
+.orion-workbench-heading > svg { color: var(--owa-semantic-accent, var(--dsw-alias-label-primary-bluish)); }
+.orion-workbench-actions button,
+.orion-workbench-sections button {
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.orion-workbench-actions button { padding: 8px 12px; background: transparent; }
+.orion-workbench-actions button.is-primary {
+  color: var(--owa-semantic-accent, var(--dsw-alias-label-primary-bluish));
+  background: var(--owa-semantic-accent-soft, var(--dsw-alias-state-business-tertiary));
+  border-color: color-mix(in srgb, currentColor 14%, transparent);
+}
+.orion-workbench-sections {
+  display: flex;
+  gap: 6px;
+  flex: none;
+  padding: 0 28px 16px;
+  border-bottom: 1px solid var(--owa-semantic-border-subtle, var(--dsw-alias-border-l2));
+}
+.orion-workbench-sections button { padding: 8px 14px; background: transparent; color: var(--owa-semantic-text-secondary, var(--dsw-alias-label-tertiary)); }
+.orion-workbench-sections button[aria-current="page"] {
+  color: var(--owa-semantic-accent, var(--dsw-alias-label-primary-bluish));
+  background: var(--owa-semantic-surface-selected, var(--dsw-alias-state-business-tertiary));
+  border-color: color-mix(in srgb, currentColor 16%, transparent);
+  box-shadow: inset 0 1px var(--dsh-aqua-material-highlight, #ffffff50);
+  font-weight: 600;
+}
+.orion-workbench-actions button:hover:not(:disabled),
+.orion-workbench-sections button:hover:not(:disabled) { background: var(--owa-semantic-surface-hover, var(--dsw-alias-interactive-bg-hover)); }
+.orion-workbench-actions button:focus-visible,
+.orion-workbench-sections button:focus-visible { outline: 2px solid var(--owa-semantic-accent, var(--dsw-alias-state-business-primary)); outline-offset: 3px; }
+.orion-workbench-actions button:disabled,
+.orion-workbench-sections button:disabled { opacity: .55; cursor: default; }
+@media (max-width: 700px) {
+  [data-orion-workbench-root] > .orion-workbench-navigation { padding: 16px; gap: 10px; }
+  .orion-workbench-sections { padding: 0 16px 12px; gap: 2px; }
+  .orion-workbench-sections button { padding: 8px 10px; }
+}
+
+[data-orion-workbench-root] > p:is([role="status"], [role="alert"]) {
+  margin: var(--owa-space-3, 12px) var(--owa-space-4, 16px);
+  padding: var(--owa-space-3, 12px);
+  border-radius: var(--owa-radius-control, 10px);
+  line-height: 1.6;
+}
+
+[data-orion-workbench-root] > p[role="alert"] {
+  color: var(--owa-semantic-danger, var(--dsw-alias-state-error-primary));
+  background: var(--owa-semantic-danger-soft, var(--dsw-alias-state-error-tertiary));
+  border: 1px solid var(--owa-semantic-danger-border, var(--dsw-alias-border-l3));
+}
+
+/* Product tokens also reach body-portaled dialogs. This changes semantic
+   materials, not native layout or the body navigation state. */
+html[data-dsh-aqua] body {
+  --owa-semantic-surface-canvas: var(--dsh-aqua-material-pane);
+  --owa-semantic-surface-navigation: var(--dsh-aqua-material-pane);
+  --owa-semantic-surface-panel: var(--dsh-aqua-material-read);
+  --owa-semantic-surface-panel-strong: var(--dsh-aqua-material-strong);
+  --owa-semantic-surface-overlay: var(--dsh-aqua-material-overlay);
+  --owa-semantic-surface-control: var(--dsh-aqua-material-control);
+  --owa-semantic-surface-hover: var(--dsh-aqua-material-control);
+  --owa-semantic-surface-input: var(--dsh-aqua-material-input);
+  --owa-semantic-surface-selected: var(--dsh-aqua-material-selected);
+}
+
+html[data-dsh-aqua] body,
+html[data-dsh-aqua] body [data-orion-workbench-root] {
+  --owa-ontology-surface-strength: var(--dsh-aqua-ontology-surface-strength, .6);
+  --owa-region-navigation: var(--dsh-aqua-material-pane);
+  --owa-region-workspace: color-mix(in srgb, var(--dsh-aqua-material-pane) calc(70% + 20% * var(--owa-ontology-surface-strength)), transparent);
+  --owa-region-context: var(--dsh-aqua-material-read);
+  --owa-surface-panel: var(--dsh-aqua-material-read);
+  --owa-surface-panel-strong: var(--dsh-aqua-material-strong);
+  --owa-surface-control: var(--dsh-aqua-material-control);
+  --owa-surface-input: var(--dsh-aqua-material-input);
+  --owa-surface-selected: var(--dsh-aqua-material-selected);
+  --owa-surface-hover: var(--dsh-aqua-material-control);
+  --owa-surface-overlay: var(--dsh-aqua-material-overlay);
+  --owa-surface-shadow: var(--owa-shadow-card, var(--dsw-elevation-soft));
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] {
+  --owa-semantic-surface-canvas: transparent;
+  --owa-semantic-surface-navigation: var(--owa-region-navigation);
+  --owa-semantic-surface-panel: var(--owa-surface-panel);
+  --owa-semantic-surface-panel-strong: var(--owa-surface-panel-strong);
+  --owa-semantic-surface-overlay: var(--owa-surface-overlay);
+  --owa-semantic-surface-control: var(--owa-surface-control);
+  --owa-semantic-surface-hover: var(--owa-surface-hover);
+  --owa-semantic-surface-input: var(--owa-surface-input);
+  --owa-semantic-surface-selected: var(--owa-surface-selected);
+  background: var(--owa-region-workspace);
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px)) saturate(125%);
+  box-shadow: inset 0 1px var(--dsh-aqua-material-highlight);
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] > .orion-workbench-navigation {
+  background: var(--owa-region-navigation);
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] [data-orion-workbench-content] {
+  background: transparent;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-engineering-view,
+  .owa-ontology-registry-view,
+  .owa-ontology-templates-view,
+  .owa-ontology-context,
+  .owa-intake-layer
+) {
+  --owa-eng-page: transparent;
+  --owa-eng-rail: var(--owa-region-navigation);
+  --owa-eng-card: var(--owa-surface-panel);
+  --owa-eng-card-strong: var(--owa-surface-panel-strong);
+  --owa-eng-control: var(--owa-surface-control);
+  --owa-eng-input: var(--owa-surface-input);
+  --owa-eng-selected: var(--owa-surface-selected);
+  background: transparent !important;
+}
+
+/* These are layout layers. Clearing only this list avoids changing graph
+   fills, thumbnails, code blocks, selected rows and approval/error states. */
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-engineering-shell,
+  .owa-engineering-workspace,
+  .owa-project-center-workspace,
+  .owa-project-center-section,
+  .owa-engineering-hero,
+  .owa-project-center-hero,
+  .owa-engineering-tabs
+) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-engineering-stage-rail,
+  .owa-engineering-context
+) {
+  background: var(--owa-region-navigation) !important;
+  backdrop-filter: none !important;
+  box-shadow: inset 0 1px var(--dsh-aqua-material-highlight) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-project-card,
+  .owa-project-center-stats,
+  .owa-registry-card,
+  .owa-template-card
+) {
+  background: var(--owa-surface-panel) !important;
+  border-color: var(--owa-semantic-border-subtle) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] .owa-project-card.is-current {
+  background: var(--owa-surface-panel-strong) !important;
+  box-shadow: inset 3px 0 var(--owa-semantic-accent), var(--owa-shadow-card) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-project-card,
+  .owa-registry-card,
+  .owa-template-card
+):hover {
+  background: var(--owa-surface-hover) !important;
+}
+
+html[data-dsh-aqua] body [data-orion-workbench-root] :is(
+  .owa-action-dialog,
+  .owa-review-drawer,
+  .owa-intake-dialog
+) {
+  background: var(--owa-surface-overlay) !important;
+  backdrop-filter: blur(max(18px, var(--dsh-aqua-blur, 14px))) saturate(125%) !important;
+}
+
+/* Version-file and document-preview portals predate the semantic foundations
+   and own local color variables. Map their reading chrome, retaining their
+   backdrop, file imagery, report contents and state-specific fills. */
+html[data-dsh-aqua] body .owa-version-files-overlay {
+  --owa-vf-bg: var(--dsh-aqua-material-overlay);
+  --owa-vf-panel: var(--dsh-aqua-material-read);
+  --owa-vf-rail: var(--dsh-aqua-material-pane);
+  --owa-vf-line: var(--owa-semantic-border-default);
+  --owa-vf-line-soft: var(--owa-semantic-border-subtle);
+  --owa-vf-ink: var(--owa-semantic-text-primary);
+  --owa-vf-muted: var(--owa-semantic-text-secondary);
+  --owa-vf-faint: var(--owa-semantic-text-tertiary);
+  --owa-vf-blue: var(--owa-semantic-accent);
+  --owa-vf-blue-strong: var(--owa-semantic-accent-hover);
+  --owa-vf-blue-soft: var(--owa-semantic-accent-soft);
+}
+
+html[data-dsh-aqua] body .owa-file-preview {
+  --p-bg: var(--dsh-aqua-material-overlay);
+  --p-soft: var(--dsh-aqua-material-read);
+  --p-ink: var(--owa-semantic-text-primary);
+  --p-muted: var(--owa-semantic-text-secondary);
+  --p-line: var(--owa-semantic-border-default);
+  background: var(--p-bg);
+}
+
+html[data-dsh-aqua] body :is(.owa-version-files-dialog, .owa-file-preview) {
+  backdrop-filter: blur(max(18px, var(--dsh-aqua-blur, 14px))) saturate(125%);
+}
+
+html[data-dsh-aqua] body #orion-runtime-refresh-notice {
+  background: var(--dsh-aqua-material-overlay) !important;
+  color: var(--owa-semantic-text-primary) !important;
+  border-color: var(--owa-semantic-warning-border) !important;
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px));
+}
+
+/* The graph is a body portal. Keep the renderer transparent and put the
+   shared material on its outer layer; the native generic dialog rule must
+   not add a second opaque surface to the inner graph shell. */
+html[data-dsh-aqua] body .owa-graph-dialog {
+  --graph-canvas-bg: transparent;
+  --graph-chrome-bg: var(--dsh-aqua-material-pane);
+  --graph-panel-bg: var(--dsh-aqua-material-read);
+  --graph-popup-bg: var(--dsh-aqua-material-overlay);
+  --graph-control-bg: var(--dsh-aqua-material-control);
+  --graph-input-bg: var(--dsh-aqua-material-input);
+  --graph-hover-bg: var(--dsh-aqua-material-control);
+  --graph-selected-bg: var(--dsh-aqua-material-selected);
+  background: var(--dsh-aqua-material-pane);
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px)) saturate(125%);
+}
+
+html[data-dsh-aqua] body .owa-graph-dialog .owa-graph-shell[role="dialog"] {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  color: var(--graph-text);
+}
+
+html[data-dsh-aqua] body .owa-graph-dialog :is(
+  .owa-graph-detail,
+  .owa-graph-display-menu,
+  .owa-graph-tip
+) {
+  backdrop-filter: blur(var(--dsh-aqua-blur, 14px)) saturate(125%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-orion-workbench-root] > .orion-workbench-navigation > button {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  html[data-dsh-aqua] body [data-orion-workbench-root] {
+    --owa-region-workspace: var(--dsh-aqua-material-pane);
+    backdrop-filter: none;
+  }
+  html[data-dsh-aqua] body .owa-graph-dialog,
+  html[data-dsh-aqua] body .owa-graph-dialog :is(.owa-graph-detail, .owa-graph-display-menu, .owa-graph-tip) {
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  [data-orion-workbench-root],
+  [data-orion-workbench-root] > .orion-workbench-navigation,
+  [data-orion-workbench-root] > div > nav[aria-label="本体工程导航"] {
+    background: Canvas !important;
+    color: CanvasText;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  [data-orion-workbench-root] > .orion-workbench-navigation > button {
+    border-color: ButtonText;
+  }
+  html[data-dsh-aqua] body .owa-graph-dialog,
+  html[data-dsh-aqua] body .owa-graph-dialog :is(.owa-graph-detail, .owa-graph-display-menu, .owa-graph-tip) {
+    --graph-chrome-bg: Canvas;
+    --graph-panel-bg: Canvas;
+    --graph-popup-bg: Canvas;
+    --graph-control-bg: Canvas;
+    --graph-input-bg: Canvas;
+    --graph-hover-bg: Canvas;
+    --graph-selected-bg: Highlight;
+    background: Canvas !important;
+    color: CanvasText;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}

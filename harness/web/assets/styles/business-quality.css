@@ -1,0 +1,12 @@
+.owa-business-quality { color: var(--owa-eng-text, var(--owa-semantic-text-primary)); overflow-wrap: anywhere; }
+.owa-business-quality-heading, .owa-business-quality-section > header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.owa-business-quality h2, .owa-business-quality h3 { margin: 0; font-size: 16px; }
+.owa-business-quality p { line-height: 1.6; margin: 8px 0; }
+.owa-business-quality-heading button, .owa-business-quality > button { border: 1px solid var(--owa-eng-border, #cbd5e1); border-radius: 8px; padding: 8px 12px; background: transparent; color: inherit; cursor: pointer; flex-shrink: 0; }
+.owa-business-quality-notice { margin: 16px 0; padding: 12px 16px; background: rgba(105, 145, 205, .08); border-radius: 10px; font-size: 13px; }
+.owa-business-quality-section { margin: 16px 0; padding: 16px; border: 1px solid var(--owa-eng-border, #cbd5e1); border-radius: 12px; }
+.owa-business-quality-section header span, .owa-business-quality-section small { font-size: 12px; color: var(--owa-eng-muted, var(--owa-semantic-text-secondary)); }
+.owa-business-quality-section dl { display: flex; flex-wrap: wrap; gap: 20px; }
+.owa-business-quality-section dd { margin: 4px 0 0; font-weight: 600; }
+.owa-business-quality-section dt { font-size: 12px; }
+.owa-business-quality-section li { margin: 12px 0; }
