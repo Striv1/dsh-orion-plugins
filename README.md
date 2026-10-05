@@ -6,27 +6,30 @@
 
 使用时，从“本体工程发起模板”描述目标并选择资料/数据库来源，在本体中心推进建设、校验和人工批准，完成正式发布后再进行有证据的问答与分析。首次安装没有客户本体数据，需要使用者提供自己的授权资料、模型账号和所需业务服务。
 
+**先说明体验范围：安装成功不等于业务闭环。** 完整包提供两个插件和 Python Core，可先体验界面、工程模板与空工作区；正式建设还需兼容的 Protégé/MCP、Semantica，资料发布还需 PostgreSQL、MinIO、Fuseki，数据库路径还需只读数据源和 Docker/Ontop。扫描件解析、数据库选择器分别需要 OCR、Chat2DB 接入。部分专用适配件和基础设施部署资料尚未随包交付，不能承诺新机器一键跑通。请先按 [外部依赖与闭环验收指南](docs/dependencies-and-acceptance.zh-CN.md) 选择路径、补齐依赖，再用真实资料、批准和发布后问答回执验收。
+
 ## 下载与开始使用
 
 - [产品简介：功能、组件与使用流程](docs/product-overview.zh-CN.md)
 - [完整安装教程：官方 Mac 桌面、Python 服务、权限与恢复](docs/install.zh-CN.md)
+- [外部依赖、下载入口与闭环验收](docs/dependencies-and-acceptance.zh-CN.md)
 - [本机 Web 安装教程](docs/web-install.zh-CN.md)
 - [让 AI 协助部署：可复制的任务说明](docs/ai-deployment.zh-CN.md)
-- [RC7 下载页面](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.7)：选择具名交付包，页面上的 `Source code (zip)` 不等同于完整安装包。
+- [RC8 下载页面](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8)：选择具名交付包，页面上的 `Source code (zip)` 不等同于完整安装包。
 
-建议交付 `orion-rc7-delivery-kit.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
+建议交付 `orion-rc8-delivery-kit.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
 
-**当前仓库已公开。任何人都可以直接打开仓库和 RC7 下载页，无需登录或邀请即可下载；公开可读不会授予仓库写入权限。** 请下载具名完整包及校验文件。
+**当前仓库已公开。任何人都可以直接打开仓库和 RC8 下载页，无需登录或邀请即可下载；公开可读不会授予仓库写入权限。** 请下载具名完整包及校验文件。
 
-当前交付面向 **Apple 芯片 Mac 本地部署**。RC7 清理个人操作人默认值与测试材料；桌面原生安装/开关已有 RC6 基线，RC7 的验证范围以发布页为准，安装者仍需验收自己的环境和业务链。完整远程多人服务器模式尚未交付。
+当前交付面向 **Apple 芯片 Mac 本地部署**。RC8 延续 RC7 的隐私清理，修正 Python 包版本并增加跨语言版本一致性检查；桌面原生安装/开关已有 RC6 基线，RC8 的验证范围以发布页为准，安装者仍需验收自己的环境和业务链。完整远程多人服务器模式尚未交付。
 
-## RC7 包含什么
+## RC8 包含什么
 
 | 交付物 | 当前候选 | 职责 |
 | --- | --- | --- |
-| `dsh-orion-workbench` | `1.0.0-rc.7` | 本体中心、工程发起模板、工程资料、本体管理、行业模板、图谱、正式发布绑定的证据问答和分析；工程/问答技能与预设；本地 Core 的受管生命周期 |
+| `dsh-orion-workbench` | `1.0.0-rc.8` | 本体中心、工程发起模板、工程资料、本体管理、行业模板、图谱、正式发布绑定的证据问答和分析；工程/问答技能与预设；本地 Core 的受管生命周期 |
 | `dsh-client-ui-aqua` | `1.3.1-orion-alpha.4` | 液态玻璃、流体背景及图片/视频壁纸；保留上游 MIT 许可与来源 |
-| `dsh-orion-runtime` | `1.0.0-rc.7` | 配套 Python 业务服务，执行 S0–S7、来源与规则、资料处理、批准/发布及问答证据契约；它不是第三个界面插件 |
+| `dsh-orion-runtime` | `1.0.0-rc.8` | 配套 Python 业务服务，执行 S0–S7、来源与规则、资料处理、批准/发布及问答证据契约；它不是第三个界面插件 |
 
 当前适配官方 DeepSeek Harness **0.2.0-rc.2**。后续升级须重新验证官方 Slot、Cordis、桌面 Profile、MCP 与进程生命周期，不通过版本豁免强行安装。
 
@@ -40,21 +43,21 @@
 
 ## 服务边界
 
-首次安装允许空工作区和空发布目录。Core 的 `NO_PUBLISHED_RUNTIME` 表示尚无正式发布，不能当作实时问答验收。数据库连接需显式配置 `DATABASE_URL`，RC7 不再提供默认用户名或密码；空连接串被拒绝，避免隐式连接本机数据库。凭据只属于部署配置，不进入源码、包、日志和回执。
+首次安装允许空工作区和空发布目录。Core 的 `NO_PUBLISHED_RUNTIME` 表示尚无正式发布，不能当作实时问答验收。已发布问答的当前版本库需显式配置 `DATABASE_URL`，不提供部署用户名或密码；空连接串被拒绝，避免隐式连接本机数据库。凭据只属于部署配置，不进入源码、包、日志和回执。
 
-Wren 如需使用，必须另建 `ORION_PROFILE_ROOT/.venvs/wren`，按 `scripts/requirements-wren.txt` 安装；不要混入 Core。Ontop/Fuseki、Semantica、Protégé/HermiT、数据库、对象存储和部分 OCR 能力按业务需要另行部署。缺失前置条件时应明确拒绝相应阶段。PDF 文本层辅助当前依赖 macOS Swift/PDFKit，部分 worker 使用 POSIX `fcntl`；跨平台功能未完整验收。
+正式 S5 需要兼容的 Protégé/MCP/HermiT；当前受管 S6 以 Semantica 环境为前置，默认 S7 还需模型同步。资料正式发布需要工作流 PostgreSQL、MinIO 和 Fuseki；数据库路径需要只读来源和 Docker/Ontop。它们不是安装 Python SDK 后就自动存在的服务。Wren 为可选分析环境，与 Core 分离。各项配置、官方入口、未交付适配及验收条件见 [依赖指南](docs/dependencies-and-acceptance.zh-CN.md)。PDF 文本层当前依赖 macOS Swift/PDFKit，部分 worker 使用 POSIX `fcntl`；跨平台功能未完整验收。
 
 [配套 runtime 说明](docs/runtime-install.md) 提供服务环境与契约要点；首次部署请按 [完整安装教程](docs/install.zh-CN.md) 完成宿主、两个插件和服务配置。
 
 ## 源码维护和构建
 
-Node.js 22 或更高版本用于构建，依赖由 `package-lock.json` 固定：
+构建需要 Node.js 22 或更高版本，以及 Python 3.11+（标准库 `tomllib` 用于核对发行版本）；依赖由 `package-lock.json` 固定：
 
 ```sh
 npm ci
 npm test
 npm run check
-node scripts/build_orion_plugins.mjs --pack --output-dir dist/rc7-new-build
+node scripts/build_orion_plugins.mjs --pack --output-dir dist/rc8-new-build
 ```
 
 已有依赖和官方 SDK 时可显式指定它们，构建工具不会将本机路径写入产物：

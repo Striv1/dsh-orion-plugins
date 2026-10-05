@@ -1,15 +1,15 @@
-# ORION runtime 1.0.0-rc.7
+# ORION runtime 1.0.0-rc.8
 
 This is the complete Python service source for the matching ORION workbench. It includes services, workflow and QA MCP entry points, scripts, dependency locks, migrations, templates, resource notices and tests. It does not contain user credentials, business state, a Python virtual environment or external infrastructure.
 
-Use the matching complete RC7 delivery kit and its `install.zh-CN.md` or `web-install.zh-CN.md` for full host/plugin configuration. The helper ZIP in that kit supplies the configuration generator. The official Harness host is 0.2.0-rc.2; the workbench and this runtime must both be 1.0.0-rc.7.
+Use the matching complete RC8 delivery kit and its `install.zh-CN.md` or `web-install.zh-CN.md` for full host/plugin configuration. The helper ZIP in that kit supplies the configuration generator. The official Harness host is 0.2.0-rc.2; the workbench and this runtime must both be 1.0.0-rc.8.
 
 ## Prepare Core
 
 Choose absolute, non-symlink paths. Keep the business Profile outside this runtime source. If a Profile already exists, back it up and inspect it; do not overwrite it to repeat installation.
 
 ```sh
-export ORION_RUNTIME_ROOT=/path/to/dsh-orion-runtime-1.0.0-rc.7
+export ORION_RUNTIME_ROOT=/path/to/dsh-orion-runtime-1.0.0-rc.8
 export ORION_PROFILE_ROOT=/path/to/orion-profile
 uv venv --python 3.12 "$ORION_PROFILE_ROOT/.venvs/core"
 UV_PROJECT_ENVIRONMENT="$ORION_PROFILE_ROOT/.venvs/core" uv sync --project "$ORION_RUNTIME_ROOT" --locked
@@ -25,7 +25,9 @@ Runtime data lives under Profile/state, caches under Profile/cache and the Core 
 
 Python 3.11–3.13 is declared; 3.12 is the validated deployment choice. Install Wren in a separate Profile/.venvs/wren environment using scripts/requirements-wren.txt. Do not mix its dependency versions into Core.
 
-Databases, object storage, OCR, Protégé/HermiT, Semantica, Ontop/Fuseki and other professional services are configured separately for the business capabilities required. Database connections must be explicit; no deployment credentials are supplied. PDF text extraction currently relies on macOS Swift/PDFKit and some workers use POSIX fcntl, so full Windows/Linux support is not claimed.
+Formal S5 needs a compatible Protégé/MCP/HermiT setup. The managed S6 entry requires Semantica runtime configuration; default S7 also requires model synchronization. Document publication needs PostgreSQL current-version storage, MinIO and Fuseki. Database-source validation needs an explicitly read-only source and Docker/Ontop. OCR MCP is needed for scanned inputs; the native database selector needs Chat2DB MCP. The custom adapters, image build recipe and service initialization are not all supplied in this archive. Installing their Python libraries does not deploy these services.
+
+Read `dependencies-and-acceptance.zh-CN.md` in the complete delivery kit, or the [repository guide](https://github.com/Striv1/dsh-orion-plugins/blob/main/docs/dependencies-and-acceptance.zh-CN.md), before planning business acceptance. Configure explicit per-Profile runtime-manager and MCP environments, rather than relying on ambient shell exports. Database connections must be explicit; no deployment credentials are supplied. PDF text extraction currently relies on macOS Swift/PDFKit and some workers use POSIX fcntl, so full Windows/Linux support is not claimed.
 
 An empty registry returns NO_PUBLISHED_RUNTIME. This means that no formally published ontology is available, not that a business question has been answered successfully. Actual authorized data, S0–S7 evidence, human approval and release read-back are necessary for business acceptance.
 

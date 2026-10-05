@@ -1,34 +1,38 @@
-# 让 AI 协助安装 ORION RC7
+# 让 AI 协助安装 ORION RC8
 
 适用于能读取本机文件、执行终端命令并在必要时操作浏览器/桌面的 AI 开发工具。只有聊天能力的 AI 可以解释步骤，但不能直接替你安装。优先把已下载的完整交付 ZIP 解压到本机，让 AI 从这个目录开始；不必给它维护者的 GitHub 账号或凭据。
 
 ## 先由使用者准备
 
-- Apple 芯片 Mac，以及 `orion-rc7-delivery-kit.zip` 和校验文件。
+- Apple 芯片 Mac，以及 `orion-rc8-delivery-kit.zip` 和校验文件。
 - 选择官方桌面端（推荐）或本机 Web 端；默认先装一种。
 - 自己的模型账号或 API 配置，通过官方界面/本机配置完成认证。
 - 若要建设工程，提供自己的稳定操作人标识和获授权的资料范围。
 
-当前 GitHub 仓库和 RC7 Release 已公开，直接下载即可，不需要账号、Read 邀请或管理员 Token。也可以先手动下载，再让 AI 安装。
+当前 GitHub 仓库和 RC8 Release 已公开，直接下载即可，不需要账号、Read 邀请或管理员 Token。也可以先手动下载，再让 AI 安装。
 
 ## 复制以下任务给 AI
 
 ```text
-请帮我在这台 Apple 芯片 Mac 上部署 ORION RC7。
+请帮我在这台 Apple 芯片 Mac 上部署 ORION RC8。
 
-交付目录：~/Downloads/ORION-RC7
+交付目录：~/Downloads/ORION-RC8
 入口选择：官方桌面端（如我明确选择 Web，则改用本机 Web 教程）
 业务用途：在我自己的本地目录中建设本体工程；操作人标识如未给出，先向我确认。
 
 先阅读交付目录中的 README-先读.txt、product-overview.zh-CN.md、
-install.zh-CN.md；Web 再读 web-install.zh-CN.md。
+install.zh-CN.md 和 dependencies-and-acceptance.zh-CN.md；Web 再读 web-install.zh-CN.md。
 以这些文件里的冻结版本、命令和配置契约为准，不自行升级依赖或猜配置。
 
 执行范围：
-1. 只读检查系统架构、已有 Harness 安装及版本、Home/Profile、Python/uv，
+1. 先确认本次目标是界面体验还是 DOCUMENT_ONLY / DATABASE_ONLY / HYBRID 业务闭环。
+   按依赖指南列出“已提供、已连接验证、缺失、尚未验证”的清单。
+   缺兼容 Protégé MCP、Semantica 配置或 Ontop 镜像等时如实阻塞对应阶段，
+   不凭上游软件下载成功推断兼容，不复制维护者私有路径或密钥，不编造安装命令。
+   只读检查系统架构、已有 Harness 安装及版本、Home/Profile、Python/uv，
    Web 另查 Node/pnpm 和端口归属。保护所有既有应用、资料、会话和修改。
 2. 核对完整包及内部 SHA-256，再核对官方安装包签名和版本。
-   宿主固定 0.2.0-rc.2，工作台/runtime 1.0.0-rc.7，Aqua alpha.4。
+   宿主固定 0.2.0-rc.2，工作台/runtime 1.0.0-rc.8，Aqua alpha.4。
    如果已有不同版本或冲突配置，先说明冲突与隔离方案，不覆盖或降级。
 3. 按所选教程准备独立目录和 Python 3.12 Core 环境；Wren 不混入 Core。
    使用受版本契约保护的 runtime，校验279个运行文件与记录中的指纹。
@@ -46,7 +50,10 @@ install.zh-CN.md；Web 再读 web-install.zh-CN.md。
    实际查看 Logo、本体中心、工程发起模板、资料引用和两个插件开关。
    新 Profile 自行完成首次说明、语言、工作区和 Aqua 设置。
    如端口、界面或工具检查失败，定位原因后修复；不将 HTTP 200 当成通过。
-8. 安装完成后列出启动/停止/恢复方式、文件位置和逐项验证结果。
+8. 外部服务参数必须进入同一 Profile 的 runtime-manager.environment 和对应 MCP env；
+   只在终端 export 不算完成桌面配置。区分工作流数据库与业务只读数据库，
+   保留现有完整配置和业务门禁，不能为了通过而关闭同步、伪造批准或手改状态。
+9. 安装完成后列出启动/停止/恢复方式、文件位置和逐项验证结果。
    首次无发布时如实记录 NO_PUBLISHED_RUNTIME。
    模型调用、资料接入和工程业务链只有实际取得结果及回执才写“通过”；
    没有执行、缺依赖或被遮罩阻挡的项目写“未验证”，不得模拟。
@@ -67,4 +74,6 @@ install.zh-CN.md；Web 再读 web-install.zh-CN.md。
 | 业务验证 | 模型/工具真实结果与业务回执；未配置或未执行项单独说明 |
 | 待处理项 | 缺失依赖、账号或人工批准，以及负责人下一步操作 |
 
-AI 辅助安装不会把当前 RC7 变成已完成的远程多人服务器，也不会自动取得客户数据授权。完整业务验收应采用使用者自己的资料、来源与批准记录。
+AI 辅助安装不会把当前 RC8 变成已完成的远程多人服务器，也不会自动取得客户数据授权。完整业务验收应采用使用者自己的资料、来源与批准记录。
+
+业务闭环须另行按 [验收指南](dependencies-and-acceptance.zh-CN.md) 保存来源指纹、S4/S7 人工批准、S5/S6 外部回执、正式版本部署回读和问答证据。安装辅助 AI 不应自行把这些标记为通过。

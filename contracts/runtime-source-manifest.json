@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "runtimeVersion": "1.0.0-rc.7",
+  "runtimeVersion": "1.0.0-rc.8",
   "algorithm": "sha256-path-content-v1",
-  "fingerprint": "7964a84a604a94dbb7d8e45e5b09a4ead7997ac68e77c42624785bd47e2690f3",
+  "fingerprint": "87ff579695e5006227265963b398da273f838b4fc9757ca36cb37721b76e533c",
   "files": [
     {
       "path": "Makefile",
@@ -26,8 +26,8 @@
     },
     {
       "path": "docs/runtime-install.md",
-      "bytes": 3400,
-      "sha256": "b6790c1044766aaa5e46e4fc3c3fbbc5846a09bd071f91623ffca73e8b72d04e"
+      "bytes": 4167,
+      "sha256": "8b1b5afb6b284b346faf5bfd163cc0272418f3669f42813eddc0faafb537b2e1"
     },
     {
       "path": "harness/__init__.py",
@@ -297,7 +297,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 1693,
-      "sha256": "8a24efce8d0f12fe4a66735739a6d24347c25aa70ddaeb615c6bbaeff0acf2d9"
+      "sha256": "632d5489906906ffafbf053b5e6d0aea3601c69fdada64a280d826f45444a9b8"
     },
     {
       "path": "scripts/build_ontology_graph.py",
@@ -1387,7 +1387,7 @@
     {
       "path": "uv.lock",
       "bytes": 283879,
-      "sha256": "536ac0c1d3af2843834ae8994ee5ddc34555fda201cd02f9e823a7a190609e99"
+      "sha256": "99c524313583916714bcdfda2c86cf727406432e6d2e5e941067a32d677c96d1"
     },
     {
       "path": "vendor/echarts-LICENSE.txt",

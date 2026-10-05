@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dsh-orion-runtime"
-version = "1.0.0rc6"
+version = "1.0.0rc8"
 description = "ORION AI production ontology engineering and reasoning platform"
 readme = "docs/runtime-install.md"
 requires-python = ">=3.11,<3.14"

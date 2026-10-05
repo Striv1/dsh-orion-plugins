@@ -13,22 +13,22 @@ import { assertRuntimeContent, createRuntimeManifest, fingerprintRuntimeFiles, p
 const project = fileURLToPath(new URL("../../", import.meta.url));
 const invoke = promisify(execFile), json = value => JSON.stringify(value, null, 2) + "\n";
 
-async function fixture(t) {
+async function fixture(t, { runtimeVersion = "1.0.0-rc.1", pythonVersion = "1.0.0rc1", lockVersion = pythonVersion, lockSource } = {}) {
   const root = await realpath(await mkdtemp(join(tmpdir(), "orion-runtime-source-test-")));
   t.after(() => rm(root, { recursive: true, force: true }));
   const save = async (path, body) => { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), body); };
   const files = new Map([
-    ["pyproject.toml", Buffer.from('[project]\nname="dsh-orion-runtime"\nversion="1.0.0rc1"\n')],
-    ["uv.lock", Buffer.from('version=1\n')], ["Makefile", Buffer.from(SAFE_RUNTIME_MAKEFILE)],
+    ["pyproject.toml", Buffer.from(`[project]\nname="dsh-orion-runtime"\nversion="${pythonVersion}"\n`)],
+    ["uv.lock", Buffer.from(lockSource ?? `version=1\n[[package]]\nname="example-dependency"\nversion="4.5.6"\n[[package]]\nname="dsh-orion-runtime"\nversion="${lockVersion}"\nsource={editable="."}\n`)], ["Makefile", Buffer.from(SAFE_RUNTIME_MAKEFILE)],
     ["services/realtime_qa/api.py", Buffer.from("raise RuntimeError('verification must not import the app')\n")],
     ["scripts/ensure_semantica_runtime.sh", Buffer.from("#!/bin/sh\nexit 0\n")],
   ]);
   for (const path of ["scripts/orion_runtime_manifest.py", "scripts/prepare_orion_runtime.py"]) files.set(path, await readFile(join(project, path)));
   for (const [path, body] of files) await save(path, body);
-  const manifest = createRuntimeManifest(files, "1.0.0-rc.1", { required: [...files.keys()] });
+  const manifest = createRuntimeManifest(files, runtimeVersion, { required: [...files.keys()] });
   await save("contracts/runtime-source-manifest.json", json(manifest));
   await save("contracts/backend-source-fingerprint.json", json(fingerprintRuntimeFiles(files)));
-  await save("package.json", json({ name: "dsh-orion-plugins", version: "1.0.0-rc.1", private: true }));
+  await save("package.json", json({ name: "dsh-orion-plugins", version: runtimeVersion, private: true }));
   return { root, save, files, manifest, options: { projectRoot: root, outputDir: join(root, "dist") } };
 }
 
@@ -58,6 +58,63 @@ test("runtime archive is reproducible, self-contained and retains executable she
   assert.equal(first.receipt.actions.virtualEnvironmentCopied, false);
   assert.equal(first.receipt.actions.serviceStart, false);
   assert.ok(first.receipt.distribution.includes("wheel equivalence has not been verified"));
+});
+
+test("runtime packaging accepts matching stable, alpha, beta and rc Python release metadata", async t => {
+  for (const [runtimeVersion, pythonVersion] of [
+    ["1.2.3", "1.2.3"], ["1.2.3-alpha.2", "1.2.3a2"],
+    ["1.2.3-beta.4", "1.2.3b4"], ["1.0.0-rc.8", "1.0.0rc8"],
+  ]) {
+    await t.test(runtimeVersion, async t => {
+      const { options } = await fixture(t, { runtimeVersion, pythonVersion });
+      const archive = await packageRuntimeSource(options);
+      const files = unpack(await readFile(archive.archive));
+      const prefix = `dsh-orion-runtime-${runtimeVersion}/`;
+      assert.match(files.get(prefix + "pyproject.toml").body.toString(), new RegExp(`version="${pythonVersion.replaceAll(".", "\\.")}"`));
+      assert.ok(files.has(prefix + "uv.lock"));
+    });
+  }
+});
+
+test("freshly valid source fingerprints cannot hide stale Python project or lock versions", async t => {
+  for (const [path, pythonVersion, lockVersion] of [
+    ["pyproject.toml", "1.0.0rc6", "1.0.0rc8"],
+    ["uv.lock", "1.0.0rc8", "1.0.0rc6"],
+    ["pyproject.toml", "1.0.0rc6", "1.0.0rc6"],
+  ]) {
+    await t.test(`${path}: ${pythonVersion}/${lockVersion}`, async t => {
+      const { root, options, manifest } = await fixture(t, { runtimeVersion: "1.0.0-rc.8", pythonVersion, lockVersion });
+      // The manifest and backend fingerprint were calculated over these exact
+      // stale metadata bytes: a source-integrity-only check would accept them.
+      const files = await verifyRuntimeManifest(root, manifest);
+      assert.equal(fingerprintRuntimeFiles(files).sha256, manifest.fingerprint);
+      await assert.rejects(packageRuntimeSource(options), error => error.message.includes(`Python runtime version mismatch in ${path}`));
+      await assert.rejects(readFile(join(options.outputDir, "dsh-orion-runtime-1.0.0-rc.8.tar.gz")), { code: "ENOENT" });
+    });
+  }
+});
+
+test("runtime packaging rejects absent or ambiguous project entries in an otherwise valid lock file", async t => {
+  for (const lockSource of [
+    'version=1\n[[package]]\nname="example-dependency"\nversion="1.0.0rc1"\n',
+    'version=1\n[[package]]\nname="dsh-orion-runtime"\nversion="1.0.0rc1"\n[[package]]\nname="dsh-orion-runtime"\nversion="1.0.0rc1"\n',
+  ]) {
+    const { options } = await fixture(t, { lockSource });
+    await assert.rejects(packageRuntimeSource(options), /uv.lock must contain exactly one dsh-orion-runtime package/);
+  }
+});
+
+test("runtime packaging rejects unknown version mappings instead of guessing compatibility", async t => {
+  for (const [runtimeVersion, pythonVersion, message] of [
+    ["1.0.0-preview.1", "1.0.0rc1", /Unsupported runtime release version/],
+    ["1.0.0-rc.08", "1.0.0rc8", /Unsupported runtime release version/],
+    ["1.0.0-rc.1", "1.0.0rc1.post1", /Unsupported Python runtime version/],
+    ["1.0.0-rc.1", "1.0.0rc1+local", /Unsupported Python runtime version/],
+    ["1.0.0-rc.1", "1.0.0rc1.dev1", /Unsupported Python runtime version/],
+  ]) {
+    const { options } = await fixture(t, { runtimeVersion, pythonVersion });
+    await assert.rejects(packageRuntimeSource(options), message);
+  }
 });
 
 test("drift in a script, resource or safe Makefile rejects delivery even at the same version", async t => {
