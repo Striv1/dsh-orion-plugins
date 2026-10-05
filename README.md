@@ -6,7 +6,7 @@
 
 使用时，从“本体工程发起模板”描述目标并选择资料/数据库来源，在本体中心推进建设、校验和人工批准，完成正式发布后再进行有证据的问答与分析。首次安装没有客户本体数据，需要使用者提供自己的授权资料、模型账号和所需业务服务。
 
-**先说明体验范围：安装成功不等于业务闭环。** 完整包提供两个插件和 Python Core，可先体验界面、工程模板与空工作区；正式建设还需兼容的 Protégé/MCP、Semantica，资料发布还需 PostgreSQL、MinIO、Fuseki，数据库路径还需只读数据源和 Docker/Ontop。扫描件解析、数据库选择器分别需要 OCR、Chat2DB 接入。部分专用适配件和基础设施部署资料尚未随包交付，不能承诺新机器一键跑通。请先按 [外部依赖与闭环验收指南](docs/dependencies-and-acceptance.zh-CN.md) 选择路径、补齐依赖，再用真实资料、批准和发布后问答回执验收。
+**先说明体验范围：安装成功不等于业务闭环。** 可以先体验工作台和工程入口；真实建设、发布和问答还需要自己的资料、模型账号及相应外部软件。软件用途与官网见 [使用前准备清单](docs/dependencies-and-acceptance.zh-CN.md)。部分环境仍需接入实施，只有实际完成批准、校验、发布和证据问答，才能说明所选业务范围已经跑通。
 
 ## 下载与开始使用
 
@@ -17,7 +17,7 @@
 - [让 AI 协助部署：可复制的任务说明](docs/ai-deployment.zh-CN.md)
 - [RC8 下载页面](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8)：选择具名交付包，页面上的 `Source code (zip)` 不等同于完整安装包。
 
-建议交付 `orion-rc8-delivery-kit.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
+建议交付 `orion-rc8-delivery-kit-r2.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
 
 **当前仓库已公开。任何人都可以直接打开仓库和 RC8 下载页，无需登录或邀请即可下载；公开可读不会授予仓库写入权限。** 请下载具名完整包及校验文件。
 
@@ -45,7 +45,7 @@
 
 首次安装允许空工作区和空发布目录。Core 的 `NO_PUBLISHED_RUNTIME` 表示尚无正式发布，不能当作实时问答验收。已发布问答的当前版本库需显式配置 `DATABASE_URL`，不提供部署用户名或密码；空连接串被拒绝，避免隐式连接本机数据库。凭据只属于部署配置，不进入源码、包、日志和回执。
 
-正式 S5 需要兼容的 Protégé/MCP/HermiT；当前受管 S6 以 Semantica 环境为前置，默认 S7 还需模型同步。资料正式发布需要工作流 PostgreSQL、MinIO 和 Fuseki；数据库路径需要只读来源和 Docker/Ontop。它们不是安装 Python SDK 后就自动存在的服务。Wren 为可选分析环境，与 Core 分离。各项配置、官方入口、未交付适配及验收条件见 [依赖指南](docs/dependencies-and-acceptance.zh-CN.md)。PDF 文本层当前依赖 macOS Swift/PDFKit，部分 worker 使用 POSIX `fcntl`；跨平台功能未完整验收。
+Protégé、Semantica、数据库、存储、查询和 OCR 等能力按实际业务范围接入，外部服务没有全部随包提供；Wren 为可选分析能力，使用独立环境。名称、用途与官网见 [准备清单](docs/dependencies-and-acceptance.zh-CN.md)。当前以 Apple 芯片 Mac 本地部署为验收范围，完整跨平台业务链尚未验收。
 
 [配套 runtime 说明](docs/runtime-install.md) 提供服务环境与契约要点；首次部署请按 [完整安装教程](docs/install.zh-CN.md) 完成宿主、两个插件和服务配置。
 

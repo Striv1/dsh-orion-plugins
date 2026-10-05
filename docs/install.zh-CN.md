@@ -2,11 +2,11 @@
 
 核对日期：2026-10-05。适用于官方 DeepSeek Harness 0.2.0-rc.2、工作台/runtime 1.0.0-rc.8、Aqua 1.3.1-orion-alpha.4。
 
-**安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；完整工程链的外部客户端、服务、配置位置及真实闭环标准见 [外部依赖与闭环验收指南](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
+**安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；外部软件的用途、官网和闭环条件见 [使用前准备清单](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
 
 目标：维护者交付完整版本包；使用者在自己的 Mac 上选择桌面或 Web 入口，部署配套服务，使用和保存自己的业务资料。
 
-**当前可以直接从 [RC8 公开下载页](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8) 下载 `orion-rc8-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt`，无需登录、添加协作者或接受邀请。** 也可以直接接收维护者提供的这两个文件。解压后得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。
+**当前可以直接从 [RC8 公开下载页](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8) 下载 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt`，无需登录、添加协作者或接受邀请。** 也可以直接接收维护者提供的这两个文件。解压后得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。
 
 包内已经准备官方 Apple 芯片 Mac 安装包；首次安装仍需联网获取 Python/Node 和依赖，Web 还需获取官方 CLI。这不是全部依赖都内置的断网安装包。
 
@@ -67,11 +67,11 @@ GitHub 写入权限与本地业务写入是两回事。使用者可按第七节�
 
 ### 4.1 下载并核对附件
 
-直接收到完整 ZIP 和校验文件时，先将两者放到自己的 `~/Downloads/`。若通过 GitHub 下载，直接打开 **RC8 公开下载页**，下载 `orion-rc8-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt`。先检查外层 ZIP：
+直接收到完整 ZIP 和校验文件时，先将两者放到自己的 `~/Downloads/`。若通过 GitHub 下载，直接打开 **RC8 公开下载页**，下载 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt`。先检查外层 ZIP：
 
 ```sh
 cd "$HOME/Downloads"
-shasum -a 256 -c SHA256SUMS-delivery-kit.txt
+shasum -a 256 -c SHA256SUMS-delivery-kit-r2.txt
 ```
 
 显示 `OK` 后解压，得到：
@@ -341,26 +341,7 @@ curl --fail --silent --show-error 'http://127.0.0.1:8091/health'
 | `contracts/` | runtime 版本与279个运行文件的完整内容指纹 |
 | `tests/`、`vendor/` | 配套测试及第三方资源许可；包内共337个文件 |
 
-服务需要安装自己的运行环境并配置实际业务依赖；它不包含数据库服务器、全部外部专业工具或维护者的数据。
-
-| 使用范围 | 额外准备 |
-| --- | --- |
-| 文件资料与本地工程 | 真实授权的资料和可用模型；扫描件/OCR 依实际资料配置 |
-| 数据库资料 | 自己的只读数据源和明确连接配置；RC8 不含数据库默认账号密码 |
-| 本体构建、质量验证 | 按对应阶段配置 Protégé/HermiT、Semantica 及其实际接口 |
-| 正式发布与证据问答 | 资料链需工作流 PostgreSQL、MinIO、Fuseki；数据库链需 Docker/Ontop 与只读来源；按默认配置完成 Semantica 同步，取得实际部署/版本回读，详见依赖指南 |
-| Wren 分析 | 单独创建 Wren 环境；不混入 Core |
-
-需要 Wren 时执行：
-
-```sh
-uv venv --python 3.12 "$ORION_PROFILE_ROOT/.venvs/wren"
-uv pip sync --python "$ORION_PROFILE_ROOT/.venvs/wren/bin/python" \
-  "$ORION_RUNTIME_ROOT/scripts/requirements-wren.txt"
-uv pip check --python "$ORION_PROFILE_ROOT/.venvs/wren/bin/python"
-```
-
-具体业务连接和凭据由部署负责人按实际数据范围配置；同时使用工作台和 Workflow MCP 时，要保持两者配置中的对应业务环境一致。不要把账号或密码写进教程、源码或 Release。
+本包不包含全部外部软件、数据库服务器或业务数据。按所选场景准备相应服务即可，名称、用途和官网见 [使用前准备清单](dependencies-and-acceptance.zh-CN.md)。使用自己的模型账号与授权资料；实际完成工程批准、构建校验、正式发布和证据问答后，再记录业务验收结果。
 
 **服务器模式尚未完成。** 当前工作流 gateway 会执行本地 Python；不能只把 Core 地址换成服务器 URL 就称为完整远程部署。多人权限、远程文件、业务 API、任务恢复和发布问答需要另做实现与验收。
 

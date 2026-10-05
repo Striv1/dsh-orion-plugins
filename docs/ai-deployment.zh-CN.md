@@ -4,7 +4,7 @@
 
 ## 先由使用者准备
 
-- Apple 芯片 Mac，以及 `orion-rc8-delivery-kit.zip` 和校验文件。
+- Apple 芯片 Mac，以及 `orion-rc8-delivery-kit-r2.zip` 和校验文件。
 - 选择官方桌面端（推荐）或本机 Web 端；默认先装一种。
 - 自己的模型账号或 API 配置，通过官方界面/本机配置完成认证。
 - 若要建设工程，提供自己的稳定操作人标识和获授权的资料范围。
@@ -27,8 +27,7 @@ install.zh-CN.md 和 dependencies-and-acceptance.zh-CN.md；Web 再读 web-insta
 执行范围：
 1. 先确认本次目标是界面体验还是 DOCUMENT_ONLY / DATABASE_ONLY / HYBRID 业务闭环。
    按依赖指南列出“已提供、已连接验证、缺失、尚未验证”的清单。
-   缺兼容 Protégé MCP、Semantica 配置或 Ontop 镜像等时如实阻塞对应阶段，
-   不凭上游软件下载成功推断兼容，不复制维护者私有路径或密钥，不编造安装命令。
+   缺外部环境或接入条件时如实记录，不凭软件下载安装成功推断业务已跑通。
    只读检查系统架构、已有 Harness 安装及版本、Home/Profile、Python/uv，
    Web 另查 Node/pnpm 和端口归属。保护所有既有应用、资料、会话和修改。
 2. 核对完整包及内部 SHA-256，再核对官方安装包签名和版本。
@@ -50,9 +49,8 @@ install.zh-CN.md 和 dependencies-and-acceptance.zh-CN.md；Web 再读 web-insta
    实际查看 Logo、本体中心、工程发起模板、资料引用和两个插件开关。
    新 Profile 自行完成首次说明、语言、工作区和 Aqua 设置。
    如端口、界面或工具检查失败，定位原因后修复；不将 HTTP 200 当成通过。
-8. 外部服务参数必须进入同一 Profile 的 runtime-manager.environment 和对应 MCP env；
-   只在终端 export 不算完成桌面配置。区分工作流数据库与业务只读数据库，
-   保留现有完整配置和业务门禁，不能为了通过而关闭同步、伪造批准或手改状态。
+8. 按所选业务范围接入外部服务，核对实际运行环境和真实结果；
+   保留业务门禁，不伪造批准或手改状态来代替验证。
 9. 安装完成后列出启动/停止/恢复方式、文件位置和逐项验证结果。
    首次无发布时如实记录 NO_PUBLISHED_RUNTIME。
    模型调用、资料接入和工程业务链只有实际取得结果及回执才写“通过”；

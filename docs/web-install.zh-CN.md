@@ -2,13 +2,13 @@
 
 本教程与 [公开下载及桌面教程](install.zh-CN.md) 配套。使用同一批两个插件、Python runtime 和安装辅助 ZIP；选择 Web 无需先安装 DeepSeek Harness 桌面 App。
 
-**安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；完整工程链的外部客户端、服务、配置位置及真实闭环标准见 [外部依赖与闭环验收指南](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
+**安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；外部软件的用途、官网和闭环条件见 [使用前准备清单](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
 
 适用范围：Mac 本机浏览器，官方 Harness **0.2.0-rc.2**，工作台/runtime **1.0.0-rc.8**，Aqua **1.3.1-orion-alpha.4**。Web 默认只监听本机，不是已经验收的公网或多人服务器产品。
 
 ## 一、下载文件与目录
 
-直接收到 `orion-rc8-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt` 时，先按主教程第四节校验外层 ZIP，再解压得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。也可以从 RC8 公开下载页直接下载这两个文件，无需 GitHub 账号或邀请。包内官方 DMG 为桌面用户准备，纯 Web 路径无需安装它。继续检查：
+直接收到 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt` 时，先按主教程第四节校验外层 ZIP，再解压得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。也可以从 RC8 公开下载页直接下载这两个文件，无需 GitHub 账号或邀请。包内官方 DMG 为桌面用户准备，纯 Web 路径无需安装它。继续检查：
 
 ```sh
 cd "$HOME/Downloads/ORION-RC8"
