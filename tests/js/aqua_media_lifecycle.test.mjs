@@ -216,6 +216,39 @@ test("an intentional pause does not turn an interrupted autoplay attempt into a 
   assert.equal(layer.mediaError, ""); assert.equal(h.wallpaperLayer.hidden, false);
 });
 
+for (const pauseReason of ["hidden", "reducedMotion"]) {
+  test(`an interrupted play rejection cannot invalidate playback resumed after ${pauseReason}`, async () => {
+    const h = harness(), pending = [];
+    h.blobs.set("saved", { type: "video/mp4" });
+    h.video.play = () => {
+      h.video.paused = false;
+      return new Promise((resolve, reject) => pending.push({ resolve, reject }));
+    };
+    const layer = h.activeVideoLayer(); await flush();
+    const setPaused = (paused) => {
+      if (pauseReason === "hidden") h.document.hidden = paused;
+      else h.policy.reducedMotion = paused;
+      layer.configureWallpaperVideo(h.video);
+    };
+    setPaused(true);
+    setPaused(false);
+    assert.equal(pending.length, 2);
+    const resumedSource = h.video.src;
+    pending[0].reject(new Error("late rejection from the intentionally paused attempt"));
+    await flush();
+    assert.equal(layer.mediaError, "");
+    assert.equal(h.video.src, resumedSource);
+    assert.equal(h.video.paused, false);
+    assert.equal(h.revoked.length, 0);
+
+    pending[1].reject(new Error("current attempt really failed"));
+    await flush();
+    assert.equal(layer.mediaError, "aqua.videoPlaybackFailed");
+    assert.equal(h.video.src, "");
+    assert.deepEqual(h.revoked, [resumedSource]);
+  });
+}
+
 test("playback rejection restores fluid, pauses decoding, and revokes the object URL", async () => {
   const h = harness({ rejectPlay: true }); h.blobs.set("saved", { type: "video/mp4" });
   const layer = h.activeVideoLayer(); await flush();

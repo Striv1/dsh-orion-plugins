@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { createWorkbenchClientPlugin } from '../../harness/plugins/orion-workbench/client.entry.js';
 
-function environment(core = null, brandAssets) {
+function environment(core = null, brandAssets, sharedWindow) {
   const registrations = [], disposers = [], effects = [], events = [], panels = [], locales = new Map();
   let language = 'zh', theme = 'light';
   const React = {
@@ -21,7 +21,7 @@ function environment(core = null, brandAssets) {
     if (typeof value === 'function') disposers.push(value);
     else if (value?.[Symbol.iterator]) for (const dispose of value) collect(dispose);
   }
-  const window = { fetch: async () => { throw new Error('Unexpected fetch'); },
+  const window = sharedWindow ?? { fetch: async () => { throw new Error('Unexpected fetch'); },
     document: { querySelector() { throw new Error('Must not inspect native DOM'); } } };
   const ctx = {
     effect(callback) { collect(callback()); },
@@ -238,6 +238,45 @@ test('actual client disable and re-enable releases its styles and reuses already
   assert.equal(requests, 1);
   release(); env.dispose();
   assert.deepEqual(children.map(node => node.tag), ['script']);
+});
+
+test('a fresh official client factory reuses page assets and re-acquires tools without an old disposer clearing them', async () => {
+  const first = environment(), children = [], loads = [], owners = new Set();
+  const manifest = { schemaVersion: 1, mode: 'core', scripts: ['/orion-workbench-assets/core.js'], styles: ['/orion-workbench-assets/brand.css'] };
+  Object.assign(first.window.document, {
+    createElement: tag => ({ tag, dataset: {}, remove() { const index = children.indexOf(this); if (index >= 0) children.splice(index, 1); } }),
+    head: { append(node) { children.push(node); loads.push(node.src ?? node.href); queueMicrotask(() => node.onload?.()); } },
+  });
+  let requests = 0;
+  first.window.fetch = async () => { requests++; return { ok: true, json: async () => manifest }; };
+  const route = { primary: 'ontology', section: 'engineering' };
+  first.window.__ORION_SHELL_STATE__ = { get: () => route, subscribe(listener) { listener(route); return () => {}; } };
+  first.window.__ORION_ONTOLOGY_CENTER__ = { activate: () => true, dispose() {} };
+  first.window.__ORION_ENGINEERING_BRIDGE__ = { mount: () => () => {} };
+  first.window.__ORION_DOCUMENT_WEBMCP__ = { acquire() { const owner = {}; owners.add(owner); return () => owners.delete(owner); } };
+  const releaseFirst = await first.entry('main').options.inject().initialize({}, {}, () => false);
+  assert.equal(owners.size, 1);
+  releaseFirst(); first.dispose();
+  assert.equal(owners.size, 0);
+  assert.deepEqual(children.map(node => node.tag), ['script']);
+  const second = environment(null, undefined, first.window);
+  assert.notEqual(second.plugin, first.plugin, 'the official reload can reconstruct the whole factory');
+  const releaseSecond = await second.entry('main').options.inject().initialize({}, {}, () => false);
+  first.dispose();
+  assert.equal(owners.size, 1);
+  assert.deepEqual(loads, [manifest.styles[0], manifest.scripts[0], manifest.styles[0]]);
+  assert.equal(requests, 1);
+  assert.deepEqual(children.map(node => node.tag), ['script', 'link']);
+  releaseSecond(); second.dispose();
+  assert.equal(owners.size, 0);
+  assert.deepEqual(children.map(node => node.tag), ['script']);
+});
+
+test('a page cache from a different plugin version asks for reload instead of executing mixed versions', async () => {
+  const env = environment();
+  env.window[Symbol.for('dsh-orion-workbench.assets')].version = 'obsolete-version';
+  await assert.rejects(env.entry('main').options.inject().initialize({}, {}, () => false), /版本已更新.*刷新/);
+  env.dispose();
 });
 
 test('real business navigation changes owned sections without splitting the sidebar or losing project routes', async () => {

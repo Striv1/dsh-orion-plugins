@@ -91,6 +91,45 @@ test('manifest read and validation failures append no nodes and remain retryable
   assert.equal(env.requests(), 3);
 });
 
+test('a stalled manifest body times out, aborts the request and cannot mount after a successful retry', async () => {
+  let finishBody, signal, attempt = 0;
+  const env = environment();
+  const load = createWorkbenchAssetLoader({ ...env, timeoutMs: 20, fetch: async (_url, options) => {
+    signal = options.signal;
+    return { ok: true, json: () => ++attempt === 1
+      ? new Promise(resolve => { finishBody = resolve; }) : Promise.resolve(manifest()) };
+  } });
+  await assert.rejects(load(), /超时/);
+  assert.equal(signal.aborted, true);
+  assert.deepEqual(env.children, [env.existing]);
+  await load();
+  finishBody(manifest());
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(env.children.length, 5, 'the old response cannot append another set of assets');
+});
+
+test('stalled styles time out, remove owned nodes and restore flags before retry', async () => {
+  const env = environment(), append = env.document.head.append;
+  env.document.head.append = node => { env.children.push(node); };
+  const load = createWorkbenchAssetLoader({ ...env, timeoutMs: 20 });
+  await assert.rejects(load(), /超时/);
+  assert.deepEqual(env.children, [env.existing]);
+  assert.equal(env.window.__ORION_NATIVE_PLUGIN__, undefined);
+  assert.equal(env.window.__OWA_PRODUCT_MODE__, 'previous');
+  env.document.head.append = append;
+  await load();
+  assert.equal(env.children.length, 5);
+});
+
+test('disable also cancels a pending manifest request without depending on the fetch implementation', async () => {
+  const env = environment();
+  const load = createWorkbenchAssetLoader({ ...env, fetch: () => new Promise(() => {}) });
+  const pending = load();
+  load.releaseStyles();
+  await assert.rejects(pending, /停用/);
+  assert.deepEqual(env.children, [env.existing]);
+});
+
 test('disable removes owned styles while retaining loaded scripts, and re-enable reloads only styles without rerunning IIFEs', async () => {
   const env = environment(), load = createWorkbenchAssetLoader(env);
   await load();

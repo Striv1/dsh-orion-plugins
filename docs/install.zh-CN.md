@@ -1,12 +1,12 @@
-# ORION RC8：完整交付、桌面/Web 与本地服务安装教程
+# ORION RC10：完整交付、桌面/Web 与本地服务安装教程
 
-核对日期：2026-10-05。适用于官方 DeepSeek Harness 0.2.0-rc.2、工作台/runtime 1.0.0-rc.8、Aqua 1.3.1-orion-alpha.4。
+更新日期：2026-10-06。适用于官方 DeepSeek Harness 0.2.0-rc.2、工作台/runtime 1.0.0-rc.10、Aqua 1.3.1-orion-alpha.5；验证范围以 RC10 发布页为准。
 
 **安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；外部软件的用途、官网和闭环条件见 [使用前准备清单](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
 
 目标：维护者交付完整版本包；使用者在自己的 Mac 上选择桌面或 Web 入口，部署配套服务，使用和保存自己的业务资料。
 
-**当前可以直接从 [RC8 公开下载页](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8) 下载 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt`，无需登录、添加协作者或接受邀请。** 也可以直接接收维护者提供的这两个文件。解压后得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。
+**当前仓库为私有。** 已获仓库访问授权的账号可登录 [RC10 下载页](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.10)，下载 `orion-rc10-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt`。没有访问权限时，可直接接收维护者提供的这两个文件，无需为了下载获得写入权限。解压后得到 `ORION-RC10` 文件夹，放到自己的 `~/Downloads/`。
 
 包内已经准备官方 Apple 芯片 Mac 安装包；首次安装仍需联网获取 Python/Node 和依赖，Web 还需获取官方 CLI。这不是全部依赖都内置的断网安装包。
 
@@ -16,33 +16,33 @@
 | --- | --- |
 | 官方 Mac 桌面端 | 按本文第四节至第八节安装 |
 | 本机浏览器 Web 端 | 先读本文版本与下载说明，再按 [Web 安装教程](web-install.zh-CN.md) 安装；无需先安装桌面 App |
-| 后台服务源码与业务依赖 | 两种入口都需要同一 RC8 runtime；见第五节、第九节 |
+| 后台服务源码与业务依赖 | 两种入口都需要同一 RC10 runtime；见第五节、第九节 |
 
 两个入口可以自由选择。若同时安装，使用不同 Home、业务 Profile 和端口，不让两个宿主同时占用同一后台数据目录。
 
-## 一、公开下载与写入权限
+## 一、文件获取与写入权限
 
-仓库当前公开：使用者可直接读取源码、查看提交历史、下载 Release，也可复制到自己的电脑或 GitHub 副本。公开并不授予对本仓库的推送、合并或 Release 修改权限，无需为了下载添加协作者。[GitHub 仓库可见性说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility)
+GitHub 下载需要登录具有当前私有仓库访问权限的账号。没有权限时，直接文件交付即可：取得完整 ZIP 和配套校验文件后按本教程安装，不需要维护者的账号或仓库写入权限。
 
 GitHub 写入权限与本地业务写入是两回事。使用者可按第七节为自己的本地工程启用资料导入和建设功能，这不会让其获得本仓库写权限，也不会绕过人工批准或业务发布规则。
 
 ## 二、交付文件
 
-在 [RC8 Release](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8) 下载完整 ZIP 和配套 SHA-256 文件。不要选择页面自动生成的 `Source code (zip/tar.gz)` 代替完整安装包。ZIP 内包含：
+从维护者直接取得文件，或登录有权限的账号在 [RC10 Release](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.10) 下载完整 ZIP 和配套 SHA-256 文件。不要选择页面自动生成的 `Source code (zip/tar.gz)` 代替完整安装包。ZIP 内包含：
 
 | 文件 | 用途 |
 | --- | --- |
-| `dsh-orion-workbench-1.0.0-rc.8.tgz` | 工作台插件 |
-| `dsh-client-ui-aqua-1.3.1-orion-alpha.4.tgz` | 玻璃、流体和壁纸插件 |
-| `dsh-orion-runtime-1.0.0-rc.8.tar.gz` | 配套本地 Python 服务源码 |
-| `SHA256SUMS-rc8.txt` | 三个冻结包的原始校验值 |
-| `orion-rc8-install-guide.zip` | RC8 原有配置生成器及最小依赖脚本、教程 |
+| `dsh-orion-workbench-1.0.0-rc.10.tgz` | 工作台插件 |
+| `dsh-client-ui-aqua-1.3.1-orion-alpha.5.tgz` | 玻璃、流体和壁纸插件 |
+| `dsh-orion-runtime-1.0.0-rc.10.tar.gz` | 配套本地 Python 服务源码 |
+| `SHA256SUMS-rc10.txt` | 三个冻结包的原始校验值 |
+| `orion-rc10-install-guide.zip` | RC10 配置生成器及最小依赖脚本、教程 |
 | `official/deepseek-harness-0.2.0-rc.2-mac-arm64.dmg` | 官方 Apple 芯片 Mac 安装包，保留原文件与签名 |
 | `official/来源与校验.md` | 官方来源、版本、架构、签名与校验信息 |
 | `README-先读.txt`、五份中文说明 | 产品简介、桌面/Web 教程、AI 部署任务和依赖验收指南 |
 | `SHA256SUMS-download.txt` | 目录内交付文件的校验清单 |
 
-辅助 ZIP 不是第四个插件。runtime tar.gz 原本不含 `configure_orion_desktop.py`；辅助 ZIP 提供同一 RC8 tag 的配置生成器、启动和指纹脚本，不必再下载整个源码仓库。脚本只生成配置方案，不自动改 Profile、启动应用或获取账号密钥。
+辅助 ZIP 不是第四个插件。runtime tar.gz 原本不含 `configure_orion_desktop.py`；辅助 ZIP 提供同一 RC10 tag 的配置生成器、启动和指纹脚本，不必再下载整个源码仓库。脚本只生成配置方案，不自动改 Profile、启动应用或获取账号密钥。
 
 ## 三、使用者：确认安装范围
 
@@ -51,9 +51,9 @@ GitHub 写入权限与本地业务写入是两回事。使用者可按第七节�
 | 项目 | 本教程版本/要求 |
 | --- | --- |
 | DeepSeek Harness 官方 App | **0.2.0-rc.2** |
-| 工作台 | **1.0.0-rc.8** |
-| Aqua | **1.3.1-orion-alpha.4** |
-| ORION Python runtime | **1.0.0-rc.8** |
+| 工作台 | **1.0.0-rc.10** |
+| Aqua | **1.3.1-orion-alpha.5** |
+| ORION Python runtime | **1.0.0-rc.10** |
 | Mac | Apple 芯片；官方 App 声明最低 macOS **13.0**，系统和权限仍按官方安装要求检查 |
 | Core Python | 建议 **3.12**；包声明允许 3.11–3.13 |
 | Python 环境工具 | uv |
@@ -67,27 +67,27 @@ GitHub 写入权限与本地业务写入是两回事。使用者可按第七节�
 
 ### 4.1 下载并核对附件
 
-直接收到完整 ZIP 和校验文件时，先将两者放到自己的 `~/Downloads/`。若通过 GitHub 下载，直接打开 **RC8 公开下载页**，下载 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt`。先检查外层 ZIP：
+直接收到完整 ZIP 和校验文件时，先将两者放到自己的 `~/Downloads/`。若通过 GitHub 下载，先登录已获访问授权的账号，再打开 **RC10 下载页**，下载 `orion-rc10-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt`。先检查外层 ZIP：
 
 ```sh
 cd "$HOME/Downloads"
-shasum -a 256 -c SHA256SUMS-delivery-kit-r2.txt
+shasum -a 256 -c SHA256SUMS-delivery-kit.txt
 ```
 
 显示 `OK` 后解压，得到：
 
 ```text
-~/Downloads/ORION-RC8/
+~/Downloads/ORION-RC10/
 ```
 
-直接接收完整 ZIP 不需要 GitHub 账号。公开下载也无需 GitHub 写入权限。Release 页面自动显示的 **Source code (zip/tar.gz)** 只是那个仓库的源码快照，不是插件安装包；安装应使用上述具名附件。
+直接接收完整 ZIP 不需要 GitHub 账号，也不需要仓库写入权限。Release 页面自动显示的 **Source code (zip/tar.gz)** 只是那个仓库的源码快照，不是插件安装包；安装应使用上述具名附件。
 
 打开 Mac“终端”，运行：
 
 ```sh
-cd "$HOME/Downloads/ORION-RC8"
+cd "$HOME/Downloads/ORION-RC10"
 shasum -a 256 -c SHA256SUMS-download.txt
-shasum -a 256 -c SHA256SUMS-rc8.txt
+shasum -a 256 -c SHA256SUMS-rc10.txt
 ```
 
 全部应显示 `OK`。如果缺文件或校验不一致，重新下载对应附件，不继续安装。
@@ -116,10 +116,10 @@ shasum -a 256 -c SHA256SUMS-rc8.txt
 ### 5.1 目录约定
 
 ```sh
-export ORION_DOWNLOAD_ROOT="$HOME/Downloads/ORION-RC8"
+export ORION_DOWNLOAD_ROOT="$HOME/Downloads/ORION-RC10"
 export ORION_BASE="$HOME/ORION"
 export ORION_INSTALLER_ROOT="$ORION_BASE/installer-support"
-export ORION_RUNTIME_ROOT="$ORION_BASE/runtimes/dsh-orion-runtime-1.0.0-rc.8"
+export ORION_RUNTIME_ROOT="$ORION_BASE/runtimes/dsh-orion-runtime-1.0.0-rc.10"
 export ORION_PROFILE_ROOT="$ORION_BASE/profiles/local"
 mkdir -p "$ORION_BASE/runtimes" "$ORION_BASE/profiles" "$ORION_BASE/backups"
 ```
@@ -131,7 +131,7 @@ mkdir -p "$ORION_BASE/runtimes" "$ORION_BASE/profiles" "$ORION_BASE/backups"
 ### 5.2 在应用完全退出后备份
 
 ```sh
-export ORION_BACKUP_ROOT="$ORION_BASE/backups/before-rc8-$(date +%Y%m%d-%H%M%S)"
+export ORION_BACKUP_ROOT="$ORION_BASE/backups/before-rc10-$(date +%Y%m%d-%H%M%S)"
 mkdir -m 700 "$ORION_BACKUP_ROOT"
 ditto "$HOME/.dsh" "$ORION_BACKUP_ROOT/dsh-home"
 if [ -d "$HOME/Library/Application Support/@deepseek-ai/dsh-desktop" ]; then
@@ -147,9 +147,9 @@ fi
 仅在对应目标目录尚不存在时执行：
 
 ```sh
-tar -xzf "$ORION_DOWNLOAD_ROOT/dsh-orion-runtime-1.0.0-rc.8.tar.gz" \
+tar -xzf "$ORION_DOWNLOAD_ROOT/dsh-orion-runtime-1.0.0-rc.10.tar.gz" \
   -C "$ORION_BASE/runtimes"
-ditto -x -k "$ORION_DOWNLOAD_ROOT/orion-rc8-install-guide.zip" "$ORION_BASE"
+ditto -x -k "$ORION_DOWNLOAD_ROOT/orion-rc10-install-guide.zip" "$ORION_BASE"
 ```
 
 结果应包含：
@@ -158,8 +158,8 @@ ditto -x -k "$ORION_DOWNLOAD_ROOT/orion-rc8-install-guide.zip" "$ORION_BASE"
 ~/ORION/installer-support/scripts/configure_orion_desktop.py
 ~/ORION/installer-support/scripts/launch_orion_harness.py
 ~/ORION/installer-support/scripts/orion_runtime_manifest.py
-~/ORION/runtimes/dsh-orion-runtime-1.0.0-rc.8/pyproject.toml
-~/ORION/runtimes/dsh-orion-runtime-1.0.0-rc.8/contracts/runtime-source-manifest.json
+~/ORION/runtimes/dsh-orion-runtime-1.0.0-rc.10/pyproject.toml
+~/ORION/runtimes/dsh-orion-runtime-1.0.0-rc.10/contracts/runtime-source-manifest.json
 ```
 
 ### 5.4 安装 uv 和 Python
@@ -183,10 +183,10 @@ UV_PROJECT_ENVIRONMENT="$ORION_PROFILE_ROOT/.venvs/core" \
   --root "$ORION_RUNTIME_ROOT" --check
 ```
 
-预期版本为 `1.0.0-rc.8`，文件数 `279`，指纹为：
+预期版本为 `1.0.0-rc.10`，文件数 `279`，指纹为：
 
 ```text
-87ff579695e5006227265963b398da273f838b4fc9757ca36cb37721b76e533c
+864af474f97cbc5f0e75fc2e70f7690f6ae6ff8dca40ca668b6813ab96dfcdc0
 ```
 
 确认 `8091` 未被占用：
@@ -216,15 +216,15 @@ lsof -nP -iTCP:8091 -sTCP:LISTEN
 DSH_HOME="$HOME/.dsh" \
   '/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh' \
   plugin --profile desktop add \
-  "$ORION_DOWNLOAD_ROOT/dsh-orion-workbench-1.0.0-rc.8.tgz"
+  "$ORION_DOWNLOAD_ROOT/dsh-orion-workbench-1.0.0-rc.10.tgz"
 
 DSH_HOME="$HOME/.dsh" \
   '/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh' \
   plugin --profile desktop add \
-  "$ORION_DOWNLOAD_ROOT/dsh-client-ui-aqua-1.3.1-orion-alpha.4.tgz"
+  "$ORION_DOWNLOAD_ROOT/dsh-client-ui-aqua-1.3.1-orion-alpha.5.tgz"
 ```
 
-先把公开 Release 附件下载到本地，再把本地 tgz 路径交给插件安装器；Release 网页地址不是插件文件路径。
+先取得并解压完整 ZIP，再把本地 tgz 路径交给插件安装器；Release 网页地址不是插件文件路径。
 
 ## 七、生成完整配置并合并
 
@@ -301,11 +301,11 @@ Cordis 会替换条目的整个 `config` 对象，因此路径、参数和环境
 ## 八、启动、设置和验收
 
 1. 从 Mac“应用程序”正常打开 **DeepSeek Harness**，首次阅读并关闭官方预览版说明；如默认英文，在官方设置选择中文。
-2. 左侧“插件 → 已安装”中确认工作台 RC8 和 Aqua alpha.4，启用两者。
+2. 在“设置 → 插件 → 已安装”中确认工作台 RC10 和 Aqua alpha.5，启用两者。
 3. 工作台应显示 AHS、`探索属于你的智能宇宙`、本体中心和工程发起模板；本体中心包含工程、本体管理、行业模板入口。
 4. 在 Harness 新建/选择自己的资料工作区，目录选择 `~/ORION/profiles/local/state/references`，可命名“本体资料工作区”，按官方工作区界面设为默认。名称和默认选择属于当前机器的工作区设置，不会随安装包复制维护者的设置。
 5. 把自己获授权使用的一份小资料放进这个目录，新会话里用 `@` 确认能找到它。看到候选只证明引用入口可用；提交工程后仍需检查资料接入回执。
-6. Aqua 设置里选择流体、图片或视频背景，检查 Logo、左右区域、文字可读性；媒体应使用本机可访问文件。
+6. 进入“设置 → 内置插件 → 界面插件”，开启“玻璃主题”，再选择流体、图片或视频背景。安装并启用 Aqua 后仍需打开此主题开关；检查 Logo、左右区域、文字可读性，媒体应使用本机可访问文件。
 7. 关闭两个插件，确认恢复所安装宿主的官方原生界面；重新开启，确认工作台和玻璃恢复。开关不会自动删除自己的资料和历史会话。
 
 后台由工作台管理，不另开一个终端手动重复启动同端口服务。可在工作台启用后只读检查：
@@ -325,11 +325,11 @@ curl --fail --silent --show-error 'http://127.0.0.1:8091/health'
 | 模型与工具 | 自己的模型账号可用；工程/问答模式、Skill 与 MCP 发现正常，实际工具调用取得结果 |
 | 业务 | 用真实授权资料建立工程，按 S0–S7 提交证据、校验并取得人工批准；正式发布后问答引用对应版本和证据 |
 
-目前交付完成的是维护者 Mac 上的安装、插件和相关运行验证；没有宣称已经完成下载者新机器或客户真实资料的全业务验收。
+验证范围以 RC10 发布页为准；维护者机器上的检查不能替代下载者新机器或客户真实资料的全业务验收。
 
 ## 九、按业务需要补齐服务
 
-后台服务代码已经包含在 `dsh-orion-runtime-1.0.0-rc.8.tar.gz` 中，不需要访问维护仓库才能取得。它是完整的受版本契约约束的 Python 源码交付，包含：
+后台服务代码已经包含在 `dsh-orion-runtime-1.0.0-rc.10.tar.gz` 中，不需要访问维护仓库才能取得。它是完整的受版本契约约束的 Python 源码交付，包含：
 
 | 目录/文件 | 内容 |
 | --- | --- |
@@ -349,9 +349,9 @@ curl --fail --silent --show-error 'http://127.0.0.1:8091/health'
 
 | 现象 | 处理 |
 | --- | --- |
-| GitHub 显示 404 | 当前仓库和 RC8 已公开；核对链接是否完整及网络是否可访问 GitHub，无需申请协作者权限 |
-| 能看仓库但找不到版本 | 管理员确认 Release 已发布、不是 Draft；打开指定 RC8，而非只看 Latest |
-| 找不到配置生成器 | 确认下载并解压 `orion-rc8-install-guide.zip`；runtime tar.gz 内原本没有它 |
+| GitHub 显示 404 | 当前仓库为私有；确认登录账号已获访问授权，或向维护者直接取得完整 ZIP 和校验文件 |
+| 能看仓库但找不到版本 | 管理员确认 Release 已发布、不是 Draft；打开指定 RC10，而非只看 Latest |
+| 找不到配置生成器 | 确认下载并解压 `orion-rc10-install-guide.zip`；runtime tar.gz 内原本没有它 |
 | 提示插件版本不兼容 | 核对官方 App 是否为 0.2.0-rc.2；不使用兼容豁免 |
 | CLI 提示 desktop Profile 不存在 | 官方 App 先正常启动初始化，再 ⌘Q 退出；使用该 App 自带 CLI |
 | 只能看，不能创建工程 | 检查第七节是否启用了本地业务写入与操作人；这和 GitHub Read 没关系 |
@@ -365,11 +365,11 @@ curl --fail --silent --show-error 'http://127.0.0.1:8091/health'
 ## 十一、维护者交付核对表
 
 - 直接文件交付：收件人拿到完整 ZIP 和校验值，无需源码仓库权限。
-- GitHub 自助下载：确认未登录也能打开公开仓库、RC8 Release 和具名附件。
+- GitHub 自助下载：确认收件人使用已获访问授权的账号能下载 RC10 Release 和具名附件；未授权时改用直接文件交付。
 - 没有为了下载向使用者授予本仓库写入权限。
-- 三个 RC8 冻结包 SHA-256 与原始 Release 一致；辅助 ZIP 单独记录校验值。
-- RC8 Release 已发布并标记预发布，README 指向当前教程。
+- 三个 RC10 冻结包 SHA-256 与原始 Release 一致；辅助 ZIP 单独记录校验值。
+- RC10 Release 已发布并标记预发布，README 指向当前教程。
 - 下载教程、版本包及校验清单对应同一候选版本。
 - 新机器实际安装和所需业务链由安装者验收，不能沿用维护者机器的测试结论。
 
-本教程及安装辅助包可以独立修订；不得因此覆盖原 RC8 插件和 runtime 归档。任何运行逻辑变更应采用新的候选版本并重新验证。
+本教程及安装辅助包可以独立修订；不得因此覆盖原 RC10 插件和 runtime 归档。任何运行逻辑变更应采用新的候选版本并重新验证。

@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256-path-content-v1",
-  "sha256": "87ff579695e5006227265963b398da273f838b4fc9757ca36cb37721b76e533c",
+  "sha256": "864af474f97cbc5f0e75fc2e70f7690f6ae6ff8dca40ca668b6813ab96dfcdc0",
   "fileCount": 279,
   "scope": [
     "runtime source/resource allowlist including Makefile, scripts, migrations, templates, skills and report assets"
@@ -28,8 +28,8 @@
     },
     {
       "path": "docs/runtime-install.md",
-      "bytes": 4167,
-      "sha256": "8b1b5afb6b284b346faf5bfd163cc0272418f3669f42813eddc0faafb537b2e1"
+      "bytes": 4171,
+      "sha256": "f9fc1e4ec0ce9fe3585bbb90166e75dba4b8bc67748b325ed5c8caf317e8e067"
     },
     {
       "path": "harness/__init__.py",
@@ -298,8 +298,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 1693,
-      "sha256": "632d5489906906ffafbf053b5e6d0aea3601c69fdada64a280d826f45444a9b8"
+      "bytes": 1694,
+      "sha256": "928fdfe29bbc7b36b8940393ab2e4a0b8f7a793b2d8358b258561d5d1c9fd537"
     },
     {
       "path": "scripts/build_ontology_graph.py",
@@ -1388,8 +1388,8 @@
     },
     {
       "path": "uv.lock",
-      "bytes": 283879,
-      "sha256": "99c524313583916714bcdfda2c86cf727406432e6d2e5e941067a32d677c96d1"
+      "bytes": 283880,
+      "sha256": "d113514ea778695ac1a520d6d55c02a9fe47ed502560ff66c73455c01285f756"
     },
     {
       "path": "vendor/echarts-LICENSE.txt",

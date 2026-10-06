@@ -176,6 +176,42 @@ test('real execFile retains executable lookup and locale with a complete string 
   assert.equal(observed.hasPrivate, false);
 });
 
+test('managed Core and workflow children share only explicitly configured service endpoints', installed, async t => {
+  const f = await fixture(t), { provider } = await officialContext(t);
+  const paths = managedRuntimePaths(f.config);
+  const endpoints = {
+    CHAT2DB_ENDPOINT: 'http://other-profile.invalid/chat2db',
+    FUSEKI_URL: 'http://other-profile.invalid/fuseki',
+    ONTOP_URL: 'http://other-profile.invalid/ontop',
+    REDIS_URL: 'redis://other-profile.invalid/3',
+  };
+  const previous = Object.fromEntries(Object.keys(endpoints).map(key => [key, process.env[key]]));
+  t.after(() => {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  });
+  Object.assign(process.env, endpoints);
+  for (const configured of [{}, { FUSEKI_URL: 'http://selected-profile.invalid/fuseki', CHAT2DB_ENDPOINT: 'http://selected-profile.invalid/chat2db' }]) {
+    const environment = managedRuntimeEnvironment(paths, configured);
+    const workflowEnvironment = managedWorkflowEnvironment(paths, configured);
+    const child = provider.spawn({
+      argv: [process.execPath, '-e', `console.log(JSON.stringify(Object.fromEntries(${JSON.stringify(Object.keys(endpoints))}.map(key => [key, process.env[key] || null]))))`],
+      cwd: f.root, env: environment, graceMs: 100,
+      stdio: { stdin: 'ignore', stdout: { maxBytes: 4096 }, stderr: { maxBytes: 4096 } },
+    });
+    t.after(async () => { child.terminate(); await child.waitForExit(); await child.done.catch(() => {}); });
+    assert.equal((await child.done).exitCode, 0);
+    assert.equal(await child.waitForExit(), true);
+    const observed = JSON.parse(child.collected.stdout.readFrom(0).text);
+    for (const key of Object.keys(endpoints)) {
+      assert.equal(observed[key], configured[key] || null, `${key} must not come from another Profile`);
+      assert.equal(workflowEnvironment[key] || null, observed[key], `${key} must agree across Core and workflow children`);
+    }
+  }
+});
+
 test('the actual official overlay and Loader interpolation keep managed MCP paths in the same Profile and preserve external bindings', installed, async () => {
   const [{ loadOverlayPatches }, { interpolate }] = await Promise.all([
     import(new URL('dsh-app-boot/lib/index.js', sdk)), import(new URL('cordis-plugin-loader/lib/index.js', sdk)),
@@ -275,4 +311,31 @@ test('a health identity mismatch and startup timeout terminate the spawned range
     assert.equal(JSON.stringify(manager.status()).includes(f.profileRoot), false);
     assert.equal(existsSync(join(f.profileRoot, 'state/core-manager.lock')), false);
   }
+});
+
+test('a buffered healthy reply cannot mark a Core that exited during startup as running', installed, async t => {
+  const f = await fixture(t), { provider } = await officialContext(t);
+  let core;
+  const ownedProvider = { spawn(spec) {
+    const child = provider.spawn(spec);
+    if (spec.argv.includes('services.realtime_qa.api')) core = child;
+    return child;
+  } };
+  const manager = createRuntimeManager(f.config, { runtimeVersion: version, fetch: async (url, options) => {
+    const response = await fetch(url, options);
+    const health = await response.json();
+    // The reply was valid when sent, but its owned process has exited before
+    // startup consumes it. Await actual process-range exit, not a fake PID.
+    core.terminate();
+    await core.done;
+    assert.equal(await core.waitForExit(), true);
+    return { ok: true, json: async () => health };
+  } });
+  t.after(() => manager.dispose());
+  await manager.start(ownedProvider);
+  assert.equal(manager.status().state, 'FAILED');
+  assert.equal(manager.status().reason, 'START_FAILED');
+  assert.equal(manager.status().coreReady, false);
+  assert.equal(manager.settings().backendValidated, undefined);
+  assert.equal(existsSync(join(f.profileRoot, 'state/core-manager.lock')), false);
 });

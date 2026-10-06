@@ -1,6 +1,6 @@
 {
   "name": "dsh-orion-workbench",
-  "version": "1.0.0-rc.8",
+  "version": "1.0.0-rc.10",
   "private": true,
   "description": "ORION 本体工程、正式资产、模板、证据问答和分析工作台。",
   "type": "module",

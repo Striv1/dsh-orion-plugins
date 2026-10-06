@@ -21,28 +21,38 @@ export function validateAssetManifest(manifest) {
 
 /** Own only the elements this loader appended; failed loads may be retried. */
 export function createWorkbenchAssetLoader({ window: hostWindow = globalThis.window,
-  document: hostDocument = hostWindow?.document, fetch: fetcher = globalThis.fetch } = {}) {
+  document: hostDocument = hostWindow?.document, fetch: fetcher = globalThis.fetch, timeoutMs = 20_000 } = {}) {
   let assetsPromise, scriptManifest, activeAttempt, epoch = 0;
   const ownedStyles = new Set();
   const load = function load() {
     if (assetsPromise) return assetsPromise;
     const version = epoch;
     const abort = new AbortController();
-    const cancellations = new Set();
-    const attempt = { abort, cancellations };
+    const attempt = { abort };
     activeAttempt = attempt;
+    const deadline = setTimeout(() => abort.abort(new Error("工作台资源加载超时，请检查本地服务后重试。")), timeoutMs);
+    // Bound the whole attempt, including response bodies and stalled browser
+    // resource events. Late responses must never mount into a newer attempt.
+    const wait = (promise) => new Promise((resolve, reject) => {
+      const cancel = () => reject(abort.signal.reason);
+      if (abort.signal.aborted) cancel();
+      else abort.signal.addEventListener("abort", cancel, { once: true });
+      Promise.resolve(promise).then(resolve, reject)
+        .finally(() => abort.signal.removeEventListener("abort", cancel));
+    });
     const pending = (async () => {
       if (!hostWindow || !hostDocument?.head || typeof fetcher !== "function") {
         throw new Error("工作台资源加载环境尚未就绪，请重新打开工作台。");
       }
       let manifest = scriptManifest;
       if (!manifest) {
-        const response = await fetcher(`${PREFIX}workbench-assets.json`, {
+        const response = await wait(fetcher(`${PREFIX}workbench-assets.json`, {
           credentials: "same-origin", headers: { Accept: "application/json" }, signal: abort.signal,
-        });
+        }));
         if (!response.ok) throw new Error(`工作台资源读取失败（${response.status}），请重新打开或重新安装插件。`);
-        manifest = validateAssetManifest(await response.json());
+        manifest = validateAssetManifest(await wait(response.json()));
       }
+      abort.signal.throwIfAborted();
       if (version !== epoch) throw new Error("工作台插件已停用，已取消资源加载。");
       const previousNative = hostWindow.__ORION_NATIVE_PLUGIN__;
       const previousMode = hostWindow.__OWA_PRODUCT_MODE__;
@@ -50,6 +60,7 @@ export function createWorkbenchAssetLoader({ window: hostWindow = globalThis.win
       hostWindow.__OWA_PRODUCT_MODE__ = "core";
       const added = [];
       const append = (tag, path) => new Promise((resolve, reject) => {
+        abort.signal.throwIfAborted();
         const node = hostDocument.createElement(tag);
         if (tag === "link") { node.rel = "stylesheet"; node.href = path; }
         else { node.src = path; node.async = false; }
@@ -60,12 +71,12 @@ export function createWorkbenchAssetLoader({ window: hostWindow = globalThis.win
           settled = true;
           node.onload = null;
           node.onerror = null;
-          cancellations.delete(cancel);
+          abort.signal.removeEventListener("abort", cancel);
           if (error) reject(error);
           else resolve();
         };
-        const cancel = () => finish(new Error("工作台插件已停用，已取消资源加载。"));
-        cancellations.add(cancel);
+        const cancel = () => finish(abort.signal.reason);
+        abort.signal.addEventListener("abort", cancel, { once: true });
         node.onload = () => finish();
         node.onerror = () => finish(new Error(`工作台资源未加载：${path}。请重新打开工作台重试。`));
         added.push(node);
@@ -79,6 +90,7 @@ export function createWorkbenchAssetLoader({ window: hostWindow = globalThis.win
         scriptManifest = manifest;
         return manifest;
       } catch (error) {
+        abort.abort(error);
         for (const node of added) { node.onload = null; node.onerror = null; ownedStyles.delete(node); node.remove(); }
         if (version === epoch) {
           if (previousNative === undefined) delete hostWindow.__ORION_NATIVE_PLUGIN__;
@@ -91,15 +103,17 @@ export function createWorkbenchAssetLoader({ window: hostWindow = globalThis.win
     })();
     assetsPromise = pending;
     pending.catch(() => { if (assetsPromise === pending) assetsPromise = null; });
-    pending.finally(() => { if (activeAttempt === attempt) activeAttempt = null; }).catch(() => {});
+    pending.finally(() => {
+      clearTimeout(deadline);
+      if (activeAttempt === attempt) activeAttempt = null;
+    }).catch(() => {});
     return pending;
   };
   // A complete script set is safe to retain for a same-page re-enable. Styles
   // belong to this plugin's live lifetime and must not alter upstream fallback.
   load.releaseStyles = () => {
     epoch++;
-    activeAttempt?.abort.abort();
-    for (const cancel of activeAttempt?.cancellations ?? []) cancel();
+    activeAttempt?.abort.abort(new Error("工作台插件已停用，已取消资源加载。"));
     for (const node of ownedStyles) node.remove();
     ownedStyles.clear();
     assetsPromise = null;

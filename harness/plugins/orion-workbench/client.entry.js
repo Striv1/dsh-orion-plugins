@@ -3,6 +3,7 @@ import { installNativeChat } from "./lib/native-chat.js";
 import { installNativeEvidence } from "./lib/native-evidence.js";
 import { installEngineeringStart } from "./lib/engineering-start.js";
 import { createWorkbenchAssetLoader, mountWorkbench } from "./lib/workbench-page.js";
+import packageMetadata from "./package.json" with { type: "json" };
 
 // The packaged client owns its brand bytes. Hot enabling a bundle may mount
 // client slots before the Host asset route is ready; branding must not race it.
@@ -19,11 +20,22 @@ export function createWorkbenchClientPlugin(require, hostWindow = globalThis.win
       en: { panel: "Ontology Center", title: "AHS Ontology Workbench", engineering: "Engineering", manage: "Published Ontologies", templates: "Industry Templates",
         create: "Start a Project", back: "Back to Conversation", headline: "Explore Your Intelligent Universe", preview: "Preview", loading: "Loading the ontology workbench…", retry: "Reload", dismiss: "Dismiss", openPage: "Open Ontology Center" },
     };
-    const loadAssets = createWorkbenchAssetLoader({ window: hostWindow, fetch: (url, options) => hostWindow.fetch(url, options) });
+    // Official hot enablement may rebuild the ModuleLoader factory. Keep the
+    // already evaluated business scripts with the page, not that factory.
+    const assetKey = Symbol.for("dsh-orion-workbench.assets");
+    const assets = hostWindow[assetKey] ??= { version: packageMetadata.version, owners: new Set(),
+      load: createWorkbenchAssetLoader({ window: hostWindow, fetch: (url, options) => hostWindow.fetch(url, options) }) };
+    const loadAssets = () => assets.version === packageMetadata.version ? assets.load()
+      : Promise.reject(new Error("工作台版本已更新，请刷新页面后继续。"));
     return {
       inject: ["slots", "layout", "locale", "theme", "sessions", "workspaces", "uiWorkspace", "remote", "remote.agentPresets"],
       apply(ctx) {
-        let controller, chatPromise, disposed = false, lastError = null, routeSubscriptionInstalled = false;
+        let controller, chatPromise, releaseWebMcp, disposed = false, lastError = null, routeSubscriptionInstalled = false;
+        const assetOwner = {};
+        ctx.effect(() => {
+          assets.owners.add(assetOwner);
+          return () => { if (assets.owners.delete(assetOwner) && !assets.owners.size) assets.load.releaseStyles(); };
+        });
         const errorListeners = new Set();
         const bridge = createSessionBridge(ctx);
         ctx.effect(() => ctx.locale.register(NS, dictionaries));
@@ -81,6 +93,7 @@ export function createWorkbenchClientPlugin(require, hostWindow = globalThis.win
           if (!chatPromise) {
             const pending = loadAssets().then(() => {
               if (disposed) throw new Error("本体工作台插件已停用。");
+              releaseWebMcp ??= hostWindow.__ORION_DOCUMENT_WEBMCP__?.acquire();
               bindRouteNavigation();
               return controller;
             });
@@ -220,9 +233,10 @@ export function createWorkbenchClientPlugin(require, hostWindow = globalThis.win
           inject: () => ({ readError, subscribeError, dismissError,
             showPage: () => ctx.layout.selectPanel(PANEL) }) }, ErrorNotice));
         ctx.effect(() => () => {
+          if (disposed) return;
           disposed = true;
           controller?.dispose();
-          loadAssets.releaseStyles();
+          releaseWebMcp?.();
           errorListeners.clear();
           if (ownsPanel(activePanel())) ctx.layout.selectPanel(null);
         });

@@ -55,7 +55,7 @@ export function managedRuntimePaths(config) {
 export function managedRuntimeEnvironment(paths, configured = {}, ambient = process.env) {
   const environment = {};
   for (const key of Object.keys(ambient)) {
-    if (/^(?:ORION_|SEMANTICA_|PROTEGE_|LLM_|DATABASE_|MINIO_|PYTHON|DSH_)/i.test(key) || /KEY|PASSWORD|SECRET|TOKEN/i.test(key)) environment[key] = undefined;
+    if (/^(?:ORION_|SEMANTICA_|PROTEGE_|CHAT2DB_|LLM_|DATABASE_|FUSEKI_|ONTOP_|REDIS_|MINIO_|PYTHON|DSH_)/i.test(key) || /KEY|PASSWORD|SECRET|TOKEN/i.test(key)) environment[key] = undefined;
   }
   for (const [key, value] of Object.entries(configured)) {
     if (!/^(?:ORION_|SEMANTICA_|PROTEGE_|CHAT2DB_|LLM_|DATABASE_URL$|FUSEKI_URL$|ONTOP_URL$|REDIS_URL$|MINIO_)/.test(key)
@@ -263,6 +263,10 @@ export function createRuntimeManager(config = {}, { runtimeVersion, fetch: reque
         const response = await request(paths.realtimeQaApiUrl + '/health', { signal: AbortSignal.any([abort.signal, AbortSignal.timeout(1000)]), redirect: 'error' });
         if (response.ok) health = await response.json();
       } catch { abort.signal.throwIfAborted(); }
+      // A buffered health reply can outlive the owned process or startup
+      // deadline. Recheck ownership/liveness before publishing readiness.
+      abort.signal.throwIfAborted();
+      if (exited) fail('START_FAILED');
       if (health) {
         if (health.service !== SERVICE_ID || health.code_fingerprint !== source.codeFingerprint
           || resolve(String(health.registry_path || '.')) !== paths.registryPath || health.reload_error || health.error

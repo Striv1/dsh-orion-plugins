@@ -44,81 +44,66 @@
       request.send();
     });
   const documentIngestionApiBase = "/orion-document-api";
-  const webMcpStatus = {
-    api_available: false,
-    registered: false,
-    tool: "inspect-document-ingestion",
-    mode: "read_only_capability_check",
-    error: null,
-  };
-  window.__OWA_WEBMCP_STATUS__ = webMcpStatus;
-  const syncWebMcpStatus = () => {
-    document.documentElement.dataset.owaWebmcpStatus =
-      JSON.stringify(webMcpStatus);
-  };
-  syncWebMcpStatus();
-
-  const asWebMcpResult = (payload) => ({
-    content: [
-      {
-        type: "text",
-        text: JSON.stringify(payload, null, 2),
-      },
-    ],
-    structuredContent: payload,
-  });
-
-  const registerDocumentIngestionTool = () => {
-    const modelContext = document.modelContext ?? navigator.modelContext;
-    webMcpStatus.api_available =
-      Boolean(modelContext) && typeof modelContext.registerTool === "function";
-    if (!webMcpStatus.api_available) {
-      webMcpStatus.error = "WebMCP API is unavailable in this browser";
-      syncWebMcpStatus();
-      return;
-    }
-    try {
-      modelContext.registerTool({
-        name: webMcpStatus.tool,
-        description:
-          "Inspect the current PDF/OCR-to-structured-Markdown ingestion readiness. Read-only: it does not upload, open, convert, or write files.",
-        inputSchema: {
-          type: "object",
-          properties: {},
-          additionalProperties: false,
-        },
-        execute: async () => {
-          try {
-            return asWebMcpResult(
-              await requestJson(`${documentIngestionApiBase}/status`),
-            );
-          } catch (runtimeError) {
+  // Browser tools are page-wide, while a native plugin instance can be
+  // replaced independently. A lease owns only this tool; never clear another
+  // plugin's model context, and never let an old disposer remove a new lease.
+  const documentWebMcp = window.__ORION_DOCUMENT_WEBMCP__ ??= (() => {
+    const owners = new Set();
+    let registeredContext = null;
+    const status = { api_available: false, registered: false, tool: "inspect-document-ingestion",
+      mode: "read_only_capability_check", error: null };
+    window.__OWA_WEBMCP_STATUS__ = status;
+    const sync = () => { document.documentElement.dataset.owaWebmcpStatus = JSON.stringify(status); };
+    const result = (payload) => ({ content: [{ type: "text", text: JSON.stringify(payload, null, 2) }], structuredContent: payload });
+    const execute = async () => {
+      if (!owners.size) return result({ status: "unavailable", read_only: true, files_written: 0, error: "工作台插件已停用。" });
+      try { return result(await requestJson(`${documentIngestionApiBase}/status`)); }
+      catch (runtimeError) {
+        try { return result(await requestJson("/document-ingestion-status.json")); }
+        catch (snapshotError) {
+          return result({ status: "unavailable", mode: status.mode, read_only: true, files_written: 0,
+            errors: [runtimeError, snapshotError].map(error => error instanceof Error ? error.message : String(error)) });
+        }
+      }
+    };
+    sync();
+    return {
+      acquire() {
+        const owner = {};
+        owners.add(owner);
+        if (!status.registered) {
+          const modelContext = document.modelContext ?? navigator.modelContext;
+          status.api_available = typeof modelContext?.registerTool === "function";
+          // Native plugins must be able to give their tool back on disable.
+          // Legacy assembly retains its existing page-lifetime registration.
+          if (!status.api_available || (window.__ORION_NATIVE_PLUGIN__ === true && typeof modelContext.unregisterTool !== "function")) {
+            status.error = "WebMCP lifecycle API is unavailable in this browser";
+          } else {
             try {
-              return asWebMcpResult(
-                await requestJson("/document-ingestion-status.json"),
-              );
-            } catch (snapshotError) {
-              return asWebMcpResult({
-                status: "unavailable",
-                mode: webMcpStatus.mode,
-                read_only: true,
-                files_written: 0,
-                errors: [runtimeError, snapshotError].map((error) =>
-                  error instanceof Error ? error.message : String(error),
-                ),
-              });
-            }
+              modelContext.registerTool({ name: status.tool,
+                description: "Inspect the current PDF/OCR-to-structured-Markdown ingestion readiness. Read-only: it does not upload, open, convert, or write files.",
+                inputSchema: { type: "object", properties: {}, additionalProperties: false }, execute });
+              registeredContext = modelContext;
+              status.registered = true;
+              status.error = null;
+            } catch (error) { status.error = error instanceof Error ? error.message : String(error); }
           }
-        },
-      });
-      webMcpStatus.registered = true;
-      syncWebMcpStatus();
-    } catch (error) {
-      webMcpStatus.error = error instanceof Error ? error.message : String(error);
-      syncWebMcpStatus();
-    }
-  };
-  registerDocumentIngestionTool();
+          sync();
+        }
+        return () => {
+          if (!owners.delete(owner) || owners.size || !status.registered) return;
+          try {
+            registeredContext.unregisterTool(status.tool);
+            registeredContext = null;
+            status.registered = false;
+            status.error = null;
+          } catch (error) { status.error = error instanceof Error ? error.message : String(error); }
+          sync();
+        };
+      },
+    };
+  })();
+  if (window.__ORION_NATIVE_PLUGIN__ !== true) documentWebMcp.acquire();
   const engineeringWorkflowClient = window.__ORION_ENGINEERING_WORKFLOW_CLIENT__ ?? null;
   const workflowApiBase = engineeringWorkflowClient?.base ?? "/orion-workflow-api";
   let engineeringViewOpen = false;

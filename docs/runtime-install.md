@@ -1,15 +1,15 @@
-# ORION runtime 1.0.0-rc.8
+# ORION runtime 1.0.0-rc.10
 
 This is the complete Python service source for the matching ORION workbench. It includes services, workflow and QA MCP entry points, scripts, dependency locks, migrations, templates, resource notices and tests. It does not contain user credentials, business state, a Python virtual environment or external infrastructure.
 
-Use the matching complete RC8 delivery kit and its `install.zh-CN.md` or `web-install.zh-CN.md` for full host/plugin configuration. The helper ZIP in that kit supplies the configuration generator. The official Harness host is 0.2.0-rc.2; the workbench and this runtime must both be 1.0.0-rc.8.
+Use the matching complete RC10 delivery kit and its `install.zh-CN.md` or `web-install.zh-CN.md` for full host/plugin configuration. The helper ZIP in that kit supplies the configuration generator. The official Harness host is 0.2.0-rc.2; the workbench and this runtime must both be 1.0.0-rc.10.
 
 ## Prepare Core
 
 Choose absolute, non-symlink paths. Keep the business Profile outside this runtime source. If a Profile already exists, back it up and inspect it; do not overwrite it to repeat installation.
 
 ```sh
-export ORION_RUNTIME_ROOT=/path/to/dsh-orion-runtime-1.0.0-rc.8
+export ORION_RUNTIME_ROOT=/path/to/dsh-orion-runtime-1.0.0-rc.10
 export ORION_PROFILE_ROOT=/path/to/orion-profile
 uv venv --python 3.12 "$ORION_PROFILE_ROOT/.venvs/core"
 UV_PROJECT_ENVIRONMENT="$ORION_PROFILE_ROOT/.venvs/core" uv sync --project "$ORION_RUNTIME_ROOT" --locked

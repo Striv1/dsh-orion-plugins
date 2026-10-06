@@ -15,21 +15,21 @@
 - [外部依赖、下载入口与闭环验收](docs/dependencies-and-acceptance.zh-CN.md)
 - [本机 Web 安装教程](docs/web-install.zh-CN.md)
 - [让 AI 协助部署：可复制的任务说明](docs/ai-deployment.zh-CN.md)
-- [RC8 下载页面](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.8)：选择具名交付包，页面上的 `Source code (zip)` 不等同于完整安装包。
+- [RC10 下载页面](https://github.com/Striv1/dsh-orion-plugins/releases/tag/plugins-v1.0.0-rc.10)：选择具名交付包，页面上的 `Source code (zip)` 不等同于完整安装包。
 
-建议交付 `orion-rc8-delivery-kit-r2.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
+建议交付 `orion-rc10-delivery-kit.zip`：两个插件、完整 Python runtime 源码、安装辅助文件、上述教程，以及适配版本的官方 Apple 芯片 Mac 安装包。也可以直接将 ZIP 交给使用者，无需开放维护仓库。首次安装仍需联网获取 Python/Node 和依赖。
 
-**当前仓库已公开。任何人都可以直接打开仓库和 RC8 下载页，无需登录或邀请即可下载；公开可读不会授予仓库写入权限。** 请下载具名完整包及校验文件。
+**当前仓库为私有（2026-10-06）。** 从 GitHub 下载需要登录已获仓库访问授权的账号；没有访问权限时，可直接接收维护者提供的完整 ZIP 和校验文件。仅下载使用不需要授予仓库写入权限。
 
-当前交付面向 **Apple 芯片 Mac 本地部署**。RC8 延续 RC7 的隐私清理，修正 Python 包版本并增加跨语言版本一致性检查；桌面原生安装/开关已有 RC6 基线，RC8 的验证范围以发布页为准，安装者仍需验收自己的环境和业务链。完整远程多人服务器模式尚未交付。
+当前交付面向 **Apple 芯片 Mac 本地部署**。RC10 修复插件反复启停时的工具清理，并改善流体资源释放、视频暂停后恢复、运行环境隔离、后台启动状态及页面加载超时处理。验证范围以 RC10 发布页为准，安装者仍需验收自己的环境和业务链。完整远程多人服务器模式尚未交付。
 
-## RC8 包含什么
+## RC10 包含什么
 
 | 交付物 | 当前候选 | 职责 |
 | --- | --- | --- |
-| `dsh-orion-workbench` | `1.0.0-rc.8` | 本体中心、工程发起模板、工程资料、本体管理、行业模板、图谱、正式发布绑定的证据问答和分析；工程/问答技能与预设；本地 Core 的受管生命周期 |
-| `dsh-client-ui-aqua` | `1.3.1-orion-alpha.4` | 液态玻璃、流体背景及图片/视频壁纸；保留上游 MIT 许可与来源 |
-| `dsh-orion-runtime` | `1.0.0-rc.8` | 配套 Python 业务服务，执行 S0–S7、来源与规则、资料处理、批准/发布及问答证据契约；它不是第三个界面插件 |
+| `dsh-orion-workbench` | `1.0.0-rc.10` | 本体中心、工程发起模板、工程资料、本体管理、行业模板、图谱、正式发布绑定的证据问答和分析；工程/问答技能与预设；本地 Core 的受管生命周期 |
+| `dsh-client-ui-aqua` | `1.3.1-orion-alpha.5` | 液态玻璃、流体背景及图片/视频壁纸；保留上游 MIT 许可与来源 |
+| `dsh-orion-runtime` | `1.0.0-rc.10` | 配套 Python 业务服务，执行 S0–S7、来源与规则、资料处理、批准/发布及问答证据契约；它不是第三个界面插件 |
 
 当前适配官方 DeepSeek Harness **0.2.0-rc.2**。后续升级须重新验证官方 Slot、Cordis、桌面 Profile、MCP 与进程生命周期，不通过版本豁免强行安装。
 
@@ -57,7 +57,7 @@ Protégé、Semantica、数据库、存储、查询和 OCR 等能力按实际业
 npm ci
 npm test
 npm run check
-node scripts/build_orion_plugins.mjs --pack --output-dir dist/rc8-new-build
+node scripts/build_orion_plugins.mjs --pack --output-dir dist/rc10-new-build
 ```
 
 已有依赖和官方 SDK 时可显式指定它们，构建工具不会将本机路径写入产物：
@@ -81,10 +81,10 @@ node scripts/test_plugins.mjs --runtime-root /path/to/official-runtime
 
 ## 分发和服务器模式
 
-此源码导出不包含既有本机 Git 历史、旧 tag、截图、验收记录、用户 Home、会话、业务资料、数据库、缓存、虚拟环境或凭据。本仓使用独立整理的源码历史，当前公开提供版本化下载；公开范围包括仓库源码、提交历史和已发布 Release。`private: true` 仅防止误发 npm，不提供仓库访问控制。本仓未启用 npm 发布；私有 npm 包需要另行决定 scope、身份和安装认证。
+此源码导出不包含既有本机 Git 历史、旧 tag、截图、验收记录、用户 Home、会话、业务资料、数据库、缓存、虚拟环境或凭据。本仓使用独立整理的源码历史，源码和 Release 当前按私有仓库权限访问，也可单独交付完整 ZIP。`private: true` 仅防止误发 npm，不提供仓库访问控制。本仓未启用 npm 发布；私有 npm 包需要另行决定 scope、身份和安装认证。
 
 当前正式候选采用**本地服务**。虽然 runtime-manager 有 `external` 接入配置，现有工作流 gateway 仍需本地源码和 Python，因此不能仅填写远程 URL 就声称支持完整服务器模式。服务器模式还需远程业务 API、认证与权限、资料上传/下载、运行版本配对、任务与日志生命周期、多人隔离、网络错误恢复及实际部署验收。此候选不包含已验证的多用户服务器部署。
 
 ## 许可
 
-ORION 自有代码当前仍标记 `UNLICENSED`；此次公开下载没有改动代码许可。Aqua 保留上游 MIT 和作者来源，官方 preset 保留 DeepSeek MIT 和版本来源；模板保留 IOF MIT、AutoMatCE CC BY 4.0、OpenEPCIS Apache-2.0 等原许可。详情见 [第三方来源说明](THIRD_PARTY_NOTICES.md)。公开可读不自动变更各组件的许可条款。
+ORION 自有代码当前仍标记 `UNLICENSED`；仓库可见性与文件交付不改变代码许可。Aqua 保留上游 MIT 和作者来源，官方 preset 保留 DeepSeek MIT 和版本来源；模板保留 IOF MIT、AutoMatCE CC BY 4.0、OpenEPCIS Apache-2.0 等原许可。详情见 [第三方来源说明](THIRD_PARTY_NOTICES.md)。

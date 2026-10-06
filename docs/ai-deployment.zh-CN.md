@@ -1,22 +1,22 @@
-# 让 AI 协助安装 ORION RC8
+# 让 AI 协助安装 ORION RC10
 
 适用于能读取本机文件、执行终端命令并在必要时操作浏览器/桌面的 AI 开发工具。只有聊天能力的 AI 可以解释步骤，但不能直接替你安装。优先把已下载的完整交付 ZIP 解压到本机，让 AI 从这个目录开始；不必给它维护者的 GitHub 账号或凭据。
 
 ## 先由使用者准备
 
-- Apple 芯片 Mac，以及 `orion-rc8-delivery-kit-r2.zip` 和校验文件。
+- Apple 芯片 Mac，以及 `orion-rc10-delivery-kit.zip` 和校验文件。
 - 选择官方桌面端（推荐）或本机 Web 端；默认先装一种。
 - 自己的模型账号或 API 配置，通过官方界面/本机配置完成认证。
 - 若要建设工程，提供自己的稳定操作人标识和获授权的资料范围。
 
-当前 GitHub 仓库和 RC8 Release 已公开，直接下载即可，不需要账号、Read 邀请或管理员 Token。也可以先手动下载，再让 AI 安装。
+当前 GitHub 仓库为私有（2026-10-06），下载 RC10 Release 需要登录已获仓库访问授权的账号。没有权限时，可直接接收维护者提供的完整 ZIP 和校验文件，再让 AI 从本机目录安装；无需为了下载获得仓库写入权限。
 
 ## 复制以下任务给 AI
 
 ```text
-请帮我在这台 Apple 芯片 Mac 上部署 ORION RC8。
+请帮我在这台 Apple 芯片 Mac 上部署 ORION RC10。
 
-交付目录：~/Downloads/ORION-RC8
+交付目录：~/Downloads/ORION-RC10
 入口选择：官方桌面端（如我明确选择 Web，则改用本机 Web 教程）
 业务用途：在我自己的本地目录中建设本体工程；操作人标识如未给出，先向我确认。
 
@@ -31,7 +31,7 @@ install.zh-CN.md 和 dependencies-and-acceptance.zh-CN.md；Web 再读 web-insta
    只读检查系统架构、已有 Harness 安装及版本、Home/Profile、Python/uv，
    Web 另查 Node/pnpm 和端口归属。保护所有既有应用、资料、会话和修改。
 2. 核对完整包及内部 SHA-256，再核对官方安装包签名和版本。
-   宿主固定 0.2.0-rc.2，工作台/runtime 1.0.0-rc.8，Aqua alpha.4。
+   宿主固定 0.2.0-rc.2，工作台/runtime 1.0.0-rc.10，Aqua 1.3.1-orion-alpha.5。
    如果已有不同版本或冲突配置，先说明冲突与隔离方案，不覆盖或降级。
 3. 按所选教程准备独立目录和 Python 3.12 Core 环境；Wren 不混入 Core。
    使用受版本契约保护的 runtime，校验279个运行文件与记录中的指纹。
@@ -72,6 +72,6 @@ install.zh-CN.md 和 dependencies-and-acceptance.zh-CN.md；Web 再读 web-insta
 | 业务验证 | 模型/工具真实结果与业务回执；未配置或未执行项单独说明 |
 | 待处理项 | 缺失依赖、账号或人工批准，以及负责人下一步操作 |
 
-AI 辅助安装不会把当前 RC8 变成已完成的远程多人服务器，也不会自动取得客户数据授权。完整业务验收应采用使用者自己的资料、来源与批准记录。
+验证范围以 RC10 发布页为准。AI 辅助安装不会把当前候选变成已完成的远程多人服务器，也不会自动取得客户数据授权。完整业务验收应采用使用者自己的资料、来源与批准记录。
 
 业务闭环须另行按 [验收指南](dependencies-and-acceptance.zh-CN.md) 保存来源指纹、S4/S7 人工批准、S5/S6 外部回执、正式版本部署回读和问答证据。安装辅助 AI 不应自行把这些标记为通过。

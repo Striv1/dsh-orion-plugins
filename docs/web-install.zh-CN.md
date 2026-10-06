@@ -1,28 +1,28 @@
-# ORION RC8：本机 Web 端与后台服务安装
+# ORION RC10：本机 Web 端与后台服务安装
 
-本教程与 [公开下载及桌面教程](install.zh-CN.md) 配套。使用同一批两个插件、Python runtime 和安装辅助 ZIP；选择 Web 无需先安装 DeepSeek Harness 桌面 App。
+本教程与 [文件获取及桌面教程](install.zh-CN.md) 配套。使用同一批两个插件、Python runtime 和安装辅助 ZIP；选择 Web 无需先安装 DeepSeek Harness 桌面 App。
 
 **安装验收与业务验收分开进行。** 本教程部署宿主、插件和 Core；外部软件的用途、官网和闭环条件见 [使用前准备清单](dependencies-and-acceptance.zh-CN.md)。请先确认要体验界面还是建设资料/数据库/联合工程；部分专用适配和初始化材料尚未随包交付，不能只按本教程安装后就承诺业务跑通。
 
-适用范围：Mac 本机浏览器，官方 Harness **0.2.0-rc.2**，工作台/runtime **1.0.0-rc.8**，Aqua **1.3.1-orion-alpha.4**。Web 默认只监听本机，不是已经验收的公网或多人服务器产品。
+更新日期：2026-10-06。适用范围：Mac 本机浏览器，官方 Harness **0.2.0-rc.2**，工作台/runtime **1.0.0-rc.10**，Aqua **1.3.1-orion-alpha.5**。Web 默认只监听本机，不是已经验收的公网或多人服务器产品。
 
 ## 一、下载文件与目录
 
-直接收到 `orion-rc8-delivery-kit-r2.zip` 和 `SHA256SUMS-delivery-kit-r2.txt` 时，先按主教程第四节校验外层 ZIP，再解压得到 `ORION-RC8` 文件夹，放到自己的 `~/Downloads/`。也可以从 RC8 公开下载页直接下载这两个文件，无需 GitHub 账号或邀请。包内官方 DMG 为桌面用户准备，纯 Web 路径无需安装它。继续检查：
+直接收到 `orion-rc10-delivery-kit.zip` 和 `SHA256SUMS-delivery-kit.txt` 时，先按主教程第四节校验外层 ZIP，再解压得到 `ORION-RC10` 文件夹，放到自己的 `~/Downloads/`。仓库当前为私有，也可登录已获访问授权的账号从 RC10 下载页取得这两个文件；仅下载不需要仓库写入权限。包内官方 DMG 为桌面用户准备，纯 Web 路径无需安装它。继续检查：
 
 ```sh
-cd "$HOME/Downloads/ORION-RC8"
+cd "$HOME/Downloads/ORION-RC10"
 shasum -a 256 -c SHA256SUMS-download.txt
-shasum -a 256 -c SHA256SUMS-rc8.txt
+shasum -a 256 -c SHA256SUMS-rc10.txt
 ```
 
 全部 `OK` 后，在同一终端定义本次 Web 的路径：
 
 ```sh
-export ORION_DOWNLOAD_ROOT="$HOME/Downloads/ORION-RC8"
+export ORION_DOWNLOAD_ROOT="$HOME/Downloads/ORION-RC10"
 export ORION_BASE="$HOME/ORION"
 export ORION_INSTALLER_ROOT="$ORION_BASE/installer-support"
-export ORION_RUNTIME_ROOT="$ORION_BASE/runtimes/dsh-orion-runtime-1.0.0-rc.8"
+export ORION_RUNTIME_ROOT="$ORION_BASE/runtimes/dsh-orion-runtime-1.0.0-rc.10"
 export ORION_PROFILE_ROOT="$ORION_BASE/profiles/web-local"
 export ORION_WEB_HOME="$ORION_BASE/homes/web"
 export ORION_WEB_SDK="$ORION_BASE/harness/0.2.0-rc.2"
@@ -34,9 +34,9 @@ Web Home、Core Profile、SDK 和 runtime 要分开放置，不使用符号链�
 仅当相应目标目录尚不存在时解压；若已经按桌面教程解压并校验过，则跳过：
 
 ```sh
-tar -xzf "$ORION_DOWNLOAD_ROOT/dsh-orion-runtime-1.0.0-rc.8.tar.gz" \
+tar -xzf "$ORION_DOWNLOAD_ROOT/dsh-orion-runtime-1.0.0-rc.10.tar.gz" \
   -C "$ORION_BASE/runtimes"
-ditto -x -k "$ORION_DOWNLOAD_ROOT/orion-rc8-install-guide.zip" "$ORION_BASE"
+ditto -x -k "$ORION_DOWNLOAD_ROOT/orion-rc10-install-guide.zip" "$ORION_BASE"
 ```
 
 ## 二、安装 Web 宿主和 Python 环境
@@ -77,7 +77,7 @@ UV_PROJECT_ENVIRONMENT="$ORION_PROFILE_ROOT/.venvs/core" \
   --root "$ORION_RUNTIME_ROOT" --check
 ```
 
-预期 runtime 为 RC8、279 个文件、指纹 `87ff579695e5006227265963b398da273f838b4fc9757ca36cb37721b76e533c`。
+预期 runtime 为 RC10、279 个文件、指纹 `864af474f97cbc5f0e75fc2e70f7690f6ae6ff8dca40ca668b6813ab96dfcdc0`。
 
 本教程使用 Web **3092**、Core **8092**。先分别检查：
 
@@ -104,10 +104,10 @@ lsof -nP -iTCP:8092 -sTCP:LISTEN
 ```sh
 DSH_HOME="$ORION_WEB_HOME" "$ORION_WEB_NODE" "$ORION_DSH_ENTRY" \
   plugin --profile web add \
-  "$ORION_DOWNLOAD_ROOT/dsh-orion-workbench-1.0.0-rc.8.tgz"
+  "$ORION_DOWNLOAD_ROOT/dsh-orion-workbench-1.0.0-rc.10.tgz"
 DSH_HOME="$ORION_WEB_HOME" "$ORION_WEB_NODE" "$ORION_DSH_ENTRY" \
   plugin --profile web add \
-  "$ORION_DOWNLOAD_ROOT/dsh-client-ui-aqua-1.3.1-orion-alpha.4.tgz"
+  "$ORION_DOWNLOAD_ROOT/dsh-client-ui-aqua-1.3.1-orion-alpha.5.tgz"
 ```
 
 官方 CLI 会初始化这个新 Home 的 `profiles/web`。它与桌面流程不同，不要求先打开桌面 App。若是在已有 Web Home 上安装，先停止它并保留 Home/业务 Profile 的备份，不覆盖既有登录、工作区和会话。
@@ -182,4 +182,4 @@ curl --fail --silent --show-error 'http://127.0.0.1:8092/health'
 
 本版本本地 Web 默认绑定 `127.0.0.1`。不能把本教程的地址直接改成公网地址就对外提供多人服务，也不关闭认证来让其他机器访问。完整服务器模式尚需补齐远程工作流 API、权限、资料传输、多人状态隔离、任务恢复及业务验收。
 
-验证范围：此前 RC6 在独立空 Web Home 中完成官方 CLI 安装、Web/Core 启动及首页 Logo、本体中心导航、工程模板检查。RC8 的具体复核记录见公开发布页。新机器仍应逐项检查本节列出的功能；没有执行的模型调用、本地写入、Aqua 个性化或客户业务链不得标记为通过。
+验证范围以 RC10 发布页为准。新机器仍应逐项检查本节列出的功能；没有执行的模型调用、本地写入、Aqua 个性化或客户业务链不得标记为通过。

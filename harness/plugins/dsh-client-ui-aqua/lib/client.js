@@ -1258,8 +1258,22 @@ void main() {
 				stir: () => {},
 				dispose: () => {}
 			};
+			// A wallpaper switch reuses this canvas/context, so GC cannot release
+			// the previous simulation's GPU handles for us.
+			const gpuResources = [];
+			const retainGpu = (resource, release) => {
+				if (resource !== null) gpuResources.push(() => release(resource));
+				return resource;
+			};
+			const releaseGpu = () => {
+				gl.useProgram(null);
+				gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+				gl.bindBuffer(gl.ARRAY_BUFFER, null);
+				gl.bindTexture(gl.TEXTURE_2D, null);
+				while (gpuResources.length) gpuResources.pop()();
+			};
 			const compile = (type, source) => {
-				const shader = gl.createShader(type);
+				const shader = retainGpu(gl.createShader(type), (value) => gl.deleteShader(value));
 				if (shader === null) return null;
 				gl.shaderSource(shader, source);
 				gl.compileShader(shader);
@@ -1273,7 +1287,7 @@ void main() {
 				const vertex = compile(gl.VERTEX_SHADER, VERTEX_SHADER);
 				const frag = compile(gl.FRAGMENT_SHADER, fragment);
 				if (vertex === null || frag === null) return null;
-				const program = gl.createProgram();
+				const program = retainGpu(gl.createProgram(), (value) => gl.deleteProgram(value));
 				if (program === null) return null;
 				gl.attachShader(program, vertex);
 				gl.attachShader(program, frag);
@@ -1286,11 +1300,14 @@ void main() {
 			};
 			const flowProgram = link(FLOW_SHADER);
 			const displayProgram = link(DISPLAY_SHADER);
-			if (flowProgram === null || displayProgram === null) return {
-				setParams: () => {},
-				stir: () => {},
-				dispose: () => {}
-			};
+			if (flowProgram === null || displayProgram === null) {
+				releaseGpu();
+				return {
+					setParams: () => {},
+					stir: () => {},
+					dispose: () => {}
+				};
+			}
 			const flow = {
 				prev: gl.getUniformLocation(flowProgram, "u_prev"),
 				mouse: gl.getUniformLocation(flowProgram, "u_mouse"),
@@ -1322,7 +1339,11 @@ void main() {
 				noiseBoost: gl.getUniformLocation(displayProgram, "u_noiseBoost"),
 				swirlBoost: gl.getUniformLocation(displayProgram, "u_swirlBoost")
 			};
-			const quadBuffer = gl.createBuffer();
+			const quadBuffer = retainGpu(gl.createBuffer(), (value) => gl.deleteBuffer(value));
+			if (quadBuffer === null) {
+				releaseGpu();
+				throw new Error("ui-aqua fluid: buffer allocation failed");
+			}
 			gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
 				-1,
@@ -1341,7 +1362,7 @@ void main() {
 				gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 			};
 			const makeTarget = (width, height, initial) => {
-				const tex = gl.createTexture();
+				const tex = retainGpu(gl.createTexture(), (value) => gl.deleteTexture(value));
 				if (tex === null) throw new Error("ui-aqua fluid: texture allocation failed");
 				gl.bindTexture(gl.TEXTURE_2D, tex);
 				if (initial !== void 0) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, initial);
@@ -1350,7 +1371,8 @@ void main() {
 				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-				const fbo = gl.createFramebuffer();
+				const fbo = retainGpu(gl.createFramebuffer(), (value) => gl.deleteFramebuffer(value));
+				if (fbo === null) throw new Error("ui-aqua fluid: framebuffer allocation failed");
 				gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
 				gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
 				gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -1389,8 +1411,14 @@ void main() {
 				initial[4 * i + 2] = 128;
 				initial[4 * i + 3] = 255;
 			}
-			let targetA = makeTarget(flowWidth, flowHeight, initial);
-			let targetB = makeTarget(flowWidth, flowHeight, initial);
+			let targetA, targetB;
+			try {
+				targetA = makeTarget(flowWidth, flowHeight, initial);
+				targetB = makeTarget(flowWidth, flowHeight, initial);
+			} catch (error) {
+				releaseGpu();
+				throw error;
+			}
 			const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 			const ua = navigator;
 			const windows = ua.userAgentData ? ua.userAgentData.platform === "Windows" : navigator.userAgent.includes("Windows");
@@ -1402,9 +1430,11 @@ void main() {
 			if (!coarse && !windows) window.addEventListener("mousemove", onMouseMove);
 			const start = performance.now();
 			let raf = 0;
+			let disposed = false;
 			let previous = 0;
 			const step = 1e3 / 30;
 			const frame = (now) => {
+				if (disposed) return;
 				raf = requestAnimationFrame(frame);
 				if (now - previous < step) return;
 				previous = now - (now - previous) % step;
@@ -1485,8 +1515,11 @@ void main() {
 					pointer.svy += (vy - pointer.svy) * .3;
 				},
 				dispose: () => {
+					if (disposed) return;
+					disposed = true;
 					cancelAnimationFrame(raf);
 					window.removeEventListener("mousemove", onMouseMove);
+					releaseGpu();
 				}
 			};
 			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -3003,6 +3036,7 @@ void main() {
 			videoBlobId;
 			videoLoadingId;
 			mediaRevision = 0;
+			videoPlaybackRevision = 0;
 			mediaError = "";
 			onMediaChange;
 			ctx;
@@ -3262,6 +3296,7 @@ void main() {
 			/** Invalidate pending reads before releasing a decoder or object URL. */
 			releaseWallpaperVideo(video) {
 				this.mediaRevision += 1;
+				this.videoPlaybackRevision += 1;
 				this.videoLoadingId = void 0;
 				if (video) {
 					video.onerror = null;
@@ -3397,10 +3432,15 @@ void main() {
 				video.defaultMuted = true;
 				video.autoplay = shouldPlay;
 				video.playsInline = true;
-				if (!shouldPlay) { video.pause(); return; }
+				if (!shouldPlay) {
+					this.videoPlaybackRevision += 1;
+					video.pause();
+					return;
+				}
 				if (!video.paused) return;
+				const playbackRevision = ++this.videoPlaybackRevision;
 				video.play().catch(() => {
-					if (!document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && this.isCurrentWallpaper(wallpaper, video, revision)) this.failWallpaper("aqua.videoPlaybackFailed");
+					if (playbackRevision === this.videoPlaybackRevision && !document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && this.isCurrentWallpaper(wallpaper, video, revision)) this.failWallpaper("aqua.videoPlaybackFailed");
 				});
 			}
 			/** Apply the mode's token layer (floating palette, or translucent compat). */
